@@ -53,3 +53,8 @@ rsconnect/
 
 # R files
 *.Rproj
+
+# Files automatically created when rendering Quarto files
+*_files
+
+
