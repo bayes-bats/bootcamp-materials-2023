@@ -1,0 +1,83 @@
+//Fonts
+
+/*-- scss:defaults --*/
+
+// Logo colors
+$uciColor: #FFC72C;
+$dukeColor: #00539B;
+$vassarColor: maroon;
+
+$mainFontSize: 35px;
+$backgroundColor: #FFFFFF;
+$mainColor: $dukeColor;
+
+// Links and actions
+$linkColor: $vassarColor;
+$linkColorHover: darken( $linkColor, 20% );
+
+// Title slide
+$data-background-image: "logo.png";
+
+
+/*-- scss:rules --*/
+
+.reveal .title {
+  color: $dukeColor;
+}
+
+.reveal .subtitle {
+  font-size: 50px;
+  font-style: italic;
+  color: $vassarColor;
+}
+
+.slide-background:first-child {
+  background-color: $uciColor;
+}
+
+.slide-background {
+  background-color: #fefaf3;
+}
+
+.reveal .slide-logo {
+  height: 60px !important;
+  width: 60px!important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.reveal section h1 {
+  color: $vassarColor;
+}
+
+.reveal section h2 {
+  color: $dukeColor;
+}
+
+.reveal section a {
+  color: $vassarColor;
+}
+
+.reveal section strong {
+  color: $vassarColor;
+}
+
+.reveal .slide .note {
+  border-left: 5px solid  #000000;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background:#fcece0;
+}
+
+
+* {
+  color:#000000;
+}
+
+// Uncomment to move slide number to bottom right
+//.slide-number, .reveal.has-logo .slide-number {
+//  bottom: 5% !important;
+//  left: 93% !important;
+//  top: unset !important;
+//}

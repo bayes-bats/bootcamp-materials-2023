@@ -1,0 +1,43 @@
+//Fonts
+
+/*-- scss:defaults --*/
+
+// Logo colors
+$uciColor: #FFC72C;
+$dukeColor: #00539B;
+$vassarColor: maroon;
+$backgroundWhite: #fefaf3;
+
+// Font colors
+$link-color: maroon;
+
+// Font size
+$font-size-root: 14px;
+
+// TOC
+$toc-color: maroon;
+
+$h2-font-size:          1.6rem !default;
+$headings-font-weight:  500 !default;
+
+/*-- scss:rules --*/
+
+.quarto-title-block .quarto-title-banner {
+  background-image: url(https://www.stat.uci.edu/bayes-bats/img/logo.png);
+  background-color: $uciColor;
+  background-size: 8%;
+  background-position: right;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-right: 50px;
+  background-origin: content-box;
+}
+
+.quarto-title {
+  font-size: 300px;
+  color: $dukeColor;
+}
+
+b, strong {
+    color: $vassarColor;
+}
