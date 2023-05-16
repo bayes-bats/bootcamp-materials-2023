@@ -832,17 +832,229 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 <div class="cell">
 
 </div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="2-lec-discrete-data_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
-</figure>
+
+<img data-src="2-lec-discrete-data_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="sequential-updating" class="title-slide slide level1 center">
+<h1>Sequential Updating</h1>
+
+</section>
+<section id="sequential-analysis" class="slide level2">
+<h2>Sequential Analysis</h2>
+<p>In a sequential Bayesian analysis, a posterior model is updated incrementally as more data comes in. With the introduction of each new piece of data, the previous posterior model reflecting our understanding prior to observing this data becomes the new prior model.</p>
+</section>
+<section id="time-travel-to-the-end-of-1970" class="slide level2">
+<h2>Time Travel to the End of 1970</h2>
+<p>Suppose our prior a movie passes the Bechdel test is an optimistic <span class="math inline">\(\pi \sim Beta(14,1)\)</span>. Now let’s look at the 1970 movies.</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1970</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+   year title                          binary
+  &lt;dbl&gt; &lt;chr&gt;                          &lt;chr&gt; 
+1  1970 Beyond the Valley of the Dolls PASS  </code></pre>
 </div>
 </div>
 </div>
-<p><img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</section>
+<section id="the-posterior" class="slide level2">
+<h2>The Posterior</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">14</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean mode         var         sd
+1     prior    14    1 0.9333333    1 0.003888889 0.06236096
+2 posterior    15    1 0.9375000    1 0.003446691 0.05870853</code></pre>
+</div>
+</div>
+</section>
+<section id="at-the-end-of-1971" class="slide level2">
+<h2>At the End of 1971</h2>
+<p>Our posterior at the end of 1970 becomes our new 1971 prior, incorporating the 1970 data, given by <span class="math inline">\(\pi \sim Beta(15,1)\)</span></p>
+<p>Let’s look at the 1971 movies that have been rated.</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1971</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+   year title                                   binary
+  &lt;dbl&gt; &lt;chr&gt;                                   &lt;chr&gt; 
+1  1971 Escape from the Planet of the Apes      FAIL  
+2  1971 Shaft                                   FAIL  
+3  1971 Straw Dogs                              FAIL  
+4  1971 The French Connection                   FAIL  
+5  1971 Willy Wonka &amp;amp; the Chocolate Factory FAIL  </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="the-posterior-1" class="slide level2">
+<h2>The Posterior</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">15</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean      mode         var         sd
+1     prior    15    1 0.9375000 1.0000000 0.003446691 0.05870853
+2 posterior    15    6 0.7142857 0.7368421 0.009276438 0.09631427</code></pre>
+</div>
+</div>
+</section>
+<section id="at-the-end-of-1972" class="slide level2">
+<h2>At the End of 1972</h2>
+<p>New prior incorporating 1971 data: <span class="math inline">\(\pi \sim Beta(15,6)\)</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1972</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+   year title          binary
+  &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; 
+1  1972 1776           FAIL  
+2  1972 Pink Flamingos PASS  
+3  1972 The Godfather  FAIL  </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="the-posterior-2" class="slide level2">
+<h2>The Posterior</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">15</span>, <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean      mode         var         sd
+1     prior    15    6 0.7142857 0.7368421 0.009276438 0.09631427
+2 posterior    16    8 0.6666667 0.6818182 0.008888889 0.09428090</code></pre>
+</div>
+</div>
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Data</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>before the analysis</td>
+<td>NA</td>
+<td>Beta(14,1)</td>
+</tr>
+<tr class="even">
+<td>at the end of 1970</td>
+<td>Y = 1, n = 1</td>
+<td>Beta(15,1)</td>
+</tr>
+<tr class="odd">
+<td>at the end of 1971</td>
+<td>Y = 0, n = 5</td>
+<td>Beta(15, 6)</td>
+</tr>
+<tr class="even">
+<td>at the end of 1972</td>
+<td>Y = 1, n = 3</td>
+<td>Beta(16,8)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-order-invariance" class="slide level2">
+<h2>Data Order Invariance</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Data</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>before the analysis</td>
+<td>NA</td>
+<td>Beta(14,1)</td>
+</tr>
+<tr class="even">
+<td>1972</td>
+<td>Y = 1, n = 3</td>
+<td>Beta(15,3)</td>
+</tr>
+<tr class="odd">
+<td>1971</td>
+<td>Y = 0, n = 5</td>
+<td>Beta(15,8)</td>
+</tr>
+<tr class="even">
+<td>1970</td>
+<td>Y = 1, n = 1</td>
+<td>Beta(16,8)</td>
+</tr>
+</tbody>
+</table>
+<p>As long as we include the same 3 years, our final conclusion is the same!</p>
+</section>
+<section id="what-if-we-observe-all-the-data-at-once" class="slide level2">
+<h2>What If We Observe All the Data at Once?</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Data</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>before the analysis</td>
+<td>NA</td>
+<td>Beta(14,1)</td>
+</tr>
+<tr class="even">
+<td>1970</td>
+<td>Y = 1, n = 1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>1971</td>
+<td>Y = 0, n = 5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1972</td>
+<td>Y = 1, n = 3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>Y = 2, n = 9</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean      mode         var         sd
+1     prior    14    1 0.9333333 1.0000000 0.003888889 0.06236096
+2 posterior    16    8 0.6666667 0.6818182 0.008888889 0.09428090</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="sequential-updating-1" class="slide level2">
+<h2>Sequential Updating</h2>
+<p>Let <span class="math inline">\(\theta\)</span> be any parameter of interest with prior pdf <span class="math inline">\(f(\theta)\)</span>. Then a <strong>sequential analysis</strong> in which we <em>first</em> observe a data point <span class="math inline">\(y_1\)</span> and <em>then</em> a second data point <span class="math inline">\(y_2\)</span> will produce the same posterior model of <span class="math inline">\(\theta\)</span> as if we <em>first</em> observed <span class="math inline">\(y_2\)</span> and <em>then</em> <span class="math inline">\(y_1\)</span>:</p>
+<p><span class="math display">\[f(\theta | y_1,y_2) = f(\theta|y_2,y_1)\;.\]</span></p>
+<p>Similarly, the posterior model is invariant to whether we observe the data <em>all at once</em> or <em>sequentially</em>.</p>
+
+<img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>

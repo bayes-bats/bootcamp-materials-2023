@@ -762,6 +762,129 @@ beta_binom_grid_plot(plot_dat_new, posterior = TRUE, likelihood = TRUE) +
 
 
 
+# Sequential Updating
+
+## Sequential Analysis 
+
+In a sequential Bayesian analysis, a posterior model is updated incrementally as more data comes in.  With the introduction of each new piece of data, the previous posterior model reflecting our understanding prior to observing this data becomes the new prior model.
+
+
+## Time Travel to the End of 1970
+
+Suppose our prior a movie passes the Bechdel test is an optimistic $\pi \sim Beta(14,1)$. Now let's look at the 1970 movies.
+
+. . . 
+
+```{r, echo=TRUE}
+bechdel %>% 
+  filter(year == 1970) 
+```
+
+
+
+## The Posterior
+
+```{r, echo=TRUE}
+summarize_beta_binomial(14, 1, y = 1, n = 1)
+```
+
+
+
+## At the End of 1971
+
+Our posterior at the end of 1970 becomes our new 1971 prior, incorporating the 1970 data, given by $\pi \sim Beta(15,1)$
+
+Let's look at the 1971 movies that have been rated.
+
+. . . 
+
+```{r, echo=TRUE}
+bechdel %>% 
+  filter(year == 1971) 
+```
+
+
+## The Posterior
+
+```{r, echo=TRUE}
+summarize_beta_binomial(15, 1, y = 0, n = 5)
+```
+
+
+
+## At the End of 1972
+
+New prior incorporating 1971 data: $\pi \sim Beta(15,6)$
+
+. . . 
+
+```{r, echo=TRUE}
+bechdel %>% 
+  filter(year == 1972) 
+```
+
+
+
+## The Posterior
+
+```{r, echo=TRUE}
+summarize_beta_binomial(15, 6, y = 1, n = 3)
+```
+
+
+
+## Summary
+
+| Time                | Data         | Model       |
+|---------------------|--------------|-------------|
+| before the analysis | NA           | Beta(14,1)  |
+| at the end of 1970  | Y = 1, n = 1 | Beta(15,1)  |
+| at the end of 1971  | Y = 0, n = 5 | Beta(15, 6) |
+| at the end of 1972  | Y = 1, n = 3 | Beta(16,8)  |
+
+
+
+
+
+## Data Order Invariance
+
+| Time                | Data         | Model      |
+|---------------------|--------------|------------|
+| before the analysis | NA           | Beta(14,1) |
+| 1972                | Y = 1, n = 3 | Beta(15,3) |
+| 1971                | Y = 0, n = 5 | Beta(15,8) |
+| 1970                | Y = 1, n = 1 | Beta(16,8) |
+
+As long as we include the same 3 years, our final conclusion is the same!
+
+
+
+
+## What If We Observe All the Data at Once?
+
+| Time                | Data         | Model      |
+|---------------------|--------------|------------|
+| before the analysis | NA           | Beta(14,1) |
+| 1970  | Y = 1, n = 1 |            |
+|1971  | Y = 0, n = 5 |            |
+|1972  | Y = 1, n = 3 |            |
+| Total               | Y = 2, n = 9 |            |
+
+. . . 
+
+```{r}
+summarize_beta_binomial(14, 1, y = 2, n = 9)
+```
+
+## Sequential Updating
+
+Let $\theta$ be any parameter of interest with prior pdf $f(\theta)$.  Then a **sequential analysis** in which we *first* observe a data point $y_1$ and *then* a second data point $y_2$ will produce the same posterior model of $\theta$ as if we *first* observed $y_2$ and *then* $y_1$: 
+
+$$f(\theta | y_1,y_2) = f(\theta|y_2,y_1)\;.$$
+
+Similarly, the posterior model is invariant to whether we observe the data *all at once* or *sequentially*.
+
+
 
 
 
