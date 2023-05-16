@@ -104,11 +104,11 @@ Watch [How Data Nerds Found A 131-Year-Old Sunken Treasure](https://fivethirtyei
 | Mammo - | 15     |   8910    |  8925   |
 | Total   | 100    |     9900  |   10000    |
 
-Let $A$ represent the event a person has breast cancer, and let $B$ represent the event that a mammogram detects breast cancer (Mammo +).
+Let $A$ represent the event a mammogram is positive for breast cancer (Mammo +), and let $B$ represent the event that a woman has cancer.
 
 
 
-[^1]: Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity
+[^1]: Data based on breast cancer prevalence at age 40 for women and standard mammogram sensitivity and specificity
 
 ## How Good is a Mammogram?
 
@@ -138,11 +138,15 @@ $P(\text{Cancer})= ~?$
 
 . . . 
 
-$P(A) = \frac{100}{10000}= 0.01$
+$P(B) = \frac{100}{10000}= 0.01$
 
 . . . 
 
-$P(A)$ represents a **marginal probability**. So do $P(A^c)=P(\text{No cancer})=$ $1-P(A)$, $P(B)$, and $P(B^c)$. We can calculate these quantities using only the values in the margins of the contingency table.
+$P(B^C)$ is called **complement** of event $B$ and represents the probability of selecting someone who does not have cancer.  
+
+. . . 
+
+$P(B)$ represents a **marginal probability**. So do $P(B^C)=1-P(B)$, $P(A)$, and $P(A^C)$. We can calculate these quantities using only the values in the margins of the contingency table.
 
 ## Conditional Probability
 
@@ -157,11 +161,11 @@ $P(\text{Cancer given Mammo +})= ~?$
 
 . . . 
 
-$P(A \mid B) = \frac{85}{1075}= 0.079$
+$P(B \mid A) = \frac{85}{1075}= 0.079$
 
 . . .
 
-$P(A \mid B)$ is a **conditional probability**.  So are $P(A^c \mid B)=1-P(A \mid B)$, $P(A \mid B^c)$, $P(A^c \mid B^c)$, $P(B \mid A)$, etc. To calculate these probabilities, we focus on the row or column of the given information, *reducing* our sample space to that only of the given information. Note that $P(A \mid B) \neq P(B \mid A)$ - order matters.
+$P(B \mid A)$ is a **conditional probability**.  So are $P(B^C \mid A)=1-P(B \mid A)$, $P(B \mid A^C)$, $P(B^c \mid A^C)$, $P(A \mid B)$, etc. To calculate these probabilities, we focus on the row or column of the given information, *reducing* our sample space to that only of the given information. Note that $P(B \mid A) \neq P(A \mid B)$ - order matters.
 
 ## Joint Probability
 
@@ -175,11 +179,11 @@ $P(\text{Cancer and Mammo +})= ~?$
 
 . . . 
 
-$P(A \cap B) = \frac{85}{10000}= 0.0085$
+$P(B \cap A) = \frac{85}{10000}= 0.0085$
 
 . . . 
 
-$P(A \cap B)$ represents a **joint probability**. So do $P(A^c \cap B)$, $P(A \cap B^c)$, etc. 
+$P(B \cap A)$ represents a **joint probability**. So do $P(B^C \cap A)$, $P(B \cap A^C)$, etc. 
 
 . . . 
 
@@ -187,7 +191,147 @@ Note that $P(A \cap B)=P(B \cap A)$. Order does not matter here.
 
 # Bayes' Rule for Events
 
+## Breast Cancer Screening
+
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | 85     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     9900  |   10000    |
+
+Suppose a 40 year old woman, Maya, goes to a clinic for a screening mammogram.  The **prevalence** of breast cancer among women in this age group is 1%. We can think of this as **prior** information about whether Maya has breast cancer.
+
+## Breast Cancer Screening
+
+Maya has the screening mammogram and receives a positive finding.  Taking this new data into account, which of the following describes your **posterior** understanding of the probability that Maya has breast cancer?
+
+a. These tests yield false positives all the time.  Let's see what happens at the next screening mammogram in a couple years.
+b. The chances Maya has cancer have risen, but it is still much more likely that she is cancer-free than that she has cancer. Still, she should follow the recommendation of the doctor for follow-up diagnostic testing so that she doesn't miss the opportunity for early treatment just in case.
+c. The chances Maya has cancer are very high. She should have follow-up testing as soon as possible and start thinking about treatment.
+
+## The Prior Model
+
+| Quantity | $B$ | $B^C$ | Sum |
+|:-----|------:|------:|-----:|
+| prior probability | 0.01 | 0.99 | 1 |
+
+## Likelihood
+
+Let's go back at the table and calculate the probability of a positive mammogram result (event $A$) in two cases: when a woman has cancer (event $B$), and when a woman does not have cancer (event $B^C$).
+
+## Likelihood Mammo + When Cancer is Present
+
+|         | **Cancer** | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | **85**     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | **100**    |     9900  |   10000    |
+
+When a woman has cancer, we expect the screening mammogram to be positive with probability $P(A \mid B)=\frac{85}{100}=0.85$. This quantity is also called the **sensitivity** of the mammogram. We like our tests to have high sensitivity, picking up most of the cancers that are present.  
+
+
+
+
+## Likelihood Mammo + When Cancer is Not Present
+
+|         | Cancer | **No Cancer** | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | 85     |    **990**    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     **9900**  |   10000    |
+
+When a woman has no cancer, we expect the screening mammogram to be positive with probability $P(A \mid B^C)=\frac{990}{9900}=0.10$. A related quantity, $1-P(A \mid B^C)=P(A^C \mid B^C)=0.90$, is called the **specificity** of the mammogram.  We also want specificity to be high, so that women without cancer are told they are cancer-free and do not need to go through additional follow up.
+
+## Likelihoods
+
+We can call these quantities **likelihoods**, as they compare the likelihood of a positive mammogram under the two scenarios. Note $L(\cdot \mid A)=P(A \mid \cdot)$ -- somewhat confusing notation, but it is meant to indicate the likelihoods of two different unknown scenarios producing the data $A$.
+
+$L(B \mid A)=0.85$
+
+$L(B^C \mid A)=0.10$
+
+When a woman has breast cancer, we are much more likely to get the data of a positive mammogram than we are when a woman is cancer-free.
+
+. . . 
+
+We can use the **likelihood function** to weigh the likelihoods of our data, a positive mammogram, under different cancer diagnosis scenarios. We can use it to 
+update our probability that a person has cancer.
+
+## Likelihood 
+
+| Quantity | $B$ | $B^C$ | Sum |
+|:-----|------:|------:|-----:|
+| prior probability | 0.01 | 0.99 | 1 |
+| likelihood | 0.85 | 0.10 | 0.95 |
+
+Note the likelihood function is not a probability function, as it does not follow the **law of total probability** given by $P(B)+P(B^C)=1$. It provides a framework to evaluate the relative compatibility of our data (here, the positive mammogram) with the events $B$ and $B^C$.
+
+. . . 
+
+While the prior data suggests it is unlikely a 40 year old woman has breast cancer, the data provide evidence in favor of cancer diagnosis because $L(B \mid A) > L(B^C \mid A)$. We can use Bayes' rule to help us determine how likely a cancer diagnosis is given this evidence.
+
+## Bayes' Rule
+
+**Bayes' rule** gives us a formal way to update our beliefs based on new infomration.  It says $P(B \mid A) = \frac{P(A \mid P(B)}{P(A)}=\frac{P(A \cap B)}{P(A)}.$ Using our likelihoods, we can express this as $$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}.$$
+
+Maya would like to know her chances of having cancer. Several papers have shown that even doctors strongly overestimate her chances of having cancer given the positive mammogram finding.
+
+Recall **Law of Total Probability**:  $P(A)=P(A \cap B) + P(A \cap B^C)$ or, equivalently, $P(A)=P(A \mid B)P(B)+P(A \mid B^C)P(B^C)$.
+
+## Calculations
+
+:::: {.columns}
+
+::: {.column width="70%"}
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | 85     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     9900  |   10000    |
+:::
+
+::: {.column width="30%"}
+
+$P(B) = \frac{100}{10000} = 0.01$
+
+$P(A \mid B) = \frac{85}{100} = 0.85$ 
+
+$P(A \mid B^C) = \frac{990}{9900} = 0.10$
+
+
+:::
+
+::::
+
+$$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A \mid B)P(B)+P(A \mid B^C)P(B^C)}$$
+
+. . . 
+
+$$P(B \mid A) = \frac{0.01 \times 0.85 }{0.85 \times 0.01 + 0.10 \times 0.99}=0.079$$
+
+## The Posterior Model
+
+
+| Quantity | $B$ | $B^C$ | Sum |
+|:-----|------:|------:|-----:|
+| prior probability | 0.01 | 0.99 | 1 |
+| likelihood | 0.85 | 0.10 | 0.95 |
+| posterior probability | 0.079 | 0.921 | 1 |
+
+## Summary
+
+$$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}$$
+
+$$ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability}}$$
+
+$$ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{normalizing constant}}$$
+
+
+
+
 # Bayes' Rule for Random Variables
+
+
 
 
 

@@ -427,8 +427,8 @@
 </tr>
 </tbody>
 </table>
-<p>Let <span class="math inline">\(A\)</span> represent the event a person has breast cancer, and let <span class="math inline">\(B\)</span> represent the event that a mammogram detects breast cancer (Mammo +).</p>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity</p></li></ol></aside></section>
+<p>Let <span class="math inline">\(A\)</span> represent the event a mammogram is positive for breast cancer (Mammo +), and let <span class="math inline">\(B\)</span> represent the event that a woman has cancer.</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Data based on breast cancer prevalence at age 40 for women and standard mammogram sensitivity and specificity</p></li></ol></aside></section>
 <section id="how-good-is-a-mammogram-1" class="slide level2">
 <h2>How Good is a Mammogram?</h2>
 <table>
@@ -500,10 +500,13 @@
 </table>
 <p><span class="math inline">\(P(\text{Cancer})= ~?\)</span></p>
 <div class="fragment">
-<p><span class="math inline">\(P(A) = \frac{100}{10000}= 0.01\)</span></p>
+<p><span class="math inline">\(P(B) = \frac{100}{10000}= 0.01\)</span></p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(P(A)\)</span> represents a <strong>marginal probability</strong>. So do <span class="math inline">\(P(A^c)=P(\text{No cancer})=\)</span> <span class="math inline">\(1-P(A)\)</span>, <span class="math inline">\(P(B)\)</span>, and <span class="math inline">\(P(B^c)\)</span>. We can calculate these quantities using only the values in the margins of the contingency table.</p>
+<p><span class="math inline">\(P(B^C)\)</span> is called <strong>complement</strong> of event <span class="math inline">\(B\)</span> and represents the probability of selecting someone who does not have cancer.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(P(B)\)</span> represents a <strong>marginal probability</strong>. So do <span class="math inline">\(P(B^C)=1-P(B)\)</span>, <span class="math inline">\(P(A)\)</span>, and <span class="math inline">\(P(A^C)\)</span>. We can calculate these quantities using only the values in the margins of the contingency table.</p>
 </div>
 </section>
 <section id="conditional-probability" class="slide level2">
@@ -540,10 +543,10 @@
 </table>
 <p><span class="math inline">\(P(\text{Cancer given Mammo +})= ~?\)</span></p>
 <div class="fragment">
-<p><span class="math inline">\(P(A \mid B) = \frac{85}{1075}= 0.079\)</span></p>
+<p><span class="math inline">\(P(B \mid A) = \frac{85}{1075}= 0.079\)</span></p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(P(A \mid B)\)</span> is a <strong>conditional probability</strong>. So are <span class="math inline">\(P(A^c \mid B)=1-P(A \mid B)\)</span>, <span class="math inline">\(P(A \mid B^c)\)</span>, <span class="math inline">\(P(A^c \mid B^c)\)</span>, <span class="math inline">\(P(B \mid A)\)</span>, etc. To calculate these probabilities, we focus on the row or column of the given information, <em>reducing</em> our sample space to that only of the given information. Note that <span class="math inline">\(P(A \mid B) \neq P(B \mid A)\)</span> - order matters.</p>
+<p><span class="math inline">\(P(B \mid A)\)</span> is a <strong>conditional probability</strong>. So are <span class="math inline">\(P(B^C \mid A)=1-P(B \mid A)\)</span>, <span class="math inline">\(P(B \mid A^C)\)</span>, <span class="math inline">\(P(B^c \mid A^C)\)</span>, <span class="math inline">\(P(A \mid B)\)</span>, etc. To calculate these probabilities, we focus on the row or column of the given information, <em>reducing</em> our sample space to that only of the given information. Note that <span class="math inline">\(P(B \mid A) \neq P(A \mid B)\)</span> - order matters.</p>
 </div>
 </section>
 <section id="joint-probability" class="slide level2">
@@ -580,20 +583,287 @@
 </table>
 <p><span class="math inline">\(P(\text{Cancer and Mammo +})= ~?\)</span></p>
 <div class="fragment">
-<p><span class="math inline">\(P(A \cap B) = \frac{85}{10000}= 0.0085\)</span></p>
+<p><span class="math inline">\(P(B \cap A) = \frac{85}{10000}= 0.0085\)</span></p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(P(A \cap B)\)</span> represents a <strong>joint probability</strong>. So do <span class="math inline">\(P(A^c \cap B)\)</span>, <span class="math inline">\(P(A \cap B^c)\)</span>, etc.</p>
+<p><span class="math inline">\(P(B \cap A)\)</span> represents a <strong>joint probability</strong>. So do <span class="math inline">\(P(B^C \cap A)\)</span>, <span class="math inline">\(P(B \cap A^C)\)</span>, etc.</p>
 </div>
 <div class="fragment">
 <p>Note that <span class="math inline">\(P(A \cap B)=P(B \cap A)\)</span>. Order does not matter here.</p>
 </div>
 </section></section>
+<section>
 <section id="bayes-rule-for-events" class="title-slide slide level1 center">
 <h1>Bayes’ Rule for Events</h1>
 
 </section>
-
+<section id="breast-cancer-screening" class="slide level2">
+<h2>Breast Cancer Screening</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose a 40 year old woman, Maya, goes to a clinic for a screening mammogram. The <strong>prevalence</strong> of breast cancer among women in this age group is 1%. We can think of this as <strong>prior</strong> information about whether Maya has breast cancer.</p>
+</section>
+<section id="breast-cancer-screening-1" class="slide level2">
+<h2>Breast Cancer Screening</h2>
+<p>Maya has the screening mammogram and receives a positive finding. Taking this new data into account, which of the following describes your <strong>posterior</strong> understanding of the probability that Maya has breast cancer?</p>
+<ol type="a">
+<li class="fragment">These tests yield false positives all the time. Let’s see what happens at the next screening mammogram in a couple years.</li>
+<li class="fragment">The chances Maya has cancer have risen, but it is still much more likely that she is cancer-free than that she has cancer. Still, she should follow the recommendation of the doctor for follow-up diagnostic testing so that she doesn’t miss the opportunity for early treatment just in case.</li>
+<li class="fragment">The chances Maya has cancer are very high. She should have follow-up testing as soon as possible and start thinking about treatment.</li>
+</ol>
+</section>
+<section id="the-prior-model" class="slide level2">
+<h2>The Prior Model</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Quantity</th>
+<th style="text-align: right;"><span class="math inline">\(B\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(B^C\)</span></th>
+<th style="text-align: right;">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">prior probability</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="likelihood" class="slide level2">
+<h2>Likelihood</h2>
+<p>Let’s go back at the table and calculate the probability of a positive mammogram result (event <span class="math inline">\(A\)</span>) in two cases: when a woman has cancer (event <span class="math inline">\(B\)</span>), and when a woman does not have cancer (event <span class="math inline">\(B^C\)</span>).</p>
+</section>
+<section id="likelihood-mammo-when-cancer-is-present" class="slide level2">
+<h2>Likelihood Mammo + When Cancer is Present</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;"><strong>Cancer</strong></th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;"><strong>85</strong></td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;"><strong>100</strong></td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<p>When a woman has cancer, we expect the screening mammogram to be positive with probability <span class="math inline">\(P(A \mid B)=\frac{85}{100}=0.85\)</span>. This quantity is also called the <strong>sensitivity</strong> of the mammogram. We like our tests to have high sensitivity, picking up most of the cancers that are present.</p>
+</section>
+<section id="likelihood-mammo-when-cancer-is-not-present" class="slide level2">
+<h2>Likelihood Mammo + When Cancer is Not Present</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;"><strong>No Cancer</strong></th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;"><strong>990</strong></td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;"><strong>9900</strong></td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<p>When a woman has no cancer, we expect the screening mammogram to be positive with probability <span class="math inline">\(P(A \mid B^C)=\frac{990}{9900}=0.10\)</span>. A related quantity, <span class="math inline">\(1-P(A \mid B^C)=P(A^C \mid B^C)=0.90\)</span>, is called the <strong>specificity</strong> of the mammogram. We also want specificity to be high, so that women without cancer are told they are cancer-free and do not need to go through additional follow up.</p>
+</section>
+<section id="likelihoods" class="slide level2">
+<h2>Likelihoods</h2>
+<p>We can call these quantities <strong>likelihoods</strong>, as they compare the likelihood of a positive mammogram under the two scenarios. Note <span class="math inline">\(L(\cdot \mid A)=P(A \mid \cdot)\)</span> – somewhat confusing notation, but it is meant to indicate the likelihoods of two different unknown scenarios producing the data <span class="math inline">\(A\)</span>.</p>
+<p><span class="math inline">\(L(B \mid A)=0.85\)</span></p>
+<p><span class="math inline">\(L(B^C \mid A)=0.10\)</span></p>
+<p>When a woman has breast cancer, we are much more likely to get the data of a positive mammogram than we are when a woman is cancer-free.</p>
+<div class="fragment">
+<p>We can use the <strong>likelihood function</strong> to weigh the likelihoods of our data, a positive mammogram, under different cancer diagnosis scenarios. We can use it to update our probability that a person has cancer.</p>
+</div>
+</section>
+<section id="likelihood-1" class="slide level2">
+<h2>Likelihood</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Quantity</th>
+<th style="text-align: right;"><span class="math inline">\(B\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(B^C\)</span></th>
+<th style="text-align: right;">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">prior probability</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">likelihood</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.95</td>
+</tr>
+</tbody>
+</table>
+<p>Note the likelihood function is not a probability function, as it does not follow the <strong>law of total probability</strong> given by <span class="math inline">\(P(B)+P(B^C)=1\)</span>. It provides a framework to evaluate the relative compatibility of our data (here, the positive mammogram) with the events <span class="math inline">\(B\)</span> and <span class="math inline">\(B^C\)</span>.</p>
+<div class="fragment">
+<p>While the prior data suggests it is unlikely a 40 year old woman has breast cancer, the data provide evidence in favor of cancer diagnosis because <span class="math inline">\(L(B \mid A) &gt; L(B^C \mid A)\)</span>. We can use Bayes’ rule to help us determine how likely a cancer diagnosis is given this evidence.</p>
+</div>
+</section>
+<section id="bayes-rule" class="slide level2">
+<h2>Bayes’ Rule</h2>
+<p><strong>Bayes’ rule</strong> gives us a formal way to update our beliefs based on new infomration. It says <span class="math inline">\(P(B \mid A) = \frac{P(A \mid P(B)}{P(A)}=\frac{P(A \cap B)}{P(A)}.\)</span> Using our likelihoods, we can express this as <span class="math display">\[P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}.\]</span></p>
+<p>Maya would like to know her chances of having cancer. Several papers have shown that even doctors strongly overestimate her chances of having cancer given the positive mammogram finding.</p>
+<p>Recall <strong>Law of Total Probability</strong>: <span class="math inline">\(P(A)=P(A \cap B) + P(A \cap B^C)\)</span> or, equivalently, <span class="math inline">\(P(A)=P(A \mid B)P(B)+P(A \mid B^C)P(B^C)\)</span>.</p>
+</section>
+<section id="calculations" class="slide level2">
+<h2>Calculations</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:30%;">
+<p><span class="math inline">\(P(B) = \frac{100}{10000} = 0.01\)</span></p>
+<p><span class="math inline">\(P(A \mid B) = \frac{85}{100} = 0.85\)</span></p>
+<p><span class="math inline">\(P(A \mid B^C) = \frac{990}{9900} = 0.10\)</span></p>
+</div>
+</div>
+<p><span class="math display">\[P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A \mid B)P(B)+P(A \mid B^C)P(B^C)}\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[P(B \mid A) = \frac{0.01 \times 0.85 }{0.85 \times 0.01 + 0.10 \times 0.99}=0.079\]</span></p>
+</div>
+</section>
+<section id="the-posterior-model" class="slide level2">
+<h2>The Posterior Model</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Quantity</th>
+<th style="text-align: right;"><span class="math inline">\(B\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(B^C\)</span></th>
+<th style="text-align: right;">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">prior probability</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">likelihood</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.95</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">posterior probability</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.921</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p><span class="math display">\[P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}\]</span></p>
+<p><span class="math display">\[ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability}}\]</span></p>
+<p><span class="math display">\[ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{normalizing constant}}\]</span></p>
+</section></section>
 <section id="bayes-rule-for-random-variables" class="title-slide slide level1 center">
 <h1>Bayes’ Rule for Random Variables</h1>
 
