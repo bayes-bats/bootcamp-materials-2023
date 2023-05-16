@@ -368,17 +368,18 @@
 <h2>Hypothesis Testing</h2>
 <p>Suppose that during a recent doctor’s visit, you tested positive for a very rare disease. If you only get to ask the doctor one question, which would it be?</p>
 <ol type="a">
-<li class="fragment"><p>What’s the chance that I actually have the disease?<br>
-</p></li>
-<li class="fragment"><p>If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?</p></li>
-<li class="fragment"><p><span class="math display">\[P(\text{disease} | +)\]</span></p></li>
-<li class="fragment"><p><span class="math display">\[P(+ | \text{disease}^c)\]</span></p></li>
+<li class="fragment">What’s the chance that I actually have the disease?<br>
+</li>
+<li class="fragment">If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?</li>
 </ol>
+<div class="fragment">
+<p><span class="math inline">\(P(\text{disease} | +)\)</span> is a mathematical expression of question (a), and <span class="math inline">\(P(+ | \text{disease}^c)\)</span> expresses (b).</p>
+</div>
 </section>
 <section id="notes-on-bayesian-history" class="slide level2">
 <h2>Notes on Bayesian History</h2>
 <ul>
-<li class="fragment"><p>Named after Thomas Bayes (1701-1761</p></li>
+<li class="fragment"><p>Named after Thomas Bayes (1701-1761)</p></li>
 <li class="fragment"><p>Frequentist statistics is more popular; Bayesian statistics is surging in popularity</p></li>
 <li class="fragment"><p>Computing, computing, computing</p></li>
 <li class="fragment"><p>It is harder to adopt to newer methods. Change is happening slowly.</p></li>
@@ -395,7 +396,7 @@
 
 </section>
 <section id="how-good-is-a-mammogram" class="slide level2">
-<h2>How good is a mammogram?</h2>
+<h2>How Good is a Mammogram?</h2>
 <table>
 <thead>
 <tr class="header">
@@ -426,7 +427,168 @@
 </tr>
 </tbody>
 </table>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity</p></li></ol></aside></section></section>
+<p>Let <span class="math inline">\(A\)</span> represent the event a person has breast cancer, and let <span class="math inline">\(B\)</span> represent the event that a mammogram detects breast cancer (Mammo +).</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity</p></li></ol></aside></section>
+<section id="how-good-is-a-mammogram-1" class="slide level2">
+<h2>How Good is a Mammogram?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[P(\text{Cancer})= ~?\]</span> <span class="math display">\[P(\text{Cancer and Mammo +})= ~?\]</span> <span class="math display">\[P(\text{Cancer given Mammo +})= ~?\]</span></p>
+<div class="fragment">
+<p>Calculate these probabilities and express them using the notation for events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+</div>
+</section>
+<section id="marginal-probability" class="slide level2">
+<h2>Marginal Probability</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;"><strong>100</strong></td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;"><strong>10000</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(P(\text{Cancer})= ~?\)</span></p>
+<div class="fragment">
+<p><span class="math inline">\(P(A) = \frac{100}{10000}= 0.01\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(P(A)\)</span> represents a <strong>marginal probability</strong>. So do <span class="math inline">\(P(A^c)=P(\text{No cancer})=\)</span> <span class="math inline">\(1-P(A)\)</span>, <span class="math inline">\(P(B)\)</span>, and <span class="math inline">\(P(B^c)\)</span>. We can calculate these quantities using only the values in the margins of the contingency table.</p>
+</div>
+</section>
+<section id="conditional-probability" class="slide level2">
+<h2>Conditional Probability</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;"><strong>85</strong></td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;"><strong>1075</strong></td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(P(\text{Cancer given Mammo +})= ~?\)</span></p>
+<div class="fragment">
+<p><span class="math inline">\(P(A \mid B) = \frac{85}{1075}= 0.079\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(P(A \mid B)\)</span> is a <strong>conditional probability</strong>. So are <span class="math inline">\(P(A^c \mid B)=1-P(A \mid B)\)</span>, <span class="math inline">\(P(A \mid B^c)\)</span>, <span class="math inline">\(P(A^c \mid B^c)\)</span>, <span class="math inline">\(P(B \mid A)\)</span>, etc. To calculate these probabilities, we focus on the row or column of the given information, <em>reducing</em> our sample space to that only of the given information. Note that <span class="math inline">\(P(A \mid B) \neq P(B \mid A)\)</span> - order matters.</p>
+</div>
+</section>
+<section id="joint-probability" class="slide level2">
+<h2>Joint Probability</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;"><strong>85</strong></td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;"><strong>10000</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(P(\text{Cancer and Mammo +})= ~?\)</span></p>
+<div class="fragment">
+<p><span class="math inline">\(P(A \cap B) = \frac{85}{10000}= 0.0085\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(P(A \cap B)\)</span> represents a <strong>joint probability</strong>. So do <span class="math inline">\(P(A^c \cap B)\)</span>, <span class="math inline">\(P(A \cap B^c)\)</span>, etc.</p>
+</div>
+<div class="fragment">
+<p>Note that <span class="math inline">\(P(A \cap B)=P(B \cap A)\)</span>. Order does not matter here.</p>
+</div>
+</section></section>
 <section id="bayes-rule-for-events" class="title-slide slide level1 center">
 <h1>Bayes’ Rule for Events</h1>
 

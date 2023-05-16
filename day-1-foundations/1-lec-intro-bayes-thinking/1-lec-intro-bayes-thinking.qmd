@@ -63,10 +63,9 @@ Suppose that during a recent doctor’s visit, you tested positive for a very ra
 a. What’s the chance that I actually have the disease?  
 b. If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?
 
+. . .
 
-
-a. $$P(\text{disease} | +)$$ 
-b. $$P(+ | \text{disease}^c)$$
+$P(\text{disease} | +)$ is a mathematical expression of question (a), and $P(+ | \text{disease}^c)$ expresses (b).
 
 
 
@@ -97,7 +96,7 @@ Watch [How Data Nerds Found A 131-Year-Old Sunken Treasure](https://fivethirtyei
 
 # Review of Probability
 
-## How good is a mammogram?
+## How Good is a Mammogram?
 
 |         | Cancer | No Cancer | Total[^1] |
 |---------|-------:|----------:|----------:|
@@ -105,8 +104,86 @@ Watch [How Data Nerds Found A 131-Year-Old Sunken Treasure](https://fivethirtyei
 | Mammo - | 15     |   8910    |  8925   |
 | Total   | 100    |     9900  |   10000    |
 
+Let $A$ represent the event a person has breast cancer, and let $B$ represent the event that a mammogram detects breast cancer (Mammo +).
+
+
 
 [^1]: Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity
+
+## How Good is a Mammogram?
+
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | 85     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     9900  |   10000    |
+
+$$P(\text{Cancer})= ~?$$
+$$P(\text{Cancer and Mammo +})= ~?$$
+$$P(\text{Cancer given Mammo +})= ~?$$
+
+. . .
+
+Calculate these probabilities and express them using the notation for events $A$ and $B$.
+
+## Marginal Probability
+
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | 85     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | **100**    |     9900  |   **10000**    |
+
+$P(\text{Cancer})= ~?$
+
+. . . 
+
+$P(A) = \frac{100}{10000}= 0.01$
+
+. . . 
+
+$P(A)$ represents a **marginal probability**. So do $P(A^c)=P(\text{No cancer})=$ $1-P(A)$, $P(B)$, and $P(B^c)$. We can calculate these quantities using only the values in the margins of the contingency table.
+
+## Conditional Probability
+
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | **85**     |    990    |   **1075**   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     9900  |   10000    |
+
+
+$P(\text{Cancer given Mammo +})= ~?$
+
+. . . 
+
+$P(A \mid B) = \frac{85}{1075}= 0.079$
+
+. . .
+
+$P(A \mid B)$ is a **conditional probability**.  So are $P(A^c \mid B)=1-P(A \mid B)$, $P(A \mid B^c)$, $P(A^c \mid B^c)$, $P(B \mid A)$, etc. To calculate these probabilities, we focus on the row or column of the given information, *reducing* our sample space to that only of the given information. Note that $P(A \mid B) \neq P(B \mid A)$ - order matters.
+
+## Joint Probability
+
+|         | Cancer | No Cancer | Total |
+|---------|-------:|----------:|----------:|
+| Mammo + | **85**     |    990    |   1075   |
+| Mammo - | 15     |   8910    |  8925   |
+| Total   | 100    |     9900  |   **10000**    |
+
+$P(\text{Cancer and Mammo +})= ~?$
+
+. . . 
+
+$P(A \cap B) = \frac{85}{10000}= 0.0085$
+
+. . . 
+
+$P(A \cap B)$ represents a **joint probability**. So do $P(A^c \cap B)$, $P(A \cap B^c)$, etc. 
+
+. . . 
+
+Note that $P(A \cap B)=P(B \cap A)$. Order does not matter here.
 
 # Bayes' Rule for Events
 
