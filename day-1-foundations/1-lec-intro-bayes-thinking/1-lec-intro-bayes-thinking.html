@@ -7,7 +7,7 @@
 <link href="1-lec-intro-bayes-thinking_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1-lec-intro-bayes-thinking_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="1-lec-intro-bayes-thinking_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+  <meta name="generator" content="quarto-1.2.475">
 
   <title>Intro to Bayesian thinking</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -330,13 +330,117 @@
 </div>
 
 </section>
-<section class="slide level2">
+<section>
+<section id="introduction-to-bayesian-statistics" class="title-slide slide level1 center">
+<h1>Introduction to Bayesian Statistics</h1>
 
+</section>
+<section id="bayesian-knowledge-building" class="slide level2">
+<h2>Bayesian Knowledge Building</h2>
+
+<img data-src="img/bayes_diagram.png" width="183" class="r-stretch quarto-figure-center"></section>
+<section id="frequentist-knowledge-building" class="slide level2">
+<h2>Frequentist Knowledge Building</h2>
+
+<img data-src="img/freq_diagram.png" style="width:10.0%" class="r-stretch quarto-figure-center"></section>
+<section id="balancing-act-of-bayesian-analysis" class="slide level2">
+<h2>Balancing Act of Bayesian Analysis</h2>
+
+<img data-src="img/bayes-balance-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="interpretation-of-probability" class="slide level2">
+<h2>Interpretation of Probability</h2>
+<p><strong>Bayesian</strong>: a probability measures the relative plausibility of an event.</p>
+<p><strong>Frequentist</strong>: a probability measures the long-run relative frequency of a repeatable event. In fact, “frequentists” are so named because of their interpretation of probability as a long-run relative frequency.</p>
+</section>
+<section id="prior-data" class="slide level2">
+<h2>Prior Data</h2>
+<p>Consider two claims.</p>
+<ol type="1">
+<li class="fragment"><p>Kaya claims that they can predict the outcome of a coin flip. To test their claim, you flip a fair coin 10 times and they correctly predicts all 10!</p></li>
+<li class="fragment"><p>Fan claims that they can distinguish natural and artificial sweeteners. To test their claim, you give them 10 sweetener samples and they correctly identify each! In light of these experiments, what do you conclude?</p></li>
+</ol>
+<ol type="a">
+<li class="fragment"><p>You’re more confident in Fan’s claim than Kaya’s claim.</p></li>
+<li class="fragment"><p>The evidence supporting Kaya’s claim is just as strong as the evidence supporting Fan’s claim.</p></li>
+</ol>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<p>Suppose that during a recent doctor’s visit, you tested positive for a very rare disease. If you only get to ask the doctor one question, which would it be?</p>
+<ol type="a">
+<li class="fragment"><p>What’s the chance that I actually have the disease?<br>
+</p></li>
+<li class="fragment"><p>If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?</p></li>
+<li class="fragment"><p><span class="math display">\[P(\text{disease} | +)\]</span></p></li>
+<li class="fragment"><p><span class="math display">\[P(+ | \text{disease}^c)\]</span></p></li>
+</ol>
+</section>
+<section id="notes-on-bayesian-history" class="slide level2">
+<h2>Notes on Bayesian History</h2>
+<ul>
+<li class="fragment"><p>Named after Thomas Bayes (1701-1761</p></li>
+<li class="fragment"><p>Frequentist statistics is more popular; Bayesian statistics is surging in popularity</p></li>
+<li class="fragment"><p>Computing, computing, computing</p></li>
+<li class="fragment"><p>It is harder to adopt to newer methods. Change is happening slowly.</p></li>
+<li class="fragment"><p>We can embrace subjectivity.</p></li>
+</ul>
+</section>
+<section id="optional" class="slide level2">
+<h2>Optional</h2>
+<p>Watch <a href="https://fivethirtyeight.com/features/how-data-nerds-found-a-131-year-old-sunken-treasure/">How Data Nerds Found A 131-Year-Old Sunken Treasure</a></p>
+</section></section>
+<section>
+<section id="review-of-probability" class="title-slide slide level1 center">
+<h1>Review of Probability</h1>
+
+</section>
+<section id="how-good-is-a-mammogram" class="slide level2">
+<h2>How good is a mammogram?</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Cancer</th>
+<th style="text-align: right;">No Cancer</th>
+<th style="text-align: right;">Total<sup>1</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mammo +</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1075</td>
+</tr>
+<tr class="even">
+<td>Mammo -</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">8910</td>
+<td style="text-align: right;">8925</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9900</td>
+<td style="text-align: right;">10000</td>
+</tr>
+</tbody>
+</table>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Data based on breast cancer prevalence at age 40 and standard mammogram sensitivity and specificity</p></li></ol></aside></section></section>
+<section id="bayes-rule-for-events" class="title-slide slide level1 center">
+<h1>Bayes’ Rule for Events</h1>
+
+</section>
+
+<section id="bayes-rule-for-random-variables" class="title-slide slide level1 center">
+<h1>Bayes’ Rule for Random Variables</h1>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section>
+
+
     </div>
   </div>
 
@@ -548,6 +652,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
