@@ -1,5 +1,5 @@
 ---
-title: "Conjugate priors"
+title: "Discrete Response Data"
 subtitle: "Day 1"
 format: 
   revealjs:
@@ -12,6 +12,757 @@ format:
       data-background-size: 12%
       data-background-position: 50% 75%
 ---
+
+# The Beta Prior Distribution
+
+## Back to Graduate School Applications
+
+We have been trying to understand $\pi$, the acceptance rate of a graduate program in a specific department. Let's make a fresh start to the same problem, expanding beyond three possibilities for $\pi$. Now we will let $\pi \in [0,1]$. 
+
+
+## Continuous Probability Models    
+ 
+Let $\pi$ be a continuous random variable with pdf $f(\pi)$.
+Then $f(\pi)$ has the following properties:    
+
+- $\int_\pi f(\pi)d\pi = 1$, ie. the area under $f(\pi)$ is 1
+- $f(\pi) \ge 0$
+- $P(a < \pi < b) = \int_a^b f(\pi) d\pi$ when $a \le b$
+
+Interpreting $f(\pi)$:
+
+$f(\pi)$ can be used to *compare* the plausibility of two different values of $\pi$.
+
+
+
+## Plotting the Continuous Prior
+
+For each of the following students' prior ideas for $\pi$, we plot the pdf of the prior.  Plot will not be exact because no exact values are given.  
+
+Bahar thinks that it is extremely difficult to get into this program.
+
+Vish thinks that it is difficult to get into this program. 
+
+Gabriela does not have any strong opinions whether it is difficult or easy to get into this program. 
+
+Wei thinks that it is easy to get into this program.
+
+Beyoncé thinks that it is extremely easy to get into this program.
+
+
+
+## Bahar's prior
+
+```{r echo = FALSE, fig.align='center'}
+library(tidyverse)
+library(bayesrules)
+library(rstanarm)
+library(ggplot2)
+plot_beta(1, 5) +
+    theme(text = element_text(size=20)) 
+
+```
+
+
+
+## Vish's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(2, 5) +
+    theme(text = element_text(size=20)) 
+
+```
+
+
+
+## Gabriela's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(1, 1) +
+    theme(text = element_text(size=20)) 
+
+```
+
+
+
+## Wei's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(5, 3) +
+    theme(text = element_text(size=20)) 
+
+```
+
+
+
+## Beyoncé's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(5, 1) +
+    theme(text = element_text(size=20)) 
+
+```
+
+
+
+## Beta Prior Model
+
+Let $\pi$ be a random variable which can take any value between 0 and 1, ie. $\pi \in [0,1]$.
+Then the variability in $\pi$ might be well modeled by a Beta model with **shape parameters** $\alpha > 0$ and $\beta > 0$: 
+
+$$\pi \sim \text{Beta}(\alpha, \beta)$$
+The Beta model is specified by continuous pdf
+\begin{equation}
+f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1} \;\; \text{ for } \pi \in [0,1] 
+\end{equation}
+ where $\Gamma(z) = \int_0^\infty y^{z-1}e^{-y}dy$ and $\Gamma(z + 1) = z \Gamma(z)$.  Fun fact: when $z$ is a positive integer, then $\Gamma(z)$ simplifies to $\Gamma(z) = (z-1)!$.   
+
+---
+
+## Beta Prior Model
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r echo = FALSE, fig.height=5.5}
+plot_beta(3, 8) +
+  geom_segment(aes(x = 0.50, y = 0, xend = 0.50, yend = dbeta(0.50, 3,8)), color = "maroon") +
+    annotate("text", label = "(0.5, ?)", x = 0.6, y = 0.9, size = 8, colour = "maroon")
+
+  
+```
+:::
+
+::: {.column width="60%"}
+
+$\pi \sim \text{Beta}(3, 8)$
+
+$f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1}$ 
+
+$f(\pi) = \frac{\Gamma(3 + 11)}{\Gamma(3)\Gamma(8)} 0.5^{3-1} (1-0.5)^{8-1}$ 
+
+$f(\pi) = \frac{13!}{2!7!} 0.5^{3-1} (1-0.5)^{8-1}$
+
+$f(\pi) = 0.703125$
+:::
+
+::::
+
+
+
+
+
+
+
+## Beta Prior Model
+
+$\pi \sim \text{Beta}(3, 8)$
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r echo = FALSE, fig.height=5.5}
+plot_beta(3, 8) +
+  geom_segment(aes(x = 0.50, y = 0, xend = 0.50, yend = dbeta(0.50, 3,8)), color = "maroon") +
+    annotate("text", label = "(0.5, ?)", x = 0.6, y = 0.9, size = 8, colour = "maroon")
+
+  
+```
+:::
+
+::: {.column width="60%"}
+
+```{r echo=TRUE}
+dbeta(x = 0.5, 
+      shape1 = 3, 
+      shape2 = 8)
+```
+
+:::
+
+::::
+
+
+
+
+## Plotting the Beta Prior
+
+```{r echo = FALSE, message = FALSE, fig.align='center'}
+library(tidyverse)
+# Set up beta data
+
+alpha <- c(1,1,3,1,5,20,7,2,5)
+beta  <- c(5,2,7,1,5,20,3,1,1)
+betas <- data.frame(setting = factor(rep(1:9, 
+                                         each = 500)), 
+                    x = rep(seq(0, 1, 
+                                length = 500), 9),
+                    alpha = rep(alpha, each = 500),
+                    beta = rep(beta, each = 500))
+
+betas <- betas %>% 
+  mutate(y = dbeta(x, shape1 = alpha, shape2 = beta))
+
+levels(betas$setting) <-
+  paste0("Beta(",alpha,",",beta,")")
+
+trend_data <- data.frame(alpha, beta,
+                         means = (alpha / (alpha +
+                                             beta)),
+                         modes = 
+                           ((alpha - 1) / 
+                              (alpha + beta - 2))) %>% 
+  mutate(Parameter = 
+           paste0("Beta(",alpha,",",beta,")")) %>% 
+  mutate(setting = Parameter) %>% 
+  mutate(means_d = dbeta(means, alpha, beta), 
+         modes_d = dbeta(modes, alpha, beta))
+
+trend_data$setting <- factor(trend_data$setting, 
+                             levels = c("Beta(1,5)",
+                                        "Beta(1,2)",
+                                        "Beta(3,7)",
+                                        "Beta(1,1)",
+                                        "Beta(5,5)",
+                                        "Beta(20,20)",
+                                        "Beta(7,3)",
+                                        "Beta(2,1)",
+                                        "Beta(5,1)"))
+  
+ggplot(betas, aes(x = x, y = y)) + 
+  lims(x = c(0,1), y = c(0,5.5)) + 
+  geom_line() + 
+  facet_wrap(~ setting) + 
+  labs(x = expression(pi), y =
+         expression(paste("f(",pi,")"))) + 
+  scale_x_continuous(breaks = c(0,0.25,0.5,0.75,1),
+                     labels =
+                       c("0","0.25","0.50","0.75","1")) +
+  theme(text = element_text(size=20)) 
+
+```
+
+
+## Plotting the Beta Prior with `bayesrules` package
+
+Use the `plot_beta()` function in the `bayesrules` package to try different shape parameters. Example:
+
+```{r fig.align="center", fig.height=3, eval = FALSE}
+plot_beta(alpha = 5, beta = 7) 
+```
+
+```{r fig.align="center", fig.height=3, echo = FALSE}
+plot_beta(alpha = 5, beta = 7) +
+  theme(text = element_text(size=20)) 
+
+```
+
+
+
+
+## Beta Descriptives
+
+$$E(\pi) = \frac{\alpha}{\alpha + \beta}$$
+
+$$\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}$$  
+
+$$\text{Var}(\pi) = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$$
+
+
+
+
+## Beta Descriptives with `bayesrules` package
+
+Use the `summarize_beta()` function in the `bayesrules` package to find the mean, mode, and variance of various Beta distributions. Example:
+
+
+```{r}
+summarize_beta(alpha = 5, beta = 7)
+```
+
+
+# The Beta-Binomial Model
+
+
+## Graduate Admissions 
+
+An applicant to a small graduate program wants to know $\pi$, the probability of admission, so they can determine how many programs to which they should apply.  Based on commentary on [The GradCafe](https://www.thegradcafe.com) about similar programs, the applicant thinks that $\pi$ is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution. Write out a reasonable $f(\pi)$. Calculate the prior expected value, mode, and variance. 
+
+
+```{r fig.align='center', fig.height=3.5, echo = FALSE}
+plot_beta(5, 35) +
+    theme(text = element_text(size=20)) 
+```
+
+
+## Plotting the Prior
+
+```{r eval = FALSE}
+plot_beta(5, 35) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(5, 35) +
+    theme(text = element_text(size=20)) 
+```
+
+
+
+## Summarizing the Prior
+
+```{r}
+summarize_beta(5, 35)
+```
+
+## Binomial Distribution
+
+The **binomial distribution** is used to obtain the probability of $Y=y$ "successes" from a fixed number of $n$ independent **Bernoulli trials**. (A Bernoulli trial has two possible outcomes, one with probability, called the probability of success, $\pi$ and the other with probability, called the probability of failure, $1-\pi$.)
+
+The distribution is $P(Y=y)={n \choose y}\pi^y(1-\pi)^{n-y}$ and has mean $n\pi$ and variance $n\pi(1-\pi)$.
+
+## Posterior for the Beta-Binomial Model
+
+Let $\pi \sim \text{Beta}(\alpha, \beta)$ and $Y|n \sim \text{Bin}(n,\pi)$. 
+
+. . . 
+
+$f(\pi|y) \propto \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\pi^{\alpha-1} (1-\pi)^{\beta-1} {n \choose y}\pi^y(1-\pi)^{n-y}$
+
+. . . 
+
+
+$f(\pi|y) \propto \pi^{(\alpha+y)-1} (1-\pi)^{(\beta+n-y)-1}$
+
+. . . 
+
+$\pi|y \sim \text{Beta}(\alpha +y, \beta+n-y)$
+
+. . . 
+
+$f(\pi|y) = \frac{\Gamma(\alpha+\beta+n)}{\Gamma(\alpha+y)\Gamma(\beta+n-y)} \pi^{(\alpha+y)-1} (1-\pi)^{(\beta+n-y)-1}$
+
+
+
+## Conjugate Prior
+
+We say that $f(\pi)$ is a **conjugate prior** for $L(\pi|y)$ if the posterior, $f(\pi|y) \propto f(\pi)L(\pi|y)$, is from the same model family as the prior.  
+
+Thus, the Beta distribution is a conjugate prior for the Binomial likelihood model because the posterior also follows a Beta distribution.
+
+. . . 
+
+Note that in the likelihood, $\pi$ is raised to the power of the number of successes, and $1-\pi$ is raised to the power of the number of failures.  The prior has a similar structure, and $\alpha-1$ is often interpreted as a prior number of successes, and $\beta-1$ is often interpreted as a prior number of failures. 
+
+
+## Graduate Program Admissions
+
+The applicant decides to collect some data on social media and identifies 50 people  who applied to the program and asks them whether they were accepted or not. It turns out that 25 of them were! What is the posterior distribution of $\pi$ after having observed this data? 
+
+. . . 
+
+$\pi|y \sim \text{Beta}(\alpha +y, \beta+n-y)$
+
+. . . 
+
+$\pi|y \sim \text{Beta}(5 +25, 35+50-25)$
+
+. . . 
+
+$\pi|y \sim \text{Beta}(30, 60)$
+
+
+
+
+## Plotting the Posterior
+
+```{r eval = FALSE}
+plot_beta(30, 60) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(30, 60) +
+    theme(text = element_text(size=20)) 
+```
+
+
+
+
+## Summarizing the Posterior
+
+```{r}
+summarize_beta(30,60)
+```
+
+
+
+
+
+## Plot Summary
+
+```{r eval = FALSE}
+plot_beta(30, 60, mean = TRUE, mode = TRUE) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(30, 60, mean = TRUE, mode = TRUE) +
+    theme(text = element_text(size=20)) 
+```
+
+
+
+## Balancing Act
+
+```{r eval = FALSE}
+plot_beta_binomial(alpha = 5, beta = 35,
+                   y = 25, n = 50)
+```
+
+```{r fig.align='center', fig.height=5, echo = FALSE}
+plot_beta_binomial(alpha = 5, beta = 35,
+                   y = 25, n = 50) +
+      theme(text = element_text(size=20)) 
+
+```
+
+
+
+
+
+## Posterior Descriptives
+
+$\pi|(Y=y) \sim \text{Beta}(\alpha+y, \beta+n-y)$
+
+$$E(\pi | (Y=y)) = \frac{\alpha + y}{\alpha + \beta + n}$$ 
+$$\text{Mode}(\pi | (Y=y))  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2} $$
+$$\text{Var}(\pi | (Y=y))   = \frac{(\alpha + y)(\beta + n - y)}{(\alpha + \beta + n)^2(\alpha + \beta + n + 1)}\\$$
+
+
+## Descriptives of the Posterior
+
+What is the descriptive measures (expected value, mode, and variance) of the posterior distribution for the admissions example?
+
+. . . 
+
+```{r}
+summarize_beta_binomial(5, 35, y = 25, n = 50)
+```
+
+
+# Balance in Bayesian Analysis
+
+
+## Bechdel Test
+
+(Example from [bayesrulesbook.com](https://bayesrulesbook.com))
+
+Alison Bechdel’s 1985 comic Dykes to Watch Out For has a strip called [The Rule](https://www.npr.org/templates/story/story.php?storyId=94202522?storyId=94202522), in which a person states that they only go to a movie if it satisfies the
+following three rules:
+- the movie has to have at least two women in it;
+- these two women talk to each other; and
+- they talk about something besides a man.
+
+This test is now used for assessing movies in terms of representation of women. Even though there are three criteria, a movie either fails (does not satisfy one or more criteria) or passes (satisfies all three criteria) the Bechdel test.
+
+
+
+## Different Priors, Different Posteriors
+
+Let $\pi$ be the the proportion of movies that pass the Bechdel test.
+
+The table shows three different people with three different priors about $\pi$.
+
+| Optimist | Clueless | Feminist |
+|:----:|:----:|:-----:|
+| Beta(14,1) | Beta(1,1) | Beta(5,11) |
+  
+
+
+
+
+Next we plot their priors.
+
+
+
+
+## Priors
+
+```{r echo = FALSE, fig.align='center', fig.height=6.5, fig.width=13}
+
+
+optimist <- plot_beta(14, 1) +
+  labs(title = "Optimist")
+
+clueless <- plot_beta(1, 1) +
+  labs(title = "Clueless")
+
+feminist <- plot_beta(5, 11) +
+  labs(title = "Feminist")
+
+gridExtra::grid.arrange(optimist, clueless, feminist, ncol = 3)
+
+```
+
+
+
+## Vocabulary
+
+**Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (ie. low variability).
+
+
+**Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
+
+
+
+## Data
+
+- `library(bayesrules)` has the `bechdel` data frame. Randomly select 20 movies from this dataset (seed = 84735) to be our data
+
+- Based on the observed data, we will update the posterior for all three people
+
+- We calculate the summary statistics for the prior and the posterior for all three
+
+- We plot the prior, likelihood, and the posterior for all three
+
+- We explain the effect of different priors on the posterior
+
+##
+
+```{r, message = FALSE, echo=TRUE}
+library(tidyverse)
+library(bayesrules)
+set.seed(84735)
+```
+
+. . . 
+
+```{r, echo=TRUE}
+bechdel_sample <- sample_n(bechdel, 20)
+```
+
+. . . 
+
+```{r, echo=TRUE}
+count(bechdel_sample, binary)
+```
+
+
+
+## The Optimist 
+
+```{r}
+summarize_beta_binomial(14, 1, y = 9, n = 20)
+```
+
+
+
+## The Optimist 
+
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(14, 1, y = 9, n = 20)
+```
+
+
+
+## The Clueless 
+
+```{r}
+summarize_beta_binomial(1, 1, y = 9, n = 20)
+```
+
+
+
+## The Clueless 
+
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(1, 1, y = 9, n = 20)
+```
+
+
+
+## The Feminist 
+
+```{r}
+summarize_beta_binomial(5, 11, y = 9, n = 20)
+```
+
+
+
+## The Feminist
+
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(5, 11, y = 9, n = 20)
+```
+
+
+
+## Comparison 
+
+
+```{r fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
+library(patchwork)
+optimist <- plot_beta_binomial(14, 1, y = 9, n = 20) +
+  labs(title = "Optimist")
+clueless <- plot_beta_binomial(1, 1, y = 9, n = 20) +
+  labs(title = "Clueless")
+feminist <- plot_beta_binomial(5, 11, y = 9, n = 20) +
+  labs(title = "Feminist")
+
+gridExtra::grid.arrange(optimist,  clueless, feminist, ncol=3)
+
+
+```
+
+
+
+## Different Data, Different Posteriors
+
+Oksana, Omari, and Orlando all share the optimistic Beta(14,1) prior for $\pi$ but each have access to different data. Oksana reviews movies from 1991. Omari reviews movies from 2000, and Orlando reviews movies from 2013. How will the posterior distribution for each differ?
+
+
+## Oksana's Data
+
+```{r, echo=TRUE}
+bechdel_1991 <- filter(bechdel, year == 1991)
+count(bechdel_1991, binary)
+
+
+6/13
+```
+
+
+
+
+## Oksana's Analysis
+
+```{r fig.height=5, fig.align="center"}
+plot_beta_binomial(14, 1, y = 6, n = 13)
+```
+
+
+
+## Omari's Data
+
+```{r, echo=TRUE}
+bechdel_2000 <- filter(bechdel, year == 2000)
+count(bechdel_2000, binary)
+
+29/(34+29)
+```
+
+
+
+
+## Omari's Analysis
+
+```{r fig.height=5, fig.align="center"}
+plot_beta_binomial(14, 1, y = 29, n = 63)
+```
+
+
+
+## Orlando's Data
+
+```{r, echo=TRUE}
+bechdel_2013 <- filter(bechdel, year == 2013)
+count(bechdel_2013, binary)
+
+46/(53+46)
+```
+
+## Orlando's Analysis
+
+```{r fig.height=5, fig.align="center"}
+plot_beta_binomial(14, 1, y = 46, n = 99)
+
+```
+
+
+
+
+## Summary
+
+```{r, echo=FALSE, message=FALSE}
+## Remove
+## Code for facet_wrapped Beta-Binomial plots
+### Plotting function
+beta_binom_grid_plot <- function(data, likelihood = FALSE, posterior = FALSE){
+  g <- ggplot(data, aes(x = pi, y = prior)) + 
+    geom_line() + 
+    geom_area(alpha = 0.5, aes(fill = "prior", x = pi, y = prior)) + 
+    scale_fill_manual("", values = c(prior = "gold1", 
+      `(scaled) likelihood` = "cyan2", posterior = "cyan4"), breaks = c("prior", "(scaled) likelihood", "posterior")) + 
+    labs(x = expression(pi), y = "density") + 
+    theme(legend.position="bottom")
+  
+  if(likelihood == TRUE){
+    g <- g + 
+      geom_line(aes(x = pi, y = likelihood)) + 
+      geom_area(alpha = 0.5, aes(fill = "(scaled) likelihood", x = pi, y = likelihood))
+  }
+  
+  if(posterior == TRUE){
+    g <- g + 
+      geom_line(aes(x = pi, y = posterior)) + 
+      geom_area(alpha = 0.5, aes(fill = "posterior", x = pi, y = posterior)) 
+  }
+  g
+}
+make_plot_data <- function(as, bs, xs, ns, labs_prior, labs_likelihood){
+  ### Set up data to call in plot
+  # Refinement parameter
+  size <- 250
+  
+  # Model settings
+  pi <- rep(seq(0,1,length=size), 9)
+  
+  # Prior parameters
+  a <- rep(as, each = size*3)
+  b <- rep(bs, each = size*3)
+  # Data
+  x <- rep(rep(xs, each = size), 3)
+  n <- rep(rep(ns, each = size), 3)
+  # Posterior parameters
+  a_post <- x + a
+  b_post <- n - x + b
+  # Labels
+  setting_prior      <- as.factor(rep(1:3, each = size*3))
+  setting_likelihood <- as.factor(rep(rep(1:3, each = size), 3))
+  levels(setting_prior)      <- labs_prior
+  levels(setting_likelihood) <- labs_likelihood    
+  # Prior, likelihood, posterior functions
+  bfun1 <- function(x){dbinom(x = xs[1], size = ns[1], prob = x)}
+  bfun2 <- function(x){dbinom(x = xs[2], size = ns[2], prob = x)}
+  bfun3 <- function(x){dbinom(x = xs[3], size = ns[3], prob = x)}
+  scale   <- rep(rep(c(integrate(bfun1, 0, 1)[[1]], integrate(bfun2, 0, 1)[[1]], integrate(bfun3, 0, 1)[[1]]), each = size), 3)
+  prior      <- dbeta(x = pi, shape1 = a, shape2 = b)
+  likelihood <- dbinom(x = x, size = n, prob = pi) / scale
+  posterior  <- dbeta(x = pi, shape1 = a_post, shape2 = b_post)
+  # Combine into data frame
+  data.frame(setting_prior, setting_likelihood, pi, a, b, x, n, likelihood, prior, posterior)
+}
+plot_dat <- make_plot_data(
+  as = c(5,1,14), bs = c(11,1,1), 
+  xs = c(6,29,46), ns = c(13,63,99), 
+  labs_prior = c("prior: Beta(5,11)", "prior: Beta(1,1)", "prior: Beta(14,1)"), 
+  labs_likelihood = c("data: Y = 6 of n = 13", "data: Y = 29 of n = 63", "data: Y = 46 of n = 99"))
+```
+
+
+```{r echo = FALSE, fig.align='center'}
+plot_dat_new <- plot_dat %>% 
+  mutate(setting_prior = factor(setting_prior, 
+                                levels = c("prior: Beta(14,1)", "prior: Beta(5,11)", "prior: Beta(1,1)")))
+beta_binom_grid_plot(plot_dat_new, posterior = TRUE, likelihood = TRUE) + 
+  facet_grid(setting_prior ~ setting_likelihood) +
+  theme(text = element_text(size=10)) 
+```
+
+
+
+
 
 
 
