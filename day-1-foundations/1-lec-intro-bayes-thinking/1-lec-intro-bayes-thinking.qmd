@@ -46,7 +46,7 @@ knitr::include_graphics("img/bayes-balance-1.png")
 
 Consider two claims. 
 
-(1) Kaya claims that they can predict the outcome of a coin flip. To test their claim, you flip a fair coin 10 times and they correctly predicts all 10! 
+(1) Kaya claims that they can predict the outcome of a coin flip. To test their claim, you flip a fair coin 10 times and they correctly predict all 10! 
 
 (2) Fan claims that they can distinguish natural and artificial sweeteners. To test their claim, you give them 10 sweetener samples and they correctly identify each! In light of these experiments, what do you conclude?
 
