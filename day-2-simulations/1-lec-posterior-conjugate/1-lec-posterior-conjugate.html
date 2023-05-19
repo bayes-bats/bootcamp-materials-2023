@@ -419,7 +419,7 @@
 </section>
 <section id="prior-distribution-options" class="slide level2">
 <h2>Prior Distribution Options</h2>
-<p>We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(43,59) prior distribution. Let’s plot and summarize this prior.</p>
+<p>We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(43,59) prior distribution (remember, the parameters of the beta can be interpreted as prior data: the # of prior successes minus 1, and the # of prior failures minus 1). Let’s plot and summarize this prior.</p>
 <div class="cell">
 
 </div>
@@ -439,7 +439,7 @@
 <thead>
 <tr class="header">
 <th>Time</th>
-<th>Data</th>
+<th>Historical Data</th>
 <th>Prior Model</th>
 </tr>
 </thead>
@@ -458,6 +458,11 @@
 <td>2010-2019</td>
 <td>7 extremely dry years</td>
 <td>Beta(8,4)</td>
+</tr>
+<tr class="even">
+<td>NA</td>
+<td>Vague prior not based on data</td>
+<td>Beta(1,1)</td>
 </tr>
 </tbody>
 </table>
@@ -536,6 +541,9 @@
 <section id="section-1" class="slide level2">
 <h2>2021</h2>
 <p>Now, take your posterior and use it as the prior distribution for analysis of the data from 2021.</p>
+</section>
+<section id="section-2" class="slide level2">
+<h2>2021</h2>
 <div class="panel-tabset">
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Your Models</a></li><li><a href="#tabset-2-2">Amy’s Models</a></li><li><a href="#tabset-2-3">Results</a></li></ul>
 <div class="tab-content">
@@ -604,9 +612,12 @@
 </div>
 </div>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2>2022</h2>
 <p>Finally, take your posterior and use it as the prior distribution for analysis of the data from 2022.</p>
+</section>
+<section id="section-4" class="slide level2">
+<h2>2022</h2>
 <div class="panel-tabset">
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Your Models</a></li><li><a href="#tabset-3-2">Amy’s Models</a></li><li><a href="#tabset-3-3">Results</a></li></ul>
 <div class="tab-content">
@@ -674,8 +685,141 @@
 </div>
 </div>
 </div>
-<p><img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</section></section>
+<section>
+<section id="continuous-response-data-the-normal-normal-model" class="title-slide slide level1 center">
+<h1>Continuous Response Data: The Normal-Normal Model</h1>
+
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<p>Example from <a href="https://bayesrulesbook.com">bayesrulesbook.com</a></p>
+<p>Let <span class="math inline">\((Y_1,Y_2,\ldots,Y_{25})\)</span> denote the hippocampal volumes for volumes for the<br>
+<span class="math inline">\(n = 25\)</span> study subjects who played collegiate American football and who have been diagnosed with concussions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Load the data</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(bayesrules)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">data</span>(football)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># Filter the data</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>football <span class="ot">&lt;-</span> football <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"fb_concuss"</span>) </span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Calcuate mean and sd of volumes</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>football <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">summarize</span>(<span class="fu">mean</span>(volume), <span class="fu">sd</span>(volume))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean(volume) sd(volume)
+1       5.7346  0.5933976</code></pre>
+</div>
+</div>
+</section>
+<section id="data-1" class="slide level2">
+<h2>Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(football, <span class="fu">aes</span>(<span class="at">x =</span> volume)) <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="the-normal-model" class="slide level2">
+<h2>The Normal Model</h2>
+<p>Let <span class="math inline">\(Y\)</span> be a random variable which can take any value between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>, ie. <span class="math inline">\(Y \in (-\infty,\infty)\)</span>. Then the variability in <span class="math inline">\(Y\)</span> might be well represented by a Normal model with <strong>mean parameter</strong> <span class="math inline">\(\mu \in (-\infty, \infty)\)</span> and <strong>standard deviation parameter</strong> <span class="math inline">\(\sigma &gt; 0\)</span>:</p>
+<p><span class="math display">\[Y \sim N(\mu, \sigma^2)\]</span></p>
+<p>The Normal model is specified by continuous pdf</p>
+<p><span class="math display">\[\begin{equation}
+f(y) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\bigg[{-\frac{(y-\mu)^2}{2\sigma^2}}\bigg] \;\; \text{ for } y \in (-\infty,\infty)
+\end{equation}\]</span></p>
+</section>
+<section id="trends-and-variability-of-the-normal-model" class="slide level2">
+<h2>Trends and Variability of the Normal Model</h2>
+<p><span class="math display">\[\begin{split}
+E(Y) &amp; = \text{ Mode}(Y) = \mu \\
+\text{Var}(Y) &amp; = \sigma^2 \\
+\end{split}\]</span></p>
+<p>Further, <span class="math inline">\(\sigma\)</span> provides a sense of scale for <span class="math inline">\(Y\)</span>. Roughly 95% of <span class="math inline">\(Y\)</span> values will be within 2 standard deviations of <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\mu \pm 2\sigma \; .
+\end{equation}\]</span></p>
+</section>
+<section id="normal-models" class="slide level2">
+<h2>Normal models</h2>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/normal-tuning-1.png" width="1152" class="r-stretch"></section>
+<section id="normal-likelihood" class="slide level2">
+<h2>Normal Likelihood</h2>
+<p><span class="math display">\[L(\mu |\vec{y})= \prod_{i=1}^{n}L(\mu | y_i) = \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\sigma^2}} \exp\bigg[{-\frac{(y_i-\mu)^2}{2\sigma^2}}\bigg].\]</span></p>
+<p>Simplifying this up to a <em>proportionality</em> constant</p>
+<p><span class="math display">\[L(\mu |\vec{y}) \propto \prod_{i=1}^{n} \exp\bigg[{-\frac{(y_i-\mu)^2}{2\sigma^2}}\bigg] =  \exp\bigg[{-\frac{\sum_{i=1}^n (y_i-\mu)^2}{2\sigma^2}}\bigg] \; .\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[\begin{equation}
+L(\mu | \vec{y}) \propto \exp\bigg[{-\frac{(\bar{y}-\mu)^2}{2\sigma^2/n}}\bigg] \;\;\;\; \text{ for } \; \mu \in (-\infty, \infty).
+\end{equation}\]</span></p>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[L(\mu | \vec{y}) \propto \exp\bigg[{-\frac{(5.735-\mu)^2}{2(0.593^2/25)}}\bigg] \;\;\;\; \text{ for } \; \mu \in (-\infty, \infty),\]</span></p>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/likelihood-hippocampus-ch5-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">The joint Normal likelihood function for the mean hippocampal volume.</p></section>
+<section id="normal-prior-for-the-mean" class="slide level2">
+<h2>Normal Prior for the Mean</h2>
+<p><span class="math display">\[\mu \sim N(\theta, \tau^2) \; , \]</span></p>
+<p>with prior pdf</p>
+<p><span class="math display">\[\begin{equation}
+f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2}}\bigg] \;\; \text{ for } \mu \in (-\infty,\infty) \; .
+\end{equation}\]</span></p>
+<div class="fragment">
+<p><a href="https://en.wikipedia.org/wiki/Hippocampus">Wikipedia</a> tells us that among the general population of human adults, both halves of the hippocampus have a volume between 3.0 and 3.5 cubic centimeters. Thus the <em>total</em> hippocampal volume of <em>both</em> sides of the brain is between 6 and 7 cubic centimeters.</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\mu \sim N(6.5, 0.5^2) \;.\]</span></p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-normal-normal-bayesian-model" class="slide level2">
+<h2>The Normal-Normal Bayesian Model</h2>
+<p>Let <span class="math inline">\(\mu \in (-\infty,\infty)\)</span> be an unknown <em>mean</em> parameter and <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span> be an independent <span class="math inline">\(N(\mu,\sigma^2)\)</span> sample where <span class="math inline">\(\sigma\)</span> is assumed to be <em>known</em>. The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[\begin{split}
+Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
+\mu &amp; \sim N(\theta, \tau^2) \\
+\end{split}\]</span></p>
+<p>Upon observing data <span class="math inline">\(\vec{y} = (y_1,y_2,\ldots,y_n)\)</span>, the posterior model of <span class="math inline">\(\mu\)</span> is also a Normal with updated parameters:</p>
+<p><span class="math display">\[\begin{equation}
+\mu|\vec{y} \; \sim \;  N\bigg(\frac{\theta\sigma^2/n + \bar{y}\tau^2}{\tau^2+\sigma^2/n}, \; \frac{\tau^2\sigma^2/n}{\tau^2+\sigma^2/n}\bigg) \; .
+\end{equation}\]</span></p>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<p>The posterior model of <span class="math inline">\(\mu\)</span> is:</p>
+<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(\frac{6.5*0.593^2/25 + 5.734*0.5^2}{0.5^2+0.593^2/25}, \; \frac{0.5^2*0.593^2/25}{0.5^2+0.593^2/25}\bigg)\;,\]</span></p>
+<p>or, further simplified,</p>
+<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(5.775, 0.115^2 \bigg) \; .\]</span></p>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-13-1.png" width="864" class="r-stretch"></section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      model     mean     mode        var        sd
+1     prior 6.500000 6.500000 0.25000000 0.5000000
+2 posterior 5.775749 5.775749 0.01331671 0.1153981</code></pre>
+</div>
+</div>
+</section>
+<section id="now-give-model-where-sigma-unknown" class="slide level2">
+<h2>Now give model where sigma unknown</h2>
+
+<img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
