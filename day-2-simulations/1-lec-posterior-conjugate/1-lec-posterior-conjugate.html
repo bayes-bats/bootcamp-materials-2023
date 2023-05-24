@@ -694,8 +694,7 @@
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <p>Example from <a href="https://bayesrulesbook.com">bayesrulesbook.com</a></p>
-<p>Let <span class="math inline">\((Y_1,Y_2,\ldots,Y_{25})\)</span> denote the hippocampal volumes for volumes for the<br>
-<span class="math inline">\(n = 25\)</span> study subjects who played collegiate American football and who have been diagnosed with concussions:</p>
+<p>Let <span class="math inline">\((Y_1,Y_2,\ldots,Y_{25})\)</span> denote the hippocampal volumes for the <span class="math inline">\(n = 25\)</span> study subjects who played collegiate American football and who have been diagnosed with concussions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Load the data</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(bayesrules)</span>
@@ -770,19 +769,13 @@ L(\mu | \vec{y}) \propto \exp\bigg[{-\frac{(\bar{y}-\mu)^2}{2\sigma^2/n}}\bigg] 
 f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2}}\bigg] \;\; \text{ for } \mu \in (-\infty,\infty) \; .
 \end{equation}\]</span></p>
 <div class="fragment">
-<p><a href="https://en.wikipedia.org/wiki/Hippocampus">Wikipedia</a> tells us that among the general population of human adults, both halves of the hippocampus have a volume between 3.0 and 3.5 cubic centimeters. Thus the <em>total</em> hippocampal volume of <em>both</em> sides of the brain is between 6 and 7 cubic centimeters.</p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\mu \sim N(6.5, 0.5^2) \;.\]</span></p>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</div>
-</div>
+<p><a href="https://en.wikipedia.org/wiki/Hippocampus">Wikipedia</a> tells us that among the general population of human adults, both halves of the hippocampus have a volume between 3.0 and 3.5 cubic centimeters. Thus the <em>total</em> hippocampal volume of <em>both</em> sides of the brain is between 6 and 7 cubic centimeters. A standard deviation <span class="math inline">\(\sigma=0.5\)</span> for a normal prior centered at 6.5 puts about 2/3 of the mass of the prior in this range: <span class="math inline">\(\mu \sim N(6.5, 0.5^2) \;.\)</span></p>
 </div>
 </section>
+<section id="n6.5-0.52-distribution" class="slide level2">
+<h2><span class="math inline">\(N(6.5, 0.5^2)\)</span> Distribution</h2>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="the-normal-normal-bayesian-model" class="slide level2">
 <h2>The Normal-Normal Bayesian Model</h2>
 <p>Let <span class="math inline">\(\mu \in (-\infty,\infty)\)</span> be an unknown <em>mean</em> parameter and <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span> be an independent <span class="math inline">\(N(\mu,\sigma^2)\)</span> sample where <span class="math inline">\(\sigma\)</span> is assumed to be <em>known</em>. The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on <span class="math inline">\(\mu\)</span>:</p>
@@ -790,23 +783,33 @@ f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2
 Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 \mu &amp; \sim N(\theta, \tau^2) \\
 \end{split}\]</span></p>
-<p>Upon observing data <span class="math inline">\(\vec{y} = (y_1,y_2,\ldots,y_n)\)</span>, the posterior model of <span class="math inline">\(\mu\)</span> is also a Normal with updated parameters:</p>
-<p><span class="math display">\[\begin{equation}
-\mu|\vec{y} \; \sim \;  N\bigg(\frac{\theta\sigma^2/n + \bar{y}\tau^2}{\tau^2+\sigma^2/n}, \; \frac{\tau^2\sigma^2/n}{\tau^2+\sigma^2/n}\bigg) \; .
-\end{equation}\]</span></p>
+<p>Upon observing data <span class="math inline">\(\vec{y} = (y_1,y_2,\ldots,y_n)\)</span>, the posterior model of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(N(\mu_n,\tau^2_n)\)</span>.</p>
+</section>
+<section id="normal-posterior" class="slide level2">
+<h2>Normal Posterior</h2>
+<p>In the posterior <span class="math inline">\(N(\mu_n,\tau^2_n)\)</span>, we have <span class="math display">\[\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}\]</span> and <span class="math display">\[\tau^2_n=\frac{1}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}.\]</span></p>
+<div class="fragment">
+<p>The <strong>inverse variance</strong> <span class="math inline">\(\frac{1}{\tau^2_n}\)</span> is also called the <strong>precision</strong>. Note <span class="math inline">\(\frac{1}{\tau^2_n}=\frac{1}{\tau^2}+\frac{n}{\sigma^2}\)</span> and thus the posterior precision is the prior precision (inverse variance) combined with the inverse data variance (information).</p>
+</div>
+</section>
+<section id="posterior-mean-as-weighted-average-of-prior-and-sample-means" class="slide level2">
+<h2>Posterior Mean as Weighted Average of Prior and Sample Means</h2>
+<p>Now <span class="math display">\[\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}.\]</span></p>
+<p>Notice that the posterior mean is a weighted average of the prior mean and the sample mean, with the prior mean weighted by the prior precision, and the sample mean weighted by its sampling precision.</p>
+</section>
+<section id="back-to-brains" class="slide level2">
+<h2>Back to Brains</h2>
+<p>For the hippocampus data, we selected the prior <span class="math inline">\(\mu \sim N(6.5, 0.5^2)\)</span>, and recall in our dataset the mean was 5.735 and sd was 0.593.</p>
+<p>The posterior model of <span class="math inline">\(\mu\)</span> is:</p>
+<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(\frac{6.5*\frac{1}{0.5^2} + 5.735*\frac{25}{0.593^2}}{\frac{1}{0.5^2}+\frac{25}{0.593^2}}, \; \frac{1}{\frac{1}{0.5^2}+\frac{25}{0.593^2}}\bigg)\;,\]</span></p>
+<p>or, further simplified,</p>
+<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(5.776, 0.115^2 \bigg) \; .\]</span></p>
 </section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<p>The posterior model of <span class="math inline">\(\mu\)</span> is:</p>
-<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(\frac{6.5*0.593^2/25 + 5.734*0.5^2}{0.5^2+0.593^2/25}, \; \frac{0.5^2*0.593^2/25}{0.5^2+0.593^2/25}\bigg)\;,\]</span></p>
-<p>or, further simplified,</p>
-<p><span class="math display">\[\mu | \vec{y} \; \sim \; N\bigg(5.775, 0.115^2 \bigg) \; .\]</span></p>
-</section>
-<section id="section-7" class="slide level2">
-<h2></h2>
 
 <img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-13-1.png" width="864" class="r-stretch"></section>
-<section id="section-8" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -816,8 +819,55 @@ Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 </div>
 </div>
 </section>
-<section id="now-give-model-where-sigma-unknown" class="slide level2">
-<h2>Now give model where sigma unknown</h2>
+<section id="interpretation-of-conjugate-prior-in-terms-of-historical-data" class="slide level2">
+<h2>Interpretation of Conjugate Prior in Terms of Historical Data</h2>
+<p>If we base our prior mean on <span class="math inline">\(n_0\)</span> observations from a similar population as <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span>, we may wish to set <span class="math inline">\(\tau^2=\frac{\sigma^2}{n_0}\)</span>, the variance of the mean of the prior observations. In this case, we can simplify our equation as</p>
+<p><span class="math display">\[\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}} = \frac{\bigg(\frac{n_0}{\sigma^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}} = \bigg(\frac{n_0}{n_0+n}\bigg)\theta + \bigg(\frac{n}{n_0+n}\bigg)\bar{y},\]</span> so we see our conjugate prior has an interpretation in terms of historical data when <span class="math inline">\(\theta\)</span> is the prior mean in a sample of size <span class="math inline">\(n_0\)</span>.</p>
+</section>
+<section id="known-sigma2" class="slide level2">
+<h2>Known <span class="math inline">\(\sigma^2\)</span>?</h2>
+<p>When is <span class="math inline">\(\sigma^2\)</span> actually known? Well, pretty much never. This case is primarily used for didactic purposes.</p>
+</section>
+<section id="conjugate-inference-in-normal-normal-model-with-sigma2-unknown" class="slide level2">
+<h2>Conjugate Inference in Normal-Normal Model with <span class="math inline">\(\sigma^2\)</span> Unknown</h2>
+<p>Typically, we make joint inference for the mean and variance. Using probability axioms, we express a joint distribution as a product of a conditional probability and a marginal probability, e.g.&nbsp;<span class="math display">\[f(\mu,\sigma^2)=f(\mu \mid \sigma^2)f(\sigma^2).\]</span></p>
+</section>
+<section id="prior-for-sigma2" class="slide level2">
+<h2>Prior for <span class="math inline">\(\sigma^2\)</span></h2>
+<p>For <span class="math inline">\(\sigma^2\)</span>, we need a prior with support on <span class="math inline">\((0,\infty)\)</span>. One nice option is the gamma distribution. While this distribution is not conjugate for <span class="math inline">\(\sigma^2\)</span>, it is conjugate for the precision, <span class="math inline">\(\frac{1}{\sigma^2}\)</span></p>
+<div class="fragment">
+<p>The gamma distribution is parameterized in terms of a shape parameter <span class="math inline">\(\alpha\)</span> and rate parameter <span class="math inline">\(\beta\)</span> and has mean <span class="math inline">\(\frac{\alpha}{\beta}\)</span> and variance <span class="math inline">\(\frac{\alpha}{\beta^2}\)</span>.</p>
+<p>We write these prior models as <span class="math inline">\(\frac{1}{\sigma^2} \sim \text{gamma}(\alpha,\beta)\)</span> or equivalently <span class="math inline">\(\sigma^2 \sim \text{inverse-gamma}(\alpha,\beta)\)</span>.</p>
+</div>
+</section>
+<section id="gamma-models" class="slide level2">
+<h2>Gamma Models</h2>
+<p>Suppose we think the variance should be centered around <span class="math inline">\(\frac{1}{2}\)</span>. Here are some gamma priors (for the precision) all with mean <span class="math inline">\(2=\frac{1}{0.5}\)</span>.</p>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/gamma-tuning-1.png" width="1152" class="r-stretch"></section>
+<section id="interpretable-gamma-prior-model-for-precision" class="slide level2">
+<h2>Interpretable Gamma Prior Model for Precision</h2>
+<p>For interpretability, we can set <span class="math display">\[\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg),\]</span> where we interpret <span class="math inline">\(\sigma^2_0\)</span> as the sample variance from a sample of prior observations of size <span class="math inline">\(\nu_0\)</span>.</p>
+<div class="fragment">
+<p>This prior for the precision has mean <span class="math inline">\(\frac{1}{\sigma^2_0}\)</span>.</p>
+</div>
+</section>
+<section id="normal-inverse-gamma-conjugate-prior-model" class="slide level2">
+<h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
+<p>Our priors are <span class="math display">\[\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)\]</span> and <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).\]</span> Our data model is <span class="math display">\[Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).\]</span> AMYAMY WRITE IN TERMS OF HER LIKELIHOOD NOTATION.</p>
+</section>
+<section id="normal-inverse-gamma-conjugate-prior-model-1" class="slide level2">
+<h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
+<p>We can show the <strong>full conditional posterior</strong> for <span class="math inline">\(\mu\)</span> is given by <span class="math display">\[\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),\]</span> where <span class="math inline">\(n^*=n_0+n\)</span> and <span class="math inline">\(\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.\)</span></p>
+<p>With <span class="math inline">\(\theta\)</span> viewed as the mean of <span class="math inline">\(n_0\)</span> prior observations, then <span class="math inline">\(E(\mu \mid Y_1, \ldots, Y_n,\sigma^2)\)</span> is the sample mean of the current and prior observations, and <span class="math inline">\(\text{Var}(\mu \mid Y_1, \ldots, Y_n, \sigma^2)\)</span> is <span class="math inline">\(\sigma^2\)</span> divided by the total number of observations (prior+current).</p>
+</section>
+<section id="normal-inverse-gamma-conjugate-prior-model-2" class="slide level2">
+<h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
+<p>To get the <strong>marginal posterior</strong> of <span class="math inline">\(\sigma^2\)</span>, we integrate over the unknown value of <span class="math inline">\(\mu\)</span> and obtain <span class="math display">\[\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),\]</span> where <span class="math inline">\(\nu_n=\nu_0+n\)</span>, <span class="math display">\[\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2],\]</span> where <span class="math inline">\(s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}\)</span> is the sample variance.</p>
+</section>
+<section id="computation-with-unknown-variance" class="slide level2">
+<h2>Computation with Unknown Variance</h2>
+<p>We’ll consider computation for the normal-inverse gamma model when we get to the slightly more involved (and more interesting!) case of the linear regression model.</p>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 

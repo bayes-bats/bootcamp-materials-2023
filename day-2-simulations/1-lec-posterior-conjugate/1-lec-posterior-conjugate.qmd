@@ -190,7 +190,7 @@ library(patchwork)
 historical <- plot_beta_binomial(61, 63, y = 1, n = 1) +
   labs(title = "Prior Using 1900-2021",y=NULL) + theme(legend.position = "none")
 last10 <- plot_beta_binomial(10, 4, y = 1, n = 1) +
-  labs(title = "Prior Using 2010-2021",y=NULL) + theme(legend.position = "none")
+  labs(title = "Pr ior Using 2010-2021",y=NULL) + theme(legend.position = "none")
 agnostic <- plot_beta_binomial(3, 1, y = 1, n = 1) + labs(title = "Vague Prior",y=NULL)
 
 historical+last10+agnostic
@@ -268,7 +268,7 @@ Further, $\sigma$ provides a sense of scale for $Y$. Roughly 95% of $Y$ values w
 
 ```{r echo=FALSE, normal-tuning, fig.width = 4.5, message=FALSE, fig.width=12}
 
-# Set up gamma data
+# Set up data
 mu <- c(2,2,4)
 sigma  <- c(.5,1,2)
 sigma.sq<-sigma^2
@@ -338,13 +338,10 @@ f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2
 . . . 
 
 [Wikipedia](https://en.wikipedia.org/wiki/Hippocampus) tells us that among the general population of human adults, both halves of the hippocampus have a volume between 3.0 and 3.5 cubic centimeters.
-Thus the _total_ hippocampal volume of _both_ sides of the brain is between 6 and 7 cubic centimeters.
+Thus the _total_ hippocampal volume of _both_ sides of the brain is between 6 and 7 cubic centimeters. A standard deviation $\sigma=0.5$ for a normal prior centered at 6.5 puts about 2/3 of the mass of the prior in this range:
+$\mu \sim N(6.5, 0.5^2) \;.$
 
-. . . 
-
-$$\mu \sim N(6.5, 0.5^2) \;.$$
-
-. . . 
+## $N(6.5, 0.5^2)$ Distribution
 
 ```{r}
 plot_normal(mean = 6.5, sd = 0.5)
@@ -362,27 +359,43 @@ Y_i | \mu & \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 \mu & \sim N(\theta, \tau^2) \\
 \end{split}$$
 
-Upon observing data $\vec{y} = (y_1,y_2,\ldots,y_n)$, the posterior model of $\mu$ is also a Normal with updated parameters:
+Upon observing data $\vec{y} = (y_1,y_2,\ldots,y_n)$, the posterior model of $\mu$ is $N(\mu_n,\tau^2_n)$.
 
-\begin{equation}
-\mu|\vec{y} \; \sim \;  N\bigg(\frac{\theta\sigma^2/n + \bar{y}\tau^2}{\tau^2+\sigma^2/n}, \; \frac{\tau^2\sigma^2/n}{\tau^2+\sigma^2/n}\bigg) \; .
-\end{equation}
+## Normal Posterior
 
-## 
+In the posterior $N(\mu_n,\tau^2_n)$, we have
+$$\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}$$ and $$\tau^2_n=\frac{1}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}.$$
+
+
+. . . 
+
+The **inverse variance** $\frac{1}{\tau^2_n}$ is also called the **precision**. Note $\frac{1}{\tau^2_n}=\frac{1}{\tau^2}+\frac{n}{\sigma^2}$ and thus the posterior precision is the prior precision (inverse variance) combined with the inverse data variance (information).
+
+## Posterior Mean as Weighted Average of Prior and Sample Means
+
+Now  $$\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}}.$$
+
+
+Notice that the posterior mean is a weighted average of the prior mean and the sample mean, with the prior mean weighted by the prior precision, and the sample mean weighted by its sampling precision.
+
+
+## Back to Brains
+
+For the hippocampus data, we selected the prior $\mu \sim N(6.5, 0.5^2)$, and recall in our dataset the mean was 5.735 and sd was 0.593.
 
 The posterior model of $\mu$ is:
 
-$$\mu | \vec{y} \; \sim \; N\bigg(\frac{6.5*0.593^2/25 + 5.734*0.5^2}{0.5^2+0.593^2/25}, \; \frac{0.5^2*0.593^2/25}{0.5^2+0.593^2/25}\bigg)\;,$$
+$$\mu | \vec{y} \; \sim \; N\bigg(\frac{6.5*\frac{1}{0.5^2} + 5.735*\frac{25}{0.593^2}}{\frac{1}{0.5^2}+\frac{25}{0.593^2}}, \; \frac{1}{\frac{1}{0.5^2}+\frac{25}{0.593^2}}\bigg)\;,$$
 
 or, further simplified,
 
-$$\mu | \vec{y} \; \sim \; N\bigg(5.775, 0.115^2 \bigg) \; .$$
+$$\mu | \vec{y} \; \sim \; N\bigg(5.776, 0.115^2 \bigg) \; .$$
 
 ## 
 
 ```{r fig.width=9}
 plot_normal_normal(mean = 6.5, sd = 0.5, sigma = 0.593, 
-  y_bar = 5.734, n = 25)
+  y_bar = 5.735, n = 25)
 ```
 
 ## 
@@ -393,5 +406,83 @@ summarize_normal_normal(mean = 6.5, sd = 0.5, sigma = 0.593,
   y_bar = 5.735, n = 25)
 ```
 
-## Now give model where sigma unknown
 
+## Interpretation of Conjugate Prior in Terms of Historical Data
+
+If we base our prior mean on $n_0$ observations from a similar population as $(Y_1,Y_2,\ldots,Y_n)$, we may wish to set $\tau^2=\frac{\sigma^2}{n_0}$, the variance of the mean of the prior observations. In this case, we can simplify our equation as 
+
+$$\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}} = \frac{\bigg(\frac{n_0}{\sigma^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}} = \bigg(\frac{n_0}{n_0+n}\bigg)\theta + \bigg(\frac{n}{n_0+n}\bigg)\bar{y},$$
+so we see our conjugate prior has an interpretation in terms of historical data when $\theta$ is the prior mean in a sample of size $n_0$.
+
+
+## Known $\sigma^2$?
+
+When is $\sigma^2$ actually known?  Well, pretty much never.  This case is primarily used for didactic purposes.
+
+## Conjugate Inference in Normal-Normal Model with $\sigma^2$ Unknown
+
+Typically, we make joint inference for the mean and variance. Using probability axioms, we express a joint distribution as a product of a conditional probability and a marginal probability, e.g. $$f(\mu,\sigma^2)=f(\mu \mid \sigma^2)f(\sigma^2).$$ 
+
+## Prior for $\sigma^2$
+
+For $\sigma^2$, we need a prior with support on $(0,\infty)$. One nice option is the gamma distribution. While this distribution is not conjugate for $\sigma^2$, it is conjugate for the precision, $\frac{1}{\sigma^2}$
+
+. . .
+
+The gamma distribution is parameterized in terms of a shape parameter $\alpha$ and rate parameter $\beta$ and has mean $\frac{\alpha}{\beta}$ and variance $\frac{\alpha}{\beta^2}$.
+
+We write these prior models as $\frac{1}{\sigma^2} \sim \text{gamma}(\alpha,\beta)$ or equivalently $\sigma^2 \sim \text{inverse-gamma}(\alpha,\beta)$.
+
+
+## Gamma Models
+
+Suppose we think the variance should be centered around $\frac{1}{2}$. Here are some gamma priors (for the precision) all with mean $2=\frac{1}{0.5}$. 
+
+
+
+```{r echo=FALSE, gamma-tuning, fig.width = 4.5, message=FALSE, fig.width=12, warning=FALSE}
+
+# Set up data
+alpha <- c(0.2,2,8)
+beta  <- c(0.1,1,4)
+gammas <- data.frame(setting = factor(rep(1:3, each = 500)), 
+                    x = rep(seq(.01, 10, length = 500), 3),
+                    alpha = rep(alpha, each = 500), 
+                    beta = rep(beta, each = 500))
+gammas <- gammas %>% 
+    mutate(y = dgamma(x, alpha, beta))
+levels(gammas$setting) <- paste0("Gamma(",alpha,",",beta,")")
+g <- ggplot(gammas, aes(x = x, y = y)) + 
+  geom_line() + 
+  facet_wrap(~ setting) + 
+  labs(x = "y", y = "f(y)") +  lims(y = c(0,1)) 
+  
+g 
+``` 
+
+
+## Interpretable Gamma Prior Model for Precision
+
+For interpretability, we can set $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg),$$ where we interpret $\sigma^2_0$ as the sample variance from a sample of prior observations of size $\nu_0$.  
+
+. . . 
+
+This prior for the precision has mean $\frac{1}{\sigma^2_0}$.
+
+## Normal-Inverse Gamma Conjugate Prior Model
+
+Our priors are $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)$$  and $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).$$ Our data model is $$Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).$$ AMYAMY WRITE IN TERMS OF HER LIKELIHOOD NOTATION.
+
+## Normal-Inverse Gamma Conjugate Prior Model
+
+We can show the **full conditional posterior** for $\mu$ is given by $$\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),$$ where $n^*=n_0+n$ and $\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.$
+
+With $\theta$ viewed as the mean of $n_0$ prior observations, then $E(\mu \mid Y_1, \ldots, Y_n,\sigma^2)$ is the sample mean of the current and prior observations, and $\text{Var}(\mu \mid Y_1, \ldots, Y_n, \sigma^2)$ is $\sigma^2$ divided by the total number of observations (prior+current).
+
+## Normal-Inverse Gamma Conjugate Prior Model
+
+To get the **marginal posterior** of $\sigma^2$, we  integrate over the unknown value of $\mu$ and obtain $$\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),$$ where $\nu_n=\nu_0+n$, $$\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2],$$ where $s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}$ is the sample variance. 
+
+## Computation with Unknown Variance
+
+We'll consider computation for the normal-inverse gamma model when we get to the slightly more involved (and more interesting!) case of the linear regression model.
