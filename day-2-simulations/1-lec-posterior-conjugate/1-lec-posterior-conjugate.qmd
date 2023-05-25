@@ -31,22 +31,22 @@ Drought conditions have been a major concern for California residents and policy
 
 ## Prior Distribution Options
 
-We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(43,59) prior distribution (remember, the parameters of the beta can be interpreted as prior data: the # of prior successes minus 1, and the # of prior failures minus 1).  Let's plot and summarize this prior.
+We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(42,58) prior distribution (remember, the parameters of the beta can be interpreted as prior data: the approximate # of prior dry and non-dry years).  Let's plot and summarize this prior.
 
 
 ```{r eval = FALSE}
 library(tidyverse)
 library(bayesrules)
-plot_beta(43, 59) 
-summarize_beta(43,59)
+plot_beta(42, 58) 
+summarize_beta(42,58)
 ```
 
 ```{r fig.align='center', fig.height=4, echo = FALSE}
 library(tidyverse)
 library(bayesrules)
-plot_beta(43, 59) +
+plot_beta(42, 58) +
     theme(text = element_text(size=20)) 
-summarize_beta(43,59)
+summarize_beta(42,58)
 ```
 
 Does this seem reasonable?
@@ -57,9 +57,9 @@ California weather has been more variable in recent years, and you may not all a
 
 | Time                | Historical Data         | Prior Model       |
 |---------------------|--------------|-------------|
-| 1900-1999 | 42 extremely dry years           | Beta(43,59)  |
-| 2000-2009  | 9 extremely dry years | Beta(10,2)  |
-| 2010-2019  | 7 extremely dry years | Beta(8,4) |
+| 1900-1999 | 42 extremely dry years           | Beta(42,58)  |
+| 2000-2009  | 9 extremely dry years | Beta(9,1)  |
+| 2010-2019  | 7 extremely dry years | Beta(7,3) |
 | NA | Vague prior not based on data | Beta(1,1) |
 
 Pick one of these prior models, or design your own, and plot your prior. Share your plot with colleagues!
@@ -79,13 +79,13 @@ Pick one of these prior models, or design your own, and plot your prior. Share y
 
 |Prior Type | Prior Model | Data | Posterior Model |
 |:-------|---------|:----------:|-----------|
-| 1900-2019 | Beta(59, 63) | Extremely dry year | Beta(60,63) |
-| Last 10 years| Beta(8,4) | Extremely dry year | Beta(9,4) |
+| 1900-2019 | Beta(58, 62) | Extremely dry year | Beta(59,62) |
+| Last 10 years| Beta(7,3) | Extremely dry year | Beta(8,3) |
 | Agnostic | Beta(1,1) | Extremely dry year | Beta(2,1) |
 
 ```{r, echo=TRUE, eval=FALSE}
-plot_beta(60,63)
-plot_beta(9,4)
+plot_beta(59,62)
+plot_beta(8,3)
 plot_beta(2,1)
 
 ```
@@ -94,9 +94,9 @@ plot_beta(2,1)
 
 ```{r, echo=FALSE}
 library(patchwork)
-historical <- plot_beta_binomial(59, 63, y = 1, n = 1) +
+historical <- plot_beta_binomial(58, 62, y = 1, n = 1) +
   labs(title = "Prior Using 1900-2019",y=NULL) + theme(legend.position = "none")
-last10 <- plot_beta_binomial(8, 4, y = 1, n = 1) +
+last10 <- plot_beta_binomial(7, 3, y = 1, n = 1) +
   labs(title = "Prior Using 2010-2019",y=NULL) + theme(legend.position = "none")
 agnostic <- plot_beta_binomial(1, 1, y = 1, n = 1) + labs(title = "Vague Prior",y=NULL)
 
@@ -126,13 +126,13 @@ Now, take your posterior and use it as the prior distribution for analysis of th
 
 |Prior Type | Prior Model | Data | Posterior Model |
 |:-------|---------|:----------:|-----------|
-| 1900-2020 | Beta(60, 63) | Extremely dry year | Beta(61,63) |
-| Last 11 years| Beta(9,4) | Extremely dry year | Beta(10,4) |
+| 1900-2020 | Beta(59, 62) | Extremely dry year | Beta(60,62) |
+| Last 11 years| Beta(8,3) | Extremely dry year | Beta(9,3) |
 | Agnostic | Beta(2,1) | Extremely dry year | Beta(3,1) |
 
 ```{r, echo=TRUE, eval=FALSE}
-plot_beta(61,63)
-plot_beta(10,4)
+plot_beta(60,62)
+plot_beta(9,3)
 plot_beta(3,1)
 
 ```
@@ -141,9 +141,9 @@ plot_beta(3,1)
 
 ```{r, echo=FALSE}
 library(patchwork)
-historical <- plot_beta_binomial(60, 63, y = 1, n = 1) +
+historical <- plot_beta_binomial(59, 62, y = 1, n = 1) +
   labs(title = "Prior Using 1900-2020",y=NULL) + theme(legend.position = "none")
-last10 <- plot_beta_binomial(9, 4, y = 1, n = 1) +
+last10 <- plot_beta_binomial(8, 3, y = 1, n = 1) +
   labs(title = "Prior Using 2010-2020",y=NULL) + theme(legend.position = "none")
 agnostic <- plot_beta_binomial(2, 1, y = 1, n = 1) + labs(title = "Vague Prior",y=NULL)
 
@@ -172,13 +172,13 @@ Finally, take your posterior and use it as the prior distribution for analysis o
 
 |Prior Type | Prior Model | Data | Posterior Model |
 |:-------|---------|:----------:|-----------|
-| 1900-2021 | Beta(61, 63) | Extremely dry year | Beta(62,63) |
-| Last 12 years| Beta(10,4) | Extremely dry year | Beta(11,4) |
+| 1900-2021 | Beta(60, 62) | Extremely dry year | Beta(61,62) |
+| Last 12 years| Beta(9,3) | Extremely dry year | Beta(10,3) |
 | Agnostic | Beta(3,1) | Extremely dry year | Beta(4,1) |
 
 ```{r, echo=TRUE, eval=FALSE}
-plot_beta(62,63)
-plot_beta(11,4)
+plot_beta(61,62)
+plot_beta(10,3)
 plot_beta(4,1)
 
 ```
@@ -187,10 +187,10 @@ plot_beta(4,1)
 
 ```{r, echo=FALSE}
 library(patchwork)
-historical <- plot_beta_binomial(61, 63, y = 1, n = 1) +
+historical <- plot_beta_binomial(60, 62, y = 1, n = 1) +
   labs(title = "Prior Using 1900-2021",y=NULL) + theme(legend.position = "none")
-last10 <- plot_beta_binomial(10, 4, y = 1, n = 1) +
-  labs(title = "Pr ior Using 2010-2021",y=NULL) + theme(legend.position = "none")
+last10 <- plot_beta_binomial(9, 3, y = 1, n = 1) +
+  labs(title = "Prior Using 2010-2021",y=NULL) + theme(legend.position = "none")
 agnostic <- plot_beta_binomial(3, 1, y = 1, n = 1) + labs(title = "Vague Prior",y=NULL)
 
 historical+last10+agnostic

@@ -525,7 +525,7 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 </section>
 <section id="graduate-admissions" class="slide level2">
 <h2>Graduate Admissions</h2>
-<p>An applicant to a small graduate program wants to know <span class="math inline">\(\pi\)</span>, the probability of admission, so they can determine how many programs to which they should apply. Based on commentary on <a href="https://www.thegradcafe.com">The GradCafe</a> about similar programs, the applicant thinks that <span class="math inline">\(\pi\)</span> is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution. Write out a reasonable <span class="math inline">\(f(\pi)\)</span>. Calculate the prior expected value, mode, and variance.</p>
+<p>An applicant to a small graduate program wants to know <span class="math inline">\(\pi\)</span>, the probability of admission, so they can determine how many programs to which they should apply. Based on commentary on <a href="https://www.thegradcafe.com">The GradCafe</a> about similar programs, the applicant thinks that <span class="math inline">\(\pi\)</span> is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution, <span class="math inline">\(\text{beta}(5,35)\)</span>. Write out a reasonable <span class="math inline">\(f(\pi)\)</span>. Calculate the prior expected value, mode, and variance.</p>
 
 <img data-src="2-lec-discrete-data_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="plotting-the-prior" class="slide level2">
@@ -570,7 +570,7 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 <p>We say that <span class="math inline">\(f(\pi)\)</span> is a <strong>conjugate prior</strong> for <span class="math inline">\(L(\pi|y)\)</span> if the posterior, <span class="math inline">\(f(\pi|y) \propto f(\pi)L(\pi|y)\)</span>, is from the same model family as the prior.</p>
 <p>Thus, the Beta distribution is a conjugate prior for the Binomial likelihood model because the posterior also follows a Beta distribution.</p>
 <div class="fragment">
-<p>Note that in the likelihood, <span class="math inline">\(\pi\)</span> is raised to the power of the number of successes, and <span class="math inline">\(1-\pi\)</span> is raised to the power of the number of failures. The prior has a similar structure, and <span class="math inline">\(\alpha-1\)</span> is often interpreted as a prior number of successes, and <span class="math inline">\(\beta-1\)</span> is often interpreted as a prior number of failures.</p>
+<p>Note that in the likelihood, <span class="math inline">\(\pi\)</span> is raised to the power of the number of successes, and <span class="math inline">\(1-\pi\)</span> is raised to the power of the number of failures. The prior has a similar structure, and <span class="math inline">\(\alpha\)</span> is often interpreted as the approximate prior number of successes, and <span class="math inline">\(\beta\)</span> is often interpreted as the approximate prior number of failures, with <span class="math inline">\(\alpha+\beta\)</span> as the approximate prior sample size.</p>
 </div>
 </section>
 <section id="graduate-program-admissions" class="slide level2">

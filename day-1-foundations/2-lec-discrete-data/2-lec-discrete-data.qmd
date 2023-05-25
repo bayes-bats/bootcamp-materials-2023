@@ -286,7 +286,7 @@ summarize_beta(alpha = 5, beta = 7)
 
 ## Graduate Admissions 
 
-An applicant to a small graduate program wants to know $\pi$, the probability of admission, so they can determine how many programs to which they should apply.  Based on commentary on [The GradCafe](https://www.thegradcafe.com) about similar programs, the applicant thinks that $\pi$ is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution. Write out a reasonable $f(\pi)$. Calculate the prior expected value, mode, and variance. 
+An applicant to a small graduate program wants to know $\pi$, the probability of admission, so they can determine how many programs to which they should apply.  Based on commentary on [The GradCafe](https://www.thegradcafe.com) about similar programs, the applicant thinks that $\pi$ is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution, $\text{beta}(5,35)$. Write out a reasonable $f(\pi)$. Calculate the prior expected value, mode, and variance. 
 
 
 ```{r fig.align='center', fig.height=3.5, echo = FALSE}
@@ -351,7 +351,7 @@ Thus, the Beta distribution is a conjugate prior for the Binomial likelihood mod
 
 . . . 
 
-Note that in the likelihood, $\pi$ is raised to the power of the number of successes, and $1-\pi$ is raised to the power of the number of failures.  The prior has a similar structure, and $\alpha-1$ is often interpreted as a prior number of successes, and $\beta-1$ is often interpreted as a prior number of failures. 
+Note that in the likelihood, $\pi$ is raised to the power of the number of successes, and $1-\pi$ is raised to the power of the number of failures.  The prior has a similar structure, and $\alpha$ is often interpreted as the approximate prior number of successes, and $\beta$ is often interpreted as the approximate prior number of failures, with $\alpha+\beta$ as the approximate prior sample size.
 
 
 ## Graduate Program Admissions

@@ -419,15 +419,15 @@
 </section>
 <section id="prior-distribution-options" class="slide level2">
 <h2>Prior Distribution Options</h2>
-<p>We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(43,59) prior distribution (remember, the parameters of the beta can be interpreted as prior data: the # of prior successes minus 1, and the # of prior failures minus 1). Let’s plot and summarize this prior.</p>
+<p>We can use a beta prior based on the historical data from 1900-1999, during which we had 42 years that were extremely dry, and 58 years that were not. This corresponds to a beta(42,58) prior distribution (remember, the parameters of the beta can be interpreted as prior data: the approximate # of prior dry and non-dry years). Let’s plot and summarize this prior.</p>
 <div class="cell">
 
 </div>
 <div class="cell" data-layout-align="center">
 
 <div class="cell-output cell-output-stdout">
-<pre><code>       mean mode         var         sd
-1 0.4215686 0.42 0.002367461 0.04865657</code></pre>
+<pre><code>  mean      mode         var         sd
+1 0.42 0.4183673 0.002411881 0.04911091</code></pre>
 </div>
 </div>
 <img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"><p>Does this seem reasonable?</p>
@@ -447,17 +447,17 @@
 <tr class="odd">
 <td>1900-1999</td>
 <td>42 extremely dry years</td>
-<td>Beta(43,59)</td>
+<td>Beta(42,58)</td>
 </tr>
 <tr class="even">
 <td>2000-2009</td>
 <td>9 extremely dry years</td>
-<td>Beta(10,2)</td>
+<td>Beta(9,1)</td>
 </tr>
 <tr class="odd">
 <td>2010-2019</td>
 <td>7 extremely dry years</td>
-<td>Beta(8,4)</td>
+<td>Beta(7,3)</td>
 </tr>
 <tr class="even">
 <td>NA</td>
@@ -504,15 +504,15 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1900-2019</td>
-<td>Beta(59, 63)</td>
+<td>Beta(58, 62)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(60,63)</td>
+<td>Beta(59,62)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Last 10 years</td>
-<td>Beta(8,4)</td>
+<td>Beta(7,3)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(9,4)</td>
+<td>Beta(8,3)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Agnostic</td>
@@ -523,8 +523,8 @@
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">plot_beta</span>(<span class="dv">60</span>,<span class="dv">63</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">plot_beta</span>(<span class="dv">9</span>,<span class="dv">4</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">plot_beta</span>(<span class="dv">59</span>,<span class="dv">62</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">plot_beta</span>(<span class="dv">8</span>,<span class="dv">3</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">plot_beta</span>(<span class="dv">2</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -578,15 +578,15 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1900-2020</td>
-<td>Beta(60, 63)</td>
+<td>Beta(59, 62)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(61,63)</td>
+<td>Beta(60,62)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Last 11 years</td>
-<td>Beta(9,4)</td>
+<td>Beta(8,3)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(10,4)</td>
+<td>Beta(9,3)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Agnostic</td>
@@ -597,8 +597,8 @@
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot_beta</span>(<span class="dv">61</span>,<span class="dv">63</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">plot_beta</span>(<span class="dv">10</span>,<span class="dv">4</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot_beta</span>(<span class="dv">60</span>,<span class="dv">62</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">plot_beta</span>(<span class="dv">9</span>,<span class="dv">3</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="fu">plot_beta</span>(<span class="dv">3</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -652,15 +652,15 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1900-2021</td>
-<td>Beta(61, 63)</td>
+<td>Beta(60, 62)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(62,63)</td>
+<td>Beta(61,62)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Last 12 years</td>
-<td>Beta(10,4)</td>
+<td>Beta(9,3)</td>
 <td style="text-align: center;">Extremely dry year</td>
-<td>Beta(11,4)</td>
+<td>Beta(10,3)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Agnostic</td>
@@ -671,8 +671,8 @@
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">plot_beta</span>(<span class="dv">62</span>,<span class="dv">63</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">plot_beta</span>(<span class="dv">11</span>,<span class="dv">4</span>)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">plot_beta</span>(<span class="dv">61</span>,<span class="dv">62</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">plot_beta</span>(<span class="dv">10</span>,<span class="dv">3</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">plot_beta</span>(<span class="dv">4</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
