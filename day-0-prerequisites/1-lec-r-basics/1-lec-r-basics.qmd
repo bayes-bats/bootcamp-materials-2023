@@ -1,0 +1,163 @@
+---
+title: "hello woRld"
+execute:
+  echo: true
+subtitle: "Prerequisites"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+
+:::{.font75}
+
+Introduction to R & RStudio
+
+:::
+
+##
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/1a-hello-world.mp4" type="video/mp4">
+</video>
+
+</center>
+
+## Object assignment operator
+
+```{r}
+birth_year <- 1950
+```
+
+
+##
+
+|                            | Windows        | Mac              |
+|----------------------------|----------------|------------------|
+| Shortcut     | Alt + -        | Option + -       |
+
+
+
+
+## R is case-sensitive
+
+
+```{r}
+#| error: true
+my_age <- 2020 - birth_year
+
+My_age
+```
+
+
+
+
+## 
+
+If something comes in quotes, it is not defined in R. 
+
+
+```{r}
+
+ages <- c(25, my_age, 32)
+
+names <- c("Menglin", "Mine", "Rafael")
+
+data.frame(age = ages, name = names)
+```
+
+
+
+
+## Vocabulary
+
+```{r}
+#| eval: false
+do(something)
+```
+
+`do()` is a function;   
+`something` is the argument of the function.
+
+
+
+```{r}
+#| eval: false
+do(something, colorful)
+```
+
+`do()` is a function;   
+`something` is the first argument of the function;   
+`colorful` is the second argument of the function.
+
+
+
+## Getting Help
+
+In order to get any help we can use `?` followed by function (or object) name. 
+
+```{r}
+#| eval: false
+#| echo: true
+?c
+```
+
+
+
+
+## tidyverse_style_guide
+
+>canyoureadthissentence?
+
+
+## tidyverse_style_guide
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{r}
+#| eval: false
+age <- c(6, 9, 15)
+
+data.frame(age_kid = age)
+```
+
+:::
+
+
+::: {.column width="40%"}
+
+After function names do not leave any spaces.
+
+Before and after operators (e.g. <-, =) leave spaces. 
+
+Put a space after a comma, **not** before. 
+
+Object names are all lower case, with words separated by an underscore.
+
+:::
+
+::::
+
+---
+
+##
+
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/1b-rstudio-setup.mp4" type="video/mp4">
+</video>
+
+</center>
