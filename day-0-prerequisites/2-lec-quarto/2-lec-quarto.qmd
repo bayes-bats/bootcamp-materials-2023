@@ -202,6 +202,8 @@ knitr::include_graphics("img/quarto-parts.png")
  
 ## Slides and Schedule
 
-The [slides](https://github.com/disseminate-collaborate-reproduce/slides) you are looking at right now and the [bootcamp schedule](https://github.com/disseminate-collaborate-reproduce/schedule) are all prepared using Quarto. 
+The slides you are looking at right now and the bootcamp schedule are all prepared using Quarto. 
+The source code is available on our [GitHub organization](https://github.com/bayes-bats/bootcamp-material).
+
 
 
