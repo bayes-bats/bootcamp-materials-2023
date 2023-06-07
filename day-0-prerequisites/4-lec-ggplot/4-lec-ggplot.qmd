@@ -1,6 +1,9 @@
 ---
-title: "ggplot"
+title: "Visualizing Data with ggplot"
 subtitle: "Prerequisites"
+execute:
+  echo: true
+  warning: true
 format: 
   revealjs:
     slide-number: true
@@ -12,6 +15,830 @@ format:
       data-background-size: 12%
       data-background-position: 50% 75%
 ---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(openintro)
+library(tidyverse)
+library(palmerpenguins)
+library(titanic)
+library(janitor)
+
+theme_set(theme_gray(base_size = 18))
+
+babies <- babies %>% 
+  mutate(smoke = as.logical(smoke),
+         parity = as.logical(parity))
+titanic <- titanic_train %>% 
+  clean_names() %>% 
+  select(survived, pclass, sex, age, fare, embarked) %>% 
+  mutate(pclass = case_when(pclass == 1 ~ "First", 
+                            pclass == 2 ~ "Second",
+                            pclass == 3 ~ "Third"),
+         embarked = case_when(embarked == "S" ~ "Southampton",
+                              embarked == "C" ~ "Cherbourg",
+                              embarked == "Q" ~ "Queenstown"),
+         embarked = as.factor(embarked),
+         sex = as.factor("sex"),
+         survived = as.logical(survived))
+```
+
+## Examples
+
+[How LGBTQ+ hate crime is committed by young people against young people](https://www.bbc.com/news/uk-46543874)
+
+[Mandatory Paid Vacation](https://www.instagram.com/p/CE1kpM5FhWR/?utm_source=ig_web_copy_link)
+
+
+##
+
+Data Visualizations
+
+- are graphical representations of data
+
+- use different colors, shapes, and the coordinate system to summarize data
+
+- can tell a story
+
+
+- can be useful for exploring data
+
+## Data
+
+```{r}
+#| echo: true
+head(titanic)
+```
+
+## Data
+
+```{r}
+#| echo: true
+tail(titanic)
+```
+
+## Data
+
+```{r}
+#| echo: true
+glimpse(titanic)
+```
+
+
+##
+
+::: {.font75}
+
+Visuals with a Single Categorical Variable
+
+:::
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+If you could speak to R in English, how would you tell R to make this plot for you?
+
+OR
+
+If you had the data and had to draw this bar plot by hand, what would you do?
+
+:::
+
+::: {.column width="60%"}
+
+```{r echo=FALSE}
+ggplot(titanic, aes(x = pclass)) +
+  geom_bar()
+```
+
+:::
+
+::::
+
+
+
+
+
+## 3 Steps of Making a Basic ggplot
+
+1.Pick data
+
+2.Map data onto aesthetics
+
+
+3.Add the geometric layer
+
+
+
+## Step 1 - Pick Data
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+ggplot(data = titanic)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig.height: 5
+ggplot(titanic)
+```
+
+:::
+
+::::
+
+## Step 2 - Map Data to Aesthetics
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r `code-line-numbers`="2"}
+#| eval: false
+ggplot(data = titanic,
+       aes(x = pclass)) 
+```
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig.height: 5
+ggplot(data = titanic,
+       aes(x = pclass))
+```
+
+:::
+
+::::
+
+
+
+## Step 3 - Add the Geometric Layer
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r `code-line-numbers`="3"}
+#| eval: false
+ggplot(data = titanic,
+       aes(x = pclass)) +
+  geom_bar() 
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig.height: 5
+ggplot(data = titanic,
+       aes(x = pclass)) +
+  geom_bar()
+```
+
+
+:::
+
+::::
+
+## 
+
+::: {.panel-tabset}
+
+## Plot
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-align: 'center'
+ggplot(data = titanic,
+       aes(x = pclass)) +
+  geom_bar()
+```
+
+## English
+
+Create a ggplot using the `titanic` data frame.
+
+Map the `pclass` to the x-axis. 
+
+Add a layer of a bar plot.
+
+## R
+
+```{r}
+#| eval: false
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = pclass)) +
+  geom_bar()
+```
+
+
+:::
+
+
+##
+
+:::{.font75}
+
+Visualizing a Single Numeric Variable
+
+:::
+
+::: {.panel-tabset}
+
+## Plot
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-align: 'center'
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram() 
+```
+
+
+## English
+
+Create a ggplot using the `titanic` data frame.
+
+Map the `fare` to the x-axis. 
+
+Add a layer of a histogram.
+
+
+## R
+
+```{r}
+#| eval: false
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram() 
+```
+
+:::
+
+## What is this warning?
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-align: 'center'
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram()
+```
+
+
+##
+
+
+```{r `code-line-numbers`="3"}
+#| fig.height: 5
+#| fig.align: 'center'
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15) 
+```
+
+
+
+
+##
+
+::: {.panel-tabset}
+
+
+## binwidth = 15
+
+
+
+```{r echo = FALSE, fig.height=5, fig.align='center'}
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15)
+```
+
+## binwidth = 50
+
+```{r echo = FALSE, fig.height=5, fig.align='center'}
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 50)
+```
+
+## binwidth = 100
+
+```{r echo = FALSE, fig.height=5, fig.align='center'}
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 100)
+```
+
+:::
+
+## 
+
+[There is no "best" number of bins](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width)
+
+
+
+
+##
+
+:::.{font150}
+
+`r emojifont::emoji(emojifont::search_emoji('rainbow'))[1]`
+:::
+
+
+Pick your favorite color(s) from the list at:
+
+[bit.ly/colors-r](https://bit.ly/colors-r)
+
+or you can use hex codes.
+
+##
+
+```{r `code-line-numbers`="4"}
+#| fig-align: 'center'
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+                 color = "white") 
+```
+
+---
+
+```{r `code-line-numbers`="5"}
+#| fig-align: 'center'
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+                 fill = "darkred") 
+```
+
+---
+
+```{r}
+#| fig-align: 'center'
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+                 color = "white", 
+                 fill = "darkred") 
+```
+
+
+
+
+:::{.font75}
+
+Visualizing Two Categorical Variables
+
+:::
+
+
+
+## Stacked Bar-Plot
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r `code-line-numbers`="3"}
+#| eval: false
+ggplot(data = titanic,
+       aes(x = pclass, 
+           fill = survived)) 
+  geom_bar() 
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = pclass, 
+           fill = survived)) +
+  geom_bar()
+```
+:::
+
+::::
+
+
+
+## Standardized Bar Plot
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r `code-line-numbers`="4"}
+#| eval: false
+ggplot(data = titanic,
+       aes(x = pclass, 
+           fill = survived)) + 
+  geom_bar(position = "fill") 
+```
+
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-height: 5
+ggplot(data = titanic,
+       aes(x = pclass, fill = survived)) +
+  geom_bar(position = "fill")
+```
+
+:::
+
+::::
+
+Note that y-axis is no longer count but we will learn how to change that later.
+
+
+
+## New Data
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| fig-height: 0.3
+knitr::include_graphics("img/penguins.png")
+```
+
+Artwork by [@allison_horst](https://twitter.com/allison_horst) 
+
+
+
+## New Data
+
+```{r}
+glimpse(penguins)
+```
+
+---
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+knitr::include_graphics("img/penguin_bill.png")
+```
+
+Artwork by [@allison_horst](https://twitter.com/allison_horst)
+
+
+##
+
+:::{.font75}
+
+Visualizing a single numerical and single categorical variable
+
+:::
+
+
+:::: {.columns}
+
+::: {.column width="50%}
+
+```{r}
+#| eval: false
+#| fig-height: 5
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_violin()
+```
+
+:::
+
+::: {.column width="50%}
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-align: 'center'
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_violin()
+```
+
+:::
+
+::::
+
+##
+
+:::{.font75}
+
+Visualizing a single numerical and single categorical variable
+
+:::
+
+
+:::: {.columns}
+
+::: {.column width="50%}
+
+```{r}
+#| eval: false
+#| fig-height: 5
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_violin()
+```
+
+:::
+
+::: {.column width="50%}
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-align: 'center'
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_boxplot()
+```
+
+:::
+
+::::
+
+
+
+
+##
+
+:::{.font75}
+
+Visualizing Two Numerical Variables
+
+:::
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm))  +
+  geom_point()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm))  +
+  geom_point()
+```
+
+:::
+
+
+::::
+
+
+
+##
+
+:::{.font75}
+
+Considering More Than Two Variables
+
+:::
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           color= species))  +
+  geom_point()
+```
+
+:::
+
+::::
+
+##
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species))  +
+  geom_point()
+```
+
+:::
+
+::::
+
+##
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+
+
+
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species))  +
+  geom_point()
+```
+
+:::
+::::
+
+##
+
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point()
+```
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r echo=FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species))  +
+  geom_point()
+```
+
+:::
+
+::::
+
+##
+
+::::{.columns}
+
+::: {.column width="50%"}
+
+
+```{r}
+#| eval: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species,
+           size = body_mass_g)) +
+  geom_point()
+```
+
+:::
+
+
+
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species,
+           size = body_mass_g))  +
+  geom_point()
+```
+
+:::
+
+::::
+
+##
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+knitr::include_graphics("img/ggplot-summary.jpeg")
+```
+
+
+
+
+## Practice
+
+Using either the `babies`, `titanic` or `penguins` data frame ask a question that you are interested in answering. Visualize data to get a visual answer to the question. What is the visual telling you? Note all of this down in your lecture notes.
 
 
 
