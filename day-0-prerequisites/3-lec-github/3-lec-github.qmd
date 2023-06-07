@@ -14,4 +14,160 @@ format:
 ---
 
 
+:::{.font75}
+
+version control
+
+:::
+
+
+
+##
+
+hw1
+
+--
+
+hw1_final
+
+--
+
+hw1_final2
+
+--
+
+hw1_final3
+
+--
+
+hw1_finalwithfinalimages
+
+--
+
+hw1_finalestfinal
+
+##
+
+What if we tracked our file with a better names for each version and have only 1 file **hw1**?
+
+--
+
+hw1 **added questions 1 through 5**
+
+--
+
+hw1 **changed question 1 image**
+
+--
+
+hw1 **fixed typos**
+
+--
+
+We will call the descriptions in bold **commit** messages.
+
+
+
+## git vs. GitHub
+
+- git allows us to keep track of different versions of a file(s).
+
+- GitHub is a website where we can store (and share) different versions of the files. 
+
+---
+
+```{r echo=FALSE, out.width='40%',fig.align='center'}
+knitr::include_graphics('img/github-illustration.002.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.003.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.004.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.005.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.006.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.007.jpeg')
+```
+
+
+---
+
+
+## Demo
+
+
+
+
+## Cloning a repo
+
+**repo** is a short form of repository. Repositories contain all of your project's files as well as each file's revision history.
+
+For this class our weekly repos (lecture code, quiz code etc.) are hosted on Github. 
+
+To **clone** a GitHub repo to our computer, we first copy the cloning link as shown in screencast then start an RStudio project using that link.  
+
+**Cloning** a repo pulls (downloads) all the elements of a repo available at that specific time. 
+
+
+
+## Commits
+
+Once you make changes to your repo (e.g. take notes during lecture). you can take a snapshot of your changes with a commit.
+
+This way if you ever have to go back in version history you have your older commits to get back to. 
+This is especially useful, for instance, if you want to go back to an earlier solution you have committed.
+
+
+
+## Push
+
+All the commits you make will initially be local (i.e. on your own computer). 
+
+In order for me to see your commits and the current version of any doc you are working on, you have to **push** your commits. In other words upload your files at the stage in that specific time.
+
+
+
+
+## (An incomplete) Git/GitHub glossary
+
+**Git:** is software for tracking changes in any set of files
+
+**GitHub:** is an internet host for Git projects.
+
+**repo:** is a short form of repository. Repositories contain all of your project's files as well as each file's revision history.
+
+**clone:** Cloning a repo **pulls** (downloads) all the elements of a repo available at that specific time. 
+
+**commit:** A snapshot of your repo at a specific point in time. We distinguish each commit with a **commit message**. 
+
+**push:** Uploads the latest "committed" state of your repo to GitHub.
+
+##
+
+:::{font75}
+
+Do you git it?
+
+:::
 
