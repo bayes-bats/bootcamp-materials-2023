@@ -42,6 +42,9 @@ Videos to be watched before the bootcamp. If you run into any issues about this 
 | hello woRld      |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
 | Introduction to Quarto |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()                    |
 | Git/GitHub              |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
+| ggplot              |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
+| Data Wrangling              |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
+| Workflow              |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
 
 <!--
 ## Day 1 - Foundation of Bayesian inference
