@@ -1,0 +1,57 @@
+---
+title: "Bayes BATS Bootcamp Schedule"
+title-block-banner: true
+format:
+  html:
+    toc: true
+    toc-title: "Content"
+    toc-location: left
+    html-math-method: katex
+    theme: 
+      -  templates/activity-style.scss
+    page-layout: full
+---
+
+```{r}
+#| echo: false
+
+library(fontawesome)
+```
+
+## Technical Setup Before the Bootcamp
+
+- **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/URiBx8mzoLt97n6e9) to let us know what your username is. Many of you have already done this.
+
+- **Install R** [`r fontawesome::fa(name = "link")`](https://mirror.las.iastate.edu/CRAN/) Yes, you do need to download and install R even if you have downloaded before. There is a newer version.
+
+- **Install RStudio** [`r fontawesome::fa(name = "link")`](https://posit.co/download/rstudio-desktop/) Yes, you do need to download and install RStudio even if you have downloaded before. There is a newer version. Download the free Desktop version.
+
+- **Install and setup git** [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7926437&node=33713927&a=41919805&autoplay=1) [`r fontawesome::fa(name = "chalkboard-teacher")`]()
+
+- **Test your installations**  [`r fontawesome::fa(name = "video")`]()
+
+- If you run into any issues about the tech setup please feel free to let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack.
+
+## Day 0 - Introduction to the Toolkit
+
+Videos to be watched before the bootcamp. If you run into any issues about this content please let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack.
+
+| Topic                         | Materials |
+|-------------------------------|-----------|
+| Overview      |[`r fontawesome::fa(name = "video")`]()|
+| hello woRld      |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
+| Introduction to Quarto |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()                    |
+| Git/GitHub              |[`r fontawesome::fa(name = "video")`]() [`r fontawesome::fa(name = "desktop")`]()           |
+
+<!--
+## Day 1 - Foundation of Bayesian inference
+
+## Day 2 - Bayesian computing: Simulating the posterior
+
+## Day 3 - Bayesian computing: Posterior analysis
+
+## Day 4 - Bayesian modeling: Regression models
+
+## Day 5 - Bayesian modeling: Hierarchical models
+
+-->

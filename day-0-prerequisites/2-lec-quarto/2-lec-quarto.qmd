@@ -13,3 +13,195 @@ format:
       data-background-position: 50% 75%
 ---
 
+## Examples for Markup Languages
+
+
+### LaTeX
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```
+$\frac{3}{5}$
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+$\frac{3}{5}$
+:::
+
+:::
+
+
+
+### HTML (Hypertext Markup Language)
+
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+```
+<a href = "http://minedogucu.com">
+  Mine Dogucu</a>
+```
+
+:::
+
+
+::: {.column width="50%"}
+<a href = "http://minedogucu.com">Mine Dogucu</a>
+
+:::
+
+:::
+
+### markdown `r fontawesome::fa(name = "markdown")`
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+
+```
+[Mine Dogucu](http://minedogucu.com)
+```
+:::
+
+::: {.column width="50%"}
+
+[Mine Dogucu](http://minedogucu.com)
+
+
+:::
+
+:::
+
+## markdown `r fontawesome::fa(name = "markdown", fill = "#4d2600")`
+
+
+<br>
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+
+```
+_Hello world_ 
+
+__Hello world__
+
+~~Hello world~~ 
+```
+:::
+
+
+
+::: {.column width="40%"}
+
+_Hello world_ 
+
+__Hello world__
+
+~~Hello world~~ 
+
+:::
+
+::::
+
+##
+
+:::{.font100}
+
+`r fontawesome::fa(name = "r-project")` = .R file
+
+:::
+
+:::{.font100}
+`r fontawesome::fa(name = "markdown")` = .md file
+:::
+
+
+:::{.font100}
+`r fontawesome::fa(name = "r-project")` + `r fontawesome::fa(name = "markdown")` = .qmd file
+:::
+
+
+## Demo
+
+
+
+## Quarto document parts
+
+```{r}
+#| fig.align: center
+knitr::include_graphics("img/quarto-parts.png")
+```
+
+
+
+## (some) Chunk options
+
+
+<table align = "center">
+
+<tr>
+
+<td>echo: false</td>
+<td>hides the code</td>
+
+</tr>
+
+<tr>
+
+<td>message: false</td>
+<td>hides messages</td>
+
+</tr>
+
+<tr>
+
+<td>warning: false</td>
+<td>hides warning</td>
+
+</tr>
+
+<tr>
+
+<td>error: true</td>
+<td>renders despite errors and displays the error</td>
+
+</tr>
+
+<tr>
+
+<td>eval: false</td>
+<td>code is not evaluated</td>
+
+</tr>
+
+<tr>
+
+<td> cache: true </td>
+<td>will not run if it has been run before and <br> the output from previous run would be used</td>
+
+</tr>
+
+</table>
+
+ 
+## Slides and Schedule
+
+The [slides](https://github.com/disseminate-collaborate-reproduce/slides) you are looking at right now and the [bootcamp schedule](https://github.com/disseminate-collaborate-reproduce/schedule) are all prepared using Quarto. 
+
+
