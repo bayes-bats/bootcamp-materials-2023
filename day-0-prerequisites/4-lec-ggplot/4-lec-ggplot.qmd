@@ -834,6 +834,9 @@ knitr::include_graphics("img/ggplot-summary.jpeg")
 ```
 
 
+## tidyverse style guide
+
+`+` should always have a space before it and be followed by a new line.
 
 
 ## Practice
