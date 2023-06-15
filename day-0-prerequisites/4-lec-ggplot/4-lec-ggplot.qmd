@@ -838,6 +838,12 @@ knitr::include_graphics("img/ggplot-summary.jpeg")
 
 `+` should always have a space before it and be followed by a new line.
 
+## Further Resources
+
+- [the ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html#1)
+- [ggplot2 book](https://ggplot2-book.org/)
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday) and #TidyTuesday on Twitter.
+
 
 ## Practice
 
