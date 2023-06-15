@@ -1,0 +1,278 @@
+---
+title: "Good workflow practices"
+subtitle: "Prerequisites"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+## Naming files
+
+::: {.nonincremental}
+
+Three principles of naming files 
+
+- machine readable
+- human readable
+- plays well with default ordering (e.g. alphabetical and numerical ordering)
+
+(Jenny Bryan)
+
+for the purposes of this bootcamp an additional principle is that file names follow
+
+- tidyverse style (all lower case letters, words separated by HYPHEN)
+
+:::
+
+## README.md
+
+- README file is the first file users read. In our case a user might be our future self, a teammate, or (if open source) anyone.
+
+
+
+- There can be multiple README files within a single directory: e.g. for the general project folder and then for a data subfolder. Data folder README's can possibly contain codebook (data dictionary).
+
+
+
+- It should be brief but detailed enough to help user navigate. 
+
+
+
+- a README should be up-to-date (can be updated throughout a project's lifecycle as needed).
+
+
+
+- On GitHub we use markdown for README file (`README.md`). Good news: [emojis are supported.](https://gist.github.com/rxaviers/7360908)
+
+
+
+## README examples
+
+- [ICS 80 website](https://github.com/ics80-fa21/website)
+- [Museum of Modern Art Collection](https://github.com/MuseumofModernArt/collection)
+- [R package bayesrules](https://github.com/bayes-rules/bayesrules)
+
+## Importing .csv Data 
+
+
+```{r}
+#| echo: true
+#| eval: false
+readr::read_csv("dataset.csv")
+```
+
+
+## Importing Excel Data
+
+```{r}
+#| echo: true
+#| eval: false
+readxl::read_excel("dataset.xlsx")
+```
+
+
+## Importing Excel Data
+
+```{r}
+#| echo: true
+#| eval: false
+readxl::read_excel("dataset.xlsx", sheet = 2)
+```
+
+
+## Importing SAS, SPSS, Stata Data
+
+```{r}
+#| echo: true
+#| eval: false
+library(haven)
+# SAS
+read_sas("dataset.sas7bdat")
+# SPSS
+read_sav("dataset.sav")
+# Stata
+read_dta("dataset.dta")
+```
+
+
+## Where is the dataset file?
+
+Importing data will depend on where the dataset is on your computer. However we use the help of `here::here()` function. 
+This function sets the working directory to the project folder (i.e. where the `.Rproj` file is).
+
+```{r}
+#| echo: true
+#| eval: false
+read_csv(here::here("data/dataset.csv"))
+```
+
+## Collaboration on GitHub
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.002.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.003.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.004.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.005.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.006.jpeg")
+```
+
+## Collaboration on GitHub
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.007.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.008.jpeg")
+```
+
+## Collaboration on GitHub
+
+If each change is made by one collaborator at a time, this would not be an efficient workflow. 
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.009.jpeg")
+```
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.010.jpeg")
+```
+
+## Collaboration on GitHub
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.011.jpeg")
+```
+
+## Collaboration on GitHub
+
+1 - commit
+
+2 - pull (very important)
+
+3 - push
+
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.013.jpeg")
+```
+
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.014.jpeg")
+```
+
+
+## Collaboration on GitHub
+
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/git-collab.015.jpeg")
+```
+
+
+## Opening an issue
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/create-issue.png")
+```
+
+We can create an **issue** to keep a list of mistakes to be fixed, ideas to check with teammates, or note a to-do task. You can assign tasks to yourself or teammates. 
+
+## Closing an issue
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/issue-number.png")
+```
+
+If you are working on an issue, it makes sense to refer to issue number in your commit message (e.g. "add first draft of alternate texts for #4"). 
+If your commit resolves the issue then you can use key words such as "fixes #4" or "closes #4" to close the issue. 
+Issues can also be manually closed.
+
+##
+
+It is also a good practice to save session information as package versions change, in order to be able to reproduce results from an analysis we need to know under what technical conditions the analysis was conducted.
+
+```{r}
+#| echo: true
+sessionInfo()
+```
+
+
+
