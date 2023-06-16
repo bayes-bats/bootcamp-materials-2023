@@ -41,29 +41,10 @@ titanic <- titanic_train %>%
                               embarked == "C" ~ "Cherbourg",
                               embarked == "Q" ~ "Queenstown"),
          embarked = as.factor(embarked),
-         sex = as.factor("sex"),
+         sex = as.factor(sex),
          survived = as.logical(survived))
 ```
 
-## Examples
-
-[How LGBTQ+ hate crime is committed by young people against young people](https://www.bbc.com/news/uk-46543874)
-
-[Mandatory Paid Vacation](https://www.instagram.com/p/CE1kpM5FhWR/?utm_source=ig_web_copy_link)
-
-
-##
-
-Data Visualizations
-
-- are graphical representations of data
-
-- use different colors, shapes, and the coordinate system to summarize data
-
-- can tell a story
-
-
-- can be useful for exploring data
 
 ## Data
 
@@ -584,7 +565,7 @@ Visualizing a single numerical and single categorical variable
 ggplot(penguins,
        aes(x = species,
            y = bill_length_mm))  +
-  geom_violin()
+  geom_boxplot()
 ```
 
 :::
