@@ -580,7 +580,7 @@ We can use pipes with ggplot too!
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="60%"}
 
 ```{r eval = FALSE}
 lapd %>% 
@@ -840,9 +840,6 @@ summarize(lapd, quantile(base_pay, c(0.25, 0.50, 0.75)))
 q1 <- summarize(lapd, quantiles = quantile(base_pay, c(0.25))) %>% 
   pull()
 ```
-
-
-We would expect 25% of the data to be less than `r q1`
 
 
 ##
