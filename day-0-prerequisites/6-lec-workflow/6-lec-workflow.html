@@ -430,41 +430,206 @@
 <li class="fragment"><a href="https://github.com/bayes-rules/bayesrules">R package bayesrules</a></li>
 </ul>
 </section>
+<section id="r-packages" class="slide level2">
+<h2>R Packages</h2>
+<p><strong>Default</strong></p>
+
+<img data-src="img/office-suite-default.png" style="width:60.0%" class="r-stretch"><p>.footnote[Microsoft products have Copyright. Images used based on <a href="https://www.microsoft.com/en-us/legal/copyright/default.aspx">fair use</a> for educational purposes.]</p>
+</section>
+<section id="r-packages-1" class="slide level2">
+<h2>R Packages</h2>
+<p><strong>Optional</strong></p>
+
+<img data-src="img/office-suite-optional.png" style="width:60.0%" class="r-stretch"></section>
+<section id="r-packages-2" class="slide level2">
+<h2>R packages</h2>
+<ul>
+<li class="fragment"><p>When you download R, you actually download base R.</p></li>
+<li class="fragment"><p>But there are MANY optional packages you can download.</p></li>
+<li class="fragment"><p>Good part: There is an R package for (almost) everything, from complex statistical modeling packages to baby names.</p></li>
+<li class="fragment"><p>Bad part: At the beginning it can feel overwhelming.</p></li>
+<li class="fragment"><p>All this time we have actually been using R packages.</p></li>
+</ul>
+</section>
+<section id="r-packages-3" class="slide level2">
+<h2>R packages</h2>
+<p>What do R packages have? All sorts of things but mainly</p>
+<ul>
+<li class="fragment"><p>functions</p></li>
+<li class="fragment"><p>datasets</p></li>
+</ul>
+</section>
+<section id="r-packages-4" class="slide level2">
+<h2>R packages</h2>
+<p>Try running the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">beep</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in beep(): could not find function "beep"</code></pre>
+</div>
+</div>
+<p>Why are we seeing this error?</p>
+<div class="font75">
+<p>Installing packages</p>
+</div>
+</section>
+<section id="using-install.packages" class="slide level2">
+<h2>Using <code>install.packages()</code></h2>
+<p>In your <strong>Console</strong>, install the beepr package</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">install.packages</span>(<span class="st">"beepr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We do this in the Console because we only need to do it once.</p>
+</section>
+<section id="using-packages-pane" class="slide level2">
+<h2>Using Packages pane</h2>
+
+<img data-src="img/packages-pane.png" style="width:40.0%" class="r-stretch quarto-figure-center"><p>Packages Pane &gt; Install</p>
+</section>
+<section id="letting-rstudio-install" class="slide level2">
+<h2>Letting RStudio Install</h2>
+
+<img data-src="img/rstudio-install.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p>If you save your file and using a package RStudio will tell you that you have not installed the package.</p>
+<div class="font75">
+<p>Using packages</p>
+</div>
+</section>
+<section id="using-beep-from-beepr" class="slide level2">
+<h2>Using beep() from beepr</h2>
+<p>Option 1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(beepr)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">beep</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>More common usage.</p>
+<p>Useful if you are going to use multiple functions from the same package. E.g. we have used many functions (ggplot, aes, geom_…) from the ggplot2 package. In such cases, usual practice is to put the library name in the first R chunk in the .Rmd file.</p>
+</section>
+<section id="using-beep-from-beepr-1" class="slide level2">
+<h2>Using beep() from beepr</h2>
+<p>Option 2</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>beepr<span class="sc">::</span><span class="fu">beep</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Useful when you are going to use a function once or few times. Also useful if there are any conflicts. For instance if there is some other package in your environment that has a beep() function that prints the word beep, you would want to distinguish the beep function from the beepr package and the beep function from the other imaginary package.</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="img/beep-help.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="open-source" class="slide level2">
+<h2>Open Source</h2>
+<ul>
+<li class="fragment"><p>Any one around the world can create R packages.</p></li>
+<li class="fragment"><p>Good part: We are able to do pretty much anything R because someone from around the world has developed the package and shared it.</p></li>
+<li class="fragment"><p>Bad part: The language can be inconsistent.</p></li>
+<li class="fragment"><p>Good news: We have tidyverse.</p></li>
+</ul>
+</section>
+<section id="tidyverse" class="slide level2">
+<h2>Tidyverse</h2>
+<blockquote>
+<p>The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. tidyverse.org</p>
+</blockquote>
+</section>
+<section id="tidyverse-1" class="slide level2">
+<h2>Tidyverse</h2>
+<p>In short, tidyverse is a family of packages. From practical stand point, you can install many tidyverse packages at once (and you did this). By doing that you installed all the following packages.</p>
+<ul>
+<li class="fragment">ggplot2</li>
+<li class="fragment">dplyr</li>
+<li class="fragment">tidyr</li>
+<li class="fragment">readr</li>
+<li class="fragment">purrr</li>
+<li class="fragment">tibble</li>
+<li class="fragment">stringr</li>
+<li class="fragment">forcats</li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>We can also load multiple tidyverse packages all at the same time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="fun-fact" class="slide level2">
+<h2>Fun fact</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(magrittr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/pipe-logo.png" style="width:40.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><a href="https://en.wikipedia.org/wiki/The_Treachery_of_Images#/media/File:MagrittePipe.jpg">Treachery of Images</a> by René Magritte</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/magritte.jpg" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Image for Treachery of Images is from University of Alabama <a href="https://tcf.ua.edu/Classes/Jbutler/T311/Modernism.htm">website</a> and used under fair use for educational purposes.</p>
+</div>
+</div>
+</section>
 <section id="importing-.csv-data" class="slide level2">
 <h2>Importing .csv Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-excel-data" class="slide level2">
 <h2>Importing Excel Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"dataset.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"dataset.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-excel-data-1" class="slide level2">
 <h2>Importing Excel Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"dataset.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"dataset.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-sas-spss-stata-data" class="slide level2">
 <h2>Importing SAS, SPSS, Stata Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># SAS</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">read_sas</span>(<span class="st">"dataset.sas7bdat"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># SPSS</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">read_sav</span>(<span class="st">"dataset.sav"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Stata</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="fu">read_dta</span>(<span class="st">"dataset.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># SAS</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">read_sas</span>(<span class="st">"dataset.sas7bdat"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># SPSS</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">read_sav</span>(<span class="st">"dataset.sav"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># Stata</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="fu">read_dta</span>(<span class="st">"dataset.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="where-is-the-dataset-file" class="slide level2">
 <h2>Where is the dataset file?</h2>
 <p>Importing data will depend on where the dataset is on your computer. However we use the help of <code>here::here()</code> function. This function sets the working directory to the project folder (i.e.&nbsp;where the <code>.Rproj</code> file is).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/dataset.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/dataset.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="collaboration-on-github" class="slide level2">
@@ -539,11 +704,11 @@
 
 <img data-src="img/issue-number.png" style="width:90.0%" class="r-stretch"><p>If you are working on an issue, it makes sense to refer to issue number in your commit message (e.g.&nbsp;“add first draft of alternate texts for #4”). If your commit resolves the issue then you can use key words such as “fixes #4” or “closes #4” to close the issue. Issues can also be manually closed.</p>
 </section>
-<section id="section" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p>It is also a good practice to save session information as package versions change, in order to be able to reproduce results from an analysis we need to know under what technical conditions the analysis was conducted.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.0 (2023-04-21)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -562,11 +727,21 @@ tzcode source: internal
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] magrittr_2.0.3  lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0  
+ [5] dplyr_1.1.2     purrr_1.0.1     readr_2.1.4     tidyr_1.3.0    
+ [9] tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+
 loaded via a namespace (and not attached):
- [1] compiler_4.3.0  fastmap_1.1.1   cli_3.6.1       tools_4.3.0    
- [5] htmltools_0.5.5 rstudioapi_0.14 yaml_2.3.7      rmarkdown_2.22 
- [9] knitr_1.42      jsonlite_1.8.4  xfun_0.39       digest_0.6.31  
-[13] rlang_1.1.1     evaluate_0.21  </code></pre>
+ [1] gtable_0.3.3     jsonlite_1.8.4   compiler_4.3.0   tidyselect_1.2.0
+ [5] scales_1.2.1     yaml_2.3.7       fastmap_1.1.1    R6_2.5.1        
+ [9] generics_0.1.3   knitr_1.42       munsell_0.5.0    pillar_1.9.0    
+[13] tzdb_0.4.0       rlang_1.1.1      utf8_1.2.3       stringi_1.7.12  
+[17] xfun_0.39        timechange_0.2.0 cli_3.6.1        withr_2.5.0     
+[21] digest_0.6.31    grid_4.3.0       rstudioapi_0.14  hms_1.1.3       
+[25] lifecycle_1.0.3  vctrs_0.6.2      evaluate_0.21    glue_1.6.2      
+[29] fansi_1.0.4      colorspace_2.1-0 rmarkdown_2.22   tools_4.3.0     
+[33] pkgconfig_2.0.3  htmltools_0.5.5 </code></pre>
 </div>
 </div>
 
