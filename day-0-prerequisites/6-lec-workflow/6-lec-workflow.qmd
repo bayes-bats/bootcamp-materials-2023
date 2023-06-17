@@ -71,7 +71,7 @@ knitr::include_graphics('img/office-suite-default.png')
 
 
 
-.footnote[Microsoft products have Copyright. Images used based on [fair use](https://www.microsoft.com/en-us/legal/copyright/default.aspx) for educational purposes.]
+Microsoft products have Copyright. Images used based on [fair use](https://www.microsoft.com/en-us/legal/copyright/default.aspx) for educational purposes.
 
 ## R Packages
 

@@ -1,5 +1,5 @@
 ---
-title: "GitHub"
+title: "Git and GitHub"
 subtitle: "Prerequisites"
 format: 
   revealjs:
@@ -26,23 +26,23 @@ version control
 
 hw1
 
---
+
 
 hw1_final
 
---
+
 
 hw1_final2
 
---
+
 
 hw1_final3
 
---
+
 
 hw1_finalwithfinalimages
 
---
+
 
 hw1_finalestfinal
 
@@ -50,19 +50,19 @@ hw1_finalestfinal
 
 What if we tracked our file with a better names for each version and have only 1 file **hw1**?
 
---
 
-hw1 **added questions 1 through 5**
 
---
+- hw1 **added questions 1 through 5**
 
-hw1 **changed question 1 image**
 
---
 
-hw1 **fixed typos**
+- hw1 **changed question 1 image**
 
---
+
+
+- hw1 **fixed typos**
+
+
 
 We will call the descriptions in bold **commit** messages.
 
@@ -74,44 +74,43 @@ We will call the descriptions in bold **commit** messages.
 
 - GitHub is a website where we can store (and share) different versions of the files. 
 
----
+##
 
 ```{r echo=FALSE, out.width='40%',fig.align='center'}
 knitr::include_graphics('img/github-illustration.002.jpeg')
 ```
 
----
+##
 
 ```{r echo=FALSE, out.width='55%', fig.align='center'}
 knitr::include_graphics('img/github-illustration.003.jpeg')
 ```
 
----
+##
 
 ```{r echo=FALSE, out.width='55%', fig.align='center'}
 knitr::include_graphics('img/github-illustration.004.jpeg')
 ```
 
----
+##
 
 ```{r echo=FALSE, out.width='55%', fig.align='center'}
 knitr::include_graphics('img/github-illustration.005.jpeg')
 ```
 
----
+##
 
 ```{r echo=FALSE, out.width='55%', fig.align='center'}
 knitr::include_graphics('img/github-illustration.006.jpeg')
 ```
 
----
+##
 
 ```{r echo=FALSE, out.width='55%', fig.align='center'}
 knitr::include_graphics('img/github-illustration.007.jpeg')
 ```
 
 
----
 
 
 ## Demo
@@ -170,4 +169,8 @@ In order for me to see your commits and the current version of any doc you are w
 Do you git it?
 
 :::
+
+## How to work on the next set of videos
+
+
 
