@@ -20,7 +20,7 @@ library(fontawesome)
 
 ## Technical Setup Before the Bootcamp
 
-- **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/URiBx8mzoLt97n6e9) to let us know what your username is. Many of you have already done this.
+- **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/XBrrS4TM2rR7xyTg6) to let us know what your username is. Many of you have already done this.
 
 - **Install R** [`r fontawesome::fa(name = "link")`](https://mirror.las.iastate.edu/CRAN/) Yes, you do need to download and install R even if you have downloaded before. There is a newer version.
 
