@@ -5,32 +5,265 @@ title-block-banner: true
 format:
   html:
     toc: true
-    toc-title: "Content"
+    toc-title: "What's in this template?"
     toc-location: left
     html-math-method: katex
     theme: 
       -  activity-style.scss
     page-layout: full
+    embed-resources: true
+    fig-align: center
+editor: source
 ---
 
-## Quarto
+Acknowledgements: this material was largely learned, or borrowed, from the USCOTS 23 workshop on Quarto by Hunter Glanz, Emily Robinson and Allison Theobold.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Unordered list {#ul}
 
+You can use typical markdown formatting, such as:
 
-## Running Code
+-   **bold** text
+-   *italic* text
+-   `code-looking`text
+-   [link](https://bayes-bats.github.io/website/)
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Ordered list
 
-```{r}
-1 + 1
+.. and such as:
+
+1.  [important]{.underline} text
+
+2.  Superscripted^1^
+
+3.  Subscripted~1~
+
+## Figures
+
+There are at least two ways you can include figures:
+
+```         
+![The Bayes BATS logo (included with Markdown) ](img/logo-white.png){fig-alt="A hex logo with a yellow background, a marron border and the text Bayes BATS in blue, with a black bat icon underneath" fig-align="center" width="100"}
 ```
 
-You can add options to executable code like this
+![The Bayes BATS logo (included with Markdown)](img/logo-white.png){fig-alt="A hex logo with a yellow background, a marron border and the text Bayes BATS in blue, with a black bat icon underneath" fig-align="center" width="100"}
+
+```{r}
+#| echo: fenced # (this is for displaying the r chunk and chunk options when rendered!)
+#| fig-cap: The Bayes BATS logo (included with R chunk)
+#| out-width: 15%
+knitr::include_graphics("img/logo-white.png")
+```
+
+## Code chunks
+
+### Classic code chunk
+
+```{r}
+2 + 2
+```
+
+
+### Code chunk that only shows output
 
 ```{r}
 #| echo: false
-2 * 2
+2 + 2
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+### Code chunk that only shows the code (but is not evaluated)
+
+```{r}
+#| eval: false
+2 + 2
+```
+
+### Cool code that unfolds and shows you code only if you want!
+
+```{r}
+#| echo: fenced # (this is for displaying the r chunk and chunk options when rendered!)
+#| code-fold: true
+2 + 2
+```
+
+### Long code chunks (better not?)
+
+Note that if your code is exceptionally long, it can be visualized by scrolling (what number is added at the end?)
+
+```{r}
+#| echo: fenced # (this is for displaying the r chunk and chunk options when rendered!)
+2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 888888
+```
+
+## Columns
+
+### Two equally-sized columns
+
+::: columns
+::: column
+This is the left column!
+
+```{r}
+2+2
+```
+:::
+
+::: column
+This is the right column!
+
+```{r}
+2*2
+```
+:::
+:::
+
+### Two differently-sized columns
+
+::: columns
+::: {.column width="25%"}
+This is the left column!
+
+```{r}
+2+2
+```
+:::
+
+::: {.column width="75%"}
+This is the right column!
+
+```{r}
+2*2
+```
+:::
+:::
+
+### Three columns?
+
+::: columns
+::: {.column width="30%"}
+This is the left column!
+
+```{r}
+2+2
+```
+:::
+
+::: {.column width="30%"}
+This is the **central** column!
+
+```{r}
+2*2
+```
+:::
+
+::: {.column width="30%"}
+This is the **right** column!
+
+```{r}
+2^2
+```
+:::
+:::
+
+### Two columns with some space between them (_little hacky_)
+
+::: columns
+::: {.column width="49%"}
+This is the left column!
+
+```{r}
+2+2
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+This is the **right** column!
+
+```{r}
+2^2
+```
+:::
+:::
+
+
+## Callouts
+
+Cute ways to highlight something (from [Quarto documentation](https://quarto.org/docs/authoring/callouts.html#callout-types))
+
+::: {.callout-note}
+Note that there are five types of callouts, including:
+`note`, `warning`, `important`, `tip`, and `caution`.
+:::
+
+::: {.callout-tip}
+## Tip with Title
+
+This is an example of a callout with a title.
+:::
+
+::: {.callout-caution collapse="true"}
+## Expand To Learn About Collapse
+
+This is an example of a 'folded' caution callout that can be expanded by the user. You can use `collapse="true"` to collapse it by default or `collapse="false"` to make a collapsible callout that is expanded by default.
+:::
+
+::: {.callout-important title="Tip with Title, that collapses!" collapse="true"}
+This is a callout with a title and that also collapses.
+:::
+
+## Cross references 
+
+You might want to link to a section or subsection within the same Quarto document.
+
+Assign a section ID to the header by including `#ID` after the title header (e.g. `## Unordered list {#ul}`).
+
+Then you can cross reference it:
+See [Unordered list](#ul) for how to make an unordered list.
+
+## Tabsets
+
+These are cool ways to divide content into clickable tabs.
+
+::: panel-tabset
+
+## Tab 1
+
+Content for the first tab.
+
+## Tab 2
+
+Content for the second tab.
+
+:::
+
+## Footnotes
+
+Here is a footnote reference[^1]
+
+[^1]: Here is the first footnote.
+
+Here is another footnote reference[^2]
+
+[^2]: Here is the second footnote.
+
+## Margins
+
+You can put information in the margins of a document:
+
+::: column-margin
+Content for the margin.
+:::
+
+### You can place output in the margins
+
+This table to the right is the output of a code chunk!
+
+```{r}
+#| echo: false
+#| column: margin
+
+mtcars[1:6, 1:3]
+```
+
