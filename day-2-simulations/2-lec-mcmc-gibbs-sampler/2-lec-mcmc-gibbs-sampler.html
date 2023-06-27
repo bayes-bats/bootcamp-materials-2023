@@ -7,7 +7,7 @@
 <link href="2-lec-mcmc-gibbs-sampler_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="2-lec-mcmc-gibbs-sampler_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2-lec-mcmc-gibbs-sampler_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.475">
+  <meta name="generator" content="quarto-1.1.168">
 
   <title>MCMC and Gibbs sampler</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,6 +27,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="2-lec-mcmc-gibbs-sampler_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="2-lec-mcmc-gibbs-sampler_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -322,16 +386,212 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="center">
   <h1 class="title">MCMC and Gibbs sampler</h1>
   <p class="subtitle">Day 2</p>
+</section>
 
-<div class="quarto-title-authors">
-</div>
+<section>
+<section id="recap-the-normal-model-with-one-unknown-parameter" class="title-slide slide level1 center">
+<h1>Recap: The Normal Model with One Unknown Parameter</h1>
 
 </section>
-<section class="slide level2">
+<section id="the-normal-normal-model-for-unknown-mean" class="slide level2">
+<h2>The Normal-Normal Model for Unknown Mean</h2>
+<ul>
+<li class="fragment"><p>The sampling model for <span class="math inline">\(Y_1, \cdots, Y_n\)</span>: <span class="math display">\[\begin{equation}
+  Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+  \end{equation}\]</span></p></li>
+<li class="fragment"><p>The prior distribution for mean <span class="math inline">\(\mu\)</span> (<span class="math inline">\(\sigma^2\)</span> is known): <span class="math display">\[\begin{equation}
+  \mu \mid {\color{red}\sigma} \sim \textrm{Normal}(\theta, \tau^2).
+  \end{equation}\]</span></p></li>
+<li class="fragment"><p>The posterior distribution for mean <span class="math inline">\(\mu\)</span> (<span class="math inline">\(\phi = 1/\sigma^2\)</span> and <span class="math inline">\(\phi_0 = 1/\tau^2\)</span>): <span class="math display">\[\begin{equation}
+  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+  \end{equation}\]</span></p></li>
+</ul>
+</section>
+<section id="the-normal-normal-model-for-unknown-mean-1" class="slide level2">
+<h2>The Normal-Normal Model for Unknown Mean</h2>
+<ul>
+<li class="fragment"><p>The posterior distribution for mean <span class="math inline">\(\mu\)</span>: <span class="math display">\[\begin{equation}
+  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+  \end{equation}\]</span> where the precision <span class="math inline">\(\phi = 1/\sigma^2\)</span> and <span class="math inline">\(\phi_0 = 1/\tau^2\)</span> which are known since <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau^2\)</span> are known</p></li>
+<li class="fragment"><p>We can then use the <code>rnorm()</code> R function to sample posterior draws of <span class="math inline">\(\mu\)</span> from its posterior distribution shown above (required quantities: <span class="math inline">\(\theta, \phi_0, \bar{y}, \phi\)</span>)</p></li>
+</ul>
+</section>
+<section id="the-gamma-normal-model-for-unknown-variance" class="slide level2">
+<h2>The Gamma-Normal Model for Unknown Variance</h2>
+<ul>
+<li class="fragment"><p>The sampling model for <span class="math inline">\(Y_1, \cdots, Y_n\)</span>: <span class="math display">\[\begin{equation}
+  Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+  \end{equation}\]</span></p></li>
+<li class="fragment"><p>The prior distribution for variance <span class="math inline">\(\sigma^2\)</span> (<span class="math inline">\(\mu\)</span> is known): <span class="math display">\[\begin{equation}
+1/\sigma^2 \mid {\color{red}\mu} \sim \textrm{Gamma}(\alpha, \beta).
+\end{equation}\]</span></p></li>
+<li class="fragment"><p>The posterior distribution for variance <span class="math inline">\(\sigma^2\)</span>: <span class="math display">\[\begin{equation}
+  1/\sigma^2 \mid y_1, \cdots, y_n, {\color{red}\mu} \sim \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right)
+  \end{equation}\]</span></p></li>
+</ul>
+</section>
+<section id="the-gamma-normal-model-for-unknown-variance-1" class="slide level2">
+<h2>The Gamma-Normal Model for Unknown Variance</h2>
+<ul>
+<li class="fragment"><p>The posterior distribution for variance <span class="math inline">\(\sigma^2\)</span>: <span class="math display">\[\begin{equation}
+  1/\sigma^2 \mid y_1, \cdots, y_n, {\color{red}\mu} \sim \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right)
+  \end{equation}\]</span></p></li>
+<li class="fragment"><p>We can then use <code>rgamma()</code> R function to sample posterior draws of <span class="math inline">\(\sigma^2\)</span> from its posterior distribution shown above (required quantities: <span class="math inline">\(\alpha, n, \beta, \{y_i\}, \mu\)</span>)</p></li>
+</ul>
+</section></section>
+<section>
+<section id="the-normal-model-with-two-unknown-parameters" class="title-slide slide level1 center">
+<h1>The Normal Model with Two Unknown Parameters</h1>
 
+</section>
+<section id="what-if-both-parameters-are-unknown" class="slide level2">
+<h2>What If Both Parameters Are Unknown?</h2>
+<div>
+<ul>
+<li>The sampling model for <span class="math inline">\(Y_1, \cdots, Y_n\)</span>: <span class="math display">\[\begin{equation}
+  Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+  \end{equation}\]</span></li>
+</ul>
+</div>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
+<p>What if both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown? Given your Bayesian inference experience with either unknown <span class="math inline">\(\mu\)</span> or unknown <span class="math inline">\(\sigma^2\)</span>, what would be a workflow for when both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-joint-prior-distribution-for-mean-and-variance" class="slide level2">
+<h2>A Joint Prior Distribution for Mean and Variance</h2>
+<ul>
+<li class="fragment"><p>Given what we have seen, how about a joint prior distribution as: <span class="math display">\[\begin{equation}
+\pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+\end{equation}\]</span></p></li>
+<li class="fragment"><p>And let priors be <span class="math display">\[\begin{eqnarray}
+\mu &amp;\sim&amp; \textrm{Normal}(\theta, \tau^2)\\
+1/\sigma^2 &amp;\sim&amp; \textrm{Gamma}(\alpha, \beta)
+\end{eqnarray}\]</span></p></li>
+</ul>
+</section>
+<section id="full-conditional-posterior-distributions" class="slide level2">
+<h2>Full Conditional Posterior Distributions</h2>
+<div>
+<ul>
+<li>Bayes’ Theorem will produce two <strong>full conditional posterior distributions</strong>:</li>
+</ul>
+</div>
+<span class="math display">\[\begin{eqnarray}
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
+1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
+\end{eqnarray}\]</span>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
+<p>Do they look familiar? Without actual derivation, can you reason through the derivation process to arrive at these two full conditional posterior distributions?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-scheme-a-gibbs-sampler" class="slide level2">
+<h2>Sampling Scheme: A Gibbs Sampler</h2>
+<span class="math display">\[\begin{eqnarray}
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
+1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
+\end{eqnarray}\]</span>
+<p>Start with initial values for parameters, <span class="math inline">\((\mu^{(0)}, \phi^{(0)})\)</span>. For <span class="math inline">\(s = 1, \ldots, S\)</span>, generate from the following sequence of <strong>full conditional posterior distributions</strong>:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
+<li class="fragment"><p>Set <span class="math inline">\(\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})\)</span></p></li>
+</ul>
+</section>
+<section id="sampling-scheme-a-gibbs-sampler-1" class="slide level2">
+<h2>Sampling Scheme: A Gibbs Sampler</h2>
+<div>
+<ul>
+<li><p><span class="math inline">\(\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
+<li><p><span class="math inline">\(\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
+<li><p>Set <span class="math inline">\(\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})\)</span></p></li>
+<li><p>The sequence <span class="math inline">\(\{\theta^{(s)}\)</span>: <span class="math inline">\(s = 1, \ldots, S\}\)</span> may be viewed (but is not necessarily… yet!) as a <strong>dependent</strong> sample from the joint posterior distribution of <span class="math inline">\((\mu, \phi \mid y_1, \cdots, y_n)\)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="writing-a-gibbs-sampler-as-an-r-function" class="slide level2">
+<h2>Writing A Gibbs Sampler as An R Function</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>gibbs_normal <span class="ot">&lt;-</span> <span class="cf">function</span>(input, S, seed){</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(input<span class="sc">$</span>y)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(input<span class="sc">$</span>y)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  para <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, S, <span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  phi <span class="ot">&lt;-</span> input<span class="sc">$</span>phi_init</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S){</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    theta1 <span class="ot">&lt;-</span> (input<span class="sc">$</span>theta<span class="sc">/</span>input<span class="sc">$</span>tau<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>phi<span class="sc">*</span>ybar)<span class="sc">/</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    (<span class="dv">1</span><span class="sc">/</span>input<span class="sc">$</span>tau<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>phi)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    tau1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>input<span class="sc">$</span>tau<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>phi))</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    mu <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> theta1, <span class="at">sd =</span> tau1)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    alpha1 <span class="ot">&lt;-</span> input<span class="sc">$</span>alpha <span class="sc">+</span> n<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    beta1 <span class="ot">&lt;-</span> input<span class="sc">$</span>beta <span class="sc">+</span> <span class="fu">sum</span>((input<span class="sc">$</span>y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span> </span>
+<span id="cb1-14"><a href="#cb1-14"></a>    phi <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, <span class="at">shape =</span> alpha1, <span class="at">rate =</span> beta1)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    para[s, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(mu, phi)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>  }</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  para </span>
+<span id="cb1-18"><a href="#cb1-18"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
+<p>What are the inputs and outputs of this <code>gibbs_normal()</code> function? Can you see how the two full conditional posterior distributions get translated into lines of R code? Anything surprises you?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="run-an-example" class="slide level2">
+<h2>RUN AN EXAMPLE</h2>
+</section>
+<section id="extending-to-more-than-two-parameters" class="slide level2">
+<h2>Extending to More Than Two Parameters</h2>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>THIS SHOULD BE AN EXERCISE CALLOUT</p>
+<p>Suppose the full conditional posterior distributions of <span class="math inline">\(\boldsymbol\theta = (\theta_1, \theta_2, \ldots, \theta_m)\)</span> are all tractable (i.e., available through derivation). Describe how you can create a Gibbs sampler. Pay attention to the initial values and the iterative process of a Gibbs sampler.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section id="markov-chain-monte-carlo-and-diagnostics" class="title-slide slide level1 center">
+<h1>Markov Chain Monte Carlo and Diagnostics</h1>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
@@ -548,6 +808,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -586,24 +888,7 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -641,42 +926,24 @@
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>

@@ -13,5 +13,68 @@ format:
       data-background-position: 50% 85%
 ---
 
+# Who Are You All and What Are You Teaching?
 
+
+## Disciplines You Represent
+
+| Discipline | Discipline |
+|------|------|
+| Aerospace Engineering    |  Logistics   |
+| Biology    | Mathematics   |
+| Biostatistics   | Mathematics Education   |
+| Business Information \& Analytics | Philosophy |
+| Computer Science | Physics |
+| Ecology  | Psychology |
+| Economics | Statistics  |
+
+
+## What Are You Teaching?
+
+- Anything related to Bayesian methods
+
+- It can be your plans
+
+- Let's hear from 2-3 of you!
+
+# Small Group Discussion
+
+## Format and Length
+
+- About 30 minutes
+
+- 4 small groups, each led by one Instructor/TA
+
+- Random assignment; get to know people from a different discipline!
+
+- Assign a note-taker; if okay, please share notes with us afterwards
+
+- Assign a reporter for large group sharing (3 minutes per group)
+
+- Feel free to use our prepared questions and feel free to come up with your own
+
+
+## Discussion Questions
+
+1. Do you introduce Bayesian methods in your teaching, either as a module or as a standalone course? If so, what topics and at what levels? Do you follow a textbook? If not, what are your plans?
+
+2. Do you have challenges with regards to pre-reqs? If so, do you have solutions?
+
+3. Do you use certain software (other than R and Python and other programming languages) in your teaching? Do you have challenges with regards to Bayesian computing? If so, do you have solutions?
+
+4. Do you include certain Bayesian modeling techniques in your teaching? Do you have challenges with regards to Bayesian modeling? If so, do you have solutions?
+
+5. What is the one challenge you would like to get help with from BATS bootcamp?
+
+# Large Group Sharing
+
+## Format and Length
+
+- About 25 minutes
+
+- We will record this portion for sharing later. Okay?
+
+- Each group reports back for 3 minutes
+
+- Open discussion for remaining time
 

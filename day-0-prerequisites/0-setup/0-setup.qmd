@@ -1,0 +1,114 @@
+---
+title: "Git/Hub Setup"
+execute:
+  echo: true
+subtitle: "Prerequisites"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+
+## Goals
+
+- Install git
+
+- Introduce yourself to git
+
+- Setup SSH key
+
+## 
+
+::: {.font75}
+
+Goal 1: Install git
+
+:::
+
+
+
+
+## Check to see if you already have git
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/00a-check-git-install.mp4" type="video/mp4">
+</video>
+
+</center>
+
+
+
+
+## Install git on Windows
+
+::: {.font75}
+
+[Git for Windows](https://gitforwindows.org/)
+
+:::
+
+
+## Install git on Mac
+
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/00b-mac-git-install.mp4" type="video/mp4">
+</video>
+
+</center>
+
+
+##
+
+::: {.font75}
+
+Goal 2: Introduce yourself to git
+
+
+:::
+
+
+
+##
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/00c-introduce-yourself.mp4" type="video/mp4">
+</video>
+
+</center>
+
+##
+
+
+
+
+::: {.font75}
+
+Goal 3: Setup SSH key
+
+:::
+
+
+
+##
+
+<center>
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/00d-ssh-setup.mp4" type="video/mp4">
+</video>
+
+</center>

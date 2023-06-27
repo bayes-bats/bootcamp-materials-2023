@@ -1,0 +1,124 @@
+---
+title: "Welcome to Bayes BATS"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="text-align: center;"}
+
+
+
+
+<img src="https://www.minedogucu.com/img/headshot.jpg"
+        alt="A headshot of a woman with curly, short, ear-length hair with green eyes and red lipstick."
+        style="width:165px; margin-top:20px; border: 3px solid whitesmoke; padding: 10px;">
+        
+[Mine Dogucu](https://www.minedogucu.com/) 
+
+:::
+:::
+
+::: {.column width="50%"}
+
+::: {style="text-align: center;"}
+
+
+<img src="https://globalhealth.duke.edu/sites/default/files/styles/person_headshot_default/public/faculty/amy-herring2.jpg?itok=Iy3_vnP-&h=9fe67f81"
+        alt="A headshot of a woman with long blonde hair"
+        style="width:165px; margin-top:20px; border: 3px solid whitesmoke; padding: 10px;">
+        
+
+[Amy Herring](https://globalhealth.duke.edu/people/herring-amy)
+
+:::
+:::
+
+
+
+::::
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {style="text-align: center;"}
+
+
+
+<img src="https://pages.vassar.edu/jihu/files/2021/01/Monika2021-300x300.jpg"
+        alt="A headshot of a woman straight black hair and glasses"
+        style="width:165px; margin-top:20px; border: 3px solid whitesmoke; padding: 10px;">
+        
+[Jingchen (Monika) Hu](https://pages.vassar.edu/jihu/)
+
+:::
+:::
+
+::: {.column width="50%"}
+
+::: {style="text-align: center;"}
+
+
+
+
+<img src="https://stats68-sp21.netlify.app/img/federica-ricci.jpeg"
+        alt="A headshot of a woman with long blonde hair and bangs."
+        style="width:165px; margin-top:20px; border: 3px solid whitesmoke; padding: 10px;">
+        
+
+[Federica Zoe Ricci](https://federicazoe.github.io/)
+
+:::
+:::
+
+
+
+::::
+
+## 
+
+::: {.font75}
+
+Ice Breaker
+
+:::
+
+
+## 
+
+::: {.font75}
+
+A Brief Overview of the Week
+
+:::
+
+##
+
+::: {.font75}
+
+A Brief Overview of UCI campus map
+
+:::
+
+## 
+
+::: {.font75}
+
+What is ahead after the bootcamp?
+
+:::
+
+- Tier 2 & Tier 3 discussion
+
+- [Application form]()
