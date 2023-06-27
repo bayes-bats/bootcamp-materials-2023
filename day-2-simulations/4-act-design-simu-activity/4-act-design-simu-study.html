@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.1.168">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,6 +97,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="4-act-design-simu-study_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="4-act-design-simu-study_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -104,7 +120,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-right">
+    <div class="quarto-title column-page">
       <h1 class="title">Designing a simulation activity</h1>
             <p class="subtitle lead">Day 2</p>
                       </div>
@@ -114,7 +130,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <div class="quarto-title-meta">
 
       
-    
       
     </div>
     
@@ -125,38 +140,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Content</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a></li>
+  <li><a href="#plan" id="toc-plan" class="nav-link active" data-scroll-target="#plan">Plan</a></li>
+  <li><a href="#simulation-activity-gibbs-sampler-of-a-beta-binomial" id="toc-simulation-activity-gibbs-sampler-of-a-beta-binomial" class="nav-link" data-scroll-target="#simulation-activity-gibbs-sampler-of-a-beta-binomial">Simulation activity: Gibbs sampler of a beta-binomial</a></li>
+  <li><a href="#the-background-of-a-beta-binomial" id="toc-the-background-of-a-beta-binomial" class="nav-link" data-scroll-target="#the-background-of-a-beta-binomial">The background of a beta-binomial</a></li>
+  <li><a href="#simulate-from-the-beta-binomial-distribution" id="toc-simulate-from-the-beta-binomial-distribution" class="nav-link" data-scroll-target="#simulate-from-the-beta-binomial-distribution">Simulate from the beta-binomial distribution</a></li>
+  <li><a href="#simulate-from-a-gibbs-sampler" id="toc-simulate-from-a-gibbs-sampler" class="nav-link" data-scroll-target="#simulate-from-a-gibbs-sampler">Simulate from a Gibbs sampler</a></li>
+  <li><a href="#results-shown-in-figure-1-from-casella-and-george-1992" id="toc-results-shown-in-figure-1-from-casella-and-george-1992" class="nav-link" data-scroll-target="#results-shown-in-figure-1-from-casella-and-george-1992">Results shown in Figure 1 from Casella and George (1992)</a></li>
+  <li><a href="#step-by-step-exercises-to-replicate-results-in-figure-1" id="toc-step-by-step-exercises-to-replicate-results-in-figure-1" class="nav-link" data-scroll-target="#step-by-step-exercises-to-replicate-results-in-figure-1">Step-by-step exercises to replicate results in Figure 1</a></li>
+  <li><a href="#solutions-to-exercises" id="toc-solutions-to-exercises" class="nav-link" data-scroll-target="#solutions-to-exercises">Solutions to exercises</a></li>
+  <li><a href="#thoughts-and-ideas-for-creating-this-simulation-activity" id="toc-thoughts-and-ideas-for-creating-this-simulation-activity" class="nav-link" data-scroll-target="#thoughts-and-ideas-for-creating-this-simulation-activity">Thoughts and ideas for creating this simulation activity</a></li>
   </ul>
 </nav>
 </div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
 </div>
-<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="plan" class="level2">
+<h2 class="anchored" data-anchor-id="plan">Plan</h2>
+<p>In this Designing a simulation activity, we would like to:</p>
+<ol type="1">
+<li><p>Present a possible simulation activity focused on Gibbs sampler (about 20 minutes)</p></li>
+<li><p>Break into smaller working groups to brainstorm and collaborate on designing a simulation activity (about 60 minutes)</p></li>
+<li><p>Come back to a large group sharing (about 45 minutes)</p></li>
+</ol>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="simulation-activity-gibbs-sampler-of-a-beta-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-activity-gibbs-sampler-of-a-beta-binomial">Simulation activity: Gibbs sampler of a beta-binomial</h2>
+<p>A classical early paper on Gibbs sampler is <a href="https://www.tandfonline.com/doi/abs/10.1080/00031305.1992.10475878">“Explaining the Gibbs Sampler”</a> by Geroge Casella and Edward I. George, appeared in The American Statistician in 1992, soon after the Gibbs sampler and other Markov chain Monte Carlo (MCMC) techniques were proposed. It contains toy examples of how Gibbs sampler works with illustrative use cases through simulation. In this activity, we will introduce and practice replicating results in Example 1 from this paper.</p>
+<p>This activity is adapted from Lab 3 of <a href="https://github.com/monika76five/Undergrad-Bayesian-Course">Vassar College’s MATH 347 Bayesian Statistics</a>. If you are interested in using this paper to explore Gibbs sampler further in your course, consider this <a href="https://github.com/monika76five/Undergrad-Bayesian-Course/blob/master/Lectures/4-GibbsMCMC/F19MATH347_ExpGibbsReadingGuide.pdf">reading guide</a> and adapt to your needs.</p>
+</section>
+<section id="the-background-of-a-beta-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="the-background-of-a-beta-binomial">The background of a beta-binomial</h2>
+<p>A joint distribution of <span class="math inline">X</span> and <span class="math inline">Y</span> is given as</p>
+<p><span class="math display">\begin{equation}
+f(x,y)\propto \binom{n}{x}y^{x+\alpha-1}(1-y)^{n-x+\beta-1},\; x=-1,\cdots
+,n,\; 0\leq y\leq 1.
+\end{equation}</span></p>
+<p>Suppose we are interested in calculating some characteristics of the marginal distribution <span class="math inline">f(x)</span> of <span class="math inline">X</span>.The Gibbs sampler allows us to generate a sample from this marginal. The full conditional posterior distribution of <span class="math inline">X</span> and <span class="math inline">Y</span> are given as</p>
+<p><span class="math display">\begin{equation}
+x \mid y,n,\alpha,\beta \sim \textrm{Binomial}(n,y),
+\end{equation}</span></p>
+<p><span class="math display">\begin{equation}
+y \mid x,n,\alpha,\beta\sim \text{Beta}(x+\alpha,n-x+\beta).
+\end{equation}</span></p>
+<p>In addition, the marginal distribution of <span class="math inline">X</span> can be obtained analytically, as</p>
+<p><span class="math display">\begin{equation}
+f(x)=\binom{n}{x}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\frac{\Gamma(x+\alpha)\Gamma(n-x+\beta)}{\Gamma(\alpha+\beta+n)},x=0,1,\cdots,n,
+\end{equation}</span> the Beta-Binomial distribution.</p>
+</section>
+<section id="simulate-from-the-beta-binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-from-the-beta-binomial-distribution">Simulate from the beta-binomial distribution</h2>
+<p>The <strong>VGAM</strong> R package can simulate draws from the beta-binomial distribution. Install this package and load the library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"VGAM"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>You can add options to executable code like this</p>
+<p>To generate a random draw from <span class="math inline">X \sim \textrm{Beta-Binomial}(n,a,b)</span>:</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbetabinom.ab</span>(<span class="dv">1</span>, n, a, b, <span class="at">.dontuse.prob =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simulate-from-a-gibbs-sampler" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-from-a-gibbs-sampler">Simulate from a Gibbs sampler</h2>
+<p>Following the full conditional posterior distributions for <span class="math inline">x</span> and <span class="math inline">y</span> in Equations (2) and (3), one can design a Gibbs sampler to generate draws of <span class="math inline">x</span> and <span class="math inline">y</span> iteratively.</p>
+</section>
+<section id="results-shown-in-figure-1-from-casella-and-george-1992" class="level2">
+<h2 class="anchored" data-anchor-id="results-shown-in-figure-1-from-casella-and-george-1992">Results shown in Figure 1 from Casella and George (1992)</h2>
+<p>According to the paper, “Figure 1 displays histograms of two samples, <span class="math inline">x_1, \cdots, x_m</span> of size <span class="math inline">m = 500</span> from the Beta-Binomial distribution with <span class="math inline">n = 16, \alpha = 2</span>, and <span class="math inline">\beta = 4</span>.”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Figure 1 from Casella and George (1992).</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: 40%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/PaperFigure1.png"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/PaperFigure1.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Figure 1 from Casella and George (1992).</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+</div>
+</section>
+<section id="step-by-step-exercises-to-replicate-results-in-figure-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-exercises-to-replicate-results-in-figure-1">Step-by-step exercises to replicate results in Figure 1</h2>
+<ol type="1">
+<li>Use the <strong>rbetabinom.ab()</strong> command to directly generate <span class="math inline">m</span> draws of <span class="math inline">x</span>, which follows a beta-binomial distribution as shown in Equation (4). Note that <span class="math inline">m = 500, n = 16, \alpha = 2, \beta = 4</span>. Make a histogram of the <span class="math inline">m</span> draws you have generated.</li>
+</ol>
+<p>According to the caption of Figure 1, ``The black histogram sample was obtained using Gibbs sampling with <span class="math inline">k = 10</span>.” Read Section 2 of the paper carefully to see how they implemented the Gibbs sampler.</p>
+<ol start="2" type="1">
+<li><p>According to the Gibbs sampler implementation described in the paper, how many Gibbs samplers/MCMC chains do we need to run?</p></li>
+<li><p>Write a Gibbs sampling scheme to generate <span class="math inline">m</span> draws of <span class="math inline">x</span>. Note that <span class="math inline">m = 500,n = 16, \alpha = 2, \beta = 4</span> and <span class="math inline">k = 10</span>. Make a histogram of the <span class="math inline">m</span> draws you have generated.</p></li>
+<li><p>Make a side-by-side histogram showing the two samples, one generated in Exercise 1, and the other generated in Exercise 3. (Hint: you can use the following R script to do a side-by-side histogram. The demo below assumes <strong>BetaBinomialDraws</strong> storing the draws from Exercise 1 and <strong>BetaBinomialDrawsGibbs</strong> storing the draws from Exercise 3.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"plotrix"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(BetaBinomialDraws, BetaBinomialDrawsGibbs)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">multhist</span>(l, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">16.5</span>, <span class="at">by =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solutions-to-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-to-exercises">Solutions to exercises</h2>
+<p>Below we include texts and/or R code (without outputs) as solutions to these exercises for your reference.</p>
+<ol type="1">
+<li>R code solution below</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>BetaBinomialDraws <span class="ot">&lt;-</span> <span class="fu">rbetabinom.ab</span>(m, n, a, b, <span class="at">.dontuse.prob=</span><span class="cn">NULL</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(BetaBinomialDraws, <span class="at">breaks=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><p>Since the paper is simulating <span class="math inline">m = 500</span> short Gibbs sampler, we need to run <span class="math inline">m = 500</span> Gibbs sampler/MCMC chains.</p></li>
+<li><p>R code solution below</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>BetaBinomialDrawsGibbs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, m)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, n, y)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        y <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, x <span class="sc">+</span> a, n <span class="sc">-</span> x <span class="sc">+</span> b)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    BetaBinomialDrawsGibbs[i] <span class="ot">&lt;-</span> x</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(BetaBinomialDrawsGibbs, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>R code solution below</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"plotrix"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(BetaBinomialDraws, BetaBinomialDrawsGibbs)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">multhist</span>(l, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">16.5</span>, <span class="at">by =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="thoughts-and-ideas-for-creating-this-simulation-activity" class="level2">
+<h2 class="anchored" data-anchor-id="thoughts-and-ideas-for-creating-this-simulation-activity">Thoughts and ideas for creating this simulation activity</h2>
+<ol type="1">
+<li><p>Casella and George (1992), whose Example 1 forms the basis of this simulation activity, is a well-regarded and accessible paper (some parts) for students. The paper can be used for a deeper dive of Gibbs sampler for a variety of audience.</p></li>
+<li><p>Beta-binomial presents a new use case of Gibbs sampler. Students (should) already have some background knowledge of the beta-binomial conjugacy so they are familiar with the setup.</p></li>
+<li><p>There exists an R function (<strong>rbetabinom.ab()</strong>) to directly sample from the marginal beta-binomial distribution, thus we have a “true” posterior distribution to compare our Gibbs sampler results to.</p></li>
+<li><p>Casella and George (1992) Example 1 illustrates a less common approach to MCMC, i.e., running a large number of shorter MCMC chains, as opposed to running one or a few long MCMC chains. This approach is worth detailed discussion in class to illustrate various aspects of MCMC and MCMC diagnostics. Moreover, understanding the setup of Example 1 deepens students’ understanding of Gibbs sampler as well as sharpens their R coding skills.</p></li>
+</ol>
 </section>
 
 </main>
@@ -202,24 +346,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -255,42 +382,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script>
