@@ -203,6 +203,12 @@ You can use this callout to highlight a discussion question
 
 :::
 
+::: {.callout-tip icon=false}
+## Example
+
+You can use this callout to highlight an example.
+:::
+
 ## Colored text
 
 [This shows red]{.red-text}
