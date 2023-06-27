@@ -13,5 +13,173 @@ format:
       data-background-position: 50% 85%
 ---
 
+# Recap: The Normal Model with One Unknown Parameter
 
+## The Normal-Normal Model for Unknown Mean
 
+- The sampling model for $Y_1, \cdots, Y_n$: 
+    \begin{equation}
+    Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+    \end{equation}
+    
+- The prior distribution for mean $\mu$ ($\sigma^2$ is known):
+    \begin{equation}
+    \mu \mid {\color{red}\sigma} \sim \textrm{Normal}(\theta, \tau^2).
+    \end{equation}
+    
+- The posterior distribution for mean $\mu$ ($\phi = 1/\sigma^2$ and $\phi_0 = 1/\tau^2$): 
+    \begin{equation}
+    \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+    \end{equation}
+
+## The Normal-Normal Model for Unknown Mean
+   
+- The posterior distribution for mean $\mu$: 
+    \begin{equation}
+    \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+    \end{equation}
+    where the precision $\phi = 1/\sigma^2$ and $\phi_0 = 1/\tau^2$ which are known since $\sigma^2$ and $\tau^2$ are known
+    
+- We can then use the **rnorm()** R function to sample posterior draws of $\mu$ from its posterior distribution shown above (required quantities: $\theta, \phi_0, \bar{y}, \phi$)
+
+## The Gamma-Normal Model for Unknown Variance
+
+- The sampling model for $Y_1, \cdots, Y_n$: 
+    \begin{equation}
+    Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+    \end{equation}
+    
+ - The prior distribution for variance $\sigma^2$ ($\mu$ is known):
+    \begin{equation}
+    1/\sigma^2 \mid {\color{red}\mu} \sim \textrm{Gamma}(\alpha, \beta).
+    \end{equation}
+
+- The posterior distribution for variance $\sigma^2$: 
+    \begin{equation}
+    1/\sigma^2 \mid y_1, \cdots, y_n, {\color{red}\mu} \sim \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right)
+    \end{equation}
+    
+## The Gamma-Normal Model for Unknown Variance
+- The posterior distribution for variance $\sigma^2$: 
+    \begin{equation}
+    1/\sigma^2 \mid y_1, \cdots, y_n, {\color{red}\mu} \sim \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right)
+    \end{equation}
+    
+- We can then use **rgamma()** R function to sample posterior draws of $\sigma^2$ from its posterior distribution shown above (required quantities: $\alpha, n, \beta, \{y_i\}, \mu$)
+
+# The Normal Model with Two Unknown Parameters
+
+## What If Both Parameters Are Unknown?
+::: {.nonincremental}
+- The sampling model for $Y_1, \cdots, Y_n$: 
+    \begin{equation}
+    Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2).
+    \end{equation}
+:::
+
+::: {.callout-note}
+THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
+
+What if both $\mu$ and $\sigma^2$ are unknown? Given your Bayesian inference experience with either unknown $\mu$ or unknown $\sigma^2$, what would be a workflow for when both $\mu$ and $\sigma^2$ are unknown?
+:::
+
+## A Joint Prior Distribution for Mean and Variance
+
+- Given what we have seen, how about a joint prior distribution as:
+\begin{equation}
+\pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+\end{equation}
+
+- And let priors be 
+\begin{eqnarray}
+\mu &\sim& \textrm{Normal}(\theta, \tau^2)\\
+1/\sigma^2 &\sim& \textrm{Gamma}(\alpha, \beta)
+\end{eqnarray}
+
+## Full Conditional Posterior Distributions
+::: {.nonincremental}
+- Bayes' Theorem will produce two **full conditional posterior distributions**:
+:::
+
+\begin{eqnarray}
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
+\end{eqnarray}
+
+::: {.callout-note}
+THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
+
+Do they look familiar? Without actual derivation, can you reason through the derivation process to arrive at these two full conditional posterior distributions?
+:::
+
+## Sampling Scheme: A Gibbs Sampler
+
+\begin{eqnarray}
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
+\end{eqnarray}
+
+Start with initial values for parameters, $(\mu^{(0)},  \phi^{(0)})$. For $s = 1, \ldots, S$, generate from the following sequence of **full conditional posterior distributions**:
+
+- $\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
+
+- $\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
+
+- Set $\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})$
+
+## Sampling Scheme: A Gibbs Sampler
+
+::: {.nonincremental}
+- $\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
+
+- $\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
+
+- Set $\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})$
+
+- The sequence  $\{\theta^{(s)}$: $s = 1, \ldots, S\}$ may be viewed
+(but is not necessarily... yet!) as a **dependent** sample from the joint
+posterior distribution of $(\mu, \phi \mid y_1, \cdots, y_n)$
+:::
+
+## Writing A Gibbs Sampler as An R Function
+
+```{r, echo=TRUE}
+gibbs_normal <- function(input, S, seed){
+  set.seed(seed)
+  ybar <- mean(input$y)
+  n <- length(input$y)
+  para <- matrix(0, S, 2)
+  phi <- input$phi_init
+  for(s in 1:S){
+    theta1 <- (input$theta/input$tau^2 + n*phi*ybar)/
+    (1/input$tau^2 + n*phi)
+    tau1 <- sqrt(1/(1/input$tau^2 + n*phi))
+    mu <- rnorm(1, mean = theta1, sd = tau1)
+    alpha1 <- input$alpha + n/2
+    beta1 <- input$beta + sum((input$y - mu)^2)/2 
+    phi <- rgamma(1, shape = alpha1, rate = beta1)
+    para[s, ] <- c(mu, phi)
+  }
+  para 
+}
+```
+
+::: {.callout-note}
+THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
+
+What are the inputs and outputs of this **gibbs_normal()** function? Can you see how the two full conditional posterior distributions get translated into lines of R code? Anything surprises you?
+:::
+
+## RUN AN EXAMPLE
+
+## Extending to More Than Two Parameters
+
+::: {.callout-note}
+THIS SHOULD BE AN EXERCISE CALLOUT
+
+Suppose the full conditional posterior distributions of $\boldsymbol\theta = (\theta_1, \theta_2, \ldots, \theta_m)$ are all tractable (i.e., available through derivation). Describe how you can create a Gibbs sampler. Pay attention to the initial values and the iterative process of a Gibbs sampler.
+:::
+
+# Use Stan and Bayesian Inferences
+
+# Markov Chain Monte Carlo and Diagnostics
