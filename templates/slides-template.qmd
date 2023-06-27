@@ -17,53 +17,51 @@ format:
 
 ## Slide title
 
-Some references to resources for making Quarto presentations. 
+Some references to resources for making Quarto presentations.
 
-- <https://quarto.org/docs/presentations/>
-- <https://quarto.org/docs/presentations/revealjs/>
-- [Long presentation example](https://rstudio-conf-2022.github.io/get-started-quarto/materials/05-presentations.html#/presentations)
-
+-   <https://quarto.org/docs/presentations/>
+-   <https://quarto.org/docs/presentations/revealjs/>
+-   [Long presentation example](https://rstudio-conf-2022.github.io/get-started-quarto/materials/05-presentations.html#/presentations)
 
 ## Useful formatting
 
 $$\text{Math:} \qquad y = \alpha + \beta x + \varepsilon$$
 
-text with footnote[^3].
+text with footnote[^1].
 
-[^3]: footnotes are notes with a foot
-
+[^1]: footnotes are notes with a foot
 
 ## Useful formatting
-
 
 > Include a quote
 
 <br>
 
-    ---
-    Pseudo code
-    ---
+```         
+---
+Pseudo code
+---
 
-    ## Step 1
-    - Draw ...
-    - Set ...
-    
+## Step 1
+- Draw ...
+- Set ...
+```
+
 <br>
-    
-`Written code`
 
+`Written code`
 
 ## Code: display
 
 You can embed code like this:
 
-```{.r}
+``` r
 1 + 1
 ```
 
 You can highlight line 1 and 3 of code like this:
 
-```{.r code-line-numbers="1,3"}
+``` {.r code-line-numbers="1,3"}
 1 + 1
 2 + 2
 3 + 3
@@ -78,15 +76,15 @@ b <- 1
 a + b
 ```
 
-##
+## 
 
-A slide without a title (in the .qmd file the last "##" has no text next to it).
+A slide without a title (in the .qmd file the last "\##" has no text next to it).
 
 . . .
 
 Information appears incrementally if it follows dot dot dot . . .
 
-. . . 
+. . .
 
 To turn off incremental, set 'incremental: false' in the YAML on the top of this file.
 
@@ -94,11 +92,9 @@ To turn off incremental, set 'incremental: false' in the YAML on the top of this
 
 Or turn it off for specific lists
 
-::: {.nonincremental}
-
-- 1st Item
-- 2nd Item
-
+::: nonincremental
+-   1st Item
+-   2nd Item
 :::
 
 ## Table
@@ -111,7 +107,6 @@ Or turn it off for specific lists
 
 : Demonstration of pipe table syntax
 
-
 ## Can include an image
 
 The image below is our Bayes Bats logo, sized to fit
@@ -120,8 +115,7 @@ The image below is our Bayes Bats logo, sized to fit
 
 ## Divide slide into columns
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
 Left column
 :::
@@ -129,8 +123,7 @@ Left column
 ::: {.column width="60%"}
 Right column
 :::
-
-::::
+:::
 
 ## Columns can be useful
 
@@ -154,8 +147,7 @@ dplyr::glimpse(mtcars)
 
 ## Tabsets are cool
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## Code
 
 ```{r, echo = TRUE}
@@ -170,26 +162,55 @@ Click on Plot now (in the slide)!
 ```{r}
 plot(x, y)
 ```
-
 :::
 
-## Also callouts are cool!
+## Standard callouts
 
-::: {.callout-note}
-These are main types of callouts:
-`note`, `warning`, `important`, `tip`.
+::: callout-note
+## Note with custom title
+These are main types of callouts: `note`, `warning`, `important`, `tip`.
 :::
 
-::: {.callout-warning}
+::: callout-warning
 Don't make your own uniform random number generator
 :::
 
 ::: {.callout-important collapse="true"}
 ## Remember this!
+
 This is an important information.
 :::
 
-::: {.callout-tip}
+::: callout-tip
 ## Tip with Title
+
 Do you feel inspired? (This is an example of a callout with a title.)
 :::
+
+## Customized callouts
+
+::: {.callout-note icon=false}
+## Exercise
+
+You can use this callout to highlight an exercise
+
+:::
+
+::: {.callout-warning icon=false}
+## Discussion question
+
+You can use this callout to highlight a discussion question
+
+:::
+
+## Colored text
+
+[This shows red]{.red-text}
+
+[This shows blue]{.blue-text}
+
+[This shows green]{.green-text}
+
+[This does not shows pink (.pink-text was not defined in slides-style.scss)]{.pink-text}
+
+
