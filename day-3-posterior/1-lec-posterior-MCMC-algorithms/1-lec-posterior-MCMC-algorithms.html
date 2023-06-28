@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="1-lec-posterior-estimation_files/libs/clipboard/clipboard.min.js"></script>
-<script src="1-lec-posterior-estimation_files/libs/quarto-html/tabby.min.js"></script>
-<script src="1-lec-posterior-estimation_files/libs/quarto-html/popper.min.js"></script>
-<script src="1-lec-posterior-estimation_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="1-lec-posterior-estimation_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="1-lec-posterior-estimation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="1-lec-posterior-estimation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+<script src="1-lec-posterior-MCMC-algorithms_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/tabby.min.js"></script>
+<script src="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/popper.min.js"></script>
+<script src="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="1-lec-posterior-MCMC-algorithms_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.168">
 
-  <title>Posterior estimation   and inference</title>
+  <title>Posterior Inference and MCMC Algorithms</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="1-lec-posterior-estimation_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="1-lec-posterior-estimation_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -28,11 +28,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="1-lec-posterior-estimation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="1-lec-posterior-estimation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="1-lec-posterior-estimation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="1-lec-posterior-estimation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="1-lec-posterior-estimation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -322,14 +322,11 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
-  <h1 class="title">Posterior estimation <br> and inference</h1>
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 95%" data-background-size="12%" class="center">
+  <h1 class="title">Posterior Inference and MCMC Algorithms</h1>
   <p class="subtitle">Day 3</p>
-
-<div class="quarto-title-authors">
-</div>
-
 </section>
+
 <section class="slide level2">
 
 
@@ -341,19 +338,19 @@
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1-lec-posterior-estimation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="1-lec-posterior-MCMC-algorithms_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -586,24 +583,7 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -641,42 +621,24 @@
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>

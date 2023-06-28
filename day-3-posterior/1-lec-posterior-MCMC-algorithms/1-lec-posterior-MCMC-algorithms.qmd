@@ -1,5 +1,5 @@
 ---
-title: "Posterior estimation <br> and inference"
+title: "Posterior Inference and MCMC Algorithms"
 subtitle: "Day 3"
 format: 
   revealjs:
@@ -10,7 +10,7 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 85%
+      data-background-position: 50% 95%
 ---
 
 
