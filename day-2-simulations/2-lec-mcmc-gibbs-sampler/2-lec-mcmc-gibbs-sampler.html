@@ -456,16 +456,12 @@
   \end{equation}\]</span></li>
 </ul>
 </div>
-<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
+<p><strong>Discussion question</strong></p>
 </div>
 <div class="callout-content">
-<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
 <p>What if both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown? Given your Bayesian inference experience with either unknown <span class="math inline">\(\mu\)</span> or unknown <span class="math inline">\(\sigma^2\)</span>, what would be a workflow for when both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown?</p>
 </div>
 </div>
@@ -494,16 +490,12 @@
 \mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}\]</span>
-<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
+<p><strong>Discussion question</strong></p>
 </div>
 <div class="callout-content">
-<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
 <p>Do they look familiar? Without actual derivation, can you reason through the derivation process to arrive at these two full conditional posterior distributions?</p>
 </div>
 </div>
@@ -555,16 +547,12 @@
 <span id="cb1-17"><a href="#cb1-17"></a>  para </span>
 <span id="cb1-18"><a href="#cb1-18"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
+<p><strong>Discussion question</strong></p>
 </div>
 <div class="callout-content">
-<p>THIS SHOULD BE A DISCUSSION QUESTION CALLOUT</p>
 <p>What are the inputs and outputs of this <code>gibbs_normal()</code> function? Can you see how the two full conditional posterior distributions get translated into lines of R code? Anything surprises you?</p>
 </div>
 </div>
@@ -575,16 +563,12 @@
 </section>
 <section id="extending-to-more-than-two-parameters" class="slide level2">
 <h2>Extending to More Than Two Parameters</h2>
-<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout callout-note no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
+<p><strong>Exercise</strong></p>
 </div>
 <div class="callout-content">
-<p>THIS SHOULD BE AN EXERCISE CALLOUT</p>
 <p>Suppose the full conditional posterior distributions of <span class="math inline">\(\boldsymbol\theta = (\theta_1, \theta_2, \ldots, \theta_m)\)</span> are all tractable (i.e., available through derivation). Describe how you can create a Gibbs sampler. Pay attention to the initial values and the iterative process of a Gibbs sampler.</p>
 </div>
 </div>

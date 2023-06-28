@@ -81,8 +81,8 @@ editor:
       \end{equation}
 :::
 
-::: callout-note
-THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
+::: {.callout-warning icon=false}
+## Discussion question
 
 What if both $\mu$ and $\sigma^2$ are unknown? Given your Bayesian
 inference experience with either unknown $\mu$ or unknown $\sigma^2$,
@@ -114,9 +114,9 @@ what would be a workflow for when both $\mu$ and $\sigma^2$ are unknown?
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}
 ```
-::: callout-note
-THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
 
+::: {.callout-warning icon=false}
+## Discussion question
 Do they look familiar? Without actual derivation, can you reason through
 the derivation process to arrive at these two full conditional posterior
 distributions?
@@ -177,9 +177,8 @@ gibbs_normal <- function(input, S, seed){
 }
 ```
 
-::: callout-note
-THIS SHOULD BE A DISCUSSION QUESTION CALLOUT
-
+::: {.callout-warning icon=false}
+## Discussion question
 What are the inputs and outputs of this `gibbs_normal()` function? Can
 you see how the two full conditional posterior distributions get
 translated into lines of R code? Anything surprises you?
@@ -189,9 +188,8 @@ translated into lines of R code? Anything surprises you?
 
 ## Extending to More Than Two Parameters
 
-::: callout-note
-THIS SHOULD BE AN EXERCISE CALLOUT
-
+::: {.callout-note icon=false}
+## Exercise
 Suppose the full conditional posterior distributions of
 $\boldsymbol\theta = (\theta_1, \theta_2, \ldots, \theta_m)$ are all
 tractable (i.e., available through derivation). Describe how you can
@@ -199,4 +197,4 @@ create a Gibbs sampler. Pay attention to the initial values and the
 iterative process of a Gibbs sampler.
 :::
 
-# Markov Chain Monte Carlo and Diagnostics
+# Overview of Markov Chain Monte Carlo
