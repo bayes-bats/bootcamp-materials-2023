@@ -13,5 +13,114 @@ format:
       data-background-position: 50% 85%
 ---
 
+## Reaction Times
+
+We consider data from a study (Belenky et al, 2003) of reaction time under a variety of sleep deprivation scenarios.  We will focus on the baseline values of reaction time, taken after study participants had a normal night's sleep. Suppose prior research has established a mean reaction time to a visual stimulus of 275ms, and we wish to determine whether the values in our study are consistent with this value. A first step is to read and plot the data.
+
+## Reaction Time Data
+
+```{r }
+library(lme4)
+library(tidyverse)
+data(sleepstudy)
+baseline <- sleepstudy %>%
+  filter(Days==0)
+baseline %>%
+  ggplot(aes(x=Reaction)) +
+  geom_histogram() + 
+  labs(x="Reaction Time (ms)") + 
+  geom_vline(xintercept=275, col="red")
+```
+
+
+## Analysis of Reaction Time
+
+We can use the R brms() function to analyze the data. One advantage of this function is that it allows us easily to implement more complex sampling algorithms, beyond Gibbs sampling. 
+
+Suppose our data model is $$Y \sim N(\mu, \sigma^2).$$ We previously studied the conjugate normal-inverse gamma specification, given by $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg)$$ and $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).$$ While this prior has a nice interpretation in terms of prior sample sizes, it's not the only option.  
+
+## Prior for the Mean
+
+Instead, we consider a relatively non-informative prior for our mean $\mu \sim N(300,50^2)$ -- based on a normal distribution, this puts 95% of the prior mass within 2 SD of the mean, which roughly corresponds to the range 200-400.  
+
+## Prior for the Standard Deviation
+
+We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which has mean 0 and scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
+
+```{r}
+library(brms)
+library(bayesplot)
+library(LaplacesDemon)
+
+x <- seq(0, 100, by = 0.1)
+y <- dhalfcauchy(x, 40)
+ggplot() +
+  aes(x, y) +
+  geom_line(size = 2) +
+  labs(
+    x = NULL, y = NULL,
+    title = "Half Cauchy distribution"
+  ) +
+  theme(axis.text.y=element_blank(),
+      axis.ticks.y=element_blank())
+```
+
+## 
+
+
+```{r runmod, cache=TRUE}
+fit <- brm(data = baseline, family = gaussian(),
+           Reaction ~ 1, #only estimating a mean (Intercept) and variance
+           prior = c(
+            prior(normal(300,50), class = Intercept), 
+              # prior for mu has mean 300 and sd 50
+            prior(cauchy(0,40), class = sigma)
+              # prior for sigma is half of a mean 0, scale 40 Cauchy
+                )
+)
+
+```
+
+## Checking the Output
+
+Trace plots can be used to check convergence. We also can check the $\hat{R}$ values.
+
+```{r}
+plot(fit) # show posteriors and trace plots
+
+fit # written summary of the output
+```
+
+## Evaluating Our Hypothesis
+
+Examining the posterior distribution for $\mu$, we see that most of its mass is below the value 275.  We can easily calculate the posterior probability that $\mu<275$ by taking the fraction of posterior samples that are less than 275.
+
+```{r}
+mean(as_draws_df(fit)$b_Intercept<275)
+```
+
+So the posterior probability that $\mu<275$ is `r mean(as_draws_df(fit)$b_Intercept<275)`.
+
+## Evaluating Our Hypothesis
+
+
+```{r}
+ci <- posterior_summary(fit,
+                  variable = c("b_Intercept")
+)
+
+```
+
+We can also use the 95% credible interval for $\mu$, given by `r paste0("(",round(ci[,3],2),",",round(ci[,4],2),")")` and note that 275 is outside this credible interval.
+
+## You Try It!
+
+The priors specified are not very informative.  Try making the priors more informative and running the code on your own to see how the results are affected!
+
+For example, you can
+- make the variance on the normal prior much smaller
+- make the scale on the half Cauchy prior much smaller
+
+Try changing just one aspect of the prior at a time to evaluate robustness.
 
 
