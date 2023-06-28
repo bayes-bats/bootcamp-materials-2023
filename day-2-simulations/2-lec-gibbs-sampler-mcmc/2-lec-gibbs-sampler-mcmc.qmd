@@ -1,5 +1,5 @@
 ---
-title: "MCMC and Gibbs sampler"
+title: "Gibbs Sampler and MCMC"
 subtitle: "Day 2"
 format: 
   revealjs:
