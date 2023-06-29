@@ -24,7 +24,7 @@ library(lme4)
 library(tidyverse)
 data(sleepstudy)
 baseline <- sleepstudy %>%
-  filter(Days==0)
+  filter(Days==2) # Day 2 is baseline, days 0-1 are training
 baseline %>%
   ggplot(aes(x=Reaction)) +
   geom_histogram() + 
@@ -68,7 +68,7 @@ ggplot() +
 ## 
 
 
-```{r runmod, cache=TRUE}
+```{r runmod}
 fit <- brm(data = baseline, family = gaussian(),
            Reaction ~ 1, #only estimating a mean (Intercept) and variance
            prior = c(
@@ -111,7 +111,7 @@ ci <- posterior_summary(fit,
 
 ```
 
-We can also use the 95% credible interval for $\mu$, given by `r paste0("(",round(ci[,3],2),",",round(ci[,4],2),")")` and note that 275 is outside this credible interval.
+We can also use the 95% credible interval for $\mu$, given by `r paste0("(",round(ci[,3],2),",",round(ci[,4],2),")")` and note that 275 is inside this credible interval.
 
 ## You Try It!
 
@@ -123,4 +123,43 @@ For example, you can
 
 Try changing just one aspect of the prior at a time to evaluate robustness.
 
+## Changes in Reaction Time with Sleep Deprivation
+
+```{r }
+sleepdep <- sleepstudy %>%
+  filter(Days %in% c(2,3)) %>%
+  pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %>%
+  mutate(diff32=Day3-Day2)
+  # keep day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
+sleepdep %>%
+  ggplot(aes(x=diff32)) +
+  geom_histogram() + 
+  labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
+  geom_vline(xintercept=0, col="red")
+
+
+```
+
+We see that reaction times tend to be longer when participants have been sleep-deprived.
+
+## You Try It!
+
+Using the previous slides as a guide, evaluate the hypothesis that sleep deprivation increases reaction time.
+
+```{r}
+fit2 <- brm(data = sleepdep, family = gaussian(),
+           diff32 ~ 1, #only estimating a mean (Intercept) and variance
+           prior = c(
+            prior(normal(0,50), class = Intercept), 
+              # prior for mu has mean 0 and sd 50
+            prior(cauchy(0,10), class = sigma)
+              # prior for sigma is half of a mean 0, scale 10 Cauchy
+                )
+)
+
+plot(fit2)
+fit2
+mean(as_draws_df(fit2)$b_Intercept>0)
+
+```
 

@@ -357,32 +357,11 @@
 <h2></h2>
 <div class="cell" data-hash="2-lec-posterior-analysis_cache/revealjs/runmod_2096d8dc78091e30e0b9fa993015bf91">
 <div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include '/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/Core:88:
-/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name 'namespace'
-namespace Eigen {
-^
-/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected ';' after top level declarator
-namespace Eigen {
-               ^
-               ;
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppEigen/include/Eigen/Core:96:10: fatal error: 'complex' file not found
-#include &lt;complex&gt;
-         ^~~~~~~~~
-3 errors generated.
-make: *** [foo.o] Error 1
-
+<pre><code>
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 1.4e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
+Chain 1: Gradient evaluation took 8e-06 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -399,15 +378,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.017145 seconds (Warm-up)
-Chain 1:                0.008624 seconds (Sampling)
-Chain 1:                0.025769 seconds (Total)
+Chain 1:  Elapsed Time: 0.01562 seconds (Warm-up)
+Chain 1:                0.008652 seconds (Sampling)
+Chain 1:                0.024272 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 3e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
+Chain 2: Gradient evaluation took 2e-06 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -424,9 +403,9 @@ Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.012141 seconds (Warm-up)
-Chain 2:                0.008301 seconds (Sampling)
-Chain 2:                0.020442 seconds (Total)
+Chain 2:  Elapsed Time: 0.014936 seconds (Warm-up)
+Chain 2:                0.008264 seconds (Sampling)
+Chain 2:                0.0232 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 3).
@@ -449,9 +428,9 @@ Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.013045 seconds (Warm-up)
-Chain 3:                0.008256 seconds (Sampling)
-Chain 3:                0.021301 seconds (Total)
+Chain 3:  Elapsed Time: 0.013523 seconds (Warm-up)
+Chain 3:                0.008262 seconds (Sampling)
+Chain 3:                0.021785 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 4).
@@ -474,9 +453,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.014074 seconds (Warm-up)
-Chain 4:                0.008548 seconds (Sampling)
-Chain 4:                0.022622 seconds (Total)
+Chain 4:  Elapsed Time: 0.013 seconds (Warm-up)
+Chain 4:                0.009505 seconds (Sampling)
+Chain 4:                0.022505 seconds (Total)
 Chain 4: </code></pre>
 </div>
 </div>
@@ -496,11 +475,11 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   257.77      8.15   242.19   274.43 1.00     2824     2835
+Intercept   257.76      7.81   242.43   273.42 1.00     2810     2131
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    33.76      5.96    24.47    47.58 1.00     2890     2587
+sigma    33.64      6.10    23.81    47.64 1.00     2260     1945
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -513,14 +492,14 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>Examining the posterior distribution for <span class="math inline">\(\mu\)</span>, we see that most of its mass is below the value 275. We can easily calculate the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> by taking the fraction of posterior samples that are less than 275.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.979</code></pre>
+<pre><code>[1] 0.98425</code></pre>
 </div>
 </div>
-<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.979.</p>
+<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.98425.</p>
 </section>
 <section id="evaluating-our-hypothesis-1" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
-<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (242.19,274.43) and note that 275 is outside this credible interval.</p>
+<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (242.43,273.42) and note that 275 is outside this credible interval.</p>
 </section>
 <section id="you-try-it" class="slide level2">
 <h2>You Try It!</h2>
