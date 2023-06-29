@@ -13,5 +13,24 @@ format:
       data-background-position: 50% 85%
 ---
 
+## Toxicological Testing: Benzophenone
 
+Scientists in the US National Toxicology Program routinely evaluate existing and new chemicals for potential human toxicity. These evaluations involve a variety of test paradigms, ranging from high-throughput *in vitro* tests to animal bioassays.  A study of benzophenone, which has many uses ranging from producing "sweet-woody-geranium-like notes" in perfume to preventing UV damage to other chemicals, involved 150 female rates exposed to various doses of benzophenone and 50 unexposed (control) rats. The outcome of interest to us is a particular tumor, histiocytic sarcoma.
 
+```{r}
+#| echo: false
+tumordat <- data.frame(
+  "tumor_no" = c(147, 50),
+  "tumor_yes" = c(3, 0),
+  row.names = c("Exposed", "Control"),
+  stringsAsFactors = FALSE
+)
+colnames(tumordat) <- c("No Tumor", "Tumor")
+
+tumordat
+
+```
+
+## Histiocytic Sarcoma
+
+A typical analysis of these data might be use of Fisher's exact test to evaluate whether there is an association between benzophenone exposure and tumor development.  We use this test to evaluate the hypothesis below.
