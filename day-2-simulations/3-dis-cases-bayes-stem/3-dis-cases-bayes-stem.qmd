@@ -34,3 +34,93 @@ tumordat
 ## Histiocytic Sarcoma
 
 A typical analysis of these data might be use of Fisher's exact test to evaluate whether there is an association between benzophenone exposure and tumor development.  We use this test to evaluate the hypothesis below.
+
+
+::: panel-tabset
+
+## Code
+
+```{r}
+#| eval: false
+fisher.test(tumorddat)
+```
+
+## Results
+
+```{r}
+#| echo: false
+fisher.test(tumorddat)
+```
+
+Here we see a large p-value, indicating that assuming there is no difference in tumor rates between the groups, our data, or data that are more extreme, are fairly likely.
+
+:::
+
+## Unusual Results
+
+Scientists in the National Toxicology Program saw the results quite differently.  Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups developed this type of tumor. 
+
+## Incorporating Historical Data
+
+Bayesian methods give us a great mechanism for incorporating historical data into an analysis!  
+
+Recall the beta-binomial model: let $\pi \sim \text{Beta}(\alpha, \beta)$ and $Y|n \sim \text{Bin}(n,\pi)$. Then $\pi|y \sim \text{Beta}(\alpha +y, \beta+n-y)$, and $\alpha$ and $\beta$ can be interpreted as the prior number of successes (here, tumors) and failures, respectively.
+
+We can think of a beta-binomial model for each group, the control group and the benzophenone group.
+
+## Benzophenone Group
+
+Given that we don't know much about this chemical, we may want to specify a uniform prior, such as a Beta(1,1).
+
+```{r}
+#| echo: false
+
+x = seq(0, 1, length=10000)
+
+db=dbeta(x, 1, 1)
+
+ggplot() + 
+  geom_line(aes(x,db)) + 
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank(),axis.text.y=element_blank()) + 
+  labs(title="Beta(1,1) Prior")
+```
+
+## Control Group
+
+We have historical data from prior studies that indicates that of 460 female rats on control, 0 have developed tumors.  Because the parameters of the beta distribution must be positive, we can specify a Beta(0.1,460) prior in this group, plotted below.
+
+```{r}
+#| echo: false
+
+x = seq(0, 1, length=10000)
+
+db=dbeta(x, 0.1, 460)
+
+ggplot() + 
+  geom_line(aes(x,db)) + 
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank(),axis.text.y=element_blank()) + 
+  labs(title="Beta(0.1,460) Prior")
+```
+
+That's hard to see!  Most of the prior mass is very close to zero.
+
+## Posterior Distributions
+
+Benzophenone group:  Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{4}{148+4}=\frac{4}{152}=0.026$.
+
+Control group:  Beta(0.1,460) prior with 0 successes and 50 failures yields a Beta(0.1+0,460+50)=Beta(0.1,510) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{0.1}{510.1}=0.0002$.
+
+
+
+## Simulation-Based Inference
+
+We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respectives beta posteriors and counting how many times we see a greater tumor proportion in the benzophenone group than among controls.
+
+```
+x1=rbeta(10000,0.1,510)
+x2=rbeta(10000,4,148)
+mean(x2>x1)
+```
+
+## What Ideas Do You Have?
+

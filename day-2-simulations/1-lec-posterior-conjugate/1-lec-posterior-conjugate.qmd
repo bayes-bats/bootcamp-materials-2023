@@ -10,7 +10,7 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 85%
+      data-background-position: 50% 95%
 ---
 
 # Application: Drought in California
@@ -462,6 +462,8 @@ g
 
 
 ## Interpretable Gamma Prior Model for Precision
+
+AMYAMY add some link to the $\alpha,\beta$
 
 For interpretability, we can set $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg),$$ where we interpret $\sigma^2_0$ as the sample variance from a sample of prior observations of size $\nu_0$.  
 

@@ -118,6 +118,8 @@ fit <- brm(data = baseline, family = gaussian(),
 
 Trace plots can be used to check convergence. 
 
+AMYAMY Introduce these and add what they mean
+
 ::: panel-tabset
 
 ## Code
