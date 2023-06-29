@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="2-lec-posterior-analysis_files/libs/revealjs/dist/theme/quarto.css">
   <link href="2-lec-posterior-analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -337,12 +402,40 @@
 </section>
 <section id="reaction-time-data" class="slide level2">
 <h2>Reaction Time Data</h2>
-
-<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#| eval: false</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">data</span>(sleepstudy)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>baseline <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">filter</span>(Days<span class="sc">==</span><span class="dv">2</span>) <span class="co"># Day 2 is baseline, days 0-1 are training</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>baseline <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Reaction)) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Reaction Time (ms)"</span>) <span class="sc">+</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">275</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="analysis-of-reaction-time" class="slide level2">
 <h2>Analysis of Reaction Time</h2>
 <p>We can use the R brms() function to analyze the data. One advantage of this function is that it allows us easily to implement more complex sampling algorithms, beyond Gibbs sampling.</p>
-<p>Suppose our data model is <span class="math display">\[Y \sim N(\mu, \sigma^2).\]</span> We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg)\]</span> and <span class="math display">\[\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior sample sizes, it’s not the only option.</p>
+<p>Suppose our data model is <span class="math display">\[Y \sim N(\mu, \sigma^2).\]</span> We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior samples, it’s not the only option.</p>
 </section>
 <section id="prior-for-the-mean" class="slide level2">
 <h2>Prior for the Mean</h2>
@@ -352,119 +445,35 @@
 <h2>Prior for the Standard Deviation</h2>
 <p>We will specify a prior directly on the standard deviation <span class="math inline">\(\sigma\)</span> as <span class="math inline">\(\sigma \sim \text{HalfCauchy}(0,40)\)</span>, which has mean 0 and scale parameter 40 and is called “half” because only the positive values are used. If you haven’t seen the Cauchy distribution, it’s a special case of a t distribution with 1 degree of freedom, and it’s nice because it has fat tails and allows substantial mass away from its mean. We plot it here.</p>
 
-<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="cell" data-hash="2-lec-posterior-analysis_cache/revealjs/runmod_2096d8dc78091e30e0b9fa993015bf91">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 8e-06 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.01562 seconds (Warm-up)
-Chain 1:                0.008652 seconds (Sampling)
-Chain 1:                0.024272 seconds (Total)
-Chain 1: 
-
-SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 2).
-Chain 2: 
-Chain 2: Gradient evaluation took 2e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
-Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 0.014936 seconds (Warm-up)
-Chain 2:                0.008264 seconds (Sampling)
-Chain 2:                0.0232 seconds (Total)
-Chain 2: 
-
-SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 3).
-Chain 3: 
-Chain 3: Gradient evaluation took 2e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 3: Adjust your expectations accordingly!
-Chain 3: 
-Chain 3: 
-Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 3: 
-Chain 3:  Elapsed Time: 0.013523 seconds (Warm-up)
-Chain 3:                0.008262 seconds (Sampling)
-Chain 3:                0.021785 seconds (Total)
-Chain 3: 
-
-SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 4).
-Chain 4: 
-Chain 4: Gradient evaluation took 2e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 4: Adjust your expectations accordingly!
-Chain 4: 
-Chain 4: 
-Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 0.013 seconds (Warm-up)
-Chain 4:                0.009505 seconds (Sampling)
-Chain 4:                0.022505 seconds (Total)
-Chain 4: </code></pre>
-</div>
-</div>
+<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="code-to-fit-model" class="slide level2">
+<h2>Code to Fit Model</h2>
 </section>
 <section id="checking-the-output" class="slide level2">
 <h2>Checking the Output</h2>
-<p>Trace plots can be used to check convergence. We also can check the <span class="math inline">\(\hat{R}\)</span> values.</p>
+<p>Trace plots can be used to check convergence.</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Code</a></li><li><a href="#tabset-2-2">Plots</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">plot</span>(fit) <span class="co"># show posteriors and trace plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-the-output-1" class="slide level2">
+<h2>Checking the Output</h2>
+<p>We also can check the <span class="math inline">\(\hat{R}\)</span> values.</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -475,37 +484,51 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   257.76      7.81   242.43   273.42 1.00     2810     2131
+Intercept   266.20      7.31   252.00   280.51 1.00     2477     2059
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    33.64      6.10    23.81    47.64 1.00     2260     1945
+sigma    31.18      5.60    22.40    44.44 1.00     2938     2434
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+</section>
 <section id="evaluating-our-hypothesis" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
 <p>Examining the posterior distribution for <span class="math inline">\(\mu\)</span>, we see that most of its mass is below the value 275. We can easily calculate the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> by taking the fraction of posterior samples that are less than 275.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(fit)<span class="sc">$</span>b_Intercept<span class="sc">&lt;</span><span class="dv">275</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.98425</code></pre>
+<pre><code>[1] 0.88425</code></pre>
 </div>
 </div>
-<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.98425.</p>
+<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.88425.</p>
 </section>
 <section id="evaluating-our-hypothesis-1" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
-<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (242.43,273.42) and note that 275 is outside this credible interval.</p>
+<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (252,280.51) and note that 275 is inside this credible interval.</p>
 </section>
 <section id="you-try-it" class="slide level2">
 <h2>You Try It!</h2>
 <p>The priors specified are not very informative. Try making the priors more informative and running the code on your own to see how the results are affected!</p>
 <p>For example, you can - make the variance on the normal prior much smaller - make the scale on the half Cauchy prior much smaller</p>
 <p>Try changing just one aspect of the prior at a time to evaluate robustness.</p>
+</section>
+<section id="changes-in-reaction-time-with-sleep-deprivation" class="slide level2">
+<h2>Changes in Reaction Time with Sleep Deprivation</h2>
+<p>Now that we’ve explored baseline reaction time, let’s see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed). First, we will do a little data wrangling and make a plot for each subject of the change in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time.</p>
+</section>
+<section id="changes-in-reaction-time-with-sleep-deprivation-1" class="slide level2">
+<h2>Changes in Reaction Time with Sleep Deprivation</h2>
+
+<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p>We see that reaction times tend to be longer when participants have been sleep deprived.</p>
+</section>
+<section id="you-try-it-1" class="slide level2">
+<h2>You Try It!</h2>
+<p>Using the previous slides as a guide, evaluate the hypothesis that sleep deprivation increases reaction time.</p>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
