@@ -1,5 +1,5 @@
 ---
-title: "Designing a regression model lab"
+title: "Designing a Regression Model Lab"
 subtitle: "Day 4"
 title-block-banner: true
 format:
@@ -13,24 +13,18 @@ format:
 ---
 
 
-## Quarto
+## Goals for the Afternoon
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+-   Consider learning objectives and goals for a regression modeling lab
 
+-   Identify interesting data to use in a simple linear regression lab (sleep study data can be used as backup)
 
-## Running Code
+-   Write lab prompts and solutions for class!
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Sample Lab Materials
 
-```{r}
-1 + 1
-```
+-   Take 15 minutes to review the exercises on humidity and penguins in [section 9.10.2 of Bayes Rules!  ](https://www.bayesrulesbook.com/chapter-9.html#exercises-8) . Start making notes about what types of questions  you want your students to address, and think about possible data sets for analysis. Be prepared to share one primary concept you would like your students to encounter in the lab.
 
-You can add options to executable code like this
+-   Full group: sharing
 
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+-   Small groups: based on topical interests, split into groups and develop lab activities!
