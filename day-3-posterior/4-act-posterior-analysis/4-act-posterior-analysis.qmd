@@ -19,7 +19,7 @@ format:
 
 -   Develop an activity that could be used in a course you teach
   -   Be creative!
-  -   Can also follow example from this morning if desired
+  -   Can also adapt example from this morning if desired
   
 -   Identify data and develop code for modeling
 
