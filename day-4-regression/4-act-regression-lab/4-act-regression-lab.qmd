@@ -17,7 +17,7 @@ format:
 
 -   Consider learning objectives and goals for a regression modeling lab
 
--   Identify interesting data to use in a simple linear regression lab (sleep study data can be used as backup)
+-   Identify interesting data to use in a linear regression lab (sleep study data can be used as backup)
 
 -   Write lab prompts and solutions for class!
 

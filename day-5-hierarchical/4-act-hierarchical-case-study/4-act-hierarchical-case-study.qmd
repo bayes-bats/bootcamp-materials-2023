@@ -12,25 +12,18 @@ format:
     page-layout: full
 ---
 
+## Goals for the Afternoon
 
-## Quarto
+-   Consider learning objectives and goals for a hierarchical modeling lab
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+-   Identify interesting data to use in a linear regression lab (longitudinal sleep study data can be used as backup -- one analysis is outlined in Bayes Rules! questions 17.6-17.9)
 
+-   Write lab prompts and solutions for class!
 
-## Running Code
+## Sample Lab Materials
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+-   Take 15 minutes to review the exercises on humidity and penguins in [section 16.9.2 of Bayes Rules!  ](https://www.bayesrulesbook.com/chapter-16.html#exercises-15) and [section 17.9.2 of Bayes Rules!](https://www.bayesrulesbook.com/chapter-17.html#applied-exercises-9). Start making notes about what types of questions  you want your students to address, and think about possible data sets for analysis. Be prepared to share one primary concept you would like your students to encounter in the lab.
 
-```{r}
-1 + 1
-```
+-   Full group: sharing
 
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+-   Small groups: based on topical interests, split into groups and develop lab activities!
