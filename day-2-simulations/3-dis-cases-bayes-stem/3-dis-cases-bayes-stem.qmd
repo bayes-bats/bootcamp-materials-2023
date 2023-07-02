@@ -59,7 +59,7 @@ Here we see a large p-value, indicating that assuming there is no difference in 
 
 ## Unusual Results
 
-Scientists in the National Toxicology Program saw the results quite differently.  Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups developed this type of tumor. 
+Scientists in the National Toxicology Program saw the results quite differently.  Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups ever developed this type of tumor. 
 
 ## Incorporating Historical Data
 
@@ -118,7 +118,7 @@ That's hard to see!  Most of the prior mass is very close to zero.
 
 ## Simulation-Based Inference
 
-We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respectives beta posteriors and counting how many times we see a greater tumor proportion in the benzophenone group than among controls.
+We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respective beta posteriors and counting how many times we see a greater tumor proportion parameter value in the benzophenone group than among controls.
 
 ```{r}
 #| echo: true

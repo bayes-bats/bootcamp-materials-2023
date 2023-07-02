@@ -444,7 +444,7 @@ odds ratio
 </section>
 <section id="unusual-results" class="slide level2">
 <h2>Unusual Results</h2>
-<p>Scientists in the National Toxicology Program saw the results quite differently. Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups developed this type of tumor.</p>
+<p>Scientists in the National Toxicology Program saw the results quite differently. Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups ever developed this type of tumor.</p>
 </section>
 <section id="incorporating-historical-data" class="slide level2">
 <h2>Incorporating Historical Data</h2>
@@ -474,13 +474,13 @@ odds ratio
 </section>
 <section id="simulation-based-inference" class="slide level2">
 <h2>Simulation-Based Inference</h2>
-<p>We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respectives beta posteriors and counting how many times we see a greater tumor proportion in the benzophenone group than among controls.</p>
+<p>We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respective beta posteriors and counting how many times we see a greater tumor proportion parameter value in the benzophenone group than among controls.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>x1<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">1000000</span>,<span class="fl">0.1</span>,<span class="dv">510</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>x2<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">1000000</span>,<span class="dv">4</span>,<span class="dv">148</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">mean</span>(x2<span class="sc">&gt;</span>x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.999899</code></pre>
+<pre><code>[1] 0.999889</code></pre>
 </div>
 </div>
 </section>

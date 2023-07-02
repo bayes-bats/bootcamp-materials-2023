@@ -777,7 +777,7 @@ f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2
 <img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="the-normal-normal-bayesian-model" class="slide level2">
 <h2>The Normal-Normal Bayesian Model</h2>
-<p>Let <span class="math inline">\(\mu \in (-\infty,\infty)\)</span> be an unknown <em>mean</em> parameter and <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span> be an independent <span class="math inline">\(N(\mu,\sigma^2)\)</span> sample where <span class="math inline">\(\sigma\)</span> is assumed to be <em>known</em>. The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on <span class="math inline">\(\mu\)</span>:</p>
+<p>Let <span class="math inline">\(\mu \in (-\infty,\infty)\)</span> be an unknown <em>mean</em> parameter and <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span> be an independent <span class="math inline">\(N(\mu,\sigma^2)\)</span> sample where <span class="math inline">\(\sigma\)</span> is assumed to be <em>known</em> (we’ll relax this strong assumption shortly). The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on <span class="math inline">\(\mu\)</span>:</p>
 <p><span class="math display">\[\begin{split}
 Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 \mu &amp; \sim N(\theta, \tau^2) \\
@@ -853,20 +853,16 @@ Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 </section>
 <section id="normal-inverse-gamma-conjugate-prior-model" class="slide level2">
 <h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
-<p>Our priors are <span class="math display">\[\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)\]</span> and <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).\]</span> Our data model is <span class="math display">\[Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).\]</span></p>
+<p>When our priors are <span class="math display">\[\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)\]</span> and <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), \]</span> and our data model is <span class="math display">\[Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2)... \]</span></p>
 </section>
 <section id="normal-inverse-gamma-conjugate-prior-model-1" class="slide level2">
 <h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
-<p>We can show the <strong>full conditional posterior</strong> for <span class="math inline">\(\mu\)</span> is given by <span class="math display">\[\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),\]</span> where <span class="math inline">\(n^*=n_0+n\)</span> and <span class="math inline">\(\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.\)</span></p>
+<p>… we have a conjugate prior for the variance and a <em>conditionally-conjugate</em> prior for the mean. The <strong>full conditional posterior</strong> for <span class="math inline">\(\mu\)</span> is <span class="math display">\[\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),\]</span> where <span class="math inline">\(n^*=n_0+n\)</span> and <span class="math inline">\(\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.\)</span></p>
 <p>With <span class="math inline">\(\theta\)</span> viewed as the mean of <span class="math inline">\(n_0\)</span> prior observations, then <span class="math inline">\(E(\mu \mid Y_1, \ldots, Y_n,\sigma^2)\)</span> is the sample mean of the current and prior observations, and <span class="math inline">\(\text{Var}(\mu \mid Y_1, \ldots, Y_n, \sigma^2)\)</span> is <span class="math inline">\(\sigma^2\)</span> divided by the total number of observations (prior+current).</p>
 </section>
 <section id="normal-inverse-gamma-conjugate-prior-model-2" class="slide level2">
 <h2>Normal-Inverse Gamma Conjugate Prior Model</h2>
-<p>To get the <strong>marginal posterior</strong> of <span class="math inline">\(\sigma^2\)</span>, we integrate over the unknown value of <span class="math inline">\(\mu\)</span> and obtain <span class="math display">\[\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),\]</span> where <span class="math inline">\(\nu_n=\nu_0+n\)</span>, <span class="math display">\[\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2],\]</span> where <span class="math inline">\(s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}\)</span> is the sample variance.</p>
-</section>
-<section id="computation-with-unknown-variance" class="slide level2">
-<h2>Computation with Unknown Variance</h2>
-<p>We’ll consider computation for the normal-inverse gamma model when we get to the slightly more involved (and more interesting!) case of the linear regression model.</p>
+<p>To get the <strong>marginal posterior</strong> of <span class="math inline">\(\sigma^2\)</span>, we integrate over the unknown value of <span class="math inline">\(\mu\)</span> and obtain <span class="math display">\[\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),\]</span> where <span class="math inline">\(\nu_n=\nu_0+n\)</span>, <span class="math display">\[\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2\bigg],\]</span> where <span class="math inline">\(s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}\)</span> is the sample variance.</p>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 

@@ -284,7 +284,8 @@ g <- ggplot(normals, aes(x = x, y = y)) +
   facet_wrap(~ setting) + 
   labs(x = "y", y = "f(y)") + 
   scale_y_continuous(breaks = c(0,2,4,6,8,10)) + 
-  lims(y = c(0,0.8)) 
+  lims(y = c(0,0.8)) +
+  theme(strip.text.x = element_text(size = 20), axis.text.x=element_text(size=10))
   
 g 
 ``` 
@@ -351,7 +352,7 @@ plot_normal(mean = 6.5, sd = 0.5)
 
 ## The Normal-Normal Bayesian Model
 
-Let $\mu \in (-\infty,\infty)$ be an unknown _mean_ parameter and $(Y_1,Y_2,\ldots,Y_n)$ be an independent $N(\mu,\sigma^2)$ sample where $\sigma$ is assumed to be *known*.
+Let $\mu \in (-\infty,\infty)$ be an unknown _mean_ parameter and $(Y_1,Y_2,\ldots,Y_n)$ be an independent $N(\mu,\sigma^2)$ sample where $\sigma$ is assumed to be *known* (we'll relax this strong assumption shortly).
 The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on $\mu$:
 
 $$\begin{split}
@@ -471,18 +472,15 @@ This prior for the precision has mean $\frac{1}{\sigma^2_0}$.
 
 ## Normal-Inverse Gamma Conjugate Prior Model
 
-Our priors are $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)$$  and $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).$$ Our data model is $$Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).$$ 
+When our priors are $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)$$  and $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), $$ and our data model is $$Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2)... $$ 
 
 ## Normal-Inverse Gamma Conjugate Prior Model
-
-We can show the **full conditional posterior** for $\mu$ is given by $$\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),$$ where $n^*=n_0+n$ and $\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.$
+... we have a conjugate prior for the variance and a *conditionally-conjugate* prior for the mean. The **full conditional posterior** for $\mu$ is  $$\mu \mid Y_1, \ldots, Y_n, \sigma^2 \sim N\bigg(\mu_n, \frac{\sigma^2}{n*}\bigg),$$ where $n^*=n_0+n$ and $\mu_n=\frac{\frac{n_0}{\sigma^2}\theta+\frac{n}{\sigma^2}\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}=\frac{n_0\theta+n\bar{y}}{n^*}.$
 
 With $\theta$ viewed as the mean of $n_0$ prior observations, then $E(\mu \mid Y_1, \ldots, Y_n,\sigma^2)$ is the sample mean of the current and prior observations, and $\text{Var}(\mu \mid Y_1, \ldots, Y_n, \sigma^2)$ is $\sigma^2$ divided by the total number of observations (prior+current).
 
 ## Normal-Inverse Gamma Conjugate Prior Model
 
-To get the **marginal posterior** of $\sigma^2$, we  integrate over the unknown value of $\mu$ and obtain $$\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),$$ where $\nu_n=\nu_0+n$, $$\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2],$$ where $s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}$ is the sample variance. 
+To get the **marginal posterior** of $\sigma^2$, we  integrate over the unknown value of $\mu$ and obtain $$\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),$$ where $\nu_n=\nu_0+n$, $$\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2\bigg],$$ where $s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}$ is the sample variance. 
 
-## Computation with Unknown Variance
 
-We'll consider computation for the normal-inverse gamma model when we get to the slightly more involved (and more interesting!) case of the linear regression model.
