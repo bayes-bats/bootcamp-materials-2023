@@ -452,18 +452,18 @@
 <p>Let <span class="math inline">\(\pi\)</span> be a random variable which can take any value between 0 and 1, ie. <span class="math inline">\(\pi \in [0,1]\)</span>. Then the variability in <span class="math inline">\(\pi\)</span> might be well modeled by a Beta model with <strong>shape parameters</strong> <span class="math inline">\(\alpha &gt; 0\)</span> and <span class="math inline">\(\beta &gt; 0\)</span>:</p>
 <p><span class="math display">\[\pi \sim \text{Beta}(\alpha, \beta)\]</span> The Beta model is specified by continuous pdf <span class="math display">\[\begin{equation}
 f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1} \;\; \text{ for } \pi \in [0,1]
-\end{equation}\]</span> where <span class="math inline">\(\Gamma(z) = \int_0^\infty y^{z-1}e^{-y}dy\)</span> and <span class="math inline">\(\Gamma(z + 1) = z \Gamma(z)\)</span>. Fun fact: when <span class="math inline">\(z\)</span> is a positive integer, then <span class="math inline">\(\Gamma(z)\)</span> simplifies to <span class="math inline">\(\Gamma(z) = (z-1)!\)</span>.</p>
+\end{equation}\]</span> where <span class="math inline">\(\Gamma(z) = \int_0^\infty y^{z-1}e^{-y}dy\)</span> and <span class="math inline">\(\Gamma(z + 1) = z \Gamma(z)\)</span>. Fun fact: when <span class="math inline">\(z\)</span> is a positive integer, then <span class="math inline">\(\Gamma(z)\)</span> simplifies to <span class="math inline">\(\Gamma(z) = (z-1)!\)</span></p>
 </section>
 <section id="beta-prior-model-1" class="slide level2">
 <h2>Beta Prior Model</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="2-lec-discrete-data_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </div>
 </div>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:30%;">
 <p><span class="math inline">\(\pi \sim \text{Beta}(3, 8)\)</span></p>
 <p><span class="math inline">\(f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1}\)</span></p>
 <p><span class="math inline">\(f(\pi) = \frac{\Gamma(3 + 11)}{\Gamma(3)\Gamma(8)} 0.5^{3-1} (1-0.5)^{8-1}\)</span></p>
@@ -476,13 +476,13 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 <h2>Beta Prior Model</h2>
 <p><span class="math inline">\(\pi \sim \text{Beta}(3, 8)\)</span></p>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="2-lec-discrete-data_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
 </div>
 </div>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:30%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">dbeta</span>(<span class="at">x =</span> <span class="fl">0.5</span>, </span>
 <span id="cb1-2"><a href="#cb1-2"></a>      <span class="at">shape1 =</span> <span class="dv">3</span>, </span>
@@ -579,7 +579,12 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 </section>
 <section id="binomial-distribution" class="slide level2">
 <h2>Binomial Distribution</h2>
-<p>The <strong>binomial distribution</strong> is used to obtain the probability of <span class="math inline">\(Y=y\)</span> “successes” from a fixed number of <span class="math inline">\(n\)</span> independent <strong>Bernoulli trials</strong>. (A Bernoulli trial has two possible outcomes, one with probability, called the probability of success, <span class="math inline">\(\pi\)</span> and the other with probability, called the probability of failure, <span class="math inline">\(1-\pi\)</span>.)</p>
+<p>The <strong>binomial distribution</strong> is used to obtain the probability of <span class="math inline">\(Y=y\)</span> “successes” from a fixed number of <span class="math inline">\(n\)</span> independent <strong>Bernoulli trials</strong>.</p>
+<p>A Bernoulli trial has two possible outcomes:</p>
+<ul>
+<li class="fragment"><p>one with probability (called the probability of success) <span class="math inline">\(\pi\)</span>, and</p></li>
+<li class="fragment"><p>the other with probability (called the probability of failure) <span class="math inline">\(1-\pi\)</span>.</p></li>
+</ul>
 <p>The distribution is <span class="math inline">\(P(Y=y)={n \choose y}\pi^y(1-\pi)^{n-y}\)</span> and has mean <span class="math inline">\(n\pi\)</span> and variance <span class="math inline">\(n\pi(1-\pi)\)</span>.</p>
 </section>
 <section id="posterior-for-the-beta-binomial-model" class="slide level2">

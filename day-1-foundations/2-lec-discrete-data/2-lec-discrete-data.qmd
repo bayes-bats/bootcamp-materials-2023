@@ -115,7 +115,7 @@ The Beta model is specified by continuous pdf
 \begin{equation}
 f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1} \;\; \text{ for } \pi \in [0,1] 
 \end{equation}
- where $\Gamma(z) = \int_0^\infty y^{z-1}e^{-y}dy$ and $\Gamma(z + 1) = z \Gamma(z)$.  Fun fact: when $z$ is a positive integer, then $\Gamma(z)$ simplifies to $\Gamma(z) = (z-1)!$.   
+ where $\Gamma(z) = \int_0^\infty y^{z-1}e^{-y}dy$ and $\Gamma(z + 1) = z \Gamma(z)$.  Fun fact: when $z$ is a positive integer, then $\Gamma(z)$ simplifies to $\Gamma(z) = (z-1)!$ 
 
 ---
 
@@ -123,9 +123,10 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="70%"}
 ```{r echo = FALSE, fig.height=5.5}
 plot_beta(3, 8) +
+  theme(text = element_text(size=20)) +
   geom_segment(aes(x = 0.50, y = 0, xend = 0.50, yend = dbeta(0.50, 3,8)), color = "maroon") +
     annotate("text", label = "(0.5, ?)", x = 0.6, y = 0.9, size = 8, colour = "maroon")
 
@@ -133,7 +134,7 @@ plot_beta(3, 8) +
 ```
 :::
 
-::: {.column width="60%"}
+::: {.column width="30%"}
 
 $\pi \sim \text{Beta}(3, 8)$
 
@@ -160,17 +161,18 @@ $\pi \sim \text{Beta}(3, 8)$
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="70%"}
 ```{r echo = FALSE, fig.height=5.5}
 plot_beta(3, 8) +
+  theme(text = element_text(size=20)) +
   geom_segment(aes(x = 0.50, y = 0, xend = 0.50, yend = dbeta(0.50, 3,8)), color = "maroon") +
-    annotate("text", label = "(0.5, ?)", x = 0.6, y = 0.9, size = 8, colour = "maroon")
+    annotate("text", label = "(0.5, ?)", x = 0.6, y = 0.9, size = 8, colour = "maroon") 
 
   
 ```
 :::
 
-::: {.column width="60%"}
+::: {.column width="30%"}
 
 ```{r echo=TRUE}
 dbeta(x = 0.5, 
@@ -319,7 +321,13 @@ summarize_beta(5, 35)
 
 ## Binomial Distribution
 
-The **binomial distribution** is used to obtain the probability of $Y=y$ "successes" from a fixed number of $n$ independent **Bernoulli trials**. (A Bernoulli trial has two possible outcomes, one with probability, called the probability of success, $\pi$ and the other with probability, called the probability of failure, $1-\pi$.)
+The **binomial distribution** is used to obtain the probability of $Y=y$ "successes" from a fixed number of $n$ independent **Bernoulli trials**. 
+
+A Bernoulli trial has two possible outcomes:
+
+-   one with probability (called the probability of success) $\pi$, and 
+
+-   the other with probability (called the probability of failure) $1-\pi$.
 
 The distribution is $P(Y=y)={n \choose y}\pi^y(1-\pi)^{n-y}$ and has mean $n\pi$ and variance $n\pi(1-\pi)$.
 
