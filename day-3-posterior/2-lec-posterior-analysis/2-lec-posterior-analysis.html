@@ -388,7 +388,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 95%" data-background-size="12%" class="quarto-title-block center">
   <h1 class="title">Posterior analysis <br> with MCMC</h1>
   <p class="subtitle">Day 3</p>
 
@@ -435,7 +435,7 @@
 <section id="analysis-of-reaction-time" class="slide level2">
 <h2>Analysis of Reaction Time</h2>
 <p>We can use the R brms() function to analyze the data. One advantage of this function is that it allows us easily to implement more complex sampling algorithms, beyond Gibbs sampling.</p>
-<p>Suppose our data model is <span class="math display">\[Y \sim N(\mu, \sigma^2).\]</span> We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior samples, it’s not the only option.</p>
+<p>Suppose our data model is <span class="math inline">\(Y \sim N(\mu, \sigma^2).\)</span> We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior samples, it’s not the only option.</p>
 </section>
 <section id="prior-for-the-mean" class="slide level2">
 <h2>Prior for the Mean</h2>
@@ -519,11 +519,11 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   266.17      7.46   251.42   281.44 1.00     2433     2109
+Intercept   266.23      7.27   252.21   281.03 1.00     2733     1668
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    31.11      5.98    22.14    44.87 1.00     2574     2063
+sigma    31.06      5.72    22.33    44.96 1.00     2499     2192
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -533,7 +533,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </section>
 <section id="effective-sample-size" class="slide level2">
 <h2>Effective Sample Size</h2>
-<p>Markov chain simulations in general produce samples that are correlated, rather than independent. The degree of autocorrelation in samples is related to the speed of convergence of the chain. The <em>effective sample size (ESS)</em> is the number of <em>independent</em> samples you would need to get a similarly accurate posterior approximation. An effective sample size much smaller than the actual number of samples in a chain is an indication that our sampling is not very efficient. In the prior output, we see values of <code>Bulk_ESS</code> and <code>Tail-ESS</code>.</p>
+<p>Markov chain simulations in general produce samples that are correlated, rather than independent. The degree of autocorrelation in samples is related to the speed of convergence of the chain. The <em>effective sample size (ESS)</em> is the number of <em>independent</em> samples you would need to get a similarly accurate posterior approximation. An effective sample size much smaller than the actual number of samples in a chain is an indication that our sampling is not very efficient. In the prior output, we see values labeled <code>Bulk_ESS</code> and <code>Tail_ESS</code>.</p>
 </section>
 <section id="effective-sample-size-1" class="slide level2">
 <h2>Effective Sample Size</h2>
@@ -541,6 +541,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li class="fragment"><p>The <em>bulk ESS</em> provides information about the sampling efficiency in the bulk of the distribution and is thus most relevant for providing information about efficiency of mean or median estimates.</p></li>
 <li class="fragment"><p><em>Tail ESS</em> computes the minimum of ESS of the 5% and 95% quantiles and is useful for determining sampling efficiency in the tails and of the variance.</p></li>
 <li class="fragment"><p>There are no hard and fast rules, but one recommendation is that both values should be at least 100 per Markov chain.</p></li>
+<li class="fragment"><p>Generally, we evalute quality of our samples based on all these criteria combined.</p></li>
 </ul>
 </section>
 <section id="evaluating-our-hypothesis" class="slide level2">
@@ -563,7 +564,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </section>
 <section id="evaluating-our-hypothesis-2" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
-<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (251.42,281.44) and note that 275 is inside this credible interval.</p>
+<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (252.21,281.03) and note that 275 is inside this credible interval.</p>
 </section>
 <section id="you-try-it" class="slide level2">
 <h2>You Try It!</h2>
@@ -573,7 +574,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </section>
 <section id="changes-in-reaction-time-with-sleep-deprivation" class="slide level2">
 <h2>Changes in Reaction Time with Sleep Deprivation</h2>
-<p>Now that we’ve explored baseline reaction time, let’s see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed). First, we will do a little data wrangling and make a plot for each subject of the change in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time.</p>
+<p>Now that we’ve explored baseline reaction time, let’s see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed). First, we will do a little data wrangling and make a plot of the changse in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time for each subject.</p>
 </section>
 <section id="changes-in-reaction-time-with-sleep-deprivation-1" class="slide level2">
 <h2>Changes in Reaction Time with Sleep Deprivation</h2>

@@ -10,7 +10,7 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 85%
+      data-background-position: 50% 95%
 ---
 
 ## Reaction Times
@@ -63,7 +63,7 @@ baseline %>%
 
 We can use the R brms() function to analyze the data. One advantage of this function is that it allows us easily to implement more complex sampling algorithms, beyond Gibbs sampling. 
 
-Suppose our data model is $$Y \sim N(\mu, \sigma^2).$$ We previously studied the conjugate normal-inverse gamma specification, given by $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).$$ While this prior has a nice interpretation in terms of prior samples, it's not the only option.  
+Suppose our data model is $Y \sim N(\mu, \sigma^2).$ We previously studied the conjugate normal-inverse gamma specification, given by $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).$$ While this prior has a nice interpretation in terms of prior samples, it's not the only option.  
 
 ## Prior for the Mean
 
@@ -189,7 +189,7 @@ fit # written summary of the output
 
 ## Effective Sample Size
 
-Markov chain simulations in general produce samples that are correlated, rather than independent. The degree of autocorrelation in samples is related to the speed of convergence of the chain.  The *effective sample size (ESS)* is the number of *independent* samples you would need to get a similarly accurate posterior approximation. An effective sample size much smaller than the actual number of samples in a chain is an indication that our sampling is not very efficient. In the prior output, we see values of `Bulk_ESS` and `Tail-ESS`.  
+Markov chain simulations in general produce samples that are correlated, rather than independent. The degree of autocorrelation in samples is related to the speed of convergence of the chain.  The *effective sample size (ESS)* is the number of *independent* samples you would need to get a similarly accurate posterior approximation. An effective sample size much smaller than the actual number of samples in a chain is an indication that our sampling is not very efficient. In the prior output, we see values labeled `Bulk_ESS` and `Tail_ESS`.  
 
 ## Effective Sample Size
 
@@ -198,6 +198,8 @@ Markov chain simulations in general produce samples that are correlated, rather 
 -   *Tail ESS* computes the minimum of ESS of the 5% and 95% quantiles and is useful for determining sampling efficiency in the tails and of the variance.
 
 -   There are no hard and fast rules, but one recommendation is that both values should be at least 100 per Markov chain.
+
+-   Generally, we evalute quality of our samples based on all these criteria combined.
 
 ## Evaluating Our Hypothesis
 
@@ -245,7 +247,7 @@ Try changing just one aspect of the prior at a time to evaluate robustness.
 
 ## Changes in Reaction Time with Sleep Deprivation
 
-Now that we've explored baseline reaction time, let's see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed).  First, we will do a little data wrangling and make a plot for each subject of the change in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time.
+Now that we've explored baseline reaction time, let's see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed).  First, we will do a little data wrangling and make a plot of the changse in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time for each subject.
 
 ## Changes in Reaction Time with Sleep Deprivation
 
