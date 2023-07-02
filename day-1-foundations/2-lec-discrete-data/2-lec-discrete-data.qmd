@@ -37,17 +37,17 @@ $f(\pi)$ can be used to *compare* the plausibility of two different values of $\
 
 ## Plotting the Continuous Prior
 
-For each of the following students' prior ideas for $\pi$, we plot the pdf of the prior.  Plot will not be exact because no exact values are given.  
+For each of the following students' prior ideas for $\pi$, we plot the pdf of a prior.   
 
-Bahar thinks that it is extremely difficult to get into this program.
+-   Bahar thinks that it is extremely difficult to get into this program.
 
-Vish thinks that it is difficult to get into this program. 
+-   Vish thinks that it is difficult to get into this program. 
 
-Gabriela does not have any strong opinions whether it is difficult or easy to get into this program. 
+-   Gabriela does not have any strong opinions whether it is difficult or easy to get into this program. 
 
-Wei thinks that it is easy to get into this program.
+-   Wei thinks that it is easy to get into this program.
 
-Beyoncé thinks that it is extremely easy to get into this program.
+-   Beyoncé thinks that it is extremely easy to get into this program.
 
 
 
@@ -247,16 +247,19 @@ ggplot(betas, aes(x = x, y = y)) +
 
 Use the `plot_beta()` function in the `bayesrules` package to try different shape parameters. Example:
 
-```{r fig.align="center", fig.height=3, eval = FALSE}
+::: panel-tabset
+## Code
+
+```
 plot_beta(alpha = 5, beta = 7) 
 ```
 
-```{r fig.align="center", fig.height=3, echo = FALSE}
-plot_beta(alpha = 5, beta = 7) +
+## Plot
+```{r, fig.height=3, echo = FALSE }
+plot_beta(alpha = 5, beta = 7)  +
   theme(text = element_text(size=20)) 
-
 ```
-
+:::
 
 
 
@@ -277,6 +280,7 @@ Use the `summarize_beta()` function in the `bayesrules` package to find the mean
 
 
 ```{r}
+#| echo: fenced
 summarize_beta(alpha = 5, beta = 7)
 ```
 
@@ -286,22 +290,20 @@ summarize_beta(alpha = 5, beta = 7)
 
 ## Graduate Admissions 
 
-An applicant to a small graduate program wants to know $\pi$, the probability of admission, so they can determine how many programs to which they should apply.  Based on commentary on [The GradCafe](https://www.thegradcafe.com) about similar programs, the applicant thinks that $\pi$ is likely to be in the range of 0.05 to 0.25. The plot below shows a possible prior distribution, $\text{beta}(5,35)$. Write out a reasonable $f(\pi)$. Calculate the prior expected value, mode, and variance. 
-
-
-```{r fig.align='center', fig.height=3.5, echo = FALSE}
-plot_beta(5, 35) +
-    theme(text = element_text(size=20)) 
-```
+An applicant to a small graduate program wants to know $\pi$, the probability of admission, so they can determine how many programs to which they should apply.  Based on commentary on [The GradCafe](https://www.thegradcafe.com) about similar programs, the applicant thinks that $\pi$ is likely to be in the range of 0.05 to 0.25. 
 
 
 ## Plotting the Prior
 
-```{r eval = FALSE}
-plot_beta(5, 35) 
-```
+::: {.callout-warning icon=false}
+## Discussion question
 
-```{r fig.align='center', fig.height=4, echo = FALSE}
+Is this a reasonable prior choice?
+
+:::
+
+```{r fig.align='center', fig.height=4}
+#| echo: fenced
 plot_beta(5, 35) +
     theme(text = element_text(size=20)) 
 ```
@@ -311,6 +313,7 @@ plot_beta(5, 35) +
 ## Summarizing the Prior
 
 ```{r}
+#| echo: fenced
 summarize_beta(5, 35)
 ```
 
@@ -439,7 +442,7 @@ $$\text{Var}(\pi | (Y=y))   = \frac{(\alpha + y)(\beta + n - y)}{(\alpha + \beta
 
 ## Descriptives of the Posterior
 
-What is the descriptive measures (expected value, mode, and variance) of the posterior distribution for the admissions example?
+What are the descriptive measures (expected value, mode, and variance) of the posterior distribution for the admissions example?
 
 . . . 
 
@@ -457,9 +460,10 @@ summarize_beta_binomial(5, 35, y = 25, n = 50)
 
 Alison Bechdel’s 1985 comic Dykes to Watch Out For has a strip called [The Rule](https://www.npr.org/templates/story/story.php?storyId=94202522?storyId=94202522), in which a person states that they only go to a movie if it satisfies the
 following three rules:
-- the movie has to have at least two women in it;
-- these two women talk to each other; and
-- they talk about something besides a man.
+
+-   the movie has to have at least two women in it;
+-   these two women talk to each other; and
+-   they talk about something besides a man.
 
 This test is now used for assessing movies in terms of representation of women. Even though there are three criteria, a movie either fails (does not satisfy one or more criteria) or passes (satisfies all three criteria) the Bechdel test.
 
@@ -471,7 +475,7 @@ Let $\pi$ be the the proportion of movies that pass the Bechdel test.
 
 The table shows three different people with three different priors about $\pi$.
 
-| Optimist | Clueless | Feminist |
+| Optimist | Clueless | Pessimist |
 |:----:|:----:|:-----:|
 | Beta(14,1) | Beta(1,1) | Beta(5,11) |
   
@@ -495,10 +499,10 @@ optimist <- plot_beta(14, 1) +
 clueless <- plot_beta(1, 1) +
   labs(title = "Clueless")
 
-feminist <- plot_beta(5, 11) +
-  labs(title = "Feminist")
+pessimist <- plot_beta(5, 11) +
+  labs(title = "Pessimist")
 
-gridExtra::grid.arrange(optimist, clueless, feminist, ncol = 3)
+gridExtra::grid.arrange(optimist, clueless, pessimist, ncol = 3)
 
 ```
 
@@ -581,7 +585,7 @@ plot_beta_binomial(1, 1, y = 9, n = 20)
 
 
 
-## The Feminist 
+## The Pessimist 
 
 ```{r}
 summarize_beta_binomial(5, 11, y = 9, n = 20)
@@ -589,7 +593,7 @@ summarize_beta_binomial(5, 11, y = 9, n = 20)
 
 
 
-## The Feminist
+## The Pessimist
 
 
 ```{r fig.align = "center", fig.height = 5}
@@ -607,10 +611,10 @@ optimist <- plot_beta_binomial(14, 1, y = 9, n = 20) +
   labs(title = "Optimist")
 clueless <- plot_beta_binomial(1, 1, y = 9, n = 20) +
   labs(title = "Clueless")
-feminist <- plot_beta_binomial(5, 11, y = 9, n = 20) +
-  labs(title = "Feminist")
+pessimist <- plot_beta_binomial(5, 11, y = 9, n = 20) +
+  labs(title = "Pessimist")
 
-gridExtra::grid.arrange(optimist,  clueless, feminist, ncol=3)
+gridExtra::grid.arrange(optimist,  clueless, pessimist, ncol=3)
 
 
 ```

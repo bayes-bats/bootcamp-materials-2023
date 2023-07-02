@@ -463,9 +463,7 @@ g
 
 ## Interpretable Gamma Prior Model for Precision
 
-AMYAMY add some link to the $\alpha,\beta$
-
-For interpretability, we can set $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg),$$ where we interpret $\sigma^2_0$ as the sample variance from a sample of prior observations of size $\nu_0$.  
+Recall the $\text{gamma}(\alpha,\beta)$ prior has mean $\frac{\alpha}{\beta}$.  One way to pick $\alpha$ and $\beta$ would be to center the prior on an existing estimate of the precision. So for interpretability, we can set $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg),$$ where we interpret $\sigma^2_0$ as the sample variance from a sample of prior observations of size $\nu_0$.  
 
 . . . 
 
@@ -473,7 +471,7 @@ This prior for the precision has mean $\frac{1}{\sigma^2_0}$.
 
 ## Normal-Inverse Gamma Conjugate Prior Model
 
-Our priors are $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)$$  and $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).$$ Our data model is $$Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).$$ AMYAMY WRITE IN TERMS OF HER LIKELIHOOD NOTATION.
+Our priors are $$\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg)$$  and $$\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg).$$ Our data model is $$Y_1, \ldots, Y_n \mid \mu, \sigma^2 \sim N(\mu,\sigma^2).$$ 
 
 ## Normal-Inverse Gamma Conjugate Prior Model
 
