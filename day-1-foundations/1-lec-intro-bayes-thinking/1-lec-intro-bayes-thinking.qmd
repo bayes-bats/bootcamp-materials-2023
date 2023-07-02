@@ -13,7 +13,10 @@ format:
       data-background-position: 50% 85%
 ---
 
+
+
 # Introduction to Bayesian Statistics
+
 
 ## Bayesian Knowledge Building
 
@@ -23,9 +26,8 @@ knitr::include_graphics("img/bayes_diagram.png")
 
 ## Frequentist Knowledge Building
 
-```{r echo = FALSE, fig.align='center',out.width="10%"}
-knitr::include_graphics("img/freq_diagram.png")
-```
+![](img/data.png){width=2in,fig-align="center"}
+
 
 
 ## Balancing Act of Bayesian Analysis
@@ -42,17 +44,17 @@ knitr::include_graphics("img/bayes-balance-1.png")
 
 
 
-## Prior Data
-
-Consider two claims. 
+## Same Data, Different Priors
 
 (1) Kaya claims that they can predict the outcome of a coin flip. To test their claim, you flip a fair coin 10 times and they correctly predict all 10! 
 
 (2) Fan claims that they can distinguish natural and artificial sweeteners. To test their claim, you give them 10 sweetener samples and they correctly identify each! In light of these experiments, what do you conclude?
 
-a. You’re more confident in Fan’s claim than Kaya’s claim.
+-   [You’re more confident in Fan’s claim than Kaya’s claim.]{.dukeblue-text}
 
-b. The evidence supporting Kaya’s claim is just as strong as the evidence supporting Fan’s claim.
+-   [The evidence supporting Kaya’s claim is just as strong as the evidence supporting Fan’s claim.]{.dukeblue-text}
+
+
 
 
 
