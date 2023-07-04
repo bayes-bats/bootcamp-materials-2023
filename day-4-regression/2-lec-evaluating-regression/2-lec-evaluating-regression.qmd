@@ -62,7 +62,11 @@ Thus, knowing the _temperature_ on two subsequent days may very well "cancel out
 
 ## Linearity and Constant Variance
 
-```{r echo=FALSE, message=FALSE}
+```{r}
+#| echo: false
+#| message: false
+#| fig-height: 3
+#| fig.align: center
 ggplot(bikes, aes(y = rides, x = temp_feel)) + 
   geom_point(size = 0.2) + 
   geom_smooth(method = "lm", se = FALSE)
@@ -70,8 +74,7 @@ ggplot(bikes, aes(y = rides, x = temp_feel)) +
 
 The relationship between ridership and temperature does appear to be linear. Further, with the slight exception of colder days on which ridership is uniformly small, the variability in ridership does appear to be roughly consistent across the range of temperatures $X$.
 
-
-__Posterior predictive check__
+## Posterior predictive check
 
 Consider a regression model with response variable $Y$, predictor $X$, and a set of regression parameters $\theta$. For example, in the model above $\theta = (\beta_0,\beta_1,\sigma)$.  Further, let $\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\right\rbrace$ be an $N$-length Markov chain for the posterior model of $\theta$.
 Then a "good" Bayesian model will produce _predictions_ of $Y$ with features similar to the _original_ $Y$ data.  To evaluate whether your model satisfies this goal:
@@ -79,8 +82,10 @@ Then a "good" Bayesian model will produce _predictions_ of $Y$ with features sim
 1. At each set of posterior plausible parameters $\theta^{(i)}$, simulate a sample of $Y$ values from the likelihood model, one corresponding to each $X$ in the original sample of size $n$.  This produces $N$ separate samples of size $n$.
 2. Compare the features of the $N$ simulated $Y$ samples, or a subset of these samples, to those of the original $Y$ data.
 
+##
 
-```{r cache=TRUE}
+```{r}
+#| cache: true
 bike_model <- stan_glm(rides ~ temp_feel, data = bikes,
                        family = gaussian,
                        prior_intercept = normal(5000, 1000),
@@ -96,6 +101,7 @@ predict_75 <- bike_model_df %>%
 ```
 
 
+##
 
 ```{r}
 first_set <- head(bike_model_df, 1)
@@ -112,8 +118,10 @@ head(one_simulation, 2)
 
 ```
 
+##
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 ggplot(one_simulation, aes(x = simulated_rides)) + 
   geom_density(color = "lightblue") + 
   geom_density(aes(x = rides), color = "darkblue")
@@ -121,8 +129,10 @@ ggplot(one_simulation, aes(x = simulated_rides)) +
 
 One posterior simulated dataset of ridership (light blue) along with the actual observed ridership data (dark blue)
 
+##
 
-```{r cache=TRUE}
+```{r}
+#| cache: true 
 # Examine 50 of the 20000 simulated samples
 pp_check(bike_model, nreps = 50) + 
   xlab("rides")
@@ -132,7 +142,8 @@ pp_check(bike_model, nreps = 50) +
 
 ##
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 # Plot the posterior predictive model
 ggplot(predict_75, aes(x = y_new)) + 
   geom_density() +
@@ -184,12 +195,15 @@ dim(predictions)
 
 ##
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
 ppc_intervals(bikes$rides, yrep = predictions, x = bikes$temp_feel, 
               prob = 0.5, prob_outer = 0.95)
 ```
 
-```{r cache=TRUE, echo=FALSE}
+```{r}
+#| cache: true
+#| echo: false
 set.seed(7)
 index <- sample(1:500, size = 25)
 bikes_small <- bikes[index,]
@@ -227,7 +241,8 @@ Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has
 ##
 
  
-```{r cache=TRUE}
+```{r}
+#| cache: true
 # Posterior predictive summaries
 prediction_summary(bike_model, data = bikes)
 ```
@@ -247,7 +262,8 @@ prediction_summary(bike_model, data = bikes)
     
 ##
 
-```{r cache=TRUE}
+```{r}
+#| cache: true
 set.seed(84735)
 cv_procedure <- prediction_summary_cv(
   data = bikes, model = bike_model, k = 10)

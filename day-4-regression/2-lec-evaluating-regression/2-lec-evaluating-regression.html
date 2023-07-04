@@ -8,7 +8,7 @@
 <link href="2-lec-evaluating-regression_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="2-lec-evaluating-regression_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2-lec-evaluating-regression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.340">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>Evaluating   regression models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -94,7 +94,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="2-lec-evaluating-regression_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="2-lec-evaluating-regression_files/libs/revealjs/dist/theme/quarto.css">
   <link href="2-lec-evaluating-regression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="2-lec-evaluating-regression_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="2-lec-evaluating-regression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -430,19 +430,20 @@
 </section>
 <section id="linearity-and-constant-variance" class="slide level2">
 <h2>Linearity and Constant Variance</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</div>
-</div>
-<p>The relationship between ridership and temperature does appear to be linear. Further, with the slight exception of colder days on which ridership is uniformly small, the variability in ridership does appear to be roughly consistent across the range of temperatures <span class="math inline">\(X\)</span>.</p>
-<p><strong>Posterior predictive check</strong></p>
+
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"><p>The relationship between ridership and temperature does appear to be linear. Further, with the slight exception of colder days on which ridership is uniformly small, the variability in ridership does appear to be roughly consistent across the range of temperatures <span class="math inline">\(X\)</span>.</p>
+</section>
+<section id="posterior-predictive-check" class="slide level2">
+<h2>Posterior predictive check</h2>
 <p>Consider a regression model with response variable <span class="math inline">\(Y\)</span>, predictor <span class="math inline">\(X\)</span>, and a set of regression parameters <span class="math inline">\(\theta\)</span>. For example, in the model above <span class="math inline">\(\theta = (\beta_0,\beta_1,\sigma)\)</span>. Further, let <span class="math inline">\(\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\right\rbrace\)</span> be an <span class="math inline">\(N\)</span>-length Markov chain for the posterior model of <span class="math inline">\(\theta\)</span>. Then a “good” Bayesian model will produce <em>predictions</em> of <span class="math inline">\(Y\)</span> with features similar to the <em>original</em> <span class="math inline">\(Y\)</span> data. To evaluate whether your model satisfies this goal:</p>
 <ol type="1">
 <li class="fragment">At each set of posterior plausible parameters <span class="math inline">\(\theta^{(i)}\)</span>, simulate a sample of <span class="math inline">\(Y\)</span> values from the likelihood model, one corresponding to each <span class="math inline">\(X\)</span> in the original sample of size <span class="math inline">\(n\)</span>. This produces <span class="math inline">\(N\)</span> separate samples of size <span class="math inline">\(n\)</span>.</li>
 <li class="fragment">Compare the features of the <span class="math inline">\(N\)</span> simulated <span class="math inline">\(Y\)</span> samples, or a subset of these samples, to those of the original <span class="math inline">\(Y\)</span> data.</li>
 </ol>
-<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-3_e6074b46ed322ebc9eeddf74cd76df4d">
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-3_712ee6e8ce9b55e916f73694d5b74641">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>bike_model <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(rides <span class="sc">~</span> temp_feel, <span class="at">data =</span> bikes,</span>
 <span id="cb2-2"><a href="#cb2-2"></a>                       <span class="at">family =</span> gaussian,</span>
 <span id="cb2-3"><a href="#cb2-3"></a>                       <span class="at">prior_intercept =</span> <span class="fu">normal</span>(<span class="dv">5000</span>, <span class="dv">1000</span>),</span>
@@ -455,6 +456,9 @@
 <span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">mutate</span>(<span class="at">mu =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> temp_feel<span class="sc">*</span><span class="dv">75</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">mutate</span>(<span class="at">y_new =</span> <span class="fu">rnorm</span>(<span class="dv">20000</span>, mu, sigma))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>first_set <span class="ot">&lt;-</span> <span class="fu">head</span>(bike_model_df, <span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>beta_0 <span class="ot">&lt;-</span> first_set<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span></span>
@@ -469,47 +473,47 @@
 <span id="cb3-11"><a href="#cb3-11"></a><span class="fu">head</span>(one_simulation, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  temp_feel rides simulated_rides
-1  64.72625   654        3962.406
-2  49.04645  1229        1657.900</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</div>
-</div>
-<p>One posterior simulated dataset of ridership (light blue) along with the actual observed ridership data (dark blue)</p>
-<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-6_f67360dfcb472cf3cfd0ebaac954b05c">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Examine 50 of the 20000 simulated samples</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">pp_check</span>(bike_model, <span class="at">nreps =</span> <span class="dv">50</span>) <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">xlab</span>(<span class="st">"rides"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+1  64.72625   654        3932.404
+2  49.04645  1229        1503.185</code></pre>
 </div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><p>One posterior simulated dataset of ridership (light blue) along with the actual observed ridership data (dark blue)</p>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-6_aad87c849673c384bcdb0d58e5b3bda6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Examine 50 of the 20000 simulated samples</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">pp_check</span>(bike_model, <span class="at">nreps =</span> <span class="dv">50</span>) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">xlab</span>(<span class="st">"rides"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="section-5" class="slide level2">
 <h2></h2>
 
 <img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="section-2" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <p><strong>observed value</strong>: <span class="math inline">\(Y\)</span><br>
 <strong>posterior predictive median</strong>: <span class="math inline">\(Y'\)</span><br>
 <strong>predictive error</strong>: <span class="math inline">\(Y - Y'\)</span></p>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>predict_75 <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(y_new), <span class="at">error =</span> <span class="dv">6228</span> <span class="sc">-</span> <span class="fu">mean</span>(y_new))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      mean    error
-1 3965.382 2262.618</code></pre>
+1 3966.865 2261.135</code></pre>
 </div>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>predict_75 <span class="sc">%&gt;%</span> </span>
@@ -517,11 +521,11 @@
 <span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">error_scaled =</span> error <span class="sc">/</span> <span class="fu">sd</span>(y_new))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        sd    error error_scaled
-1 1279.719 2262.618     1.768058</code></pre>
+1 1279.789 2261.135     1.766803</code></pre>
 </div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>predict_75 <span class="sc">%&gt;%</span> </span>
@@ -531,11 +535,11 @@
 <span id="cb10-5"><a href="#cb10-5"></a>            <span class="at">upper_95 =</span> <span class="fu">quantile</span>(y_new, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  lower_95 lower_50 upper_50 upper_95
-1 1508.509 3090.025 4826.638 6496.453</code></pre>
+1 1499.832 3096.397 4831.226 6482.125</code></pre>
 </div>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
@@ -547,7 +551,7 @@
 </div>
 </div>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ppc_intervals</span>(bikes<span class="sc">$</span>rides, <span class="at">yrep =</span> predictions, <span class="at">x =</span> bikes<span class="sc">$</span>temp_feel, </span>
@@ -555,7 +559,7 @@
 </div>
 
 <img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
-<section id="section-8" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <p>Let <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> denote <span class="math inline">\(n\)</span> <em>observed</em> outcomes. Then each <span class="math inline">\(Y_i\)</span> has a corresponding posterior predictive model with <em>median</em> <span class="math inline">\(Y_i'\)</span> and <em>median absolute deviation</em> <span class="math inline">\(\text{mad}_i\)</span>. We can evaluate the overall posterior predictive model quality by the following measures:</p>
 <ul>
@@ -566,14 +570,14 @@
 <li class="fragment"><p><code>within_50</code> and <code>within_95</code> measure the proportion of observed values <span class="math inline">\(Y_i\)</span> that fall within their 50% and 95% posterior prediction intervals respectively.</p></li>
 </ul>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
-<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-14_f4458d830632c535a125596393d5b7fd">
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-14_1f764852b302f2cf488c008063b3fb01">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Posterior predictive summaries</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">prediction_summary</span>(bike_model, <span class="at">data =</span> bikes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       mae mae_scaled within_50 within_95
-1 981.8777  0.7663165     0.432     0.966</code></pre>
+<pre><code>      mae mae_scaled within_50 within_95
+1 981.277  0.7664511     0.432     0.968</code></pre>
 </div>
 </div>
 </section>
@@ -591,40 +595,40 @@
 <li class="fragment"><p><strong>Calculate cross-validation estimates.</strong> Steps 2 and 3 produce <span class="math inline">\(k\)</span> different training models and <span class="math inline">\(k\)</span> corresponding measures of prediction quality. <em>Average</em> these <span class="math inline">\(k\)</span> measures to obtain a single cross-validation estimate of prediction quality.</p></li>
 </ol>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
-<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-15_22ff0be8b7f05f3de32e4326bd52b6db">
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-15_00b958114a21fea361460cfd62855ee6">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
 <span id="cb17-2"><a href="#cb17-2"></a>cv_procedure <span class="ot">&lt;-</span> <span class="fu">prediction_summary_cv</span>(</span>
 <span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">data =</span> bikes, <span class="at">model =</span> bike_model, <span class="at">k =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>cv_procedure<span class="sc">$</span>folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   fold       mae mae_scaled within_50 within_95
-1     1  989.6745  0.7699713      0.46      0.98
-2     2  965.0892  0.7440878      0.42      1.00
-3     3  951.8061  0.7308811      0.42      0.98
-4     4 1018.5268  0.7910674      0.46      0.98
-5     5 1161.9051  0.9099059      0.36      0.96
-6     6  937.0120  0.7314425      0.46      0.94
-7     7 1270.3524  1.0057189      0.32      0.96
-8     8 1112.5991  0.8609143      0.36      1.00
-9     9 1099.2392  0.8678510      0.40      0.92
-10   10  786.9251  0.6059721      0.56      0.96</code></pre>
+1     1  990.0292  0.7703855      0.46      0.98
+2     2  965.4461  0.7440040      0.42      1.00
+3     3  950.9012  0.7302427      0.42      0.98
+4     4 1018.4046  0.7915859      0.46      0.98
+5     5 1161.3633  0.9094372      0.36      0.96
+6     6  937.1987  0.7312820      0.46      0.94
+7     7 1269.8913  1.0051118      0.32      0.96
+8     8 1112.0559  0.8611250      0.36      1.00
+9     9 1098.7865  0.8673610      0.40      0.92
+10   10  786.9981  0.6064616      0.56      0.96</code></pre>
 </div>
 </div>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>cv_procedure<span class="sc">$</span>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       mae mae_scaled within_50 within_95
-1 1029.313  0.8017812     0.422     0.968</code></pre>
+1 1029.107  0.8016997     0.422     0.968</code></pre>
 </div>
 </div>
 
