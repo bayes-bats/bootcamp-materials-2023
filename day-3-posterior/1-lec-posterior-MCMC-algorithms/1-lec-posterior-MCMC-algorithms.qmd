@@ -13,5 +13,246 @@ format:
       data-background-position: 50% 95%
 ---
 
+# Recap: The Two-Parameter Normal Model and A Gibbs Sampler
+
+## The Normal Model and A Joint Prior
+
+-   The sampling model for $Y_1, \cdots, Y_n$: 
+      \begin{equation}
+      Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2)
+      \end{equation}
+      
+-   A joint prior distribution as:
+    \begin{equation}
+    \pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+    \end{equation}
+
+-   And let priors be:
+    \begin{eqnarray}
+    \mu &\sim& \textrm{Normal}(\theta, \tau^2)\\
+    1/\sigma^2 &\sim& \textrm{Gamma}(\alpha, \beta)
+    \end{eqnarray}
+    
+## Full Conditional Posterior Distributions
+
+```{=tex}
+\begin{eqnarray}
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
+\end{eqnarray}
+```
+
+- We can use a Gibbs sampler for posterior sampling
+
+## R Function for A Gibbs Sampler
+
+```{r, echo = TRUE, eval= FALSE}
+gibbs_normal <- function(input, S, seed){
+  set.seed(seed)
+  ybar <- mean(input$y)
+  n <- length(input$y)
+  para <- matrix(0, S, 2)
+  phi <- input$phi_init
+  for(s in 1:S){
+    theta1 <- (input$theta/input$tau^2 + n*phi*ybar)/
+    (1/input$tau^2 + n*phi)
+    tau1 <- sqrt(1/(1/input$tau^2 + n*phi))
+    mu <- rnorm(1, mean = theta1, sd = tau1)
+    alpha1 <- input$alpha + n/2
+    beta1 <- input$beta + sum((input$y - mu)^2)/2 
+    phi <- rgamma(1, shape = alpha1, rate = beta1)
+    para[s, ] <- c(mu, phi)
+  }
+  para 
+}
+```
+
+# A Two-Parameter Normal Model for The Concussion Example
+
+## Recall The Concussion Example
+
+::: nonincremental
+- Continued example from [bayesrulesbook.com](https://bayesrulesbook.com)
+
+- Let $(Y_1,Y_2,\ldots,Y_{25})$ denote the hippocampal volumes for the $n = 25$ study subjects who played collegiate American football and who have been diagnosed with concussions:
+:::
+
+```{r, echo=TRUE}
+# Load the data
+library(bayesrules)
+library(tidyverse)
+data(football)
+
+# Filter the data
+football <- football %>%
+  filter(group == "fb_concuss") 
+```
+
+## Choosing Priors    
+
+\begin{eqnarray}
+\mu &\sim& \textrm{Normal}(\theta, \tau^2)\\
+1/\sigma^2 &\sim& \textrm{Gamma}(\alpha, \beta)
+\end{eqnarray}
+
+- Previously, we selected the prior $\mu \sim \textrm{Normal}(6.5, 0.5^2)$
+
+- For $1/\sigma^2$ (or $\phi = 1/\sigma^2)$, let's try $1/\sigma^2 \sim \textrm{Gamma}(1, 1)$
+
+## Input for The Gibbs Sampler
+
+::: {.callout-warning icon=false}
+## Discussion question
+What should be included in `input`?
+:::
+
+```{r, echo = TRUE }
+#| code-line-numbers: "|3|4|6|8|9|10|12|13"
+gibbs_normal <- function(input, S, seed){
+  set.seed(seed)
+  ybar <- mean(input$y)
+  n <- length(input$y)
+  para <- matrix(0, S, 2)
+  phi <- input$phi_init
+  for(s in 1:S){
+    theta1 <- (input$theta/input$tau^2 + n*phi*ybar)/
+    (1/input$tau^2 + n*phi)
+    tau1 <- sqrt(1/(1/input$tau^2 + n*phi))
+    mu <- rnorm(1, mean = theta1, sd = tau1)
+    alpha1 <- input$alpha + n/2
+    beta1 <- input$beta + sum((input$y - mu)^2)/2 
+    phi <- rgamma(1, shape = alpha1, rate = beta1)
+    para[s, ] <- c(mu, phi)
+  }
+  para 
+}
+```
+
+## Running the Gibbs Sampler
+
+::: nonincremental
+- We create `input` to include: the data `y`, prior parameters of `theta`, `tau`, `alpha`, `beta`, and the initial value of `phi`
+
+- We then run the `gibbs_normal()` function with `input`, `S`, `seed`
+
+- We save the output of running the `gibbs_normal()` function in `output`
+:::
+
+```{r, echo = TRUE}
+input <- list(y = football$volume, theta = 6.5, tau = 0.5,
+              alpha = 1, beta = 1, phi_init = 1)
+output <- gibbs_normal(input, S = 10000, seed = 123)
+```
+
+::: {.callout-warning icon=false}
+## Discussion question
+What do we expect to see in `output`?
+:::
+
+# Summarizing MCMC Output and Posterior Analysis
+
+## MCMC Output
 
 
+```{r, echo = TRUE}
+print(output)
+```
+
+::: {.callout-warning icon=false}
+## Discussion question
+How can we extract posterior draws of `mu` and `phi` from `output`?
+:::
+
+## Extracting MCMC Output for Posterior Analysis
+
+::: panel-tabset
+## Code
+
+```{r, echo = TRUE}
+para_post <- as.data.frame(output)
+names(para_post) <- c("mu", "phi")
+```
+
+```{r, echo = TRUE}
+quantile(para_post$mu, c(0.025,0.975))
+```
+
+```{r, echo = TRUE}
+quantile(para_post$phi, c(0.025,0.975))
+```
+
+## Plot 1
+
+```{r}
+ggplot(para_post, aes(mu)) +
+geom_density(linewidth = 2) +
+labs(title = "Posterior draws of mu") +
+theme_bw(base_size = 15,
+base_family = "")
+```
+
+## Plot 2
+
+```{r}
+ggplot(para_post, aes(phi)) +
+geom_density(linewidth = 2) +
+labs(title = "Posterior draws of phi") +
+theme_bw(base_size = 15,
+base_family = "")
+```
+:::
+
+## Posterior Draws and MCMC Diagnostics
+
+- In our demo, we use every parameter draw for posterior analysis
+
+- However, posterior draws in an MCMC could be highly dependent
+
+- We will need to assess the convergence of MCMC through the use of MCMC diagnostics
+
+- Only when are eliminate any convergence issues, can we use independent posterior parameter draws for posterior analysis
+
+- We will introduce MCMC diagnostics later with using the **brms** package
+
+# MCMC Algorithms
+
+## Commonly Used MCMC Algorithms
+
+- Gibbs sampler
+
+- Metropolis and Metropolis-Hastings
+
+- Hamiltonian Monte Carlo
+
+## Gibbs Sampler
+
+- Require derivation of full conditional posterior distributions
+
+- Every draw is "accepted"
+
+- Not necessarily feasible for any model and prior choices
+
+- [demo animation](http://chi-feng.github.io/mcmc-demo/)
+
+## Metropolis and Metropolis-Hastings
+
+- No not require derivation of full conditional posterior distributions
+
+- Random walk: a new draw is proposed from a jumping/proposal distribution given at the current draw
+
+- Every draw is "accepted" with a calculated ratio
+
+- [demo animation](http://chi-feng.github.io/mcmc-demo/)
+
+
+## Hamiltonian Monte Carlo (HMC)
+
+- Some fancy algorithm involved
+
+- Compared to a random walk jumping/proposal distribution in Metropolis-Hastings, "HMC reduces the correlation between successive sampled states by proposing moves to distant states which maintain a high probability of acceptance..."([Wiki](https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo))
+
+- More efficient
+
+- The main MCMC algorithm behind **Stan** and **brms**
+
+- [demo animation](http://chi-feng.github.io/mcmc-demo/)
