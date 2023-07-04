@@ -1,0 +1,41 @@
+---
+title: "Before We Say Goodbye"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+- Tier 2 & Tier 3 discussion
+
+- [Application form]()
+
+
+## Evaluation
+
+You will receive a Qualtrics survey for post-bootcamp evaluation.
+Please fill it out.
+
+## Payments Processing 
+
+Once you fill out the evaluation, it will trigger the finance team regarding the payment. 
+
+If you run into any issues regarding payment, please contact Lisa Stieler <lstieler@ics.uci.edu> and CC Mine Dogucu <mdogucu@uci.edu>
+
+## Next-Year
+
+Please share the [program website](https://www.stat.uci.edu/bayes-bats/) with your colleagues and help us recruit if you can.
+
+Please keep in touch on Slack. We would love to hear your experiences of teaching/using Bayesian methods.
+
+---
+
+:::{.font75}
+THANK YOU!!!
+:::

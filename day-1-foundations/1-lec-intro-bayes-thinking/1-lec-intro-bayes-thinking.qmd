@@ -13,7 +13,10 @@ format:
       data-background-position: 50% 85%
 ---
 
+
+
 # Introduction to Bayesian Statistics
+
 
 ## Bayesian Knowledge Building
 
@@ -23,9 +26,8 @@ knitr::include_graphics("img/bayes_diagram.png")
 
 ## Frequentist Knowledge Building
 
-```{r echo = FALSE, fig.align='center',out.width="10%"}
-knitr::include_graphics("img/freq_diagram.png")
-```
+![](img/data.png){width=2in,fig-align="center"}
+
 
 
 ## Balancing Act of Bayesian Analysis
@@ -42,30 +44,37 @@ knitr::include_graphics("img/bayes-balance-1.png")
 
 
 
-## Prior Data
-
-Consider two claims. 
+## Same Data, Different Priors
 
 (1) Kaya claims that they can predict the outcome of a coin flip. To test their claim, you flip a fair coin 10 times and they correctly predict all 10! 
 
 (2) Fan claims that they can distinguish natural and artificial sweeteners. To test their claim, you give them 10 sweetener samples and they correctly identify each! In light of these experiments, what do you conclude?
 
-a. You’re more confident in Fan’s claim than Kaya’s claim.
+-   [You’re more confident in Fan’s claim than Kaya’s claim.]{.dukeblue-text}
 
-b. The evidence supporting Kaya’s claim is just as strong as the evidence supporting Fan’s claim.
+-   [The evidence supporting Kaya’s claim is just as strong as the evidence supporting Fan’s claim.]{.dukeblue-text}
+
+
 
 
 
 ## Hypothesis Testing
 
+
+::: {.callout-warning icon=false}
+## Discussion question
+
 Suppose that during a recent doctor’s visit, you tested positive for a very rare disease. If you only get to ask the doctor one question, which would it be?
+
+:::
+
 
 a. What’s the chance that I actually have the disease?  
 b. If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?
 
 . . .
 
-$P(\text{disease} | +)$ is a mathematical expression of question (a), and $P(+ | \text{disease}^c)$ expresses (b).
+$P(\text{disease} | +)$ is a mathematical expression of question (a), and $P(+ | \text{disease}^c)$ expresses (b). Frequentist analysis gives us an estimate of (b), and Bayes can help us get to (a).
 
 
 
@@ -108,7 +117,7 @@ Let $A$ represent the event a mammogram is positive for breast cancer (Mammo +),
 
 
 
-[^1]: Data based on breast cancer prevalence at age 40 for women and standard mammogram sensitivity and specificity
+[^1]: Data based on breast cancer prevalence at age 40 for women and standard screening mammogram sensitivity and specificity
 
 ## How Good is a Mammogram?
 
@@ -244,13 +253,13 @@ When a woman has no cancer, we expect the screening mammogram to be positive wit
 
 ## Likelihoods
 
-We can call these quantities **likelihoods**, as they compare the likelihood of a positive mammogram under the two scenarios. Note $L(\cdot \mid A)=P(A \mid \cdot)$ -- somewhat confusing notation, but it is meant to indicate the likelihoods of two different unknown scenarios producing the data $A$.
+We can call these quantities **likelihoods**, as they compare the likelihood of a positive mammogram under the two scenarios. Notation can be confusing, as $L(\cdot \mid A)=P(A \mid \cdot)$.
 
-$L(B \mid A)=0.85$
+$L(B \mid A)=P(A \mid B) = 0.85$ (our data of a positive mammogram are highly compatible with cancer)
 
-$L(B^C \mid A)=0.10$
+$L(B^C \mid A)=P(A \mid B^C)=0.10$ (data of a positive mammogram are less compatible with no cancer)
 
-When a woman has breast cancer, we are much more likely to get the data of a positive mammogram than we are when a woman is cancer-free.
+When a woman has breast cancer, we are much more likely to get the data of a positive mammogram than we are when a woman is cancer-free. Still, cancer is not common.
 
 . . . 
 
@@ -272,7 +281,7 @@ While the prior data suggests it is unlikely a 40 year old woman has breast canc
 
 ## Bayes' Rule
 
-**Bayes' rule** gives us a formal way to update our beliefs based on new infomration.  It says $P(B \mid A) = \frac{P(A \mid P(B)}{P(A)}=\frac{P(A \cap B)}{P(A)}.$ Using our likelihoods, we can express this as $$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}.$$
+**Bayes' rule** gives us a formal way to update our beliefs based on new infomration.  It says $P(B \mid A) = \frac{P(A \cap B)}{P(A)}= \frac{P(A \mid B)P(B)}{P(A)}.$ Using our likelihoods, we can express this as $$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}.$$
 
 Maya would like to know her chances of having cancer. Several papers have shown that even doctors strongly overestimate her chances of having cancer given the positive mammogram finding.
 
@@ -381,13 +390,13 @@ The expert thinks that this is quite a hard-to-get-into program.
 
 ## From Prior to Posterior
 
-We have a prior model for $\pi$ that is $f(\pi)$. 
+-   We have a prior model for $\pi$ that is $f(\pi)$. 
 
-In light of observed data $y$, we can update our ideas about $\pi$. 
+-   In light of observed data $y$, we can update our ideas about $\pi$. 
 
-We will call this the posterior model $f(\pi|y)$.  
+-   We will call this the posterior model $f(\pi|y)$.  
 
-For this update, we will need data, which we have not yet observed. 
+-   For this update, we will need data, which we have not yet observed. 
 
 
 ## Consider Data
@@ -407,13 +416,25 @@ Scenario 1: What if this program accepted five of the five applicants?
 Scenario 2: What if this program accepted none of the five applicants? 
 
 
+
+
 ## Intuition vs. Reality
 
 Your intuition may not be Bayesian if
-- you have only relied on the prior model to decide on the posterior model.
-- you have only relied on the data to decide on the posterior model.
 
-Bayesian statistics is a balancing act and we will take both the prior and the data to get to the posterior. Don't worry if your intuition was wrong. As we practice more, you will learn to think like a Bayesian.
+-     you have only relied on the prior model to decide on the posterior model
+
+-     you have only relied on the data to decide on the posterior model
+
+
+::: {.callout-warning icon=false}
+## Discussion question
+
+-   What would the probabilities in each row be like if we only relied on the prior model?  If we only relied on the data?
+
+:::
+
+-   Bayesian statistics is a balancing act and we will take both the prior and the data to get to the posterior. Don't worry if your intuition was wrong. As we practice more, you will learn to think like a Bayesian.
 
 
 
@@ -628,19 +649,20 @@ $\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 \cap \p
 
 . . . 
 
-$\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot (\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot (\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot (\pi = 0.8)}$
+$\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot f(\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot f(\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot f(\pi = 0.8)}$
 
 
 
 ## Normalizing Constant
 
 
-$\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot (\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot (\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot (\pi = 0.8)}$
+$\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot f(\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot f(\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot f(\pi = 0.8)}$
 
 
 Thus $f(y = 3) =$
 
 ```{r}
+#| echo: fenced
 dbinom(x = 3, size = 5, prob = 0.2) * 0.7 +
 dbinom(x = 3, size = 5, prob = 0.4) * 0.2 +
 dbinom(x = 3, size = 5, prob = 0.8) * 0.1

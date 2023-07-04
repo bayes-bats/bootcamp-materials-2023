@@ -56,7 +56,11 @@ export const MathJax3 = () => {
             let revealOptions = deck.getConfig().mathjax3 || {};
             let options = {...defaultOptions, ...revealOptions};
             options.tex = {...defaultOptions.tex, ...revealOptions.tex}
+<<<<<<< HEAD
             options.options = {...options.options, ...defaultOptions.options}
+=======
+            options.options = {...defaultOptions.options, ...revealOptions.options}
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
             options.startup = {...defaultOptions.startup, ...revealOptions.startup}
 
             let url = options.mathjax || 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';

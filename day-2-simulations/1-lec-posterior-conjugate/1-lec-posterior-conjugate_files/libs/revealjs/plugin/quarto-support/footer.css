@@ -6,6 +6,10 @@
   max-height: 2.2rem;
   height: 100%;
   width: auto;
+<<<<<<< HEAD
+=======
+  z-index: 2;
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 }
 
 .reveal .footer {

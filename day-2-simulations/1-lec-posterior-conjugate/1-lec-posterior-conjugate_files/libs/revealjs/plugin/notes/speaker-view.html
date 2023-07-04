@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<!--
+	NOTE: You need to build the notes plugin after making changes to this file.
+-->
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -347,7 +353,12 @@
 					layoutDropdown,
 					pendingCalls = {},
 					lastRevealApiCallId = 0,
+<<<<<<< HEAD
 					connected = false;
+=======
+					connected = false,
+					whitelistedWindows = [window.opener];
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 
 				var SPEAKER_LAYOUTS = {
 					'default': 'Default',
@@ -362,9 +373,20 @@
 				var connectionTimeout = setTimeout( function() {
 					connectionStatus.innerHTML = 'Error connecting to main window.<br>Please try closing and reopening the speaker view.';
 				}, 5000 );
+<<<<<<< HEAD
 
 				window.addEventListener( 'message', function( event ) {
 
+=======
+;
+				window.addEventListener( 'message', function( event ) {
+
+					// Validate the origin of this message to prevent XSS
+					if( window.location.origin !== event.origin && whitelistedWindows.indexOf( event.source ) === -1 ) {
+						return;
+					}
+
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 					clearTimeout( connectionTimeout );
 					connectionStatus.style.display = 'none';
 
@@ -395,7 +417,11 @@
 						}
 						else if( /slidechanged|fragmentshown|fragmenthidden|paused|resumed/.test( data.eventName ) && currentState !== JSON.stringify( data.state ) ) {
 
+<<<<<<< HEAD
 							window.opener.postMessage( JSON.stringify({ method: 'setState', args: [ data.state ]} ), '*' );
+=======
+							dispatchStateToMainWindow( data.state );
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 
 						}
 					}
@@ -403,6 +429,17 @@
 				} );
 
 				/**
+<<<<<<< HEAD
+=======
+				 * Updates the presentation in the main window to match the state
+				 * of the presentation in the notes window.
+				 */
+				const dispatchStateToMainWindow = debounce(( state ) => {
+					window.opener.postMessage( JSON.stringify({ method: 'setState', args: [ state ]} ), '*' );
+				}, 500);
+
+				/**
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 				 * Asynchronously calls the Reveal.js API of the main frame.
 				 */
 				function callRevealApi( methodName, methodArguments, callback ) {
@@ -432,6 +469,10 @@
 						setupKeyboard();
 						setupNotes();
 						setupTimer();
+<<<<<<< HEAD
+=======
+						setupHeartbeat();
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 					}
 
 				}
@@ -521,6 +562,11 @@
 					upcomingSlide.setAttribute( 'src', upcomingURL );
 					document.querySelector( '#upcoming-slide' ).appendChild( upcomingSlide );
 
+<<<<<<< HEAD
+=======
+					whitelistedWindows.push( currentSlide.contentWindow, upcomingSlide.contentWindow );
+
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 				}
 
 				/**
@@ -533,6 +579,21 @@
 
 				}
 
+<<<<<<< HEAD
+=======
+				/**
+				 * We send out a heartbeat at all times to ensure we can
+				 * reconnect with the main presentation window after reloads.
+				 */
+				function setupHeartbeat() {
+
+					setInterval( () => {
+						window.opener.postMessage( JSON.stringify({ namespace: 'reveal-notes', type: 'heartbeat'} ), '*' );
+					}, 1000 );
+
+				}
+
+>>>>>>> dd3ab052ec72a6b7d547bfdee86b50b480bf1269
 				function getTimings( callback ) {
 
 					callRevealApi( 'getSlidesAttributes', [], function ( slideAttributes ) {

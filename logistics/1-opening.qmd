@@ -90,7 +90,7 @@ format:
 
 ::: {.font75}
 
-Ice Breaker
+Who Are You?
 
 :::
 
@@ -103,6 +103,17 @@ A Brief Overview of the Week
 
 :::
 
+
+::: {.callout-important collapse="true"}
+
+## Bookmark please
+
+[bayes-bats.github.io/bootcamp-material](https://bayes-bats.github.io/bootcamp-material/)
+
+[github.com/socaldatascience](https://github.com/socaldatascience)
+:::
+
+
 ##
 
 ::: {.font75}
@@ -110,6 +121,22 @@ A Brief Overview of the Week
 A Brief Overview of UCI campus map
 
 :::
+
+[Interactive Map](https://map.uci.edu/?id=463#!ct/61979?s/)
+
+## Suggested Social Activity
+
+Monday: [University Town Center (UTC)](https://www.shopirvinecompany.com/centers/irvine/university-center)
+
+Tuesday: Hiking in [Crystal Cove State Park](http://www.crystalcovestatepark.org/hiking-2/) / [Bommer Canyon Trail](https://letsgooutside.org/explore/bommer-canyon/) / [UCI Ecological Reserve](https://ecopreserve.ucnrs.org)
+
+Wednesday: Costa Mesa
+
+Thursday: Laguna Beach
+
+Friday: Stay out of traffic if you can
+
+Slack channel `#social`
 
 ## 
 
@@ -122,3 +149,22 @@ What is ahead after the bootcamp?
 - Tier 2 & Tier 3 discussion
 
 - [Application form]()
+
+- Deadlines
+
+## Links
+
+[What if I have a medical emergency?](https://shc.uci.edu/sites/default/files/insurance/docs/uci-med-brochure-rev4.pdf)
+
+[UCI PD](https://www.police.uci.edu/)
+
+## Photo Day
+
+Thursday afternoon we will have a photographer come in from Communications to take our photo as a group. 
+
+## Social Media
+
+Please put a big cross mark on your name tag to indicate that you do not want to be photographed/your photo to be shared. 
+Otherwise we/other participants will assume you are ok with being photographed and your photo being shared. 
+
+If you share any photos/news/comments on social media feel free to use `#BayesBATS`.

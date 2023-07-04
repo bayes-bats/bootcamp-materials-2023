@@ -1,5 +1,5 @@
 ---
-title: "Bayes in STEM fields: <br> use cases"
+title: "Bayes in STEM Fields: <br> Use Cases"
 subtitle: "Day 2"
 format: 
   revealjs:
@@ -10,8 +10,129 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 85%
+      data-background-position: 50% 95%
 ---
 
+## Toxicological Testing: Benzophenone
 
+Scientists in the US National Toxicology Program routinely evaluate existing and new chemicals for potential human toxicity. These evaluations involve a variety of test paradigms, ranging from high-throughput *in vitro* tests to animal bioassays.  A study of benzophenone, which has many uses ranging from producing "sweet-woody-geranium-like notes" in perfume to preventing UV damage to other chemicals, involved 150 female rates exposed to various doses of benzophenone and 50 unexposed (control) rats. The outcome of interest to us is a particular tumor, histiocytic sarcoma.
+
+```{r}
+#| echo: false
+tumordat <- data.frame(
+  "tumor_no" = c(147, 50),
+  "tumor_yes" = c(3, 0),
+  row.names = c("Exposed", "Control"),
+  stringsAsFactors = FALSE
+)
+colnames(tumordat) <- c("No Tumor", "Tumor")
+
+tumordat
+
+```
+
+## Histiocytic Sarcoma
+
+A typical analysis of these data might be use of Fisher's exact test to evaluate whether there is an association between benzophenone exposure and tumor development.  We use this test to evaluate the hypothesis.
+
+## Histiocytic Sarcoma
+::: panel-tabset
+
+## Code
+
+```{r}
+#| eval: false
+#| echo: true
+fisher.test(tumordat)
+```
+
+## Results
+
+```{r}
+#| echo: false
+fisher.test(tumordat)
+```
+
+Here we see a large p-value, indicating that assuming there is no difference in tumor rates between the groups, our data, or data that are more extreme, are not unlikely.
+
+:::
+
+## Unusual Results
+
+Scientists in the National Toxicology Program saw the results quite differently.  Histiocytic sarcomas are exceedingly rare. One researcher pointed out that across 6 prior studies involving 460 female rats, no animals in the control groups ever developed this type of tumor. 
+
+## Incorporating Historical Data
+
+Bayesian methods give us a great mechanism for incorporating historical data into an analysis!  
+
+Recall the beta-binomial model: let $\pi \sim \text{Beta}(\alpha, \beta)$ and $Y|n \sim \text{Bin}(n,\pi)$. Then $\pi|y \sim \text{Beta}(\alpha +y, \beta+n-y)$, and $\alpha$ and $\beta$ can be interpreted as the prior number of successes (here, tumors) and failures, respectively.
+
+We can think of a beta-binomial model for each group, the control group and the benzophenone group.
+
+## Benzophenone Group
+
+Given that we don't know much about this chemical, we may want to specify a uniform prior, such as a Beta(1,1).
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+x = seq(0, 1, length=10000)
+
+db=dbeta(x, 1, 1)
+
+ggplot() + 
+  geom_line(aes(x,db)) + 
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank(),axis.text.y=element_blank()) + 
+  labs(title="Beta(1,1) Prior")
+```
+
+## Control Group
+
+We have historical data from prior studies that indicates that of 460 female rats on control, 0 have developed tumors.  Because the parameters of the beta distribution must be positive, we can specify a Beta(0.1,460) prior in this group, plotted below.
+
+```{r}
+#| echo: false
+
+x = seq(0, 1, length=10000)
+
+db=dbeta(x, 0.1, 460)
+
+ggplot() + 
+  geom_line(aes(x,db)) + 
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank(),axis.text.y=element_blank()) + 
+  labs(title="Beta(0.1,460) Prior")
+```
+
+That's hard to see!  Most of the prior mass is very close to zero.
+
+## Posterior Distributions
+
+::: nonincremental
+
+-   Benzophenone group:  Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{4}{148+4}=\frac{4}{152}=0.026$.
+
+-   Control group:  Beta(0.1,460) prior with 0 successes and 50 failures yields a Beta(0.1+0,460+50)=Beta(0.1,510) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{0.1}{510.1}=0.0002$.
+
+:::
+
+## Simulation-Based Inference
+
+We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respective beta posteriors and counting how many times we see a greater tumor proportion parameter value in the benzophenone group than among controls.
+
+```{r}
+#| echo: true
+#| eval: true
+x1=rbeta(1000000,0.1,510)
+x2=rbeta(1000000,4,148)
+mean(x2>x1)
+```
+
+## What Ideas Do You Have?
+
+-   Take 5 minutes to consider an example involving Bayesian inference that you might use in one of your courses
+
+-   Split into groups of 3 and share your ideas
+
+-   Assign a reporter for large group sharing
 
