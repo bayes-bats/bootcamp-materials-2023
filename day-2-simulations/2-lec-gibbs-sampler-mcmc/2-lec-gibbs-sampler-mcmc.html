@@ -500,6 +500,11 @@
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="gibbs-samplers" class="title-slide slide level1 center">
+<h1>Gibbs Samplers</h1>
+
 </section>
 <section id="sampling-scheme-a-gibbs-sampler" class="slide level2">
 <h2>Sampling Scheme: A Gibbs Sampler</h2>
@@ -528,7 +533,7 @@
 <section id="writing-a-gibbs-sampler-as-an-r-function" class="slide level2">
 <h2>Writing A Gibbs Sampler as An R Function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>gibbs_normal <span class="ot">&lt;-</span> <span class="cf">function</span>(input, S, seed){</span>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>gibbs_normal <span class="ot">&lt;-</span> <span class="cf">function</span>(input, S, seed){</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">set.seed</span>(seed)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(input<span class="sc">$</span>y)</span>
 <span id="cb1-4"><a href="#cb1-4"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(input<span class="sc">$</span>y)</span>
@@ -558,8 +563,18 @@
 </div>
 </div>
 </section>
-<section id="run-an-example" class="slide level2">
-<h2>RUN AN EXAMPLE</h2>
+<section id="features-of-gibbs-samplers" class="slide level2">
+<h2>Features of Gibbs Samplers</h2>
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<p><strong>Discussion question</strong></p>
+</div>
+<div class="callout-content">
+<p>Given our experience with the Gibbs sampler for the two-parameter normal model, what do you think are necessary to create a Gibbs sampler for sampling the posterior distribution? Do you expect to use a Gibbs sampler for any model and prior choices?</p>
+</div>
+</div>
+</div>
 </section>
 <section id="extending-to-more-than-two-parameters" class="slide level2">
 <h2>Extending to More Than Two Parameters</h2>
@@ -574,13 +589,46 @@
 </div>
 </div>
 </section></section>
+<section>
 <section id="overview-of-markov-chain-monte-carlo" class="title-slide slide level1 center">
 <h1>Overview of Markov Chain Monte Carlo</h1>
+
+</section>
+<section id="markov-chain-monte-carlo-mcmc" class="slide level2">
+<h2>Markov Chain Monte Carlo (MCMC)</h2>
+<ul>
+<li class="fragment"><p>MCMC has been a standard practice of sampling the posterior</p></li>
+<li class="fragment"><p>The term MCMC</p>
+<ul>
+<li class="fragment">Markov chain: dependence, iterative</li>
+<li class="fragment">Monte Carlo: sampling, independence</li>
+</ul></li>
+<li class="fragment"><p>There are several popular MCMC algorithms</p>
+<ul>
+<li class="fragment">Gibbs sampler is one example of MCMC algorithms</li>
+<li class="fragment">Later we will introduce other MCMC algorithms, including Metropolis, Metropolis-Hastings, and Hamiltonian Monte Carlo</li>
+</ul></li>
+</ul>
+</section>
+<section id="markov-chain-monte-carlo-mcmc-1" class="slide level2">
+<h2>Markov Chain Monte Carlo (MCMC)</h2>
+<ul>
+<li class="fragment"><p>Creating and using MCMC</p>
+<ul>
+<li class="fragment">One can hand-code MCMC or use MCMC estimation software, including Stan (and various wrapper functions), JAGS, and BUGS</li>
+<li class="fragment">the choice depends on teaching vs research, among other things</li>
+</ul></li>
+<li class="fragment"><p>It is crucial to perform MCMC diagnostics <strong>before</strong> posterior analysis</p>
+<ul>
+<li class="fragment">Posterior parameter draws are only useful if they converge to the true posterior</li>
+<li class="fragment">Posterior analysis requires independent posterior draws</li>
+</ul></li>
+</ul>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

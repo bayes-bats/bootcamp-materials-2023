@@ -122,6 +122,9 @@ the derivation process to arrive at these two full conditional posterior
 distributions?
 :::
 
+# Gibbs Samplers
+
+
 ## Sampling Scheme: A Gibbs Sampler
 
 ```{=tex}
@@ -157,6 +160,7 @@ conditional posterior distributions**:
 ## Writing A Gibbs Sampler as An R Function
 
 ```{r, echo=TRUE}
+#| code-line-numbers: "|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18"
 gibbs_normal <- function(input, S, seed){
   set.seed(seed)
   ybar <- mean(input$y)
@@ -184,7 +188,12 @@ you see how the two full conditional posterior distributions get
 translated into lines of R code? Anything surprises you?
 :::
 
-## RUN AN EXAMPLE
+## Features of Gibbs Samplers
+
+::: {.callout-warning icon=false}
+## Discussion question
+Given our experience with the Gibbs sampler for the two-parameter normal model, what do you think are necessary to create a Gibbs sampler for sampling the posterior distribution? Do you expect to use a Gibbs sampler for any model and prior choices?
+:::
 
 ## Extending to More Than Two Parameters
 
@@ -198,3 +207,29 @@ iterative process of a Gibbs sampler.
 :::
 
 # Overview of Markov Chain Monte Carlo
+
+## Markov Chain Monte Carlo (MCMC)
+
+- MCMC has been a standard practice of sampling the posterior
+
+- The term MCMC
+
+    - Markov chain: dependence, iterative
+    - Monte Carlo: sampling, independence
+
+- There are several popular MCMC algorithms
+
+    - Gibbs sampler is one example of MCMC algorithms
+    - Later we will introduce other MCMC algorithms, including Metropolis, Metropolis-Hastings, and Hamiltonian Monte Carlo
+
+## Markov Chain Monte Carlo (MCMC)
+
+- Creating and using MCMC
+    
+    - One can hand-code MCMC or use MCMC estimation software, including Stan (and various wrapper functions), JAGS, and BUGS
+    - the choice depends on teaching vs research, among other things
+
+- It is crucial to perform MCMC diagnostics **before** posterior analysis
+
+    - Posterior parameter draws are only useful if they converge to the true posterior
+    - Posterior analysis requires independent posterior draws
