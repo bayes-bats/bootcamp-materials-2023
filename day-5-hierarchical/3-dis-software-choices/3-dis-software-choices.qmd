@@ -13,3 +13,65 @@ format:
       data-background-position: 50% 85%
 ---
 
+
+## What software do you use?
+
+- For research
+
+- For preparing your teaching materials
+
+- For teaching your student (i.e. the software that your students learn)
+
+- Any software specifically for Bayesian methods?
+
+
+# Small Group Discussion
+
+## Format and Length
+
+- About 30 minutes
+
+- 4 small groups, each led by one Instructor/TA
+
+- Random assignment; get to know people from a different discipline!
+
+- Assign a note-taker; if okay, please share notes with us afterwards
+
+- Assign a reporter for large group sharing (3 minutes per group)
+
+- Feel free to use our prepared questions and feel free to come up with your own
+
+
+## Discussion Questions
+
+We have seen `rstan` and `rstanarm` packages for fitting models. 
+
+1. Which one of these packages would you use for your own research?
+
+2. If you were to teach with any of these packages to your students, which one would you consider using and why? 
+
+## Discussion Questions
+
+3. We have also used R packages not for fitting Bayesian models but to support learning of through data visualizations. We have utilized some R functions such as `bayesrules::plot_beta_binomial()` and `bayesplot::ppc_intervals()` to get these visualizations. How would these data visualizations tools support learning for your students? 
+What are the pros and cons of using these tools?
+
+
+
+## Discussion Questions
+
+4. Do you use any other software/packages that you think can support learning of Bayesian methods?
+
+
+# Large Group Sharing
+
+## Format and Length
+
+- About 25 minutes
+
+- We will record this portion for sharing later. Okay?
+
+- Each group reports back for 3 minutes
+
+- Open discussion for remaining time
+
+
