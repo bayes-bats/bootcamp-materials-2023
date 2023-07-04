@@ -15,10 +15,12 @@ format:
       data-background-position: 50% 85%
 ---
 
+
 Note that examples in this part of the lecture are a simplified version of [Chapter 10 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-10.html).
 
 
 ## Packages
+
 
 ```{r}
 library(bayesrules)
@@ -26,6 +28,7 @@ library(tidyverse)
 library(rstanarm)
 library(bayesplot)
 ```
+
 
 ##
 
@@ -62,6 +65,7 @@ Thus, knowing the _temperature_ on two subsequent days may very well "cancel out
 
 ## Linearity and Constant Variance
 
+
 ```{r}
 #| echo: false
 #| message: false
@@ -71,6 +75,7 @@ ggplot(bikes, aes(y = rides, x = temp_feel)) +
   geom_point(size = 0.2) + 
   geom_smooth(method = "lm", se = FALSE)
 ```
+
 
 The relationship between ridership and temperature does appear to be linear. Further, with the slight exception of colder days on which ridership is uniformly small, the variability in ridership does appear to be roughly consistent across the range of temperatures $X$.
 
@@ -83,6 +88,7 @@ Then a "good" Bayesian model will produce _predictions_ of $Y$ with features sim
 2. Compare the features of the $N$ simulated $Y$ samples, or a subset of these samples, to those of the original $Y$ data.
 
 ##
+
 
 ```{r}
 #| cache: true
@@ -101,7 +107,9 @@ predict_75 <- bike_model_df %>%
 ```
 
 
+
 ##
+
 
 ```{r}
 first_set <- head(bike_model_df, 1)
@@ -118,7 +126,9 @@ head(one_simulation, 2)
 
 ```
 
+
 ##
+
 
 ```{r}
 #| echo: false
@@ -127,9 +137,11 @@ ggplot(one_simulation, aes(x = simulated_rides)) +
   geom_density(aes(x = rides), color = "darkblue")
 ```
 
+
 One posterior simulated dataset of ridership (light blue) along with the actual observed ridership data (dark blue)
 
 ##
+
 
 ```{r}
 #| cache: true 
@@ -140,7 +152,9 @@ pp_check(bike_model, nreps = 50) +
 
 
 
+
 ##
+
 
 ```{r}
 #| echo: false
@@ -149,6 +163,7 @@ ggplot(predict_75, aes(x = y_new)) +
   geom_density() +
   geom_vline(xintercept = 6228)
 ```
+
 
 
 ##
@@ -160,12 +175,15 @@ __predictive error__: $Y - Y'$
 ##
 
 
+
 ```{r}
 predict_75 %>% 
   summarize(mean = mean(y_new), error = 6228 - mean(y_new))
 ```
 
+
 ##
+
 
 ```{r}
 predict_75 %>% 
@@ -173,7 +191,9 @@ predict_75 %>%
             error_scaled = error / sd(y_new))
 ```
 
+
 ##
+
 
 ```{r}
 predict_75 %>% 
@@ -183,7 +203,9 @@ predict_75 %>%
             upper_95 = quantile(y_new, 0.975))
 ```
 
+
 ##
+
 
 ```{r}
 set.seed(84735)
@@ -193,7 +215,9 @@ dim(predictions)
 
 ```
 
+
 ##
+
 
 ```{r}
 #| eval: false
@@ -222,6 +246,7 @@ ggpubr::ggarrange(g1,g2,ncol=2, common.legend = TRUE, legend = "right")
 
 
 
+
 ##
 
 
@@ -241,11 +266,13 @@ Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has
 ##
 
  
+
 ```{r}
 #| cache: true
 # Posterior predictive summaries
 prediction_summary(bike_model, data = bikes)
 ```
+
 
 ## The k-fold cross validation algorithm
 
@@ -262,6 +289,7 @@ prediction_summary(bike_model, data = bikes)
     
 ##
 
+
 ```{r}
 #| cache: true
 set.seed(84735)
@@ -269,18 +297,23 @@ cv_procedure <- prediction_summary_cv(
   data = bikes, model = bike_model, k = 10)
 ```
 
+
 ##
+
 
 ```{r}
 cv_procedure$folds
 ```
 
 
+
 ##
+
 
 ```{r}
 cv_procedure$cv
 ```
+
 
 ##
 
@@ -288,6 +321,7 @@ Note that examples in this part of the lecture are a simplified version of [Chap
 
 
 ## Data
+
 
 ```{r}
 weather_WU <- weather_australia %>% 
@@ -297,19 +331,24 @@ weather_WU <- weather_australia %>%
     pressure9am, temp9am, temp3pm)
 ```
 
+
 . . . 
+
 
 ```{r}
 glimpse(weather_WU)
 ```
 
+
 ## 
+
 
 
 ```{r fig.height=6}
 ggplot(weather_WU, aes(x = temp9am, y = temp3pm)) +
   geom_point()
 ```
+
 
 ## 
 
@@ -326,6 +365,7 @@ $\sigma \sim \text{Exp}(\ldots)$
 
 
 
+
 ```{r}
 #| cache: true
 weather_model_1 <- stan_glm(
@@ -339,7 +379,9 @@ weather_model_1 <- stan_glm(
 
 
 
+
 ## 
+
 
 
 ```{r}
@@ -347,7 +389,9 @@ weather_model_1 <- stan_glm(
 mcmc_dens_overlay(weather_model_1)
 ```
 
+
 ## 
+
 
 
 
@@ -356,7 +400,9 @@ mcmc_dens_overlay(weather_model_1)
 posterior_interval(weather_model_1, prob = 0.80)
 ```
 
+
 ## 
+
 
 
 
@@ -365,11 +411,13 @@ posterior_interval(weather_model_1, prob = 0.80)
 pp_check(weather_model_1)
 ```
 
+
 ## 
 
 
 
 ### Considering a categorical predictor
+
 
 ```{r}
 #| fig-width: 10
@@ -377,6 +425,7 @@ pp_check(weather_model_1)
 ggplot(weather_WU, aes(x = temp3pm, fill = location)) +
   geom_density(alpha = 0.5)
 ```
+
 
 ## 
 
@@ -410,6 +459,7 @@ $$\beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1 \; .$$
 
 ## Simulating the Posterior
 
+
 ```{r}
 #| cache: true
 weather_model_2 <- stan_glm(
@@ -422,7 +472,9 @@ weather_model_2 <- stan_glm(
 ```
 
 
+
 ## 
+
 
 
 ```{r}
@@ -430,7 +482,9 @@ weather_model_2 <- stan_glm(
 mcmc_dens_overlay(weather_model_2)
 ```
 
+
 ## 
+
 
 
 
@@ -442,14 +496,18 @@ head(as.data.frame(model_summary), -2) %>%
   select(mean, "10%", "90%", Rhat)
 ```
 
+
 . . . 
+
 
 ```{r}
 b0 <- model_summary[1,1]
 b1 <- model_summary[2,1]
 ```
 
+
 ## 
+
 
 
 
@@ -463,12 +521,14 @@ ggplot(weather_WU, aes(x = temp3pm, fill = location)) +
     linetype = "dashed")
 ```
 
+
 ## 
 
 
 
 
 ### Two Predictors
+
 
 ```{r}
 #| message: false
@@ -478,6 +538,7 @@ ggplot(weather_WU,
   geom_point() + 
   geom_smooth(method = "lm", se = FALSE)
 ```
+
 
 ## 
 
@@ -509,6 +570,7 @@ $$\beta_0 + \beta_1 X_{i1} + \beta_2 \cdot 1 = (\beta_0 + \beta_2) + \beta_1 X_{
 
  
 
+
 ```{r}
 #| cache: true
 weather_model_3 <- stan_glm(temp3pm ~ temp9am + location, 
@@ -521,7 +583,9 @@ weather_model_3 <- stan_glm(temp3pm ~ temp9am + location,
 ```
 
 
+
 ## 
+
 
 
 ```{r}
@@ -529,7 +593,9 @@ weather_model_3_df <- as.data.frame(weather_model_3)
 head(weather_model_3_df, 3)
 ```
 
+
 ## 
+
 
 ```{r}
 #| eval: false
@@ -544,7 +610,9 @@ ggplot(weather_WU, aes(x = temp9am, y = temp3pm)) +
     slope = temp9am), color = "blue")
 ```
 
+
 ## 
+
 
 
 
@@ -562,13 +630,14 @@ ggplot(weather_WU, aes(x = temp9am, y = temp3pm)) +
     slope = temp9am), color = "blue")
 ```
 
-
 ```{r}
 #| echo: false
 stats <- posterior_interval(weather_model_3, prob = 0.80)
 ```
 
+
 ## 
+
 
 
 
@@ -583,7 +652,9 @@ temp3pm_prediction <- posterior_predict(
     temp9am = c(10, 10), location = c("Uluru", "Wollongong")))
 ```
 
+
 ##  Posterior Predictive Model
+
 
 ```{r}
 #| fig-height: 4
@@ -594,7 +665,9 @@ ggplot(shortcut_df, aes(x = uluru)) +
   geom_density(aes(x = woll), color = "blue")
 ```
 
+
 ## 
+
 
 
 
@@ -607,6 +680,7 @@ ggplot(weather_WU,
   geom_point(size = 0.5) +
   geom_smooth(method = "lm", se = FALSE)
 ```
+
 
 ## 
 
@@ -641,6 +715,7 @@ $$\mu = \beta_0 + \beta_1 + \beta_2 X_{3} + \beta_3 X_{3} = (\beta_0 + \beta_1) 
 
 
 
+
 ```{r}
 #| eval: false
 interaction_model <- stan_glm(temp3pm ~ location + humidity9am + 
@@ -661,7 +736,9 @@ data = weather_WU, family = gaussian,
 chains = 4, iter = 5000*2, seed = 84735, refresh=FALSE)
 ```
 
+
 ## 
+
 
 
 
@@ -671,7 +748,6 @@ head(as.data.frame(model_summary), -2) %>%
 select(`10%`, `50%`, `90%`) %>%
 round(3)
 ```
-
 
 ```{r}
 #| echo: false
@@ -687,6 +763,7 @@ post_sum <- as.data.frame(model_summary) %>%
   round(3) %>% 
   head(-2)
 ```
+
 
 
 ## 
@@ -727,6 +804,7 @@ $\sigma \sim \text{Exp}(\ldots)$
 
 
 
+
 ```{r}
 #| cache: true
 weather_model_4 <- stan_glm(
@@ -737,6 +815,7 @@ weather_model_4 <- stan_glm(
   prior_aux = exponential(1, autoscale = TRUE),
   chains = 4, iter = 5000*2, seed = 84735, refresh = FALSE)
 ```
+
 
 
 
@@ -758,6 +837,7 @@ weather_model_4 <- stan_glm(
 
 
 
+
 ```{r}
 #| echo: false
 #| fig-width: 10
@@ -769,7 +849,9 @@ g4 <- pp_check(weather_model_4) + theme(legend.position = "bottom")
 gridExtra::grid.arrange(g1,g2,g3,g4,ncol = 2)
 ```
 
+
 ## 
+
 
 
 
@@ -815,7 +897,9 @@ ppc_violin_grouped(weather_WU$temp3pm,
 ```
 
 
+
 ## 
+
 
 
 
@@ -827,7 +911,9 @@ prediction_summary_cv(data = weather_WU,
                       k = 10)
 ```
 
+
 ## 
+
 
 
 
@@ -855,7 +941,6 @@ ps_4 <- prediction_summary_cv(
 post_sum_df <- data.frame(rbind(round(ps_1,3), round(ps_2,3), round(ps_3,3), round(ps_4,3)))
 ```
 
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -869,5 +954,4 @@ test_mat <- matrix(
 
 knitr::kable(test_mat)
 ```
-
 

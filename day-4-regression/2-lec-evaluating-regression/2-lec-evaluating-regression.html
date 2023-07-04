@@ -396,16 +396,18 @@
 </div>
 
 </section>
+<section class="slide level2">
+
+<p>Note that examples in this part of the lecture are a simplified version of <a href="https://www.bayesrulesbook.com/chapter-10.html">Chapter 10 of Bayes Rules! book</a>.</p>
+</section>
 <section id="packages" class="slide level2">
 <h2>Packages</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(bayesrules)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(rstanarm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(bayesplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="data" class="slide level2">
-<h2>Data</h2>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -629,6 +631,460 @@
 <div class="cell-output cell-output-stdout">
 <pre><code>       mae mae_scaled within_50 within_95
 1 1029.107  0.8016997     0.422     0.968</code></pre>
+</div>
+</div>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<p>Note that examples in this part of the lecture are a simplified version of <a href="https://www.bayesrulesbook.com/chapter-11.html">Chapter 11 of Bayes Rules! book</a>.</p>
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>weather_WU <span class="ot">&lt;-</span> weather_australia <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">filter</span>(location <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Wollongong"</span>, <span class="st">"Uluru"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">droplevels</span>(<span class="fu">as.factor</span>(location))) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">select</span>(location, windspeed9am, humidity9am, </span>
+<span id="cb22-5"><a href="#cb22-5"></a>    pressure9am, temp9am, temp3pm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">glimpse</span>(weather_WU)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 200
+Columns: 6
+$ location     &lt;fct&gt; Uluru, Uluru, Uluru, Uluru, Uluru, Uluru, Uluru, Uluru, U…
+$ windspeed9am &lt;dbl&gt; 20, 9, 7, 28, 24, 22, 22, 4, 2, 9, 20, 20, 9, 22, 9, 24, …
+$ humidity9am  &lt;int&gt; 23, 71, 15, 29, 10, 32, 43, 57, 64, 40, 28, 30, 95, 47, 7…
+$ pressure9am  &lt;dbl&gt; 1023.3, 1012.9, 1012.3, 1016.0, 1010.5, 1012.2, 1025.7, 1…
+$ temp9am      &lt;dbl&gt; 20.9, 23.4, 24.1, 26.4, 36.7, 25.1, 14.9, 15.9, 24.6, 15.…
+$ temp3pm      &lt;dbl&gt; 29.7, 33.9, 39.7, 34.2, 43.3, 33.5, 24.0, 22.6, 33.2, 24.…</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(weather_WU, <span class="fu">aes</span>(<span class="at">x =</span> temp9am, <span class="at">y =</span> temp3pm)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<p><span class="math inline">\(\text{likelihood model:} \; \; \; Y_i | \beta_0, \beta_1, \sigma \;\;\;\stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right)\text{ with } \mu_i = \beta_0 + \beta_1X_{i1}\)</span></p>
+<p><span class="math inline">\(\text{prior models:}\)</span></p>
+<p><span class="math inline">\(\beta_0\sim N(\ldots, \ldots )\)</span><br>
+<span class="math inline">\(\beta_1\sim N(\ldots, \ldots )\)</span><br>
+<span class="math inline">\(\sigma \sim \text{Exp}(\ldots)\)</span></p>
+</section>
+<section id="section-20" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-21_255f85ffa955879cef9efaf0826ac012">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>weather_model_1 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  temp3pm <span class="sc">~</span> temp9am, </span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="at">data =</span> weather_WU, <span class="at">family =</span> gaussian,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="at">prior_intercept =</span> <span class="fu">normal</span>(<span class="dv">25</span>, <span class="dv">5</span>),</span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="at">prior =</span> <span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="at">prior_aux =</span> <span class="fu">exponential</span>(<span class="dv">1</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">iter =</span> <span class="dv">5000</span><span class="sc">*</span><span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">84735</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-21" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">mcmc_dens_overlay</span>(weather_model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-22-1.png" width="1440" class="r-stretch"></section>
+<section id="section-22" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">posterior_interval</span>(weather_model_1, <span class="at">prob =</span> <span class="fl">0.80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  10%      90%
+(Intercept) 2.9498083 5.448752
+temp9am     0.9802648 1.102423
+sigma       3.8739305 4.409474</code></pre>
+</div>
+</div>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">pp_check</span>(weather_model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<section id="section-24" class="slide level2">
+<h2></h2>
+<h3 id="considering-a-categorical-predictor">Considering a categorical predictor</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(weather_WU, <span class="fu">aes</span>(<span class="at">x =</span> temp3pm, <span class="at">fill =</span> location)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<section id="section-25" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[X_{i2} = \begin{cases}
+1 &amp; \text{ Wollongong} \\
+0 &amp; \text{ otherwise (ie. Uluru)} \\
+\end{cases}\]</span></p>
+</section>
+<section id="section-26" class="slide level2">
+<h2></h2>
+<p><span class="math inline">\(\text{likelihood model:} \; \; \; Y_i | \beta_0, \beta_1, \sigma \;\;\;\stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right)\text{ with } \mu_i = \beta_0 + \beta_1X_{i2}\)</span></p>
+<p><span class="math inline">\(\text{prior models:}\)</span></p>
+<p><span class="math inline">\(\beta_0\sim N(\ldots, \ldots )\)</span><br>
+<span class="math inline">\(\beta_1\sim N(\ldots, \ldots )\)</span><br>
+<span class="math inline">\(\sigma \sim \text{Exp}(\ldots)\)</span></p>
+<p>–</p>
+<p>For Uluru, <span class="math inline">\(X_{i2} = 0\)</span> and the trend in 3pm temperature simplifies to</p>
+<p><span class="math display">\[\beta_0 + \beta_1 \cdot 0 = \beta_0 \; .\]</span> For Wollongong, <span class="math inline">\(X_{i2} = 1\)</span> and the trend in 3pm temperature is</p>
+<p><span class="math display">\[\beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1 \; .\]</span></p>
+</section>
+<section id="simulating-the-posterior" class="slide level2">
+<h2>Simulating the Posterior</h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-26_3f1346bb610cabdf0bdbc3a4bfb6ba5a">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>weather_model_2 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb32-2"><a href="#cb32-2"></a>  temp3pm <span class="sc">~</span> location,</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="at">data =</span> weather_WU, <span class="at">family =</span> gaussian,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="at">prior_intercept =</span> <span class="fu">normal</span>(<span class="dv">25</span>, <span class="dv">5</span>),</span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="at">prior =</span> <span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb32-6"><a href="#cb32-6"></a>  <span class="at">prior_aux =</span> <span class="fu">exponential</span>(<span class="dv">1</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">iter =</span> <span class="dv">5000</span><span class="sc">*</span><span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">84735</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-27" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">mcmc_dens_overlay</span>(weather_model_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-27-1.png" width="1440" class="r-stretch"></section>
+<section id="section-28" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Posterior summary statistics</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(weather_model_2)</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(model_summary), <span class="sc">-</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">select</span>(mean, <span class="st">"10%"</span>, <span class="st">"90%"</span>, Rhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         mean       10%       90%      Rhat
+(Intercept)         29.718920  29.01943 30.424971 1.0000536
+locationWollongong -10.317874 -11.31883 -9.301761 1.0001838
+sigma                5.494874   5.14486  5.857824 0.9999858</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>b0 <span class="ot">&lt;-</span> model_summary[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb36-2"><a href="#cb36-2"></a>b1 <span class="ot">&lt;-</span> model_summary[<span class="dv">2</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="section-29" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(weather_WU, <span class="fu">aes</span>(<span class="at">x =</span> temp3pm, <span class="at">fill =</span> location)) <span class="sc">+</span> </span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(b0, b0 <span class="sc">+</span> b1), </span>
+<span id="cb37-4"><a href="#cb37-4"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
+<section id="section-30" class="slide level2">
+<h2></h2>
+<h3 id="two-predictors">Two Predictors</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(weather_WU, </span>
+<span id="cb38-2"><a href="#cb38-2"></a>    <span class="fu">aes</span>(<span class="at">y =</span> temp3pm, <span class="at">x =</span> temp9am, <span class="at">color =</span> location)) <span class="sc">+</span> </span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
+<section id="section-31" class="slide level2">
+<h2></h2>
+<p><span class="math inline">\(\text{likelihood model:}\)</span> <span class="math inline">\(Y_i | \beta_0, \beta_1, \beta_2 \sigma \;\;\;\stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right)\text{ with } \mu_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2}\)</span></p>
+<p><span class="math inline">\(\text{prior models:}\)</span></p>
+<p><span class="math inline">\(\beta_0\sim N(m_0, s_0 )\)</span><br>
+<span class="math inline">\(\beta_1\sim N(m_1, s_1 )\)</span><br>
+<span class="math inline">\(\beta_2\sim N(m_2, s_2 )\)</span><br>
+<span class="math inline">\(\sigma \sim \text{Exp}(l)\)</span></p>
+</section>
+<section id="section-32" class="slide level2">
+<h2></h2>
+<p>In <em>Uluru</em>, <span class="math inline">\(X_{i2} = 0\)</span> and the trend in the relationship between 3pm and 9am temperature simplifies to</p>
+<p><span class="math display">\[\beta_0 + \beta_1 X_{i1} + \beta_2 \cdot 0 = \beta_0 + \beta_1 X_{i1} \; .\]</span></p>
+<p>In <em>Wollongong</em>, <span class="math inline">\(X_{i2} = 1\)</span> and the trend in the relationship between 3pm and 9am temperature simplifies to</p>
+<p><span class="math display">\[\beta_0 + \beta_1 X_{i1} + \beta_2 \cdot 1 = (\beta_0 + \beta_2) + \beta_1 X_{i1} \; .\]</span></p>
+</section>
+<section id="section-33" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-32_0c2ed2ae5a74a82a7bbd77e6545cd4cd">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>weather_model_3 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(temp3pm <span class="sc">~</span> temp9am <span class="sc">+</span> location, </span>
+<span id="cb39-2"><a href="#cb39-2"></a>                            <span class="at">data =</span> weather_WU, </span>
+<span id="cb39-3"><a href="#cb39-3"></a>                            <span class="at">family =</span> gaussian, </span>
+<span id="cb39-4"><a href="#cb39-4"></a>                            <span class="at">chains =</span> <span class="dv">4</span>, </span>
+<span id="cb39-5"><a href="#cb39-5"></a>                            <span class="at">iter =</span> <span class="dv">5000</span><span class="sc">*</span><span class="dv">2</span>, </span>
+<span id="cb39-6"><a href="#cb39-6"></a>                            <span class="at">seed =</span> <span class="dv">84735</span>,</span>
+<span id="cb39-7"><a href="#cb39-7"></a>                            <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-34" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>weather_model_3_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(weather_model_3)</span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">head</span>(weather_model_3_df, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)   temp9am locationWollongong    sigma
+1    11.21958 0.8988170          -7.932687 2.588490
+2    10.35556 0.9015759          -6.722425 2.559874
+3    10.55716 0.8917270          -6.731531 2.556703</code></pre>
+</div>
+</div>
+</section>
+<section id="section-35" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>first_50 <span class="ot">&lt;-</span> <span class="fu">head</span>(weather_model_3_df, <span class="dv">50</span>)</span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="fu">ggplot</span>(weather_WU, <span class="fu">aes</span>(<span class="at">x =</span> temp9am, <span class="at">y =</span> temp3pm)) <span class="sc">+</span> </span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.01</span>) <span class="sc">+</span> </span>
+<span id="cb42-5"><a href="#cb42-5"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> first_50, <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>    <span class="fu">aes</span>(<span class="at">intercept =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, <span class="at">slope =</span> temp9am)) <span class="sc">+</span> </span>
+<span id="cb42-7"><a href="#cb42-7"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> first_50, <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb42-8"><a href="#cb42-8"></a>    <span class="fu">aes</span>(<span class="at">intercept =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> locationWollongong, </span>
+<span id="cb42-9"><a href="#cb42-9"></a>    <span class="at">slope =</span> temp9am), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-36" class="slide level2">
+<h2></h2>
+
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
+<section id="section-37" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-37_6f076deb87b6570e2443820063901a93">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># Simulate a set of predictions</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
+<span id="cb43-3"><a href="#cb43-3"></a>temp3pm_prediction <span class="ot">&lt;-</span> <span class="fu">posterior_predict</span>(</span>
+<span id="cb43-4"><a href="#cb43-4"></a>  weather_model_3, </span>
+<span id="cb43-5"><a href="#cb43-5"></a>  <span class="at">newdata =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-6"><a href="#cb43-6"></a>    <span class="at">temp9am =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">location =</span> <span class="fu">c</span>(<span class="st">"Uluru"</span>, <span class="st">"Wollongong"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="posterior-predictive-model" class="slide level2">
+<h2>Posterior Predictive Model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>shortcut_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">uluru =</span> temp3pm_prediction[,<span class="dv">1</span>],</span>
+<span id="cb44-2"><a href="#cb44-2"></a>                          <span class="at">woll =</span> temp3pm_prediction[,<span class="dv">2</span>])</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="fu">ggplot</span>(shortcut_df, <span class="fu">aes</span>(<span class="at">x =</span> uluru)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> woll), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<section id="section-38" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(weather_WU,</span>
+<span id="cb45-2"><a href="#cb45-2"></a>       <span class="fu">aes</span>(<span class="at">y =</span> temp3pm, <span class="at">x =</span> humidity9am, <span class="at">color =</span> location)) <span class="sc">+</span> </span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
+<section id="section-39" class="slide level2">
+<h2></h2>
+<p><span class="math inline">\(\text{likelihood model:}\)</span> <span class="math inline">\(Y_i | \beta_0, \beta_1, \beta_2, \beta_3 \sigma \;\;\;\stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right)\text{ with }\)</span> <span class="math inline">\(\mu_i = \beta_0 + \beta_1X_{i2} + \beta_2X_{i3} + \beta_3X_{i2}X_{i3}\)</span></p>
+<p><span class="math inline">\(\text{prior models:}\)</span></p>
+<p><span class="math inline">\(\beta_0\sim N(m_0, s_0 )\)</span><br>
+<span class="math inline">\(\beta_1\sim N(m_1, s_1 )\)</span><br>
+<span class="math inline">\(\beta_2\sim N(m_2, s_2 )\)</span><br>
+<span class="math inline">\(\beta_3\sim N(m_3, s_3 )\)</span><br>
+<span class="math inline">\(\sigma \sim \text{Exp}(l)\)</span></p>
+</section>
+<section id="section-40" class="slide level2">
+<h2></h2>
+<p>In <em>Uluru</em>, <span class="math inline">\(X_{2} = 0\)</span> and the trend in the relationship between temperature and humidity simplifies to</p>
+<p><span class="math display">\[\mu = \beta_0 + \beta_2 X_{3} \; .\]</span></p>
+<p>In <em>Wollongong</em>, <span class="math inline">\(X_{2} = 1\)</span> and the trend in the relationship between temperature and humidity simplifies to</p>
+<p><span class="math display">\[\mu = \beta_0 + \beta_1 + \beta_2 X_{3} + \beta_3 X_{3} = (\beta_0 + \beta_1) + (\beta_2 + \beta_3) X_3 \; .\]</span></p>
+</section>
+<section id="section-41" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>interaction_model <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(temp3pm <span class="sc">~</span> location <span class="sc">+</span> humidity9am <span class="sc">+</span> </span>
+<span id="cb46-2"><a href="#cb46-2"></a>                                location<span class="sc">:</span>humidity9am,</span>
+<span id="cb46-3"><a href="#cb46-3"></a>                              <span class="at">data =</span> weather_WU, </span>
+<span id="cb46-4"><a href="#cb46-4"></a>                              <span class="at">family =</span> gaussian,</span>
+<span id="cb46-5"><a href="#cb46-5"></a>                              <span class="at">chains =</span> <span class="dv">4</span>, </span>
+<span id="cb46-6"><a href="#cb46-6"></a>                              <span class="at">iter =</span> <span class="dv">5000</span><span class="sc">*</span><span class="dv">2</span>, </span>
+<span id="cb46-7"><a href="#cb46-7"></a>                              <span class="at">seed =</span> <span class="dv">84735</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-42" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(interaction_model)</span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(model_summary), <span class="sc">-</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="fu">select</span>(<span class="st">`</span><span class="at">10%</span><span class="st">`</span>, <span class="st">`</span><span class="at">50%</span><span class="st">`</span>, <span class="st">`</span><span class="at">90%</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                   10%     50%     90%
+(Intercept)                     36.450  37.600  38.764
+locationWollongong             -24.806 -21.885 -18.925
+humidity9am                     -0.214  -0.190  -0.166
+locationWollongong:humidity9am   0.198   0.246   0.292
+sigma                            4.194   4.466   4.773</code></pre>
+</div>
+</div>
+</section>
+<section id="section-43" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[\begin{array}{lrl}
+\text{Uluru:}      &amp; \mu &amp; =  37.6 - 0.19 \text{ humidity9am} \\
+\text{Wollongong:} &amp; \mu &amp; = (37.6 - 21.885) + (-0.19 + 0.246) \text{ humidity9am}\\
+&amp;&amp; = 15.715 + 0.056 \text{ humidity9am}\\
+\end{array}\]</span></p>
+</section>
+<section id="do-you-need-an-interaction-term" class="slide level2">
+<h2>Do you need an interaction term?</h2>
+<ul>
+<li class="fragment"><p><strong>Context.</strong></p></li>
+<li class="fragment"><p><strong>Visualizations.</strong></p></li>
+<li class="fragment"><p><strong>Hypothesis tests.</strong></p></li>
+</ul>
+</section>
+<section id="more-than-two-predictors" class="slide level2">
+<h2>More than two predictors</h2>
+<p><span class="math inline">\(\text{likelihood model:} \; \; \; Y_i | \beta_0, \beta_1,\beta_2,...\beta_p, \sigma \;\;\;\stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right)\text{ with }\)</span> <span class="math inline">\(\mu_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \ldots +\beta_pX_{ip}\)</span></p>
+<p><span class="math inline">\(\text{prior models:}\)</span></p>
+<p><span class="math inline">\(\beta_0, \beta_1,\beta_2, ...,\beta_p\sim N(\ldots, \ldots )\)</span></p>
+<p><span class="math inline">\(\sigma \sim \text{Exp}(\ldots)\)</span></p>
+</section>
+<section id="section-44" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-44_d3666870624a2880aa31ae8013428266">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>weather_model_4 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb49-2"><a href="#cb49-2"></a>  temp3pm <span class="sc">~</span> .,</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="at">data =</span> weather_WU, <span class="at">family =</span> gaussian, </span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="at">prior_intercept =</span> <span class="fu">normal</span>(<span class="dv">25</span>, <span class="dv">5</span>),</span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="at">prior =</span> <span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb49-6"><a href="#cb49-6"></a>  <span class="at">prior_aux =</span> <span class="fu">exponential</span>(<span class="dv">1</span>, <span class="at">autoscale =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-7"><a href="#cb49-7"></a>  <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">iter =</span> <span class="dv">5000</span><span class="sc">*</span><span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">84735</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-evaluation-and-comparison" class="slide level2">
+<h2>Model evaluation and comparison</h2>
+<div data-align="center">
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>weather_model_1</code></td>
+<td><code>temp3pm ~ temp9am</code></td>
+</tr>
+<tr class="even">
+<td><code>weather_model_2</code></td>
+<td><code>temp3pm ~ location</code></td>
+</tr>
+<tr class="odd">
+<td><code>weather_model_3</code></td>
+<td><code>temp3pm ~ temp9am + location</code></td>
+</tr>
+<tr class="even">
+<td><code>weather_model_4</code></td>
+<td><code>temp3pm ~ .</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="section-45" class="slide level2">
+<h2></h2>
+
+<img data-src="2-lec-evaluating-regression_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
+<section id="section-46" class="slide level2">
+<h2></h2>
+<div class="cell" data-hash="2-lec-evaluating-regression_cache/revealjs/unnamed-chunk-46_196c885e15d657b4a3e4597c625babf1">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
+<span id="cb50-2"><a href="#cb50-2"></a>predictions_1 <span class="ot">&lt;-</span> <span class="fu">posterior_predict</span>(weather_model_1, </span>
+<span id="cb50-3"><a href="#cb50-3"></a>  <span class="at">newdata =</span> weather_WU)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># Posterior predictive models for weather_model_1</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="fu">ppc_intervals</span>(weather_WU<span class="sc">$</span>temp3pm, </span>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="at">yrep =</span> predictions_1, </span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="at">x =</span> weather_WU<span class="sc">$</span>temp9am, </span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="at">prob =</span> <span class="fl">0.5</span>, <span class="at">prob_outer =</span> <span class="fl">0.95</span>)</span>
+<span id="cb51-6"><a href="#cb51-6"></a></span>
+<span id="cb51-7"><a href="#cb51-7"></a><span class="co"># Posterior predictive models for weather_model_2</span></span>
+<span id="cb51-8"><a href="#cb51-8"></a><span class="fu">ppc_violin_grouped</span>(weather_WU<span class="sc">$</span>temp3pm, </span>
+<span id="cb51-9"><a href="#cb51-9"></a>  <span class="at">yrep =</span> predictions_2, </span>
+<span id="cb51-10"><a href="#cb51-10"></a>  <span class="at">group =</span> weather_WU<span class="sc">$</span>location,</span>
+<span id="cb51-11"><a href="#cb51-11"></a>  <span class="at">y_draw =</span> <span class="st">"points"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-47" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">prediction_summary_cv</span>(<span class="at">data =</span> weather_WU, </span>
+<span id="cb52-2"><a href="#cb52-2"></a>                      <span class="at">model =</span> weather_model_1, </span>
+<span id="cb52-3"><a href="#cb52-3"></a>                      <span class="at">k =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-48" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">model</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">mae scaled</td>
+<td style="text-align: left;">within 50</td>
+<td style="text-align: left;">within 95</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">weather model 1</td>
+<td style="text-align: left;">3.285</td>
+<td style="text-align: left;">0.79</td>
+<td style="text-align: left;">0.405</td>
+<td style="text-align: left;">0.97</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">weather model 2</td>
+<td style="text-align: left;">3.653</td>
+<td style="text-align: left;">0.661</td>
+<td style="text-align: left;">0.495</td>
+<td style="text-align: left;">0.935</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">weather model 3</td>
+<td style="text-align: left;">1.142</td>
+<td style="text-align: left;">0.483</td>
+<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">0.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">weather model 4</td>
+<td style="text-align: left;">1.206</td>
+<td style="text-align: left;">0.522</td>
+<td style="text-align: left;">0.64</td>
+<td style="text-align: left;">0.95</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
