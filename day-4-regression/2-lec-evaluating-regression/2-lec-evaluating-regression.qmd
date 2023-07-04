@@ -836,6 +836,7 @@ prediction_summary_cv(data = weather_WU,
 
 ```{r}
 #| echo: false
+#| cache: true
 set.seed(84735)
 ps_1 <- prediction_summary_cv(
   data = weather_WU, model = weather_model_1, k = 10)$cv
