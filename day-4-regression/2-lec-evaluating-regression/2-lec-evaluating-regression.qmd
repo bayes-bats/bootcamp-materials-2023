@@ -1,6 +1,8 @@
 ---
 title: "Evaluating <br> regression models"
 subtitle: "Day 4"
+execute:
+  echo: true
 format: 
   revealjs:
     slide-number: true
@@ -12,3 +14,256 @@ format:
       data-background-size: 12%
       data-background-position: 50% 85%
 ---
+
+## Packages
+
+```{r}
+library(bayesrules)
+library(tidyverse)
+library(rstanarm)
+```
+
+
+## Data
+
+
+##
+
+1. __How fair is the model?__ How was the data collected? By whom and for what purpose? How might the results of the analysis, or the data collection itself, impact individuals and society? What biases or power structures might be baked into this analysis?   
+  
+
+
+2. __How wrong is the model?__  George Box famously said: “All models are wrong, but some are useful.” What’s important to know then is, how wrong is our model? Are our model assumptions reasonable?
+
+
+
+3. __How accurate are the posterior predictive models?__    
+
+
+
+## Checking Model Assumptions
+
+
+$$Y_i | \beta_0, \beta_1, \sigma \stackrel{ind}{\sim} N(\mu_i, \sigma^2) \;\; \text{ with } \;\; \mu_i = \beta_0 + \beta_1 X_i  .$$
+
+1. Conditioned on $X$, the observed __data__ $Y_i$ on case $i$ is _independent_ of the observed data on any other case $j$.
+2. The typical $Y$ outcome can be written as a _linear function_ of $X$, $\mu = \beta_0 + \beta_1 X$.
+3. At any $X$ value, $Y$ __varies normally__ around $\mu$ with consistent variability $\sigma$. 
+
+
+
+## Independence
+
+
+_When taken alone_, ridership $Y$ is likely correlated over time -- today's ridership likely tells us something about tomorrow's ridership.
+Yet much of this correlation, or dependence, can be explained by the time of year and features associated with the time of year -- like temperature $X$.
+Thus, knowing the _temperature_ on two subsequent days may very well "cancel out" the time correlation in their ridership data.
+
+
+## Linearity and Constant Variance
+
+```{r echo=FALSE, message=FALSE}
+ggplot(bikes, aes(y = rides, x = temp_feel)) + 
+  geom_point(size = 0.2) + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+The relationship between ridership and temperature does appear to be linear. Further, with the slight exception of colder days on which ridership is uniformly small, the variability in ridership does appear to be roughly consistent across the range of temperatures $X$.
+
+
+__Posterior predictive check__
+
+Consider a regression model with response variable $Y$, predictor $X$, and a set of regression parameters $\theta$. For example, in the model above $\theta = (\beta_0,\beta_1,\sigma)$.  Further, let $\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\right\rbrace$ be an $N$-length Markov chain for the posterior model of $\theta$.
+Then a "good" Bayesian model will produce _predictions_ of $Y$ with features similar to the _original_ $Y$ data.  To evaluate whether your model satisfies this goal:
+
+1. At each set of posterior plausible parameters $\theta^{(i)}$, simulate a sample of $Y$ values from the likelihood model, one corresponding to each $X$ in the original sample of size $n$.  This produces $N$ separate samples of size $n$.
+2. Compare the features of the $N$ simulated $Y$ samples, or a subset of these samples, to those of the original $Y$ data.
+
+
+```{r cache=TRUE}
+bike_model <- stan_glm(rides ~ temp_feel, data = bikes,
+                       family = gaussian,
+                       prior_intercept = normal(5000, 1000),
+                       prior = normal(100, 40), 
+                       prior_aux = exponential(0.0008),
+                       chains = 4, iter = 5000*2, seed = 84735, refresh = FALSE)
+bike_model_df <- as.data.frame(bike_model)
+set.seed(84735)
+predict_75 <- bike_model_df %>% 
+  mutate(mu = `(Intercept)` + temp_feel*75) %>% 
+  mutate(y_new = rnorm(20000, mu, sigma))
+
+```
+
+
+
+```{r}
+first_set <- head(bike_model_df, 1)
+beta_0 <- first_set$`(Intercept)`
+beta_1 <- first_set$temp_feel
+sigma  <- first_set$sigma
+set.seed(84735)
+one_simulation <- bikes %>% 
+  mutate(mu = beta_0 + beta_1 * temp_feel,
+         simulated_rides = rnorm(500, mean = mu, sd = sigma)) %>% 
+  select(temp_feel, rides, simulated_rides)
+
+head(one_simulation, 2)
+
+```
+
+
+```{r echo=FALSE}
+ggplot(one_simulation, aes(x = simulated_rides)) + 
+  geom_density(color = "lightblue") + 
+  geom_density(aes(x = rides), color = "darkblue")
+```
+
+One posterior simulated dataset of ridership (light blue) along with the actual observed ridership data (dark blue)
+
+
+```{r cache=TRUE}
+# Examine 50 of the 20000 simulated samples
+pp_check(bike_model, nreps = 50) + 
+  xlab("rides")
+```
+
+
+
+##
+
+```{r echo=FALSE}
+# Plot the posterior predictive model
+ggplot(predict_75, aes(x = y_new)) + 
+  geom_density() +
+  geom_vline(xintercept = 6228)
+```
+
+
+##
+
+__observed value__: $Y$  
+__posterior predictive median__: $Y'$  
+__predictive error__: $Y - Y'$
+
+##
+
+
+```{r}
+predict_75 %>% 
+  summarize(mean = mean(y_new), error = 6228 - mean(y_new))
+```
+
+##
+
+```{r}
+predict_75 %>% 
+  summarize(sd = sd(y_new), error = 6228 - mean(y_new),
+            error_scaled = error / sd(y_new))
+```
+
+##
+
+```{r}
+predict_75 %>% 
+  summarize(lower_95 = quantile(y_new, 0.025),
+            lower_50 = quantile(y_new, 0.25),
+            upper_50 = quantile(y_new, 0.75),
+            upper_95 = quantile(y_new, 0.975))
+```
+
+##
+
+```{r}
+set.seed(84735)
+predictions <- posterior_predict(bike_model, newdata = bikes)
+
+dim(predictions)
+
+```
+
+##
+
+```{r eval=FALSE}
+ppc_intervals(bikes$rides, yrep = predictions, x = bikes$temp_feel, 
+              prob = 0.5, prob_outer = 0.95)
+```
+
+```{r cache=TRUE, echo=FALSE}
+set.seed(7)
+index <- sample(1:500, size = 25)
+bikes_small <- bikes[index,]
+predictions_small <- predictions[,index]
+g1 <- bayesplot::ppc_intervals(bikes$rides, 
+  yrep = predictions, 
+  x = bikes$temp_feel, 
+  prob = 0.5, prob_outer = 0.95)
+g2 <- bayesplot::ppc_intervals(bikes_small$rides, 
+  yrep = predictions_small, 
+  x = bikes_small$temp_feel, 
+  prob = 0.5, prob_outer = 0.95)
+ggpubr::ggarrange(g1,g2,ncol=2, common.legend = TRUE, legend = "right")
+```
+
+
+
+
+##
+
+
+Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has a corresponding posterior predictive model with _median_ $Y_i'$ and _median absolute deviation_ $\text{mad}_i$.  We can evaluate the overall posterior predictive model quality by the following measures:
+
+- The __median absolute error__  `mae`
+
+    $$\text{mae} = \text{median}_{i \in \{1,2,\ldots,n\}} |Y_i - Y_i'|$$
+
+- The __scaled median absolute error__ `scaled_mae`
+
+    $$\text{mae scaled} = \text{median}_{i \in \{1,2,\ldots,n\}} \frac{|Y_i - Y_i'|}{\text{sd}_i}$$
+
+- `within_50` and `within_95` measure the proportion of observed values $Y_i$ that fall within their 50% and 95% posterior prediction intervals respectively.  
+
+
+##
+
+ 
+```{r cache=TRUE}
+# Posterior predictive summaries
+prediction_summary(bike_model, data = bikes)
+```
+
+## The k-fold cross validation algorithm
+
+1. __Create folds.__ Let $k$ be some integer from 2 to our original sample size $n$. Split the data into $k$ __folds__, or subsets, of roughly equal size.    
+    
+2. __Train and test the model.__    
+    - _Train_ the model using the first $k - 1$ data folds combined.
+    - _Test_ this model on the $k$th data fold.
+    - Measure the prediction quality (eg: by MAE).
+    
+3. __Repeat.__ Repeat step 2 $k - 1$ times, each time leaving out a different fold for testing.
+    
+4. __Calculate cross-validation estimates.__ Steps 2 and 3 produce $k$ different training models and $k$ corresponding measures of prediction quality. _Average_ these $k$ measures to obtain a single cross-validation estimate of prediction quality.
+    
+##
+
+```{r cache=TRUE}
+set.seed(84735)
+cv_procedure <- prediction_summary_cv(
+  data = bikes, model = bike_model, k = 10)
+```
+
+##
+
+```{r}
+cv_procedure$folds
+```
+
+
+##
+
+```{r}
+cv_procedure$cv
+```
+
+
