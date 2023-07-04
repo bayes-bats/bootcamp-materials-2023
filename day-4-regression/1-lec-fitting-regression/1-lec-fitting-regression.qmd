@@ -574,7 +574,7 @@ We can both visualize and summarize the corresponding (approximate) posterior pr
 The results are equivalent to those we constructed from scratch above:
 
 
-```{r fig.cap = "Posterior predictive model of ridership on a 75-degree day.", fig.alt = "A density plot of the predicted ridership on a 75-degree day. The density plot is bell-shaped, centered at roughly 4000 rides, and ranges from roughly 1000 to 7000.", fig.width=10}
+```{r fig.cap = "Posterior predictive model of ridership on a 75-degree day.", fig.alt = "A density plot of the predicted ridership on a 75-degree day. The density plot is bell-shaped, centered at roughly 4000 rides, and ranges from roughly 1000 to 7000.", out.width=10}
 # Construct a 95% posterior credible interval
 posterior_interval(shortcut_prediction, prob = 0.95)
 
@@ -582,4 +582,6 @@ posterior_interval(shortcut_prediction, prob = 0.95)
 mcmc_dens(shortcut_prediction) + 
   xlab("predicted ridership on a 75 degree day")
 ```
+
+
 
