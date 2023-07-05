@@ -1,5 +1,5 @@
 ---
-title: "Bayes course vs. module"
+title: "Bayes Course vs. Module"
 subtitle: "Day 4"
 format: 
   revealjs:
@@ -12,6 +12,84 @@ format:
       data-background-size: 12%
       data-background-position: 50% 85%
 ---
+
+## What Are You Teaching?
+
+- A Bayesian course vs a Bayesian module in a course?
+
+- It can be your plans
+
+- Let's hear from 2-3 of you!
+
+## Analyses of Bayesian Courses
+::: nonincremental
+- Results from [a recent The American Statistician paper](https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232) by Mine and Monika
+
+- Out of 51 Bayesian courses from various STEM fields
+:::
+
+```{r,  echo = FALSE, out.width = 500, fig.align = 'center'}
+knitr::include_graphics("TAStable.png")
+```
+# Small Group Discussion
+
+## Format and Length
+
+- About 30 minutes
+
+- 3-4 small groups, each led by one Instructor/TA
+
+- Grouped by: 
+    - Bayesian courses only 
+    - Bayesian modules only
+    - Bayesian courses and modules
+
+- Assign a note-taker; if okay, please share notes with us afterwards
+
+- Assign a reporter for large group sharing (3 minutes per group)
+
+- Feel free to use our prepared questions and feel free to come up with your own
+
+
+## Discussion Questions
+
+::: nonincremental
+1. [The American Statistician paper](https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232) by Mine and Monika includes the following breakdown of topics by area for a Bayesian course. What do you think of them?
+:::
+```{r,  echo = FALSE, out.width = 500, fig.align = 'center'}
+knitr::include_graphics("TAStopics.png")
+```
+
+## Discussion Questions
+
+::: nonincremental
+2. [The American Statistician paper](https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232) by Mine and Monika includes
+the following sample weekly schedules for a Bayesian course. What do you think of them?
+:::
+```{r,  echo = FALSE, out.width = 500, fig.align = 'center'}
+knitr::include_graphics("TASschedule.png")
+```
+## Discussion Questions
+
+3. What has been your biggest challenge of teaching a Bayesian course/module? Have you figured out some solutions to it?
+
+4. What is your favorite topic when teaching a Bayesian course/module?
+
+5. If introducing a Bayesian module in an introductory/intermediate/advanced-level course in your field, what would be your plans, in terms of topic, data, computing, and modeling?
+
+6. What is the one challenge you would like to get help with from BATS bootcamp?
+
+# Large Group Sharing
+
+## Format and Length
+
+- About 25 minutes
+
+- We will record this portion for sharing later. Okay?
+
+- Each group reports back for 3 minutes
+
+- Open discussion for remaining time
 
 
 
