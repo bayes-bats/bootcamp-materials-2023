@@ -1,0 +1,39 @@
+---
+title: "Conjugate Priors and their Posteriors"
+subtitle: "Day 2"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    theme: ["../../templates/slides-style.scss"]
+    logo: https://www.stat.uci.edu/bayes-bats/img/logo.png
+    title-slide-attributes: 
+      data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
+      data-background-size: 12%
+      data-background-position: 50% 85%
+---
+
+Note that this lecture is based on [Chapters 3-4 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-3.html).
+
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
