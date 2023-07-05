@@ -260,6 +260,7 @@ sleepdep <- sleepstudy %>%
   pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %>%
   mutate(diff32=Day3-Day2)
   # consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
+  # positive differences indicate longer reaction times when sleep-deprived
 sleepdep %>%
   ggplot(aes(x=diff32)) +
   geom_histogram() + 
@@ -277,6 +278,7 @@ sleepdep <- sleepstudy %>%
   pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %>%
   mutate(diff32=Day3-Day2)
   # keep day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
+# positive differences indicate longer reaction times when sleep-deprived
 sleepdep %>%
   ggplot(aes(x=diff32)) +
   geom_histogram() + 
