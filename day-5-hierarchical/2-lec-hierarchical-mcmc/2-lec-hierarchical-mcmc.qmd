@@ -1,5 +1,5 @@
 ---
-title: "Hierarchical models: <br> MCMC and inference"
+title: "Hierarchical Models: <br> MCMC and Inference"
 subtitle: "Day 5"
 format: 
   revealjs:
@@ -10,8 +10,216 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 85%
+      data-background-position: 50% 95%
 ---
 
 
+# MCMC Estimation and Diagnostics
 
+## Fitting The Model
+
+::: nonincremental
+- Use the `brm()` function with `family = gaussian`
+
+- Use `rating \~ 1 + 1 | Title` expression for model specification
+:::
+
+```{r, echo = FALSE}
+library(tidyverse)
+
+MovieRatings <- read.csv("2010_animation_ratings.csv", header = TRUE, sep = ",")
+
+MovieRatings %>%
+  mutate(Title = as.character(title),
+         Title = recode(Title,
+                  "Shrek Forever After (a.k.a. Shrek: The Final Chapter) (2010)" = "Shrek Forever",
+                  "How to Train Your Dragon (2010)" = "Dragon",
+                  "Toy Story 3 (2010)" = "Toy Story 3",
+                  "Tangled (2010)" = "Tangled",
+                  "Despicable Me (2010)" = "Despicable Me",
+                  "Legend of the Guardians: The Owls of Ga'Hoole (2010)" = "Guardians",
+                  "Megamind (2010)" = "Megamind",
+                  "Batman: Under the Red Hood (2010)" = "Batman")) ->
+           MovieRatings
+```
+
+```{r, warning = FALSE, message = FALSE, echo = TRUE}
+library(brms)
+ml_fit <- brm(data = MovieRatings, family = gaussian,
+               rating ~ 1 + (1 | Title),
+               prior = c(prior(normal(3, 1), class = Intercept),
+                         prior(cauchy(0, 1), class = sd),
+                         prior(cauchy(0, 1), class = sigma)),
+               iter = 20000, warmup = 10000, thin = 10, chains = 2, 
+               seed = 1234)
+```
+
+## Saving Posterior Draws
+
+::: nonincremental
+- Save `post` as a matrix of simulated posterior draws
+
+- The model parameters: $\{\mu, \tau, \mu_1, \cdots, \mu_8, \sigma\}$
+:::
+
+```{r, warning = FALSE, message = FALSE, echo = TRUE}
+post_ml <- as_draws_df(ml_fit)
+print(post_ml)
+```
+
+
+## Posterior Plots
+
+::: nonincremental
+- Function `mcmc_areas()` displays a density estimate of the simulated posterior draws with a specified credible interval
+:::
+
+```{r fig.height = 2, fig.width = 3, fig.align = "center", echo = TRUE}
+library(bayesplot)
+mcmc_areas(post_ml, 
+           pars = c("b_Intercept", "r_Title[Batman,Intercept]"), 
+           prob = 0.95)
+```
+
+## Posterior Plots
+
+```{r fig.height = 2, fig.width = 4, fig.align = "center", echo = TRUE}
+library(bayesplot)
+mcmc_areas(post_ml, 
+           pars = c("b_Intercept", 
+                    "r_Title[Batman,Intercept]", 
+                    "r_Title[Despicable.Me,Intercept]", 
+                    "r_Title[Dragon,Intercept]",
+                    "r_Title[Guardians,Intercept]",
+                    "r_Title[Megamind,Intercept]",
+                    "r_Title[Shrek.Forever,Intercept]",
+                    "r_Title[Tangled,Intercept]",
+                    "r_Title[Toy.Story.3,Intercept]"), 
+           prob = 0.95)
+```
+
+## Posterior Plots
+
+::: nonincremental
+- Between-group variability $\tau$ vs within-group variability $\sigma$
+:::
+
+```{r fig.height = 2, fig.width = 3, fig.align = "center", echo = TRUE}
+library(bayesplot)
+mcmc_areas(post_ml, 
+           pars = c("sd_Title__Intercept", "sigma"), 
+           prob = 0.95)
+```
+
+## MCMC Diagnostics
+
+```{r, eval = FALSE, echo = TRUE}
+ml_fit <- brm(data = MovieRatings, family = gaussian,
+               rating ~ 1 + (1 | Title),
+               prior = c(prior(normal(3, 1), class = Intercept),
+                         prior(cauchy(0, 1), class = sd),
+                         prior(cauchy(0, 1), class = sigma)),
+               iter = 20000, warmup = 10000, thin = 10, chains = 2, 
+               seed = 1234)
+```
+
+::: nonincremental
+- `iter`: total number of iterations
+- `warmup`: the number of iterations to be discarded (beginning iterations are not converged)
+- `thin`: the number of draws to thin for saving
+- `chains`: the number of MCMC chains (some diagnostics can only be done for more than one chain)
+:::    
+    
+## MCMC Diagnostics: Traceplot
+
+::: nonincremental
+- Function `mcmc_trace()` displays a traceplot of the simulated posterior draws for each chain
+:::
+
+```{r fig.height = 2, fig.width = 3, fig.align = "center"}
+mcmc_trace(ml_fit, pars = c("sd_Title__Intercept"))
+```
+
+## MCMC Diagnostics: Autocorrelation Plot
+
+::: nonincremental
+- Function `mcmc_acf()` displays an autocorrelation plot of the simulated posterior draws
+:::
+
+```{r fig.height = 2, fig.width = 3, fig.align = "center"}
+mcmc_acf_bar(ml_fit, pars = c("sd_Title__Intercept"))
+```
+
+# Additional Bayesian Inferential Questions
+
+## Shrinkage/Pooling Effects
+
+```{r fig.height = 3, fig.width = 3, fig.align = "center", echo = FALSE}
+J <- 8
+Post_Mus <- post_ml$b_Intercept + 
+  post_ml[, 4:11]
+Post_Means <- colMeans(Post_Mus)
+
+MovieRatings %>% group_by(Group_Number) %>%
+  summarize(Title = first(title),
+            N = n(), M = mean(rating),
+            SE = sd(rating) / sqrt(N)) -> Ind_Stats
+
+Means1 <- data.frame(Type = "Sample", Mean = Ind_Stats$M)
+Means2 <- data.frame(Type = "Posterior", Mean = Post_Means)
+Means1$Title <- c("Dragon", "Toy Story 3", "Shrek Forever",
+                  "Despicable Me", "Batman", "Guardians",
+                  "Megamind", "Tangled")
+Means2$Title <- c("Batman", "Despicable Me", "Dragon", "Guardians",
+                  "Megamind", "Shrek Forever",
+                   "Tangled", "Toy Story 3")
+df <- rbind(Means1, Means2)
+df$Type <- factor(df$Type, levels = c("Sample", "Posterior"))
+ggplot(df,
+       aes(Type, Mean, group=Title)) +
+  geom_line() + geom_point() +
+  annotate(geom = "text",
+           x = 0.75,
+           y = Means1$Mean + c(0.05, 0, 0.05, 0,
+                               0, -0.05, 0, 0),
+           size = 2,
+           label = Means1$Title) +
+  theme_bw()
+```
+
+## Sources of Variability
+
+- Two sources of variability in $Y_{ij}$:
+\begin{eqnarray*}
+Y_{ij} &\overset{i.i.d.}{\sim}& \textrm{Normal}(\mu_j, \sigma) \,\,\, \text{[within-group variability]} \\
+\mu_j &\sim& \textrm{Normal}(\mu, \tau) \,\,\, \text{[between-group variability]}
+\end{eqnarray*}
+
+- To compare these two sources of variability, one can compute the fraction
+\begin{equation*}
+R = \frac{\tau^2}{\tau^2 + \sigma^2}
+\end{equation*}
+from the posterior draws of $\tau$ and $\sigma$
+
+- If $R \rightarrow 1$, the higher the between-group variability
+
+## Sources of Variability: Results
+
+::: panel-tabset
+## Code
+```{r echo = TRUE}
+tau_draws <- post_ml$sd_Title__Intercept
+sigma_draws <- post_ml$sigma
+R <- tau_draws^2/(tau_draws^2 + sigma_draws^2)
+quantile(R, c(0.025, 0.975))
+```
+
+## Plot
+```{r}
+df <- as.data.frame(R)
+ggplot(df, aes(x=R)) + 
+  geom_density() + 
+  labs(title="Density of R") + 
+  theme_bw()
+```
+:::

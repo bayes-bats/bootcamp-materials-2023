@@ -7,9 +7,9 @@
 <link href="2-lec-hierarchical-mcmc_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="2-lec-hierarchical-mcmc_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2-lec-hierarchical-mcmc_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+  <meta name="generator" content="quarto-1.1.168">
 
-  <title>Hierarchical models:   MCMC and inference</title>
+  <title>Hierarchical Models:   MCMC and Inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +27,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="2-lec-hierarchical-mcmc_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="2-lec-hierarchical-mcmc_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -322,21 +386,280 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
-  <h1 class="title">Hierarchical models: <br> MCMC and inference</h1>
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 95%" data-background-size="12%" class="center">
+  <h1 class="title">Hierarchical Models: <br> MCMC and Inference</h1>
   <p class="subtitle">Day 5</p>
+</section>
 
-<div class="quarto-title-authors">
-</div>
+<section>
+<section id="mcmc-estimation-and-diagnostics" class="title-slide slide level1 center">
+<h1>MCMC Estimation and Diagnostics</h1>
 
 </section>
-<section class="slide level2">
-
-
-<img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<section id="fitting-the-model" class="slide level2">
+<h2>Fitting The Model</h2>
+<div>
+<ul>
+<li><p>Use the <code>brm()</code> function with <code>family = gaussian</code></p></li>
+<li><p>Use <code>rating \~ 1 + 1 | Title</code> expression for model specification</p></li>
+</ul>
+</div>
+<div class="cell">
 
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>ml_fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> MovieRatings, <span class="at">family =</span> gaussian,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>               rating <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Title),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb1-5"><a href="#cb1-5"></a>                         <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>                         <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>               <span class="at">iter =</span> <span class="dv">20000</span>, <span class="at">warmup =</span> <span class="dv">10000</span>, <span class="at">thin =</span> <span class="dv">10</span>, <span class="at">chains =</span> <span class="dv">2</span>, </span>
+<span id="cb1-8"><a href="#cb1-8"></a>               <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL '7b3628b1edef480fb50f98dfbed4d799' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 2.9e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.29 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:     1 / 20000 [  0%]  (Warmup)
+Chain 1: Iteration:  2000 / 20000 [ 10%]  (Warmup)
+Chain 1: Iteration:  4000 / 20000 [ 20%]  (Warmup)
+Chain 1: Iteration:  6000 / 20000 [ 30%]  (Warmup)
+Chain 1: Iteration:  8000 / 20000 [ 40%]  (Warmup)
+Chain 1: Iteration: 10000 / 20000 [ 50%]  (Warmup)
+Chain 1: Iteration: 10001 / 20000 [ 50%]  (Sampling)
+Chain 1: Iteration: 12000 / 20000 [ 60%]  (Sampling)
+Chain 1: Iteration: 14000 / 20000 [ 70%]  (Sampling)
+Chain 1: Iteration: 16000 / 20000 [ 80%]  (Sampling)
+Chain 1: Iteration: 18000 / 20000 [ 90%]  (Sampling)
+Chain 1: Iteration: 20000 / 20000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.797204 seconds (Warm-up)
+Chain 1:                1.00965 seconds (Sampling)
+Chain 1:                1.80686 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL '7b3628b1edef480fb50f98dfbed4d799' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:     1 / 20000 [  0%]  (Warmup)
+Chain 2: Iteration:  2000 / 20000 [ 10%]  (Warmup)
+Chain 2: Iteration:  4000 / 20000 [ 20%]  (Warmup)
+Chain 2: Iteration:  6000 / 20000 [ 30%]  (Warmup)
+Chain 2: Iteration:  8000 / 20000 [ 40%]  (Warmup)
+Chain 2: Iteration: 10000 / 20000 [ 50%]  (Warmup)
+Chain 2: Iteration: 10001 / 20000 [ 50%]  (Sampling)
+Chain 2: Iteration: 12000 / 20000 [ 60%]  (Sampling)
+Chain 2: Iteration: 14000 / 20000 [ 70%]  (Sampling)
+Chain 2: Iteration: 16000 / 20000 [ 80%]  (Sampling)
+Chain 2: Iteration: 18000 / 20000 [ 90%]  (Sampling)
+Chain 2: Iteration: 20000 / 20000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.823537 seconds (Warm-up)
+Chain 2:                0.971366 seconds (Sampling)
+Chain 2:                1.7949 seconds (Total)
+Chain 2: </code></pre>
+</div>
+</div>
 </section>
+<section id="saving-posterior-draws" class="slide level2">
+<h2>Saving Posterior Draws</h2>
+<div>
+<ul>
+<li><p>Save <code>post</code> as a matrix of simulated posterior draws</p></li>
+<li><p>The model parameters: <span class="math inline">\(\{\mu, \tau, \mu_1, \cdots, \mu_8, \sigma\}\)</span></p></li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>post_ml <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(ml_fit)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(post_ml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A draws_df: 1000 iterations, 2 chains, and 13 variables
+   b_Intercept sd_Title__Intercept sigma r_Title[Batman,Intercept]
+1          3.8               0.244  1.00                     0.381
+2          4.2               0.291  0.90                    -0.202
+3          3.7               0.237  0.95                     0.134
+4          3.8               0.393  0.92                    -0.381
+5          3.6               0.272  0.95                     0.025
+6          3.7               0.297  0.85                    -0.012
+7          3.8               0.081  0.83                     0.035
+8          3.8               0.164  0.83                     0.019
+9          3.8               0.107  1.05                     0.078
+10         3.9               0.053  0.90                     0.016
+   r_Title[Despicable.Me,Intercept] r_Title[Dragon,Intercept]
+1                             0.038                     0.152
+2                             0.023                    -0.544
+3                            -0.103                    -0.021
+4                            -0.329                    -0.631
+5                             0.012                    -0.098
+6                            -0.026                    -0.178
+7                             0.036                    -0.027
+8                             0.138                    -0.079
+9                             0.155                    -0.063
+10                            0.033                     0.106
+   r_Title[Guardians,Intercept] r_Title[Megamind,Intercept]
+1                        0.1547                      -0.210
+2                       -0.1091                       0.057
+3                       -0.1426                      -0.203
+4                       -1.0599                      -0.034
+5                        0.2055                       0.249
+6                        0.1035                      -0.119
+7                       -0.0131                      -0.023
+8                       -0.0928                       0.018
+9                       -0.1473                       0.088
+10                      -0.0081                       0.049
+# ... with 1990 more draws, and 5 more variables
+# ... hidden reserved variables {'.chain', '.iteration', '.draw'}</code></pre>
+</div>
+</div>
+</section>
+<section id="posterior-plots" class="slide level2">
+<h2>Posterior Plots</h2>
+<div>
+<ul>
+<li>Function <code>mcmc_areas()</code> displays a density estimate of the simulated posterior draws with a specified credible interval</li>
+</ul>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">mcmc_areas</span>(post_ml, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>           <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_Intercept"</span>, <span class="st">"r_Title[Batman,Intercept]"</span>), </span>
+<span id="cb5-4"><a href="#cb5-4"></a>           <span class="at">prob =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-4-1.png" width="288" class="r-stretch quarto-figure-center"></section>
+<section id="posterior-plots-1" class="slide level2">
+<h2>Posterior Plots</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mcmc_areas</span>(post_ml, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>           <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_Intercept"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>                    <span class="st">"r_Title[Batman,Intercept]"</span>, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>                    <span class="st">"r_Title[Despicable.Me,Intercept]"</span>, </span>
+<span id="cb6-6"><a href="#cb6-6"></a>                    <span class="st">"r_Title[Dragon,Intercept]"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                    <span class="st">"r_Title[Guardians,Intercept]"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                    <span class="st">"r_Title[Megamind,Intercept]"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9"></a>                    <span class="st">"r_Title[Shrek.Forever,Intercept]"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>                    <span class="st">"r_Title[Tangled,Intercept]"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>                    <span class="st">"r_Title[Toy.Story.3,Intercept]"</span>), </span>
+<span id="cb6-12"><a href="#cb6-12"></a>           <span class="at">prob =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-5-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="posterior-plots-2" class="slide level2">
+<h2>Posterior Plots</h2>
+<div>
+<ul>
+<li>Between-group variability <span class="math inline">\(\tau\)</span> vs within-group variability <span class="math inline">\(\sigma\)</span></li>
+</ul>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">mcmc_areas</span>(post_ml, </span>
+<span id="cb7-3"><a href="#cb7-3"></a>           <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"sd_Title__Intercept"</span>, <span class="st">"sigma"</span>), </span>
+<span id="cb7-4"><a href="#cb7-4"></a>           <span class="at">prob =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-6-1.png" width="288" class="r-stretch quarto-figure-center"></section>
+<section id="mcmc-diagnostics" class="slide level2">
+<h2>MCMC Diagnostics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>ml_fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> MovieRatings, <span class="at">family =</span> gaussian,</span>
+<span id="cb8-2"><a href="#cb8-2"></a>               rating <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Title),</span>
+<span id="cb8-3"><a href="#cb8-3"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb8-4"><a href="#cb8-4"></a>                         <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd),</span>
+<span id="cb8-5"><a href="#cb8-5"></a>                         <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb8-6"><a href="#cb8-6"></a>               <span class="at">iter =</span> <span class="dv">20000</span>, <span class="at">warmup =</span> <span class="dv">10000</span>, <span class="at">thin =</span> <span class="dv">10</span>, <span class="at">chains =</span> <span class="dv">2</span>, </span>
+<span id="cb8-7"><a href="#cb8-7"></a>               <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div>
+<ul>
+<li><code>iter</code>: total number of iterations</li>
+<li><code>warmup</code>: the number of iterations to be discarded (beginning iterations are not converged)</li>
+<li><code>thin</code>: the number of draws to thin for saving</li>
+<li><code>chains</code>: the number of MCMC chains (some diagnostics can only be done for more than one chain)</li>
+</ul>
+</div>
+</section>
+<section id="mcmc-diagnostics-traceplot" class="slide level2">
+<h2>MCMC Diagnostics: Traceplot</h2>
+<div>
+<ul>
+<li>Function <code>mcmc_trace()</code> displays a traceplot of the simulated posterior draws for each chain</li>
+</ul>
+</div>
+
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-8-1.png" width="288" class="r-stretch quarto-figure-center"></section>
+<section id="mcmc-diagnostics-autocorrelation-plot" class="slide level2">
+<h2>MCMC Diagnostics: Autocorrelation Plot</h2>
+<div>
+<ul>
+<li>Function <code>mcmc_acf()</code> displays an autocorrelation plot of the simulated posterior draws</li>
+</ul>
+</div>
+
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-9-1.png" width="288" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="additional-bayesian-inferential-questions" class="title-slide slide level1 center">
+<h1>Additional Bayesian Inferential Questions</h1>
+
+</section>
+<section id="shrinkagepooling-effects" class="slide level2">
+<h2>Shrinkage/Pooling Effects</h2>
+
+<img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-10-1.png" width="288" class="r-stretch quarto-figure-center"></section>
+<section id="sources-of-variability" class="slide level2">
+<h2>Sources of Variability</h2>
+<ul>
+<li class="fragment"><p>Two sources of variability in <span class="math inline">\(Y_{ij}\)</span>: <span class="math display">\[\begin{eqnarray*}
+Y_{ij} &amp;\overset{i.i.d.}{\sim}&amp; \textrm{Normal}(\mu_j, \sigma) \,\,\, \text{[within-group variability]} \\
+\mu_j &amp;\sim&amp; \textrm{Normal}(\mu, \tau) \,\,\, \text{[between-group variability]}
+\end{eqnarray*}\]</span></p></li>
+<li class="fragment"><p>To compare these two sources of variability, one can compute the fraction <span class="math display">\[\begin{equation*}
+R = \frac{\tau^2}{\tau^2 + \sigma^2}
+\end{equation*}\]</span> from the posterior draws of <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma\)</span></p></li>
+<li class="fragment"><p>If <span class="math inline">\(R \rightarrow 1\)</span>, the higher the between-group variability</p></li>
+</ul>
+</section>
+<section id="sources-of-variability-results" class="slide level2">
+<h2>Sources of Variability: Results</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>tau_draws <span class="ot">&lt;-</span> post_ml<span class="sc">$</span>sd_Title__Intercept</span>
+<span id="cb9-2"><a href="#cb9-2"></a>sigma_draws <span class="ot">&lt;-</span> post_ml<span class="sc">$</span>sigma</span>
+<span id="cb9-3"><a href="#cb9-3"></a>R <span class="ot">&lt;-</span> tau_draws<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tau_draws<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma_draws<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">quantile</span>(R, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        2.5%        97.5% 
+0.0001146342 0.4024477749 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="2-lec-hierarchical-mcmc_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</section></section>
     </div>
   </div>
 
@@ -548,6 +871,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -586,24 +951,7 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -641,42 +989,24 @@
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>
