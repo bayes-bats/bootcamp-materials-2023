@@ -13,6 +13,7 @@ format:
       data-background-position: 50% 85%
 ---
 
+Note that this lecture is based on [Chapters 1-2 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-1.html).
 
 
 # Introduction to Bayesian Statistics

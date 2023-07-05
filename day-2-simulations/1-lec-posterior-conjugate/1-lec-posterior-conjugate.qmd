@@ -13,7 +13,10 @@ format:
       data-background-position: 50% 95%
 ---
 
-# Application: Drought in California
+
+Note that this lecture is based on [Chapter 5 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-5.html).
+
+# Review Application: Drought in California
 
 ## California Drought
 

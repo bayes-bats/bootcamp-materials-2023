@@ -13,6 +13,9 @@ format:
       data-background-position: 50% 85%
 ---
 
+Note that this lecture is based on [Chapters 3-4 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-3.html).
+
+
 # The Beta Prior Distribution
 
 ## Back to Graduate School Applications
