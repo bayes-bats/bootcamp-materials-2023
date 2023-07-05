@@ -19,7 +19,7 @@ format:
 
 -   Develop an activity that could be used in a course you teach
   -   Be creative!
-  -   Can also adapt example from this morning if desired
+  -   Can also adapt example from this morning if desired (for example you can evaluate if participants adapt to sleep deprivation, as we have a week of measurements in this condition, with day 9 the last sleep-deprived measurement)
   
 -   Identify data and develop code for modeling
 
