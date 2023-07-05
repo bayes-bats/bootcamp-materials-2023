@@ -13,6 +13,7 @@ format:
       data-background-position: 50% 95%
 ---
 
+
 ## Reaction Times
 
 We consider data from a study (Belenky et al, 2003) of reaction time under a variety of sleep deprivation scenarios.  We will focus on the baseline values of reaction time, taken after study participants had a normal night's sleep. Suppose prior research has established a mean reaction time to a visual stimulus of 275ms, and we wish to determine whether the values in our study are consistent with this value. A first step is to read and plot the data.
@@ -22,6 +23,7 @@ We consider data from a study (Belenky et al, 2003) of reaction time under a var
 ::: panel-tabset
 
 ## Code
+
 
 ```{r }
 #| echo: fenced
@@ -38,7 +40,9 @@ baseline %>%
   geom_vline(xintercept=275, col="red")
 ```
 
+
 ## Plot
+
 
 ```{r }
 #| echo: false
@@ -54,6 +58,7 @@ baseline %>%
   labs(x="Reaction Time (ms)") + 
   geom_vline(xintercept=275, col="red")
 ```
+
 :::
 
 
@@ -72,6 +77,7 @@ Instead, we consider a relatively non-informative prior for our mean $\mu \sim N
 ## Prior for the Standard Deviation
 
 We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which has mean 0 and scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
+
 
 ```{r}
 #| echo: false
@@ -96,7 +102,9 @@ ggplot() +
 
 ```
 
+
 ## Code to Fit Model
+
 
 
 ```{r, echo=TRUE, eval=FALSE}
@@ -113,9 +121,6 @@ fit <- brm(data = baseline, family = gaussian(),
 
 ```
 
-
-
-
 ```{r runmod2}
 #| include: false
 fit <- brm(data = baseline, family = gaussian(),
@@ -130,6 +135,7 @@ fit <- brm(data = baseline, family = gaussian(),
 
 ```
 
+
 ## Checking the Output
 
 Trace plots can be used to check convergence. 
@@ -141,6 +147,7 @@ Trace plots can be used to check convergence.
 ## Code
 
 
+
 ```{r}
 #| echo: true
 #| eval: false
@@ -148,13 +155,16 @@ plot(fit) # show posteriors and trace plots
 ```
 
 
+
 ## Plots
+
 
 
 ```{r}
 #| echo: false
 plot(fit) # show posteriors and trace plots
 ```
+
 :::
 
 ## Interpreting Trace Plots
@@ -183,10 +193,12 @@ We also can check the $\hat{R}$ values. These compare the sampled values across 
 ## Checking $\hat{R}$
 
 
+
 ```{r}
 #| echo: fenced
 fit # written summary of the output
 ```
+
 
 ## Effective Sample Size
 
@@ -206,13 +218,16 @@ Markov chain simulations in general produce samples that are correlated, rather 
 
 Examining the posterior distribution for $\mu$, we see that most of its mass is below the value 275. 
 
+
 ```{r }
 plot(fit)
 ```
 
+
 ## Evaluating Our Hypothesis
 
 We can easily calculate the posterior probability that $\mu<275$ by taking the fraction of posterior samples that are less than 275.
+
 
 
 
@@ -222,9 +237,11 @@ We can easily calculate the posterior probability that $\mu<275$ by taking the f
 mean(as_draws_df(fit)$b_Intercept<275)
 ```
 
+
 So the posterior probability that $\mu<275$ is `r mean(as_draws_df(fit)$b_Intercept<275)`.
 
 ## Evaluating Our Hypothesis
+
 
 
 ```{r}
@@ -233,6 +250,7 @@ ci <- posterior_summary(fit,
 )
 
 ```
+
 
 We can also use the 95% credible interval for $\mu$, given by `r paste0("(",round(ci[,3],2),",",round(ci[,4],2),")")` and note that 275 is inside this credible interval.
 
@@ -271,6 +289,7 @@ sleepdep %>%
 
 ## Plot
 
+
 ```{r, echo=FALSE }
 sleepdep <- sleepstudy %>%
   filter(Days %in% c(2,3)) %>%
@@ -284,6 +303,7 @@ sleepdep %>%
   geom_vline(xintercept=0, col="red")
 
 ```
+
 :::
 
 
@@ -295,6 +315,7 @@ Using the previous slides as a guide, evaluate the hypothesis that sleep depriva
 ::: callout-warning
 Think carefully about your priors!
 :::
+
 
 ```{r}
 #| echo: false

@@ -10,7 +10,7 @@
 <link href="2-lec-posterior-analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.353">
 
-  <title>Posterior analysis   with MCMC</title>
+  <title>Posterior Analysis   with MCMC</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -389,7 +389,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 95%" data-background-size="12%" class="quarto-title-block center">
-  <h1 class="title">Posterior analysis <br> with MCMC</h1>
+  <h1 class="title">Posterior Analysis <br> with MCMC</h1>
   <p class="subtitle">Day 3</p>
 
 <div class="quarto-title-authors">
@@ -435,7 +435,7 @@
 <section id="analysis-of-reaction-time" class="slide level2">
 <h2>Analysis of Reaction Time</h2>
 <p>We can use the R brms() function to analyze the data. One advantage of this function is that it allows us easily to implement more complex sampling algorithms, beyond Gibbs sampling.</p>
-<p>Suppose our data model is <span class="math inline">\(Y \sim N(\mu, \sigma^2).\)</span> We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior samples, it’s not the only option.</p>
+<p>Suppose our data model is <span class="math inline">\(Y \sim N(\mu, \sigma^2),\)</span> and we wish to evaluate whether <span class="math inline">\(\mu\)</span> is consistent with a reaction time of 275ms. We previously studied the conjugate normal-inverse gamma specification, given by <span class="math display">\[\mu \mid \sigma^2 \sim N\bigg(\theta,\frac{\sigma^2}{n_0}\bigg), ~~~\frac{1}{\sigma^2} \sim \text{gamma}\bigg(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\bigg).\]</span> While this prior has a nice interpretation in terms of prior samples, it’s not the only option.</p>
 </section>
 <section id="prior-for-the-mean" class="slide level2">
 <h2>Prior for the Mean</h2>
@@ -448,16 +448,17 @@
 <img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="code-to-fit-model" class="slide level2">
 <h2>Code to Fit Model</h2>
-<pre><code>fit &lt;- brm(data = baseline, family = gaussian(),
-           Reaction ~ 1, #only estimating a mean (Intercept) and variance
-           prior = c(
-            prior(normal(300,50), class = Intercept), 
-              # prior for mu has mean 300 and sd 50
-            prior(cauchy(0,40), class = sigma)
-              # prior for sigma is half of a mean 0, scale 40 Cauchy
-                )
-)
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="|1|2|3-9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> baseline, <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb2-2"><a href="#cb2-2"></a>           Reaction <span class="sc">~</span> <span class="dv">1</span>, <span class="co">#only estimating a mean (Intercept) and variance</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>           <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb2-4"><a href="#cb2-4"></a>            <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">300</span>,<span class="dv">50</span>), <span class="at">class =</span> Intercept), </span>
+<span id="cb2-5"><a href="#cb2-5"></a>              <span class="co"># prior for mu has mean 300 and sd 50</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>            <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">class =</span> sigma)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>              <span class="co"># prior for sigma is half of a mean 0, scale 40 Cauchy</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>                )</span>
+<span id="cb2-9"><a href="#cb2-9"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="checking-the-output" class="slide level2">
 <h2>Checking the Output</h2>
@@ -473,7 +474,7 @@
 <div id="tabset-2-2">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -519,11 +520,11 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   266.23      7.27   252.21   281.03 1.00     2733     1668
+Intercept   266.32      7.42   251.46   280.89 1.00     2602     2168
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    31.06      5.72    22.33    44.96 1.00     2499     2192
+sigma    31.07      5.67    22.27    44.30 1.00     2791     2165
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -548,7 +549,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <h2>Evaluating Our Hypothesis</h2>
 <p>Examining the posterior distribution for <span class="math inline">\(\mu\)</span>, we see that most of its mass is below the value 275.</p>
 
-<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="evaluating-our-hypothesis-1" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
 <p>We can easily calculate the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> by taking the fraction of posterior samples that are less than 275.</p>
@@ -557,14 +558,14 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(fit)<span class="sc">$</span>b_Intercept<span class="sc">&lt;</span><span class="dv">275</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.889</code></pre>
+<pre><code>[1] 0.87775</code></pre>
 </div>
 </div>
-<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.889.</p>
+<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.87775.</p>
 </section>
 <section id="evaluating-our-hypothesis-2" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
-<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (252.21,281.03) and note that 275 is inside this credible interval.</p>
+<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (251.46,280.89) and note that 275 is inside this credible interval.</p>
 </section>
 <section id="you-try-it" class="slide level2">
 <h2>You Try It!</h2>
@@ -576,14 +577,51 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <h2>Changes in Reaction Time with Sleep Deprivation</h2>
 <p>Now that we’ve explored baseline reaction time, let’s see what happens to the reaction times of study participants after one night of sleep deprivation (only 3 hours of time in bed). First, we will do a little data wrangling and make a plot of the changse in reaction time, plotting the sleep deprived reaction time minus the baseline reaction time for each subject.</p>
 </section>
-<section id="changes-in-reaction-time-with-sleep-deprivation-1" class="slide level2">
-<h2>Changes in Reaction Time with Sleep Deprivation</h2>
+<section id="changes-in-reaction-time" class="slide level2">
+<h2>Changes in Reaction Time</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Code</a></li><li><a href="#tabset-3-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<pre><code>sleepdep &lt;- sleepstudy %&gt;%
+  filter(Days %in% c(2,3)) %&gt;%
+  pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %&gt;%
+  mutate(diff32=Day3-Day2)
+  # consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
+sleepdep %&gt;%
+  ggplot(aes(x=diff32)) +
+  geom_histogram() + 
+  labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
+  geom_vline(xintercept=0, col="red")
 
-<img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><p>We see that reaction times tend to be longer when participants have been sleep deprived.</p>
+</code></pre>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="you-try-it-1" class="slide level2">
 <h2>You Try It!</h2>
 <p>Using the previous slides as a guide, evaluate the hypothesis that sleep deprivation increases reaction time.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Think carefully about the prior you use!</p>
+</div>
+</div>
+</div>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
