@@ -1,5 +1,5 @@
 ---
-title: "Posterior of <br> Conjugate Priors"
+title: "Posteriors with Conjugate Priors"
 subtitle: "Day 2"
 format: 
   revealjs:
@@ -10,13 +10,14 @@ format:
     title-slide-attributes: 
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
-      data-background-position: 50% 95%
+      data-background-position: 50% 85%
 ---
-
 
 Note that this lecture is based on [Chapter 5 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-5.html).
 
-# Review Application: Drought in California
+# Review
+
+
 
 ## California Drought
 
@@ -31,6 +32,8 @@ knitr::include_graphics("img/cadrought.jpeg")
 Drought conditions have been a major concern for California residents and policy makers for years. We consider historical data on "extremely dry years" to formulate a prior distribution -- for example, from 1900-1999,  42 years were characterized as "extremely dry." For data analysis, we will assume we go back in time to 2020 and let data from 2020, 2021, and 2022 contribute to our data likelihood.
 :::
 :::
+
+
 
 ## Prior Distribution Options
 
@@ -485,5 +488,6 @@ With $\theta$ viewed as the mean of $n_0$ prior observations, then $E(\mu \mid Y
 ## Normal-Inverse Gamma Conjugate Prior Model
 
 To get the **marginal posterior** of $\sigma^2$, we  integrate over the unknown value of $\mu$ and obtain $$\frac{1}{\sigma^2} \mid Y_1, \ldots, Y_n \sim \text{gamma}\bigg(\frac{\nu_n}{2},\frac{\nu_n \sigma^2_n}{2}\bigg),$$ where $\nu_n=\nu_0+n$, $$\sigma^2_n=\frac{1}{\nu_n}\bigg[\nu_0\sigma^2_0 + (n-1)s^2 + \frac{n_0n}{n^*}(\bar{y}-\theta)^2\bigg],$$ where $s^2=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n-1}$ is the sample variance. 
+
 
 
