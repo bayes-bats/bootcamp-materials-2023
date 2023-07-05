@@ -7,9 +7,9 @@
 <link href="3-dis-effective-assessment-bayes_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="3-dis-effective-assessment-bayes_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="3-dis-effective-assessment-bayes_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+  <meta name="generator" content="quarto-1.1.168">
 
-  <title>Effective assessment   for Bayes learning</title>
+  <title>Effective Assessment   for Bayes Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -322,21 +322,84 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
-  <h1 class="title">Effective assessment <br> for Bayes learning</h1>
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="center">
+  <h1 class="title">Effective Assessment <br> for Bayes Learning</h1>
   <p class="subtitle">Day 3</p>
+</section>
 
-<div class="quarto-title-authors">
+<section id="what-assessment-tools-are-you-using" class="slide level2">
+<h2>What Assessment Tools Are You Using?</h2>
+<ul>
+<li class="fragment"><p>Anything related to statistics and/or Bayesian statistics</p></li>
+<li class="fragment"><p>It can be your plans</p></li>
+<li class="fragment"><p>Let’s hear from 2-3 of you!</p></li>
+</ul>
+</section>
+<section id="analyses-of-assessments" class="slide level2">
+<h2>Analyses of Assessments</h2>
+<div>
+<ul>
+<li><p>Results from <a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232">a recent The American Statistician paper</a> by Mine and Monika</p></li>
+<li><p>Out of 29 syllabi from various STEM fields</p></li>
+</ul>
 </div>
 
-</section>
-<section class="slide level2">
+<img data-src="TAStable.png" width="500" class="r-stretch"></section>
+<section>
+<section id="small-group-discussion" class="title-slide slide level1 center">
+<h1>Small Group Discussion</h1>
 
+</section>
+<section id="format-and-length" class="slide level2">
+<h2>Format and Length</h2>
+<ul>
+<li class="fragment"><p>About 30 minutes</p></li>
+<li class="fragment"><p>4 small groups, each led by one Instructor/TA</p></li>
+<li class="fragment"><p>Random assignment; get to know people from a different discipline!</p></li>
+<li class="fragment"><p>Assign a note-taker; if okay, please share notes with us afterwards</p></li>
+<li class="fragment"><p>Assign a reporter for large group sharing (3 minutes per group)</p></li>
+<li class="fragment"><p>Feel free to use our prepared questions and feel free to come up with your own</p></li>
+</ul>
+</section>
+<section id="discussion-questions" class="slide level2">
+<h2>Discussion Questions</h2>
+<ol type="1">
+<li class="fragment"><p><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232">The American Statistician paper</a> by Mine and Monika includes the following recommendations for assessments of a Bayesian course. What do you think of them?</p>
+<ul>
+<li class="fragment">Include a data analysis portion in a homework assignment and in an exam</li>
+<li class="fragment">Include a course project component in course assessments</li>
+<li class="fragment">Include formative assessments such as quizzes (low to no-grade contribution) to get students to do drill and practice exercises</li>
+<li class="fragment">Be created with assessment tools</li>
+<li class="fragment">In addition to lectures, use real data in every assessment when possible</li>
+</ul></li>
+</ol>
+</section>
+<section id="discussion-questions-1" class="slide level2">
+<h2>Discussion Questions</h2>
+<ol start="2" type="1">
+<li class="fragment"><p>What assessment tool(s) you have found to be most effective. Why and what advice do you have for someone to give it a try?</p></li>
+<li class="fragment"><p>What assessment tool(s) you have found to be least effective. Why and do you have solutions to improve it/them?</p></li>
+<li class="fragment"><p>What is the one challenge you would like to get help with from BATS bootcamp?</p></li>
+</ol>
+</section></section>
+<section>
+<section id="large-group-sharing" class="title-slide slide level1 center">
+<h1>Large Group Sharing</h1>
+
+</section>
+<section id="format-and-length-1" class="slide level2">
+<h2>Format and Length</h2>
+<ul>
+<li class="fragment"><p>About 25 minutes</p></li>
+<li class="fragment"><p>We will record this portion for sharing later. Okay?</p></li>
+<li class="fragment"><p>Each group reports back for 3 minutes</p></li>
+<li class="fragment"><p>Open discussion for remaining time</p></li>
+</ul>
 
 <img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -548,6 +611,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -586,24 +691,7 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -641,42 +729,24 @@
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>
