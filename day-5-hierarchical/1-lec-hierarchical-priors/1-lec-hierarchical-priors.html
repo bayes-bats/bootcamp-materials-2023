@@ -7,9 +7,9 @@
 <link href="1-lec-hierarchical-priors_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1-lec-hierarchical-priors_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="1-lec-hierarchical-priors_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.475">
+  <meta name="generator" content="quarto-1.1.168">
 
-  <title>Hierarchical models: priors</title>
+  <title>Hierarchical Models: Priors</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +27,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="1-lec-hierarchical-priors_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="1-lec-hierarchical-priors_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -322,21 +386,289 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="quarto-title-block center">
-  <h1 class="title">Hierarchical models: priors</h1>
+<section id="title-slide" data-background-image="https://www.stat.uci.edu/bayes-bats/img/logo.png" data-background-position="50% 85%" data-background-size="12%" class="center">
+  <h1 class="title">Hierarchical Models: Priors</h1>
   <p class="subtitle">Day 5</p>
+</section>
 
-<div class="quarto-title-authors">
-</div>
+<section>
+<section id="introduction-observations-in-groups" class="title-slide slide level1 center">
+<h1>Introduction: Observations in Groups</h1>
 
 </section>
-<section class="slide level2">
+<section id="recap-the-normal-model-normal-regression" class="slide level2">
+<h2>Recap: The Normal Model &amp; Normal Regression</h2>
+<ul>
+<li class="fragment"><p>When you have continuous outcomes, you can use a normal model: <span class="math display">\[\begin{equation*}
+Y_i \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma), \,\,\, i = 1, \cdots, n.
+\end{equation*}\]</span></p></li>
+<li class="fragment"><p>When you have predictor variables available, <span class="math inline">\(\{x_{i1}, \cdots, x_{ip}\}\)</span>; you can specify an observation specific mean: <span class="math display">\[\begin{equation*}
+Y_i \mid \mu_i, \sigma \overset{ind}{\sim} \textrm{Normal}(\mu_i, \sigma), \,\,\, i = 1, \cdots, n,
+\end{equation*}\]</span> where <span class="math display">\[\begin{equation*}
+\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots, \beta_p x_{ip}.
+\end{equation*}\]</span></p></li>
+<li class="fragment"><p>Observations are assumed independent.</p></li>
+</ul>
+</section>
+<section id="when-observations-are-not-necessarily-independent" class="slide level2">
+<h2>When Observations Are Not Necessarily Independent</h2>
+<div>
+<ul>
+<li><p>Observations can be dependent in several ways</p></li>
+<li><p>Observations are nested in groups:</p>
+<ul>
+<li>Students’ test scores from multiple schools</li>
+<li>Ratings of movies of different genres</li>
+<li>Ratings of dramas of different schedules</li>
+<li>Death rates of hospitals</li>
+</ul></li>
+</ul>
+</div>
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<p><strong>Discussion question</strong></p>
+</div>
+<div class="callout-content">
+<p>Can you think of additional examples of observations in groups?</p>
+</div>
+</div>
+</div>
+<div>
+<ul>
+<li>We will focus on a movie rating dataset to explore modeling approaches for dependent data</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="example-ratings-of-animation-movies" class="title-slide slide level1 center">
+<h1>Example: Ratings of Animation Movies</h1>
 
-
-<img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
-
+</section>
+<section id="ratings-of-animation-movies" class="slide level2">
+<h2>Ratings of Animation Movies</h2>
+<ul>
+<li class="fragment"><p>Example from <a href="https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html">Probability and Bayesian Modeling</a></p></li>
+<li class="fragment"><p>MovieLens: personalized movie recommendation for users</p></li>
+<li class="fragment"><p>In one study, a sample on movie ratings for 8 animation movies released in 2010, total 55 ratings</p></li>
+<li class="fragment"><p>Each rating is for a movie completed by a user; some movies have many ratings while others have few</p></li>
+<li class="fragment"><p>A natural grouping of these 55 ratings: by movie title</p></li>
+</ul>
+</section>
+<section id="plot-of-ratings-by-title" class="slide level2">
+<h2>Plot of Ratings by Title</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>MovieRatings <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"2010_animation_ratings.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>MovieRatings <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">mutate</span>(<span class="at">Title =</span> <span class="fu">as.character</span>(title),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>         <span class="at">Title =</span> <span class="fu">recode</span>(Title,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>                  <span class="st">"Shrek Forever After (a.k.a. Shrek: The Final Chapter) (2010)"</span> <span class="ot">=</span> <span class="st">"Shrek Forever"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>                  <span class="st">"How to Train Your Dragon (2010)"</span> <span class="ot">=</span> <span class="st">"Dragon"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>                  <span class="st">"Toy Story 3 (2010)"</span> <span class="ot">=</span> <span class="st">"Toy Story 3"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11"></a>                  <span class="st">"Tangled (2010)"</span> <span class="ot">=</span> <span class="st">"Tangled"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12"></a>                  <span class="st">"Despicable Me (2010)"</span> <span class="ot">=</span> <span class="st">"Despicable Me"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13"></a>                  <span class="st">"Legend of the Guardians: The Owls of Ga'Hoole (2010)"</span> <span class="ot">=</span> <span class="st">"Guardians"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14"></a>                  <span class="st">"Megamind (2010)"</span> <span class="ot">=</span> <span class="st">"Megamind"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15"></a>                  <span class="st">"Batman: Under the Red Hood (2010)"</span> <span class="ot">=</span> <span class="st">"Batman"</span>)) <span class="ot">-&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>           MovieRatings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="1-lec-hierarchical-priors_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
+<section id="summary-statistics-of-ratings-by-title" class="slide level2">
+<h2>Summary Statistics of Ratings by Title</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Movie Title</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Batman: Under the Red Hood</td>
+<td style="text-align: right;">5.00</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Despicable Me</td>
+<td style="text-align: right;">3.72</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">How to Train Your Dragon</td>
+<td style="text-align: right;">3.41</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Legend of the Guardians</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Megamind</td>
+<td style="text-align: right;">3.38</td>
+<td style="text-align: right;">1.31</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Shrek Forever After</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">1.32</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tangled</td>
+<td style="text-align: right;">4.20</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Toy Story 3</td>
+<td style="text-align: right;">3.81</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modeling-challenges" class="slide level2">
+<h2>Modeling Challenges</h2>
+<ul>
+<li class="fragment">Approach 1 - separate estimates for each movie <span class="math inline">\(j\)</span>: <span class="math display">\[\begin{equation*}
+Y_{1j}, \cdots, Y_{n_j j} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma_j)
+\end{equation*}\]</span>
+<ul>
+<li class="fragment">No relation among groups; groups with small sample size might suffer (e.g., <span class="math inline">\(n_j = 1\)</span>)</li>
+</ul></li>
+<li class="fragment">Approach 2 - combined estimates for all <span class="math inline">\(J\)</span> movies: <span class="math display">\[\begin{equation*}
+Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma)
+\end{equation*}\]</span>
+<ul>
+<li class="fragment">Differences in groups are ignored</li>
+</ul></li>
+</ul>
+</section>
+<section id="potential-solutions" class="slide level2">
+<h2>Potential Solutions</h2>
+<ul>
+<li class="fragment">Something in between - hierarchical/multilevel modeling
+<ul>
+<li class="fragment">Pooling information across groups</li>
+<li class="fragment">Achieved through a two-stage prior</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="a-hierarchical-model-with-random-sigma" class="title-slide slide level1 center">
+<h1>A Hierarchical Model with Random <span class="math inline">\(\sigma\)</span></h1>
+
+</section>
+<section id="the-sampling-model" class="slide level2">
+<h2>The Sampling Model</h2>
+<div>
+<ul>
+<li><p>Without loss of generality, assume a group-specific normal model for movie <span class="math inline">\(j\)</span>: <span class="math display">\[\begin{eqnarray}
+Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma)
+\end{eqnarray}\]</span> where <span class="math inline">\(i = 1, \cdots, n_j\)</span> and <span class="math inline">\(n_j\)</span> is the number of observations in group <span class="math inline">\(j\)</span></p></li>
+<li><p>Model parameters: <span class="math inline">\(\{\mu_1, \cdots, \mu_J, \sigma\}\)</span></p></li>
+</ul>
+</div>
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<p><strong>Discussion question</strong></p>
+</div>
+<div class="callout-content">
+<p>Is a commonly shared <span class="math inline">\(\sigma\)</span> reasonable? If not, what can you do?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-two-stage-prior-for-mu_1-cdots-mu_j-stage-1" class="slide level2">
+<h2>A Two-Stage Prior for <span class="math inline">\(\{\mu_1, \cdots, \mu_J\}\)</span>: Stage 1</h2>
+<ul>
+<li class="fragment"><p>All movies are animation movies, we could assume that the mean ratings are similar across movies</p></li>
+<li class="fragment"><p>First stage: the same normal prior distribution for each mean <span class="math inline">\(\mu_j\)</span> <span class="math display">\[\begin{equation}
+\mu_j \mid \mu, \tau \sim \textrm{Normal}(\mu, \tau)
+\end{equation}\]</span></p></li>
+<li class="fragment"><p>This prior allows information pooled across movies (groups)</p>
+<ul>
+<li class="fragment">If <span class="math inline">\(\tau\)</span> is large, the <span class="math inline">\(\mu_j\)</span>’s are very different a priori <span class="math inline">\(\rightarrow\)</span> modest pooling in parameter estimation</li>
+<li class="fragment">If <span class="math inline">\(\tau\)</span> is small, the <span class="math inline">\(\mu_j\)</span>’s are very similar a priori <span class="math inline">\(\rightarrow\)</span> large pooling in parameter estimation</li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau\)</span>: hyperparameters, and treated random</p></li>
+</ul>
+</section>
+<section id="a-two-stage-prior-for-mu_1-cdots-mu_j-stage-2" class="slide level2">
+<h2>A Two-Stage Prior for <span class="math inline">\(\{\mu_1, \cdots, \mu_J\}\)</span>: Stage 2</h2>
+<ul>
+<li class="fragment"><p>Second stage: weakly informative hyperpriors for hyperparameters <span class="math display">\[\begin{eqnarray}
+\mu &amp;\sim&amp; \textrm{Normal}(3, 1) \\
+\tau &amp;\sim&amp; \textrm{Cauchy}(0, 1)
+\end{eqnarray}\]</span></p></li>
+<li class="fragment"><p>After posterior inference:</p>
+<ul>
+<li class="fragment">The posterior of <span class="math inline">\(\mu\)</span> is informative about an average mean rating</li>
+<li class="fragment">The posterior of <span class="math inline">\(\tau\)</span> is informative about the variation among the <span class="math inline">\(\mu_j\)</span>’s</li>
+</ul></li>
+</ul>
+</section>
+<section id="prior-for-sigma-and-graphical-representation" class="slide level2">
+<h2>Prior for <span class="math inline">\(\sigma\)</span> and Graphical Representation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
+<ul>
+<li>Weakly informative prior for <span class="math inline">\(\sigma\)</span>: <span class="math display">\[\begin{eqnarray}
+\sigma &amp;\sim&amp; \textrm{Cauchy}(0, 1)
+\end{eqnarray}\]</span></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="treediagram.png" width="500"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<p><strong>Discussion question</strong></p>
+</div>
+<div class="callout-content">
+<p>Describe how the graphical representation corresponds to the hierarchical model. What parameters/hyperparameters are shared among what?</p>
+</div>
+</div>
+</div>
+<p><img src="https://www.stat.uci.edu/bayes-bats/img/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</section></section>
     </div>
   </div>
 
@@ -548,6 +880,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -586,24 +960,7 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -641,42 +998,24 @@
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>
