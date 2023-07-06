@@ -403,7 +403,7 @@
   Y_1, \cdots, Y_n \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2)
   \end{equation}\]</span></p></li>
 <li class="fragment"><p>A joint prior distribution as: <span class="math display">\[\begin{equation}
-\pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 \end{equation}\]</span></p></li>
 <li class="fragment"><p>And let priors be: <span class="math display">\[\begin{eqnarray}
 \mu &amp;\sim&amp; \textrm{Normal}(\theta, \tau^2)\\
@@ -10572,17 +10572,21 @@
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">names</span>(para_post) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"mu"</span>, <span class="st">"phi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">quantile</span>(para_post<span class="sc">$</span>mu, <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>para_post <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">reframe</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(mu, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    2.5%    97.5% 
-5.537106 6.039795 </code></pre>
+<pre><code>    quants
+1 5.537106
+2 5.619701</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">quantile</span>(para_post<span class="sc">$</span>phi, <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>para_post <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">reframe</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(phi, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    2.5%    97.5% 
-1.332576 3.995338 </code></pre>
+<pre><code>    quants
+1 1.332576
+2 1.652845</code></pre>
 </div>
 </div>
 </div>

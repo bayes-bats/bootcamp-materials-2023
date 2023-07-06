@@ -24,7 +24,7 @@ format:
       
 -   A joint prior distribution as:
     \begin{equation}
-    \pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+    f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
     \end{equation}
 
 -   And let priors be:
@@ -174,11 +174,13 @@ names(para_post) <- c("mu", "phi")
 ```
 
 ```{r, echo = TRUE}
-quantile(para_post$mu, c(0.025,0.975))
+para_post %>%
+  reframe(quants = quantile(mu, probs = c(0.025, 0.0975)))
 ```
 
 ```{r, echo = TRUE}
-quantile(para_post$phi, c(0.025,0.975))
+para_post %>%
+  reframe(quants = quantile(phi, probs = c(0.025, 0.0975)))
 ```
 
 ## Plot 1
