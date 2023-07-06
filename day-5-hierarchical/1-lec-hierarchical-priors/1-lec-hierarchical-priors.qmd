@@ -13,6 +13,7 @@ format:
       data-background-position: 50% 85%
 ---
 
+Note that the example in this lecture is from [Chapter 10.2 of Probability and Bayesian Modeling book](https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html#hierarchical-normal-modeling)
 
 # Introduction: Observations in Groups
 
@@ -58,7 +59,7 @@ Can you think of additional examples of observations in groups?
 
 ## Ratings of Animation Movies
 
-- Example from [Probability and Bayesian Modeling](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html)
+- Example from [Chapter 10.2 of Probability and Bayesian Modeling book](https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html#hierarchical-normal-modeling)
 
 - MovieLens: personalized movie recommendation for users
 
