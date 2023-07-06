@@ -471,7 +471,7 @@
 <h2>A Joint Prior Distribution for Mean and Variance</h2>
 <ul>
 <li class="fragment"><p>Given what we have seen, how about a joint prior distribution as: <span class="math display">\[\begin{equation}
-\pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 \end{equation}\]</span></p></li>
 <li class="fragment"><p>And let priors be <span class="math display">\[\begin{eqnarray}
 \mu &amp;\sim&amp; \textrm{Normal}(\theta, \tau^2)\\
@@ -514,8 +514,8 @@
 \end{eqnarray}\]</span>
 <p>Start with initial values for parameters, <span class="math inline">\((\mu^{(0)}, \phi^{(0)})\)</span>. For <span class="math inline">\(s = 1, \ldots, S\)</span>, generate from the following sequence of <strong>full conditional posterior distributions</strong>:</p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\mu^{(s)} \sim f(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\phi^{(s)} \sim f(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
 <li class="fragment"><p>Set <span class="math inline">\(\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})\)</span></p></li>
 </ul>
 </section>
@@ -523,8 +523,8 @@
 <h2>Sampling Scheme: A Gibbs Sampler</h2>
 <div>
 <ul>
-<li><p><span class="math inline">\(\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
-<li><p><span class="math inline">\(\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
+<li><p><span class="math inline">\(\mu^{(s)} \sim f(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)\)</span></p></li>
+<li><p><span class="math inline">\(\phi^{(s)} \sim f(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)\)</span></p></li>
 <li><p>Set <span class="math inline">\(\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})\)</span></p></li>
 <li><p>The sequence <span class="math inline">\(\{\theta^{(s)}\)</span>: <span class="math inline">\(s = 1, \ldots, S\}\)</span> may be viewed (but is not necessarily… yet!) as a <strong>dependent</strong> sample from the joint posterior distribution of <span class="math inline">\((\mu, \phi \mid y_1, \cdots, y_n)\)</span></p></li>
 </ul>

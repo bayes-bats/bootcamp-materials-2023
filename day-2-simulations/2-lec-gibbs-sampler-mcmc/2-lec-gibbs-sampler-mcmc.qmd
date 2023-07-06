@@ -93,7 +93,7 @@ what would be a workflow for when both $\mu$ and $\sigma^2$ are unknown?
 
 -   Given what we have seen, how about a joint prior distribution as:
     \begin{equation}
-    \pi(\mu, \sigma^2) = \pi_1(\mu) \pi_2(\sigma^2)
+    f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
     \end{equation}
 
 -   And let priors be \begin{eqnarray}
@@ -137,18 +137,18 @@ Start with initial values for parameters, $(\mu^{(0)}, \phi^{(0)})$. For
 $s = 1, \ldots, S$, generate from the following sequence of **full
 conditional posterior distributions**:
 
--   $\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
+-   $\mu^{(s)} \sim f(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
 
--   $\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
+-   $\phi^{(s)} \sim f(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
 
 -   Set $\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})$
 
 ## Sampling Scheme: A Gibbs Sampler
 
 ::: nonincremental
--   $\mu^{(s)} \sim \pi(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
+-   $\mu^{(s)} \sim f(\mu \mid \phi^{(s-1)}, y_1, \cdots, y_n)$
 
--   $\phi^{(s)} \sim \pi(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
+-   $\phi^{(s)} \sim f(\phi \mid \mu^{(s)}, y_1, \cdots, y_n)$
 
 -   Set $\theta^{(s)} = (\mu^{(s)}, \phi^{(s)})$
 
