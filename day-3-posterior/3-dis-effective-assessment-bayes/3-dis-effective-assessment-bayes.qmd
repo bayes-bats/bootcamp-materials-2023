@@ -38,7 +38,7 @@ knitr::include_graphics("TAStable.png")
 
 - About 30 minutes
 
-- 4 small groups, each led by one Instructor/TA
+- 3-4 small groups, each led by one Instructor/TA
 
 - Random assignment; get to know people from a different discipline!
 
