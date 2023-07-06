@@ -13,6 +13,7 @@ format:
       data-background-position: 50% 95%
 ---
 
+Note that the example in this lecture is from [Chapter 10.2 of Probability and Bayesian Modeling book](https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html#hierarchical-normal-modeling); the MCMC estimation done in the book is with **JAGS**
 
 # MCMC Estimation and Diagnostics
 

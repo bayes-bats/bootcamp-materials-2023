@@ -391,6 +391,10 @@
   <p class="subtitle">Day 5</p>
 </section>
 
+<section class="slide level2">
+
+<p>Note that the example in this lecture is from <a href="https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html#hierarchical-normal-modeling">Chapter 10.2 of Probability and Bayesian Modeling book</a>; the MCMC estimation done in the book is with <strong>JAGS</strong></p>
+</section>
 <section>
 <section id="mcmc-estimation-and-diagnostics" class="title-slide slide level1 center">
 <h1>MCMC Estimation and Diagnostics</h1>
@@ -420,8 +424,8 @@
 <pre><code>
 SAMPLING FOR MODEL '7b3628b1edef480fb50f98dfbed4d799' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 2.9e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.29 seconds.
+Chain 1: Gradient evaluation took 3.3e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.33 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -438,15 +442,15 @@ Chain 1: Iteration: 16000 / 20000 [ 80%]  (Sampling)
 Chain 1: Iteration: 18000 / 20000 [ 90%]  (Sampling)
 Chain 1: Iteration: 20000 / 20000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.797204 seconds (Warm-up)
-Chain 1:                1.00965 seconds (Sampling)
-Chain 1:                1.80686 seconds (Total)
+Chain 1:  Elapsed Time: 0.827145 seconds (Warm-up)
+Chain 1:                1.01088 seconds (Sampling)
+Chain 1:                1.83803 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL '7b3628b1edef480fb50f98dfbed4d799' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 1e-05 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+Chain 2: Gradient evaluation took 1.3e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -463,9 +467,9 @@ Chain 2: Iteration: 16000 / 20000 [ 80%]  (Sampling)
 Chain 2: Iteration: 18000 / 20000 [ 90%]  (Sampling)
 Chain 2: Iteration: 20000 / 20000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.823537 seconds (Warm-up)
-Chain 2:                0.971366 seconds (Sampling)
-Chain 2:                1.7949 seconds (Total)
+Chain 2:  Elapsed Time: 0.801909 seconds (Warm-up)
+Chain 2:                0.982624 seconds (Sampling)
+Chain 2:                1.78453 seconds (Total)
 Chain 2: </code></pre>
 </div>
 </div>
