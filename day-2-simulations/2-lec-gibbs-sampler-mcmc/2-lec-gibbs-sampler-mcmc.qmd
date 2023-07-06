@@ -227,7 +227,7 @@ iterative process of a Gibbs sampler.
 - Creating and using MCMC
     
     - One can hand-code MCMC or use MCMC estimation software, including Stan (and various wrapper functions), JAGS, and BUGS
-    - the choice depends on teaching vs research, among other things
+    - The choice depends on teaching vs research, among other things
 
 - It is crucial to perform MCMC diagnostics **before** posterior analysis
 

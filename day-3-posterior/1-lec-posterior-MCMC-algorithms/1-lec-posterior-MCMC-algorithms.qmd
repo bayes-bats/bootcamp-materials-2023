@@ -232,7 +232,7 @@ base_family = "")
 
 - Not necessarily feasible for any model and prior choices
 
-- [demo animation](http://chi-feng.github.io/mcmc-demo/)
+- [Demo animation](http://chi-feng.github.io/mcmc-demo/)
 
 ## Metropolis and Metropolis-Hastings
 
@@ -242,7 +242,7 @@ base_family = "")
 
 - Every draw is "accepted" with a calculated ratio
 
-- [demo animation](http://chi-feng.github.io/mcmc-demo/)
+- [Demo animation](http://chi-feng.github.io/mcmc-demo/)
 
 
 ## Hamiltonian Monte Carlo (HMC)
@@ -255,4 +255,4 @@ base_family = "")
 
 - The main MCMC algorithm behind **Stan** and **brms**
 
-- [demo animation](http://chi-feng.github.io/mcmc-demo/)
+- [Demo animation](http://chi-feng.github.io/mcmc-demo/)
