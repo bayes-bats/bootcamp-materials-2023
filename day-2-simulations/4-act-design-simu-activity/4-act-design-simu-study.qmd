@@ -1,5 +1,5 @@
 ---
-title: "Designing a simulation activity"
+title: "Designing A Simulation Activity"
 subtitle: "Day 2"
 title-block-banner: true
 format:
@@ -59,7 +59,7 @@ the Beta-Binomial distribution.
 
 ## Simulate from the beta-binomial distribution
 
-The **VGAM** R package can simulate draws from the beta-binomial distribution. Install this package and load the library.
+The `VGAM` R package can simulate draws from the beta-binomial distribution. Install this package and load the library.
 
 ```{r}
 #| eval: false
@@ -90,7 +90,7 @@ knitr::include_graphics("img/PaperFigure1.png")
 
 ## Step-by-step exercises to replicate results in Figure 1
 
-1. Use the **rbetabinom.ab()** command to directly generate $m$ draws of $x$, which follows a beta-binomial distribution as shown in Equation (4). Note that $m = 500, n = 16, \alpha = 2, \beta = 4$. Make a histogram of the $m$ draws you have generated.
+1. Use the `rbetabinom.ab()` command to directly generate $m$ draws of $x$, which follows a beta-binomial distribution as shown in Equation (4). Note that $m = 500, n = 16, \alpha = 2, \beta = 4$. Make a histogram of the $m$ draws you have generated.
 
 According to the caption of Figure 1, ``The black histogram sample was obtained using Gibbs sampling with $k = 10$." Read Section 2 of the paper carefully to see how they implemented the Gibbs sampler.
 
@@ -98,7 +98,7 @@ According to the caption of Figure 1, ``The black histogram sample was obtained 
 
 3. Write a Gibbs sampling scheme to generate $m$ draws of $x$. Note that $m = 500,n = 16, \alpha = 2, \beta = 4$ and $k = 10$. Make a histogram of the $m$ draws you have generated.
 
-4. Make a side-by-side histogram showing the two samples, one generated in Exercise 1, and the other generated in Exercise 3. (Hint: you can use the following R script to do a side-by-side histogram. The demo below assumes **BetaBinomialDraws** storing the draws from Exercise 1 and **BetaBinomialDrawsGibbs** storing the draws from Exercise 3.
+4. Make a side-by-side histogram showing the two samples, one generated in Exercise 1, and the other generated in Exercise 3. (Hint: you can use the following R script to do a side-by-side histogram. The demo below assumes `BetaBinomialDraws` storing the draws from Exercise 1 and `BetaBinomialDrawsGibbs` storing the draws from Exercise 3.
 
 ```{r}
 #| eval: false
@@ -163,6 +163,6 @@ multhist(l, breaks = seq(-0.5, 16.5, by = 1))
 
 2. Beta-binomial presents a new use case of Gibbs sampler. Students (should) already have some background knowledge of the beta-binomial conjugacy so they are familiar with the setup.
 
-3. There exists an R function (**rbetabinom.ab()**) to directly sample from the marginal beta-binomial distribution, thus we have a "true" posterior distribution to compare our Gibbs sampler results to.
+3. There exists an R function (`rbetabinom.ab()`) to directly sample from the marginal beta-binomial distribution, thus we have a "true" posterior distribution to compare our Gibbs sampler results to.
 
 4. Casella and George (1992) Example 1 illustrates a less common approach to MCMC, i.e., running a large number of shorter MCMC chains, as opposed to running one or a few long MCMC chains. This approach is worth detailed discussion in class to illustrate various aspects of MCMC and MCMC diagnostics. Moreover, understanding the setup of Example 1 deepens students' understanding of Gibbs sampler as well as sharpens their R coding skills.
