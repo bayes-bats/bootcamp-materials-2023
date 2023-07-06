@@ -44,7 +44,7 @@ format:
 
 ## Discussion Questions
 
-We have seen `rstan` and `rstanarm` packages for fitting models. 
+We have seen `rstan`, `rstanarm`, and `brms` packages for fitting models. 
 
 1. Which one of these packages would you use for your own research?
 
