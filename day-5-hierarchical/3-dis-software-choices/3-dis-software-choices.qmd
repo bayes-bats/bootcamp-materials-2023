@@ -74,4 +74,9 @@ What are the pros and cons of using these tools?
 
 - Open discussion for remaining time
 
+##
 
+Note that Monika and I discuss what we do in our courses that may or may not be applicable for your students in Section 3.2 of [Content and computing outline of two undergraduate Bayesian courses: Tools, examples, and recommendations](https://onlinelibrary.wiley.com/doi/epdf/10.1002/sta4.452). You can also see another language `JAGS` and side-by-side comparison of `JAGS` and `Stan`.
+
+In addition Jim Albert and Monika discuss [Bayesian Computing in the Undergraduate Statistics Curriculum
+](https://www.tandfonline.com/doi/full/10.1080/10691898.2020.1847008).
