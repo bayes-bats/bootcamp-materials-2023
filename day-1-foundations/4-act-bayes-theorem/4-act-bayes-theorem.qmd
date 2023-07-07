@@ -12,25 +12,37 @@ format:
     page-layout: full
 ---
 
+## Short Discussion
 
-## Quarto
+Discuss the following questions in groups before starting to design your activity. 
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+- What kind of scientific questions do you want your students to answer using statistics?
+
+- What exciting datasets do you use or would like to use with your students?
+
+<hr>
+
+## Activity
+
+The Beta-Binomial model is so simple, yet so powerful in teaching foundational Bayesian concept. It is also [the most popular](https://www.tandfonline.com/doi/full/10.1080/00031305.2022.2089232) in teaching foundational concepts. 
+
+The possibilities in utilizing this model are endless and can range from teaching with math and computation or [with little math and no computation](https://arxiv.org/abs/2304.01276). 
+
+We will learn more complex models soon but for now our goal is to design an activity that conveys the foundations of Bayes theorem using the Beta-Binomial model. 
+
+In designing your activity please consider the following questions:
+
+- What is the scientific question that students will try to answer in the activity? In other what is the context of the activity?
+
+- What data will they use to answer the research question? If they are collecting data please plan on how they will do so. If they are relying on secondary data please locate the data and check terms of use. 
+
+- How much math and computing will the activity require? 
+
+- How will the activity convey concepts like prior, likelihood, and posterior?
 
 
-## Running Code
+<hr>
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+The answers to these questions will of course vary depending on what you teach and whom you teach. 
+As a group you can plan on a single teaching scenario but then consider what you would do differently in different teaching scenarios. 
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
