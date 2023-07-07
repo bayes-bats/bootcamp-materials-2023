@@ -12,7 +12,6 @@ format:
       data-background-position: 50% 75%
 ---
 
-
 :::: {.columns}
 
 ::: {.column width="50%"}
@@ -94,8 +93,13 @@ Who Are You?
 
 :::
 
+Brief introductions.
+
+
+## BINGO!!!
 
 ## 
+
 
 ::: {.font75}
 
@@ -148,9 +152,9 @@ What is ahead after the bootcamp?
 
 - Tier 2 & Tier 3 discussion
 
-- [Application form]()
+- [Tier 2 Application form](https://duke.qualtrics.com/jfe/form/SV_bmvqDdmb5s0e8yq)
 
-- Deadlines
+- Tier 2 Application deadline: July 21st
 
 ## Links
 

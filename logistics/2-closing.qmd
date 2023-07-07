@@ -12,9 +12,9 @@ format:
       data-background-position: 50% 75%
 ---
 
-- Tier 2 & Tier 3 discussion
+- [Tier 2 Application form](https://duke.qualtrics.com/jfe/form/SV_bmvqDdmb5s0e8yq)
 
-- [Application form]()
+- Tier 2 Application deadline: July 21st
 
 
 ## Evaluation
@@ -32,9 +32,32 @@ If you run into any issues regarding payment, please contact Lisa Stieler <lstie
 
 Please share the [program website](https://www.stat.uci.edu/bayes-bats/) with your colleagues and help us recruit if you can.
 
+
+## Acknowledgement 
+
+We have been extremely grateful for receiving funding from the National Science Foundation.
+
+If you happen to use any of your products that is a result of this bootcamp/program, we would greatly appreciate it if you can use something similar to following as a form of acknowledgement:
+
+> An earlier version of this activity/manuscript was designed at the Bayes BATS bootcamp funded by the National Science Foundation with award numbers 2215879, 2215920, and 2215709.
+
+
+We would also like to know about it and would appreciate it if you can let us know about it on this [Google Form]().
+
+
+## Please keep in touch 
+
+
 Please keep in touch on Slack. We would love to hear your experiences of teaching/using Bayesian methods.
 
----
+
+## 
+
+
+We would also like to "see" you at the free webinars of [Section on Bayesian Education Research and Practice (BERaP)](https://berap-isba.github.io/events.html) of [The International Society for Bayesian Analysis ](https://bayesian.org/).
+
+##
+
 
 :::{.font75}
 THANK YOU!!!
