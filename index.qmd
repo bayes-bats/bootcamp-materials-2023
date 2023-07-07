@@ -18,43 +18,132 @@ format:
 library(fontawesome)
 ```
 
+## Daily Schedule
+
+The bootcamp will take place in **room 3011** on the 3rd floor of [Donald Bren Hall](https://www.google.com/maps/place/Donald+Bren+Hall,+Irvine,+CA+92617/@33.6432551,-117.8445834,17z/data=!3m1!4b1!4m6!3m5!1s0x80dcde0ff1b87c15:0xb938c700700116dd!8m2!3d33.6432551!4d-117.8420085!16s%2Fg%2F1tj96qn2?entry=tts&shorturl=1). Breakfast and lunch will be provided on site. The schedule for each day will be:
+
+```{=html}
+
+<!--timeline from https://bootsnipp.com/snippets/xrKXW-->
+
+      <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <ul class="timeline">
+
+
+
+                    <li>
+                    <b> 8 AM - 9 AM |  Breakfast </b>
+                    </li>
+
+                    <li>
+                    <b> 9 AM - 12 PM |  Lesson </b>
+
+                    </li>
+
+                    <li>
+                    <b> 12 - 1 PM |  Lunch </b>
+                    </li>
+
+                    <li>
+                    <b> 1 - 2 PM |  Discussion </b>
+                    </li>
+                    
+                    <li>
+                    <b> 2:15 - 5 PM |  Activity </b>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+      </div>
+
+
+      <!--end of timeline-->
+      
+```
 ## Technical Setup Before the Bootcamp
 
-- **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/XBrrS4TM2rR7xyTg6) to let us know what your username is. Many of you have already done this.
+-   **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/XBrrS4TM2rR7xyTg6) to let us know what your username is. Many of you have already done this.
 
-- **Install R** [`r fontawesome::fa(name = "link")`](https://mirror.las.iastate.edu/CRAN/) Yes, you do need to download and install R even if you have downloaded before. There is a newer version.
+-   **Install R** [`r fontawesome::fa(name = "link")`](https://mirror.las.iastate.edu/CRAN/) Yes, you do need to download and install R even if you have downloaded before. There is a newer version.
 
-- **Install RStudio** [`r fontawesome::fa(name = "link")`](https://posit.co/download/rstudio-desktop/) Yes, you do need to download and install RStudio even if you have downloaded before. There is a newer version. Download the free Desktop version.
+-   **Install RStudio** [`r fontawesome::fa(name = "link")`](https://posit.co/download/rstudio-desktop/) Yes, you do need to download and install RStudio even if you have downloaded before. There is a newer version. Download the free Desktop version.
 
-- **Install and setup git** [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7926437&node=33713927&a=41919805&autoplay=1) [`r fontawesome::fa(name = "chalkboard-teacher")`](day-0-prerequisites/0-setup/0-setup.html)
+-   **Install and setup git** [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7926437&node=33713927&a=41919805&autoplay=1) [`r fontawesome::fa(name = "chalkboard-teacher")`](day-0-prerequisites/0-setup/0-setup.html)
 
-- **Test your installations**  [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998123&node=34055987&a=84256585&autoplay=1)
+-   **Test your installations** [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998123&node=34055987&a=84256585&autoplay=1)
 
-- If you run into any issues about the tech setup please feel free to let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack. Federica will also be holding office hours and you will receive the appropriate zoom links via email from her. 
+-   If you run into any issues about the tech setup please feel free to let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack. Federica will also be holding office hours and you will receive the appropriate zoom links via email from her.
 
 ## Day 0 - Introduction to the Toolkit
 
 Videos to be watched before the bootcamp. If you run into any issues about this content please let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack.
 
-| Topic                         | Materials |
-|-------------------------------|-----------|
-| Overview      |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7997841&node=34055000&a=198253550&autoplay=1)|
-| hello woRld      |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998435&node=34057183&a=136917506&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/1-lec-r-basics/1-lec-r-basics.html)           |
-| Introduction to Quarto |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998520&node=34057485&a=212583999&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/2-lec-quarto/2-lec-quarto.html)                    |
-| Git/GitHub              |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7999068&node=34059613&a=192345937&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/3-lec-github/3-lec-github.html)           |
-| ggplot              |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998687&node=34058227&a=75458400&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/4-lec-ggplot/4-lec-ggplot.html)           |
-| Data Wrangling              |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998875&node=34058869&a=77289457&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/5-lec-wrangle/5-lec-wrangle.html)           |
-| Workflow              |[`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998997&node=34059344&a=179917770&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/6-lec-workflow/6-lec-workflow.html)           |
+| Topic                  | Materials                                                                                                                                                                                                          |
+|-----------------------------------------------|------------------------|
+| Overview               | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7997841&node=34055000&a=198253550&autoplay=1)                                                                                                 |
+| hello woRld            | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998435&node=34057183&a=136917506&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/1-lec-r-basics/1-lec-r-basics.html) |
+| Introduction to Quarto | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998520&node=34057485&a=212583999&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/2-lec-quarto/2-lec-quarto.html)     |
+| Git/GitHub             | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7999068&node=34059613&a=192345937&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/3-lec-github/3-lec-github.html)     |
+| ggplot                 | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998687&node=34058227&a=75458400&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/4-lec-ggplot/4-lec-ggplot.html)      |
+| Data Wrangling         | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998875&node=34058869&a=77289457&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/5-lec-wrangle/5-lec-wrangle.html)    |
+| Workflow               | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998997&node=34059344&a=179917770&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/6-lec-workflow/6-lec-workflow.html) |
 
-<!--
 ## Day 1 - Foundation of Bayesian inference
 
-## Day 2 - Bayesian computing: Simulating the posterior
+Your GitHub repository: `day1-foundations-username`
 
-## Day 3 - Bayesian computing: Posterior analysis
+| Type             | Topic                              | Materials                                                                                          |
+|------------------|-----------------------------------|------------------|
+| Lecture - part 1 | Introduction to Bayesian thinking  | [{{< fa desktop >}}](day-1-foundations/1-lec-intro-bayes-thinking/1-lec-intro-bayes-thinking.html) |
+| Lecture - part 2 | Discrete Response Data   | [{{< fa desktop >}}](day-1-foundations/2-lec-discrete-data/2-lec-discrete-data.html)               |
+| Discussion       | Challenges of teaching Bayes       |  [{{< fa desktop >}}](day-1-foundations/3-dis-challenges-teach-bayes/3-dis-challenges-teach-bayes.html)                                                                                                |
+| Activity         | Designing a Bayes Theorem activity |  [{{< fa desktop >}}](day-1-foundations/4-act-bayes-theorem/4-act-bayes-theorem.html)  |
+
+
+##  Day 2 - Bayesian computing: Simulating the posterior
+
+Your GitHub repository: `day2-simulations-username`
+
+| Type             | Topic                              | Materials                                                                                          |
+|------------------|-----------------------------------|------------------|
+| Lecture - part 1 | Conjugate Priors and their Posteriors | [{{< fa desktop >}}](day-2-simulations/1-lec-posterior-conjugate/1-lec-posterior-conjugate.html) |
+| Lecture - part 2 | Gibbs Sampler and MCMC | [{{< fa desktop >}}](day-2-simulations/2-lec-gibbs-sampler-mcmc/2-lec-gibbs-sampler-mcmc.html)               |
+| Discussion       | Bayes in STEM Fields: Use Cases      |  [{{< fa desktop >}}](day-2-simulations/3-dis-cases-bayes-stem/3-dis-cases-bayes-stem.html)                                                                                                |
+| Activity         | Designing a simulation activity |  [{{< fa desktop >}}](day-2-simulations/4-act-design-simu-activity/4-act-design-simu-activity.html)  |
+
+##  Day 3 - Bayesian computing: Posterior analysis
+
+Your GitHub repository: `day3-posterior-username`
+
+| Type             | Topic                              | Materials                                                                                          |
+|------------------|-----------------------------------|------------------|
+| Lecture - part 1 | Posterior Inference and MCMC Algorithms | [{{< fa desktop >}}](day-3-posterior/1-lec-posterior-MCMC-algorithms/1-lec-posterior-MCMC-algorithms.html) |
+| Lecture - part 2 | Posterior Analysis with MCMC | [{{< fa desktop >}}](day-3-posterior/2-lec-posterior-analysis/2-lec-posterior-analysis.html)               |
+| Discussion       | Effective Assessment for Bayes Learning      |  [{{< fa desktop >}}](day-3-posterior/3-dis-effective-assessment-bayes/3-dis-effective-assessment-bayes.html)                                                                                                |
+| Activity         | Designing a posterior analysis activity |  [{{< fa desktop >}}](day-3-posterior/4-act-posterior-analysis/4-act-posterior-analysis.html)  |
 
 ## Day 4 - Bayesian modeling: Regression models
 
+Your GitHub repository: `day4-regression-username`
+
+| Type             | Topic                              | Materials                                                                                          |
+|------------------|-----------------------------------|------------------|
+| Lecture - part 1 | Fitting regression models | [{{< fa desktop >}}](day-4-regression/1-lec-fitting-regression/1-lec-fitting-regression.html) |
+| Lecture - part 2 | Evaluating regression models | [{{< fa desktop >}}](day-4-regression/2-lec-evaluating-regression/2-lec-evaluating-regression.html)               |
+| Discussion       |  Bayes Course vs. Module |  [{{< fa desktop >}}](day-4-regression/3-dis-bayes-course-vs-module/3-dis-bayes-course-vs-module.html)                                                                                                |
+| Activity         | Designing a Regression Model Lab |  [{{< fa desktop >}}](day-4-regression/4-act-regression-lab/4-act-regression-lab.html)  |
+
 ## Day 5 - Bayesian modeling: Hierarchical models
 
--->
+
+Your GitHub repository: `day5-hierarchical-username`
+
+| Type             | Topic                              | Materials                                                                                          |
+|------------------|-----------------------------------|------------------|
+| Lecture - part 1 | Hierarchical Models: Priors | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html) |
+| Lecture - part 2 | Hierarchical Models:  MCMC and Inference | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hierarchical-mcmc/2-lec-hierarchical-mcmc.html)               |
+| Discussion       | Software choices for Bayes learners      |  [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)                                                                                                |
+| Activity         | Designing a hierachical case study |  [{{< fa desktop >}}](day-5-hierarchical/4-act-hierarchical-case-study/4-act-hierarchical-case-study.html)  |
