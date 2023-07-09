@@ -66,7 +66,7 @@ plot_beta(1, 5) +
 
 ```
 
-
+-   Note: it's the area under the curve here that represents the probability (the total of which is 1), not the value $f(\pi)$
 
 ## Vish's prior
 
