@@ -480,7 +480,7 @@ odds ratio
 <span id="cb4-2"><a href="#cb4-2"></a>x2<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">1000000</span>,<span class="dv">4</span>,<span class="dv">148</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">mean</span>(x2<span class="sc">&gt;</span>x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.999889</code></pre>
+<pre><code>[1] 0.999931</code></pre>
 </div>
 </div>
 </section>
@@ -705,6 +705,25 @@ odds ratio
           RevealSearch,
           RevealZoom
         ]
+      });
+    </script>
+    
+    <!-- From: https://github.com/quarto-dev/quarto-cli/discussions/557 -->
+    <script type="text/javascript">
+      Reveal.on('ready', event => {
+        if (event.indexh === 0) {
+          document.querySelector("div.has-logo > img.slide-logo").style.display = "none";
+        }
+      });
+      Reveal.addEventListener('slidechanged', (event) => {
+        if (event.indexh === 0) {
+          Reveal.configure({ slideNumber: null });
+          document.querySelector("div.has-logo > img.slide-logo").style.display = "none";
+        }
+        if (event.indexh === 1) { 
+          Reveal.configure({ slideNumber: 'c/t' });
+          document.querySelector("div.has-logo > img.slide-logo").style.display = null;
+        }
       });
     </script>
     

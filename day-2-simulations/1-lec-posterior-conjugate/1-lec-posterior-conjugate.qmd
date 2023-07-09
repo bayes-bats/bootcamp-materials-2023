@@ -14,6 +14,8 @@ format:
     include-after-body: ../../templates/clean_title_page.html
 ---
 
+# {.center}
+
 Note that this lecture is based in part on [Chapter 5 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-5.html).
 
 # Review Application
@@ -404,7 +406,7 @@ plot_normal_normal(mean = 6.5, sd = 0.5, sigma = 0.593,
   y_bar = 5.735, n = 25)
 ```
 
-## 
+## {.center}
 
 ```{r}
 
@@ -413,7 +415,7 @@ summarize_normal_normal(mean = 6.5, sd = 0.5, sigma = 0.593,
 ```
 
 
-## Interpretation of Conjugate Prior in Terms of Historical Data
+## Interpretation of Conjugate Prior in Terms of Historical Data {.scrollable}
 
 If we base our prior mean on $n_0$ observations from a similar population as $(Y_1,Y_2,\ldots,Y_n)$, we may wish to set $\tau^2=\frac{\sigma^2}{n_0}$, the variance of the mean of the prior observations. In this case, we can simplify our equation as 
 
