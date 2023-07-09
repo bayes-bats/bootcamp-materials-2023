@@ -441,7 +441,7 @@ Your intuition may not be Bayesian if
 
 ## Likelihood
 
-We do not know $\pi$, but for now. let's consider one of the three possibilities: $\pi = 0.2$. If $\pi$ were 0.2, what is the probability that we would observe 4 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
+We do not know $\pi$, but for now let's consider one of the three possibilities: $\pi = 0.2$. If $\pi$ were 0.2, what is the probability that we would observe 4 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
 
 . . . 
 
