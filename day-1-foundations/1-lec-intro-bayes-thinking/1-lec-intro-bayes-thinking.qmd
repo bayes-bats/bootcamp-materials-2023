@@ -441,7 +441,7 @@ Your intuition may not be Bayesian if
 
 ## Likelihood
 
-We do not know $\pi$, but for now. let's consider one of the three possibilities: $\pi = 0.2$. If $\pi$ were 0.2, what is the probability that we would observe 4 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
+We do not know $\pi$, but for now let's consider one of the three possibilities: $\pi = 0.2$. If $\pi$ were 0.2, what is the probability that we would observe 4 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
 
 . . . 
 
@@ -489,7 +489,7 @@ dbinom(x = 3, size = 5, prob = 0.2)
 
 Rather than doing this one-by-one we can let R consider all different possible observations of y, 0 through 5. 
 
-```{r}
+```{r,echo=TRUE, eval=TRUE}
 dbinom(x = 0:5, size = 5, prob = 0.2)
 ```
 
@@ -585,15 +585,15 @@ ggplot(just_3, aes(x = pi, y = y)) +
 
 ## Likelihood
 
-```{r}
+```{r, echo=TRUE, eval=TRUE}
 dbinom(x = 3, size = 5, prob = 0.2)
 ```
 
-```{r}
+```{r, echo=TRUE, eval=TRUE}
 dbinom(x = 3, size = 5, prob = 0.4)
 ```
 
-```{r}
+```{r, echo=TRUE, eval=TRUE}
 dbinom(x = 3, size = 5, prob = 0.8)
 ```
 
