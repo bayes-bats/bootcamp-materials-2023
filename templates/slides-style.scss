@@ -86,7 +86,9 @@ $data-background-image: "logo.png";
   color: #00539B;
 }
 
-
+.reveal .increased-line p {
+    line-height: 3;
+}
 
 * {
   color:#000000;
@@ -104,4 +106,5 @@ $data-background-image: "logo.png";
 .font75{font-size:75px}
 .font100{font-size:100px}
 .font150{font-size:150px}
+
 

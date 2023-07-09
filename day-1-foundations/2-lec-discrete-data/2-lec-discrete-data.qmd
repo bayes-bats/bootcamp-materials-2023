@@ -13,6 +13,8 @@ format:
       data-background-position: 50% 85%
 ---
 
+# {.center}
+
 Note that this lecture is based on [Chapters 3-4 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-3.html).
 
 
@@ -334,7 +336,7 @@ A Bernoulli trial has two possible outcomes:
 
 The distribution is $P(Y=y)={n \choose y}\pi^y(1-\pi)^{n-y}$ and has mean $n\pi$ and variance $n\pi(1-\pi)$.
 
-## Posterior for the Beta-Binomial Model
+## Posterior for the Beta-Binomial Model {.increased-line}
 
 Let $\pi \sim \text{Beta}(\alpha, \beta)$ and $Y|n \sim \text{Bin}(n,\pi)$. 
 

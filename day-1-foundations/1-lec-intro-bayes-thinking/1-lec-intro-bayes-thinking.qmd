@@ -3,6 +3,7 @@ title: "Intro to Bayesian Thinking"
 subtitle: "Day 1"
 format: 
   revealjs:
+    auto-stretch: true
     slide-number: true
     incremental: true
     theme: ["../../templates/slides-style.scss"]
@@ -12,6 +13,8 @@ format:
       data-background-size: 12%
       data-background-position: 50% 95%
 ---
+
+# {.center}
 
 Note that this lecture is based on [Chapters 1-2 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-1.html).
 
@@ -29,15 +32,13 @@ knitr::include_graphics("img/bayes_diagram.png")
 
 ![](img/data.png){width=2in,fig-align="center"}
 
-
-
-## Balancing Act of Bayesian Analysis
+## Balancing Act of Bayesian Analysis 
 
 ```{r echo = FALSE, fig.align='center', out.width="80%"}
 knitr::include_graphics("img/bayes-balance-1.png")
 ```
 
-## Interpretation of Probability
+## Interpretation of Probability 
 
 **Bayesian**: a probability measures the relative plausibility of an event.
 
@@ -90,8 +91,7 @@ $P(\text{disease} | +)$ is a mathematical expression of question (a), and $P(+ |
 - Computing, computing, computing
 
 
-- It is harder to adopt to newer methods. Change is happening slowly. 
-
+- It is harder to adopt newer methods. Change is happening slowly. 
 
 
 - We can embrace subjectivity. 
@@ -328,7 +328,7 @@ $$P(B \mid A) = \frac{0.01 \times 0.85 }{0.85 \times 0.01 + 0.10 \times 0.99}=0.
 | likelihood | 0.85 | 0.10 | 0.95 |
 | posterior probability | 0.079 | 0.921 | 1 |
 
-## Summary
+## Summary {.increased-line}
 
 $$P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}$$
 
@@ -356,13 +356,13 @@ $$ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{normali
 
 
 
-## Review: Discrete Probability Models
+## Review: Discrete Probability Models 
 
 Let $Y$ be a discrete random variable with probability mass function (pmf) $f(y)$.  Then the pmf defines the probability of any given $y$, $f(y) = P(Y = y)$, and has the following properties:    
 
-$\sum_{\text{all } y} f(y) = 1$  
+- $\sum_{\text{all } y} f(y) = 1$  
 
-$0 \le f(y) \le 1$ for all values of $y$ in the range of $Y$
+- $0 \le f(y) \le 1$ for all values of $y$ in the range of $Y$
 
 
 
@@ -389,7 +389,7 @@ The expert thinks that this is quite a hard-to-get-into program.
 
 
 
-## From Prior to Posterior
+## From Prior to Posterior {.increased-line}
 
 -   We have a prior model for $\pi$ that is $f(\pi)$. 
 
@@ -471,7 +471,7 @@ dbinom(x = 4, size = 5, prob = 0.2)
 ```
 
 
-## The Binomial Model
+## The Binomial Model 
 
 If $\pi$ were 0.2, what is the probability that we would observe 3 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
 
@@ -625,7 +625,7 @@ $$L(\pi_1|y) \; \text{ vs } \; L(\pi_2|y) \; .$$
 
 
 
-## Getting Closer to Conclusion
+## Getting Closer to Conclusion {.increased-line}
 
 The expert assigned the highest weight to $\pi = 0.2$. 
 
@@ -636,7 +636,7 @@ We will continue to consider all the possible values of $\pi$.
 Now is a good time to balance the prior and the likelihood.
 
 
-## From Events to Random Variables
+## From Events to Random Variables {.increased-line}
 
 $\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability of data}}$
 
@@ -654,7 +654,7 @@ $\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi =
 
 
 
-## Normalizing Constant
+## Normalizing Constant {.increased-line}
 
 
 $\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot f(\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot f(\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot f(\pi = 0.8)}$

@@ -396,10 +396,11 @@
 </div>
 
 </section>
-<section class="slide level2">
-
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
 <p>Note that this lecture is based on <a href="https://www.bayesrulesbook.com/chapter-1.html">Chapters 1-2 of Bayes Rules! book</a>.</p>
 </section>
+
 <section>
 <section id="introduction-to-bayesian-statistics" class="title-slide slide level1 center">
 <h1>Introduction to Bayesian Statistics</h1>
@@ -408,7 +409,7 @@
 <section id="bayesian-knowledge-building" class="slide level2">
 <h2>Bayesian Knowledge Building</h2>
 
-<img data-src="img/bayes_diagram.png" width="183" class="r-stretch quarto-figure-center"></section>
+<img data-src="img/bayes_diagram.png" width="2000" class="r-stretch quarto-figure-center"></section>
 <section id="frequentist-knowledge-building" class="slide level2">
 <h2>Frequentist Knowledge Building</h2>
 
@@ -460,7 +461,7 @@
 <li class="fragment"><p>Named after Thomas Bayes (1701-1761)</p></li>
 <li class="fragment"><p>Frequentist statistics is more popular; Bayesian statistics is surging in popularity</p></li>
 <li class="fragment"><p>Computing, computing, computing</p></li>
-<li class="fragment"><p>It is harder to adopt to newer methods. Change is happening slowly.</p></li>
+<li class="fragment"><p>It is harder to adopt newer methods. Change is happening slowly.</p></li>
 <li class="fragment"><p>We can embrace subjectivity.</p></li>
 </ul>
 </section>
@@ -936,7 +937,7 @@
 </tbody>
 </table>
 </section>
-<section id="summary" class="slide level2">
+<section id="summary" class="slide level2 increased-line">
 <h2>Summary</h2>
 <p><span class="math display">\[P(B \mid A) = \frac{P(B)L(B \mid A)}{P(A)}\]</span></p>
 <p><span class="math display">\[ \text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability}}\]</span></p>
@@ -958,8 +959,10 @@
 <section id="review-discrete-probability-models" class="slide level2">
 <h2>Review: Discrete Probability Models</h2>
 <p>Let <span class="math inline">\(Y\)</span> be a discrete random variable with probability mass function (pmf) <span class="math inline">\(f(y)\)</span>. Then the pmf defines the probability of any given <span class="math inline">\(y\)</span>, <span class="math inline">\(f(y) = P(Y = y)\)</span>, and has the following properties:</p>
-<p><span class="math inline">\(\sum_{\text{all } y} f(y) = 1\)</span></p>
-<p><span class="math inline">\(0 \le f(y) \le 1\)</span> for all values of <span class="math inline">\(y\)</span> in the range of <span class="math inline">\(Y\)</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\sum_{\text{all } y} f(y) = 1\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(0 \le f(y) \le 1\)</span> for all values of <span class="math inline">\(y\)</span> in the range of <span class="math inline">\(Y\)</span></p></li>
+</ul>
 </section>
 <section id="phd-admissions" class="slide level2">
 <h2>PhD Admissions</h2>
@@ -989,7 +992,7 @@
 </table>
 <p>The expert thinks that this is quite a hard-to-get-into program.</p>
 </section>
-<section id="from-prior-to-posterior" class="slide level2">
+<section id="from-prior-to-posterior" class="slide level2 increased-line">
 <h2>From Prior to Posterior</h2>
 <ul>
 <li class="fragment"><p>We have a prior model for <span class="math inline">\(\pi\)</span> that is <span class="math inline">\(f(\pi)\)</span>.</p></li>
@@ -1177,14 +1180,14 @@
 <p>When <span class="math inline">\(Y=y\)</span> is known, the <strong>likelihood function</strong> <span class="math inline">\(L(\cdot | y) = f(y | \cdot)\)</span> allows us to compare the relative likelihoods of different possible values of <span class="math inline">\(\pi\)</span> (eg: <span class="math inline">\(\pi_1\)</span> or <span class="math inline">\(\pi_2\)</span>) given that we observed data <span class="math inline">\(y\)</span>:</p>
 <p><span class="math display">\[L(\pi_1|y) \; \text{ vs } \; L(\pi_2|y) \; .\]</span></p>
 </section>
-<section id="getting-closer-to-conclusion" class="slide level2">
+<section id="getting-closer-to-conclusion" class="slide level2 increased-line">
 <h2>Getting Closer to Conclusion</h2>
 <p>The expert assigned the highest weight to <span class="math inline">\(\pi = 0.2\)</span>.</p>
 <p>However the data <span class="math inline">\(y = 3\)</span> suggests that <span class="math inline">\(\pi = 0.4\)</span> is more likely.</p>
 <p>We will continue to consider all the possible values of <span class="math inline">\(\pi\)</span>.</p>
 <p>Now is a good time to balance the prior and the likelihood.</p>
 </section>
-<section id="from-events-to-random-variables" class="slide level2">
+<section id="from-events-to-random-variables" class="slide level2 increased-line">
 <h2>From Events to Random Variables</h2>
 <p><span class="math inline">\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability of data}}\)</span></p>
 <div class="fragment">
@@ -1197,7 +1200,7 @@
 <p><span class="math inline">\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot f(\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot f(\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot f(\pi = 0.8)}\)</span></p>
 </div>
 </section>
-<section id="normalizing-constant" class="slide level2">
+<section id="normalizing-constant" class="slide level2 increased-line">
 <h2>Normalizing Constant</h2>
 <p><span class="math inline">\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(y = 3 | \pi = 0.2) \cdot f(\pi = 0.2) + f(y = 3 | \pi = 0.4) \cdot f(\pi = 0.4) + f(y = 3 | \pi = 0.8) \cdot f(\pi = 0.8)}\)</span></p>
 <p>Thus <span class="math inline">\(f(y = 3) =\)</span></p>

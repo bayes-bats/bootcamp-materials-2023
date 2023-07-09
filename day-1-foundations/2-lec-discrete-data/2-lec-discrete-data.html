@@ -396,10 +396,11 @@
 </div>
 
 </section>
-<section class="slide level2">
-
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
 <p>Note that this lecture is based on <a href="https://www.bayesrulesbook.com/chapter-3.html">Chapters 3-4 of Bayes Rules! book</a>.</p>
 </section>
+
 <section>
 <section id="the-beta-prior-distribution" class="title-slide slide level1 center">
 <h1>The Beta Prior Distribution</h1>
@@ -591,7 +592,7 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 </ul>
 <p>The distribution is <span class="math inline">\(P(Y=y)={n \choose y}\pi^y(1-\pi)^{n-y}\)</span> and has mean <span class="math inline">\(n\pi\)</span> and variance <span class="math inline">\(n\pi(1-\pi)\)</span>.</p>
 </section>
-<section id="posterior-for-the-beta-binomial-model" class="slide level2">
+<section id="posterior-for-the-beta-binomial-model" class="slide level2 increased-line">
 <h2>Posterior for the Beta-Binomial Model</h2>
 <p>Let <span class="math inline">\(\pi \sim \text{Beta}(\alpha, \beta)\)</span> and <span class="math inline">\(Y|n \sim \text{Bin}(n,\pi)\)</span>.</p>
 <div class="fragment">
@@ -724,7 +725,7 @@ f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-
 <li class="fragment"><p>We explain the effect of different priors on the posterior</p></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tidyverse)</span>
