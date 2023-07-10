@@ -198,12 +198,11 @@ dbeta(x = 0.5,
 library(tidyverse)
 # Set up beta data
 
-alpha <- c(1,1,3,1,5,20,7,2,5)
-beta  <- c(5,2,7,1,5,20,3,1,1)
+alpha <- c(1,1,1,5,5,5,20,20,20)
+beta  <- c(20,2,1,20,2,1,20,2,1)
 betas <- data.frame(setting = factor(rep(1:9, 
                                          each = 500)), 
-                    x = rep(seq(0, 1, 
-                                length = 500), 9),
+                    x = rep(seq(0, 1, length = 500), 9),
                     alpha = rep(alpha, each = 500),
                     beta = rep(beta, each = 500))
 
@@ -226,18 +225,18 @@ trend_data <- data.frame(alpha, beta,
          modes_d = dbeta(modes, alpha, beta))
 
 trend_data$setting <- factor(trend_data$setting, 
-                             levels = c("Beta(1,5)",
+                             levels = c("Beta(1,20)",
                                         "Beta(1,2)",
-                                        "Beta(3,7)",
                                         "Beta(1,1)",
-                                        "Beta(5,5)",
+                                        "Beta(5,20)",
+                                        "Beta(5,2)",
+                                        "Beta(5,1)",
                                         "Beta(20,20)",
-                                        "Beta(7,3)",
-                                        "Beta(2,1)",
-                                        "Beta(5,1)"))
+                                        "Beta(20,2)",
+                                        "Beta(20,1)"))
   
 ggplot(betas, aes(x = x, y = y)) + 
-  lims(x = c(0,1), y = c(0,5.5)) + 
+  lims(x = c(0,1), y = c(0,8)) + 
   geom_line() + 
   facet_wrap(~ setting) + 
   labs(x = expression(pi), y =
