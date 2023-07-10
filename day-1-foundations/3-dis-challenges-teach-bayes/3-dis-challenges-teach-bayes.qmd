@@ -37,6 +37,20 @@ format:
 
 - Let's hear from 2-3 of you!
 
+## Resources/Platforms for More Discussion
+
+- Check out the [Undergraduate Bayesian Education Network](https://undergrad-bayes.netlify.app/)
+
+    - A collection of teaching resources including courses, papers etc.
+    - We have a Slack space and organize check-ins for instructors who teach Bayes
+
+- Check out the [Bayesian Education Research and Practice](https://berap-isba.github.io/) section website of the [International Society for Bayesian Analysis](https://bayesian.org/)
+    
+    - We started a quarterly webinar series this year and feel free to watch the recordings of the [two Bayes textbook panels](https://berap-isba.github.io/events.html) so far
+    - Do you want to be a presenter/panelist in the future? If so, please get in touch with us (jihu@vassar.edu; mdogucu@uci.edu)
+
+- Do you have resources/platforms to share?
+
 # Small Group Discussion
 
 ## Format and Length
