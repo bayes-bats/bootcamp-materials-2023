@@ -82,7 +82,7 @@ The bootcamp will take place in **room 3011** on the 3rd floor of [Donald Bren H
 Videos to be watched before the bootcamp. If you run into any issues about this content please let us know in advance. <!--Federica will hold office hours on XXX. You can join the office hours using the zoom link.--> You can also feel free to ask questions on the #bootcamp channel on Slack.
 
 | Topic                  | Materials                                                                                                                                                                                                          |
-|-----------------------------------------------|------------------------|
+|-----------------------------------------------|-------------------------|
 | Overview               | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7997841&node=34055000&a=198253550&autoplay=1)                                                                                                 |
 | hello woRld            | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998435&node=34057183&a=136917506&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/1-lec-r-basics/1-lec-r-basics.html) |
 | Introduction to Quarto | [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=7998520&node=34057485&a=212583999&autoplay=1) [`r fontawesome::fa(name = "desktop")`](day-0-prerequisites/2-lec-quarto/2-lec-quarto.html)     |
@@ -95,55 +95,54 @@ Videos to be watched before the bootcamp. If you run into any issues about this 
 
 Your GitHub repository: `day1-foundations-username`
 
-| Type             | Topic                              | Materials                                                                                          |
-|------------------|-----------------------------------|------------------|
-| Lecture - part 1 | Introduction to Bayesian thinking  | [{{< fa desktop >}}](day-1-foundations/1-lec-intro-bayes-thinking/1-lec-intro-bayes-thinking.html) |
-| Lecture - part 2 | Discrete Response Data   | [{{< fa desktop >}}](day-1-foundations/2-lec-discrete-data/2-lec-discrete-data.html)               |
-| Discussion       | Challenges of teaching Bayes       |  [{{< fa desktop >}}](day-1-foundations/3-dis-challenges-teach-bayes/3-dis-challenges-teach-bayes.html)                                                                                                |
-| Activity         | Designing a Bayes Theorem activity |  [{{< fa desktop >}}](day-1-foundations/4-act-bayes-theorem/4-act-bayes-theorem.html)  |
+| Type             | Topic                              | Materials                                                                                              |
+|-------------------|-----------------------------------|-------------------|
+| Opening        | Welcome to Bayes BATS!              | [{{< fa desktop >}}](logistics/1-opening.html)                                                                                                          |
+| Lecture - part 1 | Introduction to Bayesian thinking  | [{{< fa desktop >}}](day-1-foundations/1-lec-intro-bayes-thinking/1-lec-intro-bayes-thinking.html)     |
+| Lecture - part 2 | Discrete Response Data             | [{{< fa desktop >}}](day-1-foundations/2-lec-discrete-data/2-lec-discrete-data.html)                   |
+| Discussion       | Challenges of teaching Bayes       | [{{< fa desktop >}}](day-1-foundations/3-dis-challenges-teach-bayes/3-dis-challenges-teach-bayes.html) |
+| Activity         | Designing a Bayes Theorem activity | [{{< fa desktop >}}](day-1-foundations/4-act-bayes-theorem/4-act-bayes-theorem.html)                   |
 
-
-##  Day 2 - Bayesian computing: Simulating the posterior
+## Day 2 - Bayesian computing: Simulating the posterior
 
 Your GitHub repository: `day2-simulations-username`
 
-| Type             | Topic                              | Materials                                                                                          |
-|------------------|-----------------------------------|------------------|
-| Lecture - part 1 | Conjugate Priors and their Posteriors | [{{< fa desktop >}}](day-2-simulations/1-lec-posterior-conjugate/1-lec-posterior-conjugate.html) |
-| Lecture - part 2 | Gibbs Sampler and MCMC | [{{< fa desktop >}}](day-2-simulations/2-lec-gibbs-sampler-mcmc/2-lec-gibbs-sampler-mcmc.html)               |
-| Discussion       | Bayes in STEM Fields: Use Cases      |  [{{< fa desktop >}}](day-2-simulations/3-dis-cases-bayes-stem/3-dis-cases-bayes-stem.html)                                                                                                |
-| Activity         | Designing a simulation activity |  [{{< fa desktop >}}](day-2-simulations/4-act-design-simu-activity/4-act-design-simu-activity.html)  |
+| Type             | Topic                                 | Materials                                                                                          |
+|-------------------|-----------------------------------|-------------------|
+| Lecture - part 1 | Conjugate Priors and their Posteriors | [{{< fa desktop >}}](day-2-simulations/1-lec-posterior-conjugate/1-lec-posterior-conjugate.html)   |
+| Lecture - part 2 | Gibbs Sampler and MCMC                | [{{< fa desktop >}}](day-2-simulations/2-lec-gibbs-sampler-mcmc/2-lec-gibbs-sampler-mcmc.html)     |
+| Discussion       | Bayes in STEM Fields: Use Cases       | [{{< fa desktop >}}](day-2-simulations/3-dis-cases-bayes-stem/3-dis-cases-bayes-stem.html)         |
+| Activity         | Designing a simulation activity       | [{{< fa desktop >}}](day-2-simulations/4-act-design-simu-activity/4-act-design-simu-activity.html) |
 
-##  Day 3 - Bayesian computing: Posterior analysis
+## Day 3 - Bayesian computing: Posterior analysis
 
 Your GitHub repository: `day3-posterior-username`
 
-| Type             | Topic                              | Materials                                                                                          |
-|------------------|-----------------------------------|------------------|
-| Lecture - part 1 | Posterior Inference and MCMC Algorithms | [{{< fa desktop >}}](day-3-posterior/1-lec-posterior-MCMC-algorithms/1-lec-posterior-MCMC-algorithms.html) |
-| Lecture - part 2 | Posterior Analysis with MCMC | [{{< fa desktop >}}](day-3-posterior/2-lec-posterior-analysis/2-lec-posterior-analysis.html)               |
-| Discussion       | Effective Assessment for Bayes Learning      |  [{{< fa desktop >}}](day-3-posterior/3-dis-effective-assessment-bayes/3-dis-effective-assessment-bayes.html)                                                                                                |
-| Activity         | Designing a posterior analysis activity |  [{{< fa desktop >}}](day-3-posterior/4-act-posterior-analysis/4-act-posterior-analysis.html)  |
+| Type             | Topic                                   | Materials                                                                                                    |
+|-------------------|-----------------------------------|-------------------|
+| Lecture - part 1 | Posterior Inference and MCMC Algorithms | [{{< fa desktop >}}](day-3-posterior/1-lec-posterior-MCMC-algorithms/1-lec-posterior-MCMC-algorithms.html)   |
+| Lecture - part 2 | Posterior Analysis with MCMC            | [{{< fa desktop >}}](day-3-posterior/2-lec-posterior-analysis/2-lec-posterior-analysis.html)                 |
+| Discussion       | Effective Assessment for Bayes Learning | [{{< fa desktop >}}](day-3-posterior/3-dis-effective-assessment-bayes/3-dis-effective-assessment-bayes.html) |
+| Activity         | Designing a posterior analysis activity | [{{< fa desktop >}}](day-3-posterior/4-act-posterior-analysis/4-act-posterior-analysis.html)                 |
 
 ## Day 4 - Bayesian modeling: Regression models
 
 Your GitHub repository: `day4-regression-username`
 
-| Type             | Topic                              | Materials                                                                                          |
-|------------------|-----------------------------------|------------------|
-| Lecture - part 1 | Fitting regression models | [{{< fa desktop >}}](day-4-regression/1-lec-fitting-regression/1-lec-fitting-regression.html) |
-| Lecture - part 2 | Evaluating regression models | [{{< fa desktop >}}](day-4-regression/2-lec-evaluating-regression/2-lec-evaluating-regression.html)               |
-| Discussion       |  Bayes Course vs. Module |  [{{< fa desktop >}}](day-4-regression/3-dis-bayes-course-vs-module/3-dis-bayes-course-vs-module.html)                                                                                                |
-| Activity         | Designing a Regression Model Lab |  [{{< fa desktop >}}](day-4-regression/4-act-regression-lab/4-act-regression-lab.html)  |
+| Type             | Topic                            | Materials                                                                                             |
+|-------------------|-----------------------------------|-------------------|
+| Lecture - part 1 | Fitting regression models        | [{{< fa desktop >}}](day-4-regression/1-lec-fitting-regression/1-lec-fitting-regression.html)         |
+| Lecture - part 2 | Evaluating regression models     | [{{< fa desktop >}}](day-4-regression/2-lec-evaluating-regression/2-lec-evaluating-regression.html)   |
+| Discussion       | Bayes Course vs. Module          | [{{< fa desktop >}}](day-4-regression/3-dis-bayes-course-vs-module/3-dis-bayes-course-vs-module.html) |
+| Activity         | Designing a Regression Model Lab | [{{< fa desktop >}}](day-4-regression/4-act-regression-lab/4-act-regression-lab.html)                 |
 
 ## Day 5 - Bayesian modeling: Hierarchical models
 
-
 Your GitHub repository: `day5-hierarchical-username`
 
-| Type             | Topic                              | Materials                                                                                          |
-|------------------|-----------------------------------|------------------|
-| Lecture - part 1 | Hierarchical Models: Priors | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html) |
-| Lecture - part 2 | Hierarchical Models:  MCMC and Inference | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hierarchical-mcmc/2-lec-hierarchical-mcmc.html)               |
-| Discussion       | Software choices for Bayes learners      |  [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)                                                                                                |
-| Activity         | Designing a hierachical case study |  [{{< fa desktop >}}](day-5-hierarchical/4-act-hierarchical-case-study/4-act-hierarchical-case-study.html)  |
+| Type             | Topic                                   | Materials                                                                                                 |
+|-------------------|-----------------------------------|-------------------|
+| Lecture - part 1 | Hierarchical Models: Priors             | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html)         |
+| Lecture - part 2 | Hierarchical Models: MCMC and Inference | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hierarchical-mcmc/2-lec-hierarchical-mcmc.html)             |
+| Discussion       | Software choices for Bayes learners     | [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)               |
+| Activity         | Designing a hierachical case study      | [{{< fa desktop >}}](day-5-hierarchical/4-act-hierarchical-case-study/4-act-hierarchical-case-study.html) |
