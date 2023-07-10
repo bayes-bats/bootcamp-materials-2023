@@ -419,7 +419,8 @@ summarize_normal_normal(mean = 6.5, sd = 0.5, sigma = 0.593,
 
 If we base our prior mean on $n_0$ observations from a similar population as $(Y_1,Y_2,\ldots,Y_n)$, we may wish to set $\tau^2=\frac{\sigma^2}{n_0}$, the variance of the mean of the prior observations. In this case, we can simplify our equation as 
 
-$$\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}} = \frac{\bigg(\frac{n_0}{\sigma^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}} = \bigg(\frac{n_0}{n_0+n}\bigg)\theta + \bigg(\frac{n}{n_0+n}\bigg)\bar{y},$$
+$$\mu_n=\frac{\bigg(\frac{1}{\tau^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{1}{\tau^2}+\frac{n}{\sigma^2}} = \frac{\bigg(\frac{n_0}{\sigma^2}\bigg)\theta+\bigg(\frac{n}{\sigma^2}\bigg)\bar{y}}{\frac{n_0}{\sigma^2}+\frac{n}{\sigma^2}}$$
+$$\mu_n= \bigg(\frac{n_0}{n_0+n}\bigg)\theta + \bigg(\frac{n}{n_0+n}\bigg)\bar{y},$$
 so we see our conjugate prior has an interpretation in terms of historical data when $\theta$ is the prior mean in a sample of size $n_0$.
 
 
