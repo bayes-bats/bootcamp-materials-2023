@@ -115,7 +115,7 @@ A Brief Overview of the Week
 
 [bayes-bats.github.io/bootcamp-material](https://bayes-bats.github.io/bootcamp-material/)
 
-[github.com/socaldatascience](https://github.com/socaldatascience)
+[github.com/bayes-bats](https://github.com/bayes-bats)
 :::
 
 
