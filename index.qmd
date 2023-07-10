@@ -63,6 +63,9 @@ The bootcamp will take place in **room 3011** on the 3rd floor of [Donald Bren H
       <!--end of timeline-->
       
 ```
+
+Each day of the bootcamp, the learning material will be distributed to each participant in our [GitHub organization {{< fa brands github >}}](https://github.com/bayes-bats).
+
 ## Technical Setup Before the Bootcamp
 
 -   **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/XBrrS4TM2rR7xyTg6) to let us know what your username is. Many of you have already done this.
