@@ -10,6 +10,7 @@ format:
       data-background-image: https://www.stat.uci.edu/bayes-bats/img/logo.png
       data-background-size: 12%
       data-background-position: 50% 75%
+    include-after-body: ../templates/clean_title_page.html
 ---
 
 :::: {.columns}
