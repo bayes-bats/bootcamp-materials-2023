@@ -34,6 +34,22 @@ ul.task-list li input[type="checkbox"] {
 <link href="4-act-posterior-analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="4-act-posterior-analysis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -63,6 +79,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#goals-for-the-afternoon" id="toc-goals-for-the-afternoon" class="nav-link active" data-scroll-target="#goals-for-the-afternoon">Goals for the Afternoon</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul>
 </nav>
 </div>
@@ -76,13 +93,130 @@ ul.task-list li input[type="checkbox"] {
 <section id="goals-for-the-afternoon" class="level2">
 <h2 class="anchored" data-anchor-id="goals-for-the-afternoon">Goals for the Afternoon</h2>
 <ul>
+<li><p>Develop an activity that could be used in a course you teach</p>
+<p>Be creative!</p></li>
 <li><p>Brainstorm ideas for questions to answer using a Bayesian analysis</p></li>
-<li><p>For today, avoid regression models (coming soon!) and stick with analysis using simple one or two-parameter models</p></li>
-<li><p>Develop an activity that could be used in a course you teach</p></li>
-<li><p>Be creative!</p></li>
-<li><p>Can also adapt example from this morning if desired (for example you can evaluate if participants adapt to sleep deprivation, as we have a week of measurements in this condition, with day 9 the last sleep-deprived measurement)</p></li>
-<li><p>Identify data and develop code for modeling</p></li>
+<li><p>Identify data</p></li>
+<li><p>Pinpoint how data can be used to address the question</p></li>
+<li><p>Write down data model and prior</p></li>
+<li><p>Develop code for modeling</p></li>
+<li><p>Develop an approach for drawing inferences from the model</p></li>
 </ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Question
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Do individuals adapt to extended periods of sleep deprivation?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sleep study data from <code>lme4</code> R package, exploring whether the day 3 (first day of sleep deprivation) reaction times differ from the day 9 (7th day of sleep deprivation) reaction times</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How Data Can Address the Question
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Take the difference between the 7th day and first day reaction times (7th-1st). Positive differences would imply that more consecutive days of sleep deprivation are related to longer reaction times. Negative differences would imply that reaction times are recovering a bit after individuals become acclimated to sleep deprivation over the week. Differences close to zero would imply no difference in reaction times of the first vs 7th day of sleep deprivation.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Data Model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Take the difference between the 7th day and first day reaction times (7th-1st) and call it <span class="math inline">Y_i</span>. Let <span class="math inline">Y_i \sim N(\mu,\sigma^2)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Priors
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We could use a normal prior for the mean and a Cauchy prior for the standard deviation. Students can experiment with prior choices.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This can be adapted depending on choice of priors. We could use the <code>brms</code> packages for analysis, so that students have a “black box” method for simulating from the posterior.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Posterior Summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We will first look at convergence diagnostics and assuming these are satisfactory, we will calculate the posterior probability that the mean difference between response times after 7 days and 1 day of sleep deprivation is <span class="math inline">&gt;0</span>.</p>
+</div>
+</div>
+</div>
 </section>
 
 </main>

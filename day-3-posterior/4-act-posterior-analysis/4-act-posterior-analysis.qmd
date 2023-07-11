@@ -14,12 +14,72 @@ format:
 
 ## Goals for the Afternoon
 
--   Brainstorm ideas for questions to answer using a Bayesian analysis
-  -   For today, avoid regression models (coming soon!) and stick with analysis using simple one or two-parameter models
-
 -   Develop an activity that could be used in a course you teach
-  -   Be creative!
-  -   Can also adapt example from this morning if desired (for example you can evaluate if participants adapt to sleep deprivation, as we have a week of measurements in this condition, with day 9 the last sleep-deprived measurement)
-  
--   Identify data and develop code for modeling
+
+    Be creative!
+    
+-   Brainstorm ideas for questions to answer using a Bayesian analysis
+
+-   Identify data 
+
+-   Pinpoint how data can be used to address the question
+
+-   Write down data model and prior
+
+-   Develop code for modeling
+
+-   Develop an approach for drawing inferences from the model
+
+## Example
+
+::: {.callout-caution collapse="true"}
+## The Question
+
+Do individuals adapt to extended periods of sleep deprivation?
+:::
+
+
+::: {.callout-caution collapse="true"}
+## The Data
+
+Sleep study data from `lme4` R package, exploring whether the day 3 (first day of sleep deprivation) reaction times differ from the day 9 (7th day of sleep deprivation) reaction times
+
+:::
+
+::: {.callout-caution collapse="true"}
+## How Data Can Address the Question
+
+Take the difference between the 7th day and first day reaction times (7th-1st).  Positive differences would imply that more consecutive days of sleep deprivation are related to longer reaction times.  Negative differences would imply that reaction times are recovering a bit after individuals become acclimated to sleep deprivation over the week.  Differences close to zero would imply no difference in reaction times of the first vs 7th day of sleep deprivation.
+
+:::
+
+::: {.callout-caution collapse="true"}
+## The Data Model
+
+Take the difference between the 7th day and first day reaction times (7th-1st) and call it $Y_i$.  Let $Y_i \sim N(\mu,\sigma^2)$
+
+:::
+
+::: {.callout-caution collapse="true"}
+## The Priors
+
+We could use a normal prior for the mean and a Cauchy prior for the standard deviation. Students can experiment with prior choices.
+
+:::
+
+::: {.callout-caution collapse="true"}
+## The Code
+
+This can be adapted depending on choice of priors. We could use the `brms` packages for analysis, so that students have a "black box" method for simulating from the posterior.
+
+:::
+   
+   
+::: {.callout-caution collapse="true"}
+## The Posterior Summary
+
+We will first look at convergence diagnostics and assuming these are satisfactory, we will calculate the posterior probability that the mean difference between response times after 7 days and 1 day of sleep deprivation is $>0$.
+
+::: 
+
 
