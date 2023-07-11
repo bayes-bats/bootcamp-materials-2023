@@ -542,6 +542,11 @@
 </div>
 </div>
 </section>
+<section id="aside-posterior-proportional-to-likelihood" class="slide level2">
+<h2>Aside: Posterior Proportional to Likelihood</h2>
+
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>For the uniform prior distribution, the prior takes the same value everywhere, so the posterior distribution (generally proportional to the prior times the likelihood) is simply proportional to the likelihood.</p>
+</section>
 <section id="section-2" class="slide level2">
 <h2>2021</h2>
 <p>Now, take your posterior and use it as the prior distribution for analysis of the data from 2021.</p>
@@ -609,7 +614,7 @@
 <div id="tabset-2-3">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -683,7 +688,7 @@
 <div id="tabset-3-3">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -724,7 +729,7 @@
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="the-normal-model" class="slide level2">
 <h2>The Normal Model</h2>
 <p>Let <span class="math inline">\(Y\)</span> be a random variable which can take any value between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>, ie. <span class="math inline">\(Y \in (-\infty,\infty)\)</span>. Then the variability in <span class="math inline">\(Y\)</span> might be well represented by a Normal model with <strong>mean parameter</strong> <span class="math inline">\(\mu \in (-\infty, \infty)\)</span> and <strong>standard deviation parameter</strong> <span class="math inline">\(\sigma &gt; 0\)</span>:</p>
@@ -779,7 +784,7 @@ f(\mu) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\bigg[{-\frac{(\mu - \theta)^2}{2\tau^2
 <section id="n6.5-0.52-distribution" class="slide level2">
 <h2><span class="math inline">\(N(6.5, 0.5^2)\)</span> Distribution</h2>
 
-<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="the-normal-normal-bayesian-model" class="slide level2">
 <h2>The Normal-Normal Bayesian Model</h2>
 <p>Let <span class="math inline">\(\mu \in (-\infty,\infty)\)</span> be an unknown <em>mean</em> parameter and <span class="math inline">\((Y_1,Y_2,\ldots,Y_n)\)</span> be an independent <span class="math inline">\(N(\mu,\sigma^2)\)</span> sample where <span class="math inline">\(\sigma\)</span> is assumed to be <em>known</em> (we’ll relax this strong assumption shortly). The Normal-Normal Bayesian model complements the Normal structure of the data with a Normal prior on <span class="math inline">\(\mu\)</span>:</p>
@@ -812,7 +817,7 @@ Y_i | \mu &amp; \stackrel{ind}{\sim} N(\mu, \sigma^2) \\
 <section id="section-7" class="slide level2">
 <h2></h2>
 
-<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-13-1.png" width="864" class="r-stretch"></section>
+<img data-src="1-lec-posterior-conjugate_files/figure-revealjs/unnamed-chunk-14-1.png" width="864" class="r-stretch"></section>
 <section id="section-8" class="slide level2 center">
 <h2></h2>
 <div class="cell">
