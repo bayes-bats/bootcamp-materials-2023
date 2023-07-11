@@ -419,7 +419,7 @@ f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 <section id="full-conditional-posterior-distributions" class="slide level2">
 <h2>Full Conditional Posterior Distributions</h2>
 <span class="math display">\[\begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}\]</span>
 <ul>
@@ -10578,7 +10578,7 @@ f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>para_post <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">reframe</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(mu, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">summarize</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(mu, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    quants
 1 5.537106
@@ -10587,7 +10587,7 @@ f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>para_post <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">reframe</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(phi, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">summarize</span>(<span class="at">quants =</span> <span class="fu">quantile</span>(phi, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.0975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    quants
 1 1.332576

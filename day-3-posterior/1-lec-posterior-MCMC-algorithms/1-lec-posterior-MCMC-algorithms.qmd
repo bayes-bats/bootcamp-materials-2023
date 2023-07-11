@@ -37,7 +37,7 @@ format:
 
 ```{=tex}
 \begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber 
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}
 ```
@@ -175,12 +175,12 @@ names(para_post) <- c("mu", "phi")
 
 ```{r, echo = TRUE}
 para_post %>%
-  reframe(quants = quantile(mu, probs = c(0.025, 0.0975)))
+  summarize(quants = quantile(mu, probs = c(0.025, 0.0975)))
 ```
 
 ```{r, echo = TRUE}
 para_post %>%
-  reframe(quants = quantile(phi, probs = c(0.025, 0.0975)))
+  summarize(quants = quantile(phi, probs = c(0.025, 0.0975)))
 ```
 
 ## Plot 1
