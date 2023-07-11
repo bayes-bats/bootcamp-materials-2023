@@ -190,10 +190,11 @@ mean(x_ben>x_con)
 
 ## What Ideas Do You Have?
 
--   Take 5 minutes to consider an example involving Bayesian inference that you might use in one of your courses
+-   Take 5 minutes to consider an example involving Bayesian inference that you might use in one of your courses (tomorrow we will design a posterior analysis activity, so you might think about examples that work well for that goal)
+
+-   Split into (new!) groups of 3-4 and share your ideas
 
 -   Add your examples to [https://bit.ly/3JOBKxp](https://bit.ly/3JOBKxp)
 
--   Split into (new!) groups of 3-4 and share your ideas
 
 -   Assign a reporter for large group sharing
