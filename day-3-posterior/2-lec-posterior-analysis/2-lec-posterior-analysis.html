@@ -407,19 +407,16 @@
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#| eval: false</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">data</span>(sleepstudy)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>baseline <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">filter</span>(Days<span class="sc">==</span><span class="dv">2</span>) <span class="co"># Day 2 is baseline, days 0-1 are training</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>baseline <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Reaction)) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Reaction Time (ms)"</span>) <span class="sc">+</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">275</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="|2-3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(lme4) <span class="co"># lme4 package contains sleep study data</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">data</span>(sleepstudy)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>baseline <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">filter</span>(Days<span class="sc">==</span><span class="dv">2</span>) <span class="co"># Day 2 is baseline, days 0-1 are training</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>baseline <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Reaction)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Reaction Time (ms)"</span>) <span class="sc">+</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">275</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2">
@@ -449,7 +446,7 @@
 <section id="code-to-fit-model" class="slide level2">
 <h2>Code to Fit Model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="|1|2|3-9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> baseline, <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="|1|2|4-5|6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> baseline, <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
 <span id="cb2-2"><a href="#cb2-2"></a>           Reaction <span class="sc">~</span> <span class="dv">1</span>, <span class="co">#only estimating a mean (Intercept) and variance</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>           <span class="at">prior =</span> <span class="fu">c</span>(</span>
 <span id="cb2-4"><a href="#cb2-4"></a>            <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">300</span>,<span class="dv">50</span>), <span class="at">class =</span> Intercept), </span>
@@ -520,11 +517,11 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   266.32      7.03   252.59   280.55 1.00     2859     2314
+Intercept   266.16      7.42   251.52   280.90 1.00     2602     2183
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    30.89      5.33    22.40    43.06 1.00     2469     2003
+sigma    31.08      5.67    22.25    44.46 1.00     2590     2364
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -558,14 +555,14 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(fit)<span class="sc">$</span>b_Intercept<span class="sc">&lt;</span><span class="dv">275</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.897</code></pre>
+<pre><code>[1] 0.88575</code></pre>
 </div>
 </div>
-<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.897.</p>
+<p>So the posterior probability that <span class="math inline">\(\mu&lt;275\)</span> is 0.88575.</p>
 </section>
 <section id="evaluating-our-hypothesis-2" class="slide level2">
 <h2>Evaluating Our Hypothesis</h2>
-<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (252.59,280.55) and note that 275 is inside this credible interval.</p>
+<p>We can also use the 95% credible interval for <span class="math inline">\(\mu\)</span>, given by (251.52,280.9) and note that 275 is inside this credible interval.</p>
 </section>
 <section id="you-try-it" class="slide level2">
 <h2>You Try It!</h2>
@@ -583,24 +580,25 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Code</a></li><li><a href="#tabset-3-2">Plot</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<pre><code>sleepdep &lt;- sleepstudy %&gt;%
-  filter(Days %in% c(2,3)) %&gt;%
-  pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %&gt;%
-  mutate(diff32=Day3-Day2)
-  # consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
-  # positive differences indicate longer reaction times when sleep-deprived
-sleepdep %&gt;%
-  ggplot(aes(x=diff32)) +
-  geom_histogram() + 
-  labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
-  geom_vline(xintercept=0, col="red")
-
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="|1-2|3-4|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>sleepdep <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(Days <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Days, <span class="at">names_prefix=</span><span class="st">"Day"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>              <span class="at">values_from =</span> Reaction, <span class="at">id_cols=</span>Subject) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">mutate</span>(<span class="at">diff32=</span>Day3<span class="sc">-</span>Day2)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="co"># consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="co"># positive differences indicate longer reaction times when sleep-deprived</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>sleepdep <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>diff32)) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Difference in Reaction Time (ms) when Sleep Deprived"</span>) <span class="sc">+</span> </span>
+<span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div id="tabset-3-2">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="2-lec-posterior-analysis_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </div>
 </div>
 </div>

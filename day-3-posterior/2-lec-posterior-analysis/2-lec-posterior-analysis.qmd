@@ -23,11 +23,11 @@ We consider data from a study (Belenky et al, 2003) of reaction time under a var
 
 ## Code
 
-```{r }
-#| echo: fenced
+```{r,echo=TRUE}
 #| eval: false
-library(lme4)
+#| code-line-numbers: "|2-3|4-5"
 library(tidyverse)
+library(lme4) # lme4 package contains sleep study data
 data(sleepstudy)
 baseline <- sleepstudy %>%
   filter(Days==2) # Day 2 is baseline, days 0-1 are training
@@ -100,7 +100,7 @@ ggplot() +
 
 
 ```{r, echo=TRUE, eval=FALSE}
-#| code-line-numbers: "|1|2|3-9"
+#| code-line-numbers: "|1|2|4-5|6-7"
 fit <- brm(data = baseline, family = gaussian(),
            Reaction ~ 1, #only estimating a mean (Intercept) and variance
            prior = c(
@@ -254,10 +254,13 @@ Now that we've explored baseline reaction time, let's see what happens to the re
 
 ::: panel-tabset
 ## Code
-```
+```{r, echo=TRUE}
+#| eval: false
+#| code-line-numbers: "|1-2|3-4|5"
 sleepdep <- sleepstudy %>%
   filter(Days %in% c(2,3)) %>%
-  pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %>%
+  pivot_wider(names_from = Days, names_prefix="Day", 
+              values_from = Reaction, id_cols=Subject) %>%
   mutate(diff32=Day3-Day2)
   # consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
   # positive differences indicate longer reaction times when sleep-deprived
@@ -266,7 +269,6 @@ sleepdep %>%
   geom_histogram() + 
   labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
   geom_vline(xintercept=0, col="red")
-
 
 ```
 
