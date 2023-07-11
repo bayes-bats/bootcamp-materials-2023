@@ -319,3 +319,37 @@ mean(as_draws_df(fit2)$b_Intercept>0)
 
 ```
 
+
+
+```{r}
+#| echo: false
+#| eval: false
+
+# do you adapt, eg same deprivation day 3 and 2?
+sleepdep93 <- sleepstudy %>%
+  filter(Days %in% c(3,9)) %>%
+  pivot_wider(names_from = Days, names_prefix="Day", values_from = Reaction, id_cols=Subject) %>%
+  mutate(diff93=Day9-Day3) #positive means slower reaction day 7 than 1
+
+sleepdep93 %>%
+  ggplot(aes(x=diff93)) +
+  geom_histogram() + 
+  labs(x="Difference in Reaction Time (ms) when Sleep Deprived 7 vs 3 days") + 
+  geom_vline(xintercept=0, col="red")
+
+fit3 <- brm(data = sleepdep93, family = gaussian(),
+           diff93 ~ 1, #only estimating a mean (Intercept) and variance
+           prior = c(
+            prior(normal(0,50), class = Intercept), 
+              # prior for mu has mean 0 and sd 50
+            prior(cauchy(0,10), class = sigma)
+              # prior for sigma is half of a mean 0, scale 10 Cauchy
+                )
+)
+
+plot(fit3)
+fit3
+mean(as_draws_df(fit3)$b_Intercept>0)
+
+```
+
