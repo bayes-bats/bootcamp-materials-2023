@@ -411,7 +411,7 @@
   \mu \mid {\color{red}\sigma} \sim \textrm{Normal}(\theta, \tau^2).
   \end{equation}\]</span></p></li>
 <li class="fragment"><p>The posterior distribution for mean <span class="math inline">\(\mu\)</span> (<span class="math inline">\(\phi = 1/\sigma^2\)</span> and <span class="math inline">\(\phi_0 = 1/\tau^2\)</span>): <span class="math display">\[\begin{equation}
-  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \frac{1}{\phi_0 + n \phi}\right)
   \end{equation}\]</span></p></li>
 </ul>
 </section>
@@ -419,7 +419,7 @@
 <h2>The Normal-Normal Model for Unknown Mean</h2>
 <ul>
 <li class="fragment"><p>The posterior distribution for mean <span class="math inline">\(\mu\)</span>: <span class="math display">\[\begin{equation}
-  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+  \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \frac{1}{\phi_0 + n \phi}\right)
   \end{equation}\]</span> where the precision <span class="math inline">\(\phi = 1/\sigma^2\)</span> and <span class="math inline">\(\phi_0 = 1/\tau^2\)</span> which are known since <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau^2\)</span> are known</p></li>
 <li class="fragment"><p>We can then use the <code>rnorm()</code> R function to sample posterior draws of <span class="math inline">\(\mu\)</span> from its posterior distribution shown above (required quantities: <span class="math inline">\(\theta, \phi_0, \bar{y}, \phi\)</span>)</p></li>
 </ul>

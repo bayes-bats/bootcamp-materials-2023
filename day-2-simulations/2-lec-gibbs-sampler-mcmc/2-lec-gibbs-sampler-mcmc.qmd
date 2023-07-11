@@ -31,13 +31,13 @@ editor:
 
 -   The posterior distribution for mean $\mu$ ($\phi = 1/\sigma^2$ and
     $\phi_0 = 1/\tau^2$): \begin{equation}
-      \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+      \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \frac{1}{\phi_0 + n \phi}\right)
       \end{equation}
 
 ## The Normal-Normal Model for Unknown Mean
 
 -   The posterior distribution for mean $\mu$: \begin{equation}
-      \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)
+      \mu \mid y_1, \cdots, y_n, {\color{red}\phi} \sim \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y} }{\phi_0 + n\phi}, \frac{1}{\phi_0 + n \phi}\right)
       \end{equation} where the precision $\phi = 1/\sigma^2$ and
     $\phi_0 = 1/\tau^2$ which are known since $\sigma^2$ and $\tau^2$
     are known
