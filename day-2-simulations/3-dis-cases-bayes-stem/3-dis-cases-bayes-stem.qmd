@@ -16,7 +16,7 @@ format:
 
 ## Toxicological Testing: Benzophenone
 
-Scientists in the US National Toxicology Program routinely evaluate existing and new chemicals for potential human toxicity. These evaluations involve a variety of test paradigms, ranging from high-throughput *in vitro* tests to animal bioassays. A study of benzophenone, which has many uses ranging from producing "sweet-woody-geranium-like notes" in perfume to preventing UV damage to other chemicals, involved 150 female rates exposed to various doses of benzophenone and 50 unexposed (control) rats. The outcome of interest to us is a particular tumor, histiocytic sarcoma.
+Scientists in the US National Toxicology Program routinely evaluate existing and new chemicals for potential human toxicity. These evaluations involve a variety of test paradigms, ranging from high-throughput *in vitro* tests to animal bioassays. A study of benzophenone, which has many uses ranging from producing "sweet-woody-geranium-like notes" in perfume to preventing UV damage to other chemicals, involved 150 female rats exposed to various doses of benzophenone and 50 unexposed (control) rats. The outcome of interest to us is a particular tumor, histiocytic sarcoma.
 
 ## 
 
