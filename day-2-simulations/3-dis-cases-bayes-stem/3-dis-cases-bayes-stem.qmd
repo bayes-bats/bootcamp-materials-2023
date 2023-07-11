@@ -194,6 +194,6 @@ mean(x_ben>x_con)
 
 -   Add your examples to LINK HERE
 
--   Split into (new!) groups of 4 and share your ideas
+-   Split into (new!) groups of 3-4 and share your ideas
 
 -   Assign a reporter for large group sharing
