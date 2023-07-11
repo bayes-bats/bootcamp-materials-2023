@@ -113,6 +113,16 @@ historical+last10+agnostic
 
 :::
 
+## Aside: More Informative Prior
+
+For the more informative prior, using 121 years of historical data, the prior and posterior are not exactly the same but are very close. We can focus in more closely to see the slight difference.
+
+```{r, echo=TRUE, eval=TRUE}
+plot_beta_binomial(59, 62, y = 1, n = 1) +
+  labs(title = "Prior Using 1900-2020",y=NULL) + 
+  xlim(0.3,0.675)
+```
+
 ## Aside: Posterior Proportional to Likelihood
 
 ```{r }
@@ -168,6 +178,15 @@ historical+last10+agnostic2
 
 
 :::
+
+## Aside: Posterior Proportional to Likelihood
+
+```{r }
+agnostic2
+```
+
+In this case, the prior Beta(2,1) is proportional to $\pi^{2-1}(1-\pi)^{1-1}=\pi$, and the likelihood is also proportional to $\pi^1(1-\pi)^0=\pi$.  
+
 
 
 ## 2022
