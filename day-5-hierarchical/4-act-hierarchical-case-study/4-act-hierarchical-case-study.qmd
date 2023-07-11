@@ -22,7 +22,7 @@ format:
 
 ## Sample Lab Materials
 
--   Take 15 minutes to review the exercises on humidity and penguins in [section 16.9.2 of Bayes Rules!  ](https://www.bayesrulesbook.com/chapter-16.html#exercises-15) and [section 17.9.2 of Bayes Rules!](https://www.bayesrulesbook.com/chapter-17.html#applied-exercises-9). Start making notes about what types of questions  you want your students to address, and think about possible data sets for analysis. Be prepared to share one primary concept you would like your students to encounter in the lab.
+-   Take 15 minutes to review the exercises on humidity and (time permitting) penguins in [section 16.9.2 of Bayes Rules!  ](https://www.bayesrulesbook.com/chapter-16.html#exercises-15) and (time permitting) [section 17.9.2 of Bayes Rules!](https://www.bayesrulesbook.com/chapter-17.html#applied-exercises-9). Start making notes about what types of questions  you want your students to address, and think about possible data sets for analysis. Be prepared to share one primary concept you would like your students to encounter in the lab.
 
 -   Full group: sharing
 
