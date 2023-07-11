@@ -149,4 +149,10 @@ Your GitHub repository: `day5-hierarchical-username`
 | Lecture - part 2 | Hierarchical Models: MCMC and Inference | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hierarchical-mcmc/2-lec-hierarchical-mcmc.html)             |
 | Discussion       | Software choices for Bayes learners     | [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)               |
 | Activity         | Designing a hierachical case study      | [{{< fa desktop >}}](day-5-hierarchical/4-act-hierarchical-case-study/4-act-hierarchical-case-study.html) |
-| Closing        | Before We Say Goodbye           | [{{< fa desktop >}}](logistics/2-closing.html)     
+| Closing        | Before We Say Goodbye           | [{{< fa desktop >}}](logistics/2-closing.html) 
+
+## Tier 2
+
+About ten instructors who attend the bootcamp will be selected to develop course materials in the Fall semester.
+
+You can find more information [following this link](https://www.stat.uci.edu/bayes-bats/materials.html).
