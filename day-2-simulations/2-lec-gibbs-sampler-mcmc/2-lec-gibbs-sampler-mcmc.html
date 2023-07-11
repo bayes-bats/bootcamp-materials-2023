@@ -492,7 +492,7 @@ f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 </ul>
 </div>
 <span class="math display">\[\begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}\]</span>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
@@ -514,7 +514,7 @@ f(\mu, \sigma^2) = f(\mu) f(\sigma^2)
 <section id="sampling-scheme-a-gibbs-sampler" class="slide level2">
 <h2>Sampling Scheme: A Gibbs Sampler</h2>
 <span class="math display">\[\begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &amp;\sim&amp; \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &amp;\sim&amp; \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}\]</span>
 <p>Start with initial values for parameters, <span class="math inline">\((\mu^{(0)}, \phi^{(0)})\)</span>. For <span class="math inline">\(s = 1, \ldots, S\)</span>, generate from the following sequence of <strong>full conditional posterior distributions</strong>:</p>

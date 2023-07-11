@@ -110,7 +110,7 @@ what would be a workflow for when both $\mu$ and $\sigma^2$ are unknown?
 
 ```{=tex}
 \begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber 
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}
 ```
@@ -129,7 +129,7 @@ distributions?
 
 ```{=tex}
 \begin{eqnarray}
-\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \sqrt{\frac{1}{\phi_0 + n \phi}}\right)  \\ \nonumber 
+\mu \mid y_1, \cdots, y_n,{\color{red}\phi} &\sim& \textrm{Normal}\left(\frac{\phi_0 \theta + n\phi\bar{y}}{\phi_0 + n \phi}, \frac{1}{\phi_0 + n \phi}\right)  \\ \nonumber 
 1/\sigma^2 = \phi \mid y_1, \cdots, y_n,{\color{red}\mu} &\sim& \textrm{Gamma} \left(\alpha + \frac{n}{2}, \beta + \frac{1}{2}\sum_{i=1}^{n}(y_i - \mu)^2 \right) \nonumber \\
 \end{eqnarray}
 ```
