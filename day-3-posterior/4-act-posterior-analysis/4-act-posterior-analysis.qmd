@@ -78,7 +78,7 @@ This can be adapted depending on choice of priors. We could use the `brms` packa
 ::: {.callout-caution collapse="true"}
 ## The Posterior Summary
 
-We will first look at convergence diagnostics and assuming these are satisfactory, we will calculate the posterior probability that the mean difference between response times after 7 days and 1 day of sleep deprivation is $>0$.
+We will first look at convergence diagnostics and assuming these are satisfactory, we will plot the posterior. Then we will calculate the posterior probability that the mean difference between response times after 7 days and 1 day of sleep deprivation is $>0$.
 
 ::: 
 
