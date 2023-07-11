@@ -399,7 +399,21 @@
 <section id="toxicological-testing-benzophenone" class="slide level2">
 <h2>Toxicological Testing: Benzophenone</h2>
 <p>Scientists in the US National Toxicology Program routinely evaluate existing and new chemicals for potential human toxicity. These evaluations involve a variety of test paradigms, ranging from high-throughput <em>in vitro</em> tests to animal bioassays. A study of benzophenone, which has many uses ranging from producing “sweet-woody-geranium-like notes” in perfume to preventing UV damage to other chemicals, involved 150 female rates exposed to various doses of benzophenone and 50 unexposed (control) rats. The outcome of interest to us is a particular tumor, histiocytic sarcoma.</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>tumordat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="st">"tumor_no"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">147</span>, <span class="dv">50</span>),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="st">"tumor_yes"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">0</span>),</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">"Exposed"</span>, <span class="st">"Control"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">colnames</span>(tumordat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"No Tumor"</span>, <span class="st">"Tumor"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>tumordat</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        No Tumor Tumor
 Exposed      147     3
@@ -418,7 +432,7 @@ Control       50     0</code></pre>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">fisher.test</span>(tumordat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">fisher.test</span>(tumordat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2">
@@ -461,26 +475,56 @@ odds ratio
 <h2>Control Group</h2>
 <p>We have historical data from prior studies that indicates that of 460 female rats on control, 0 have developed tumors. Because the parameters of the beta distribution must be positive, we can specify a Beta(0.1,460) prior in this group, plotted below.</p>
 
-<img data-src="3-dis-cases-bayes-stem_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><p>That’s hard to see! Most of the prior mass is very close to zero.</p>
+<img data-src="3-dis-cases-bayes-stem_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><p>That’s hard to see!</p>
+</section>
+<section id="zooming-in" class="slide level2">
+<h2>Zooming In</h2>
+
+<img data-src="3-dis-cases-bayes-stem_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>Most of the prior mass is very close to zero (mean <span class="math inline">\(\frac{\alpha}{\beta}=\frac{0.1}{460+0.1}=0.0002\)</span>).</p>
 </section>
 <section id="posterior-distributions" class="slide level2">
 <h2>Posterior Distributions</h2>
-<div>
-<ul>
-<li><p>Benzophenone group: Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{4}{148+4}=\frac{4}{152}=0.026\)</span>.</p></li>
-<li><p>Control group: Beta(0.1,460) prior with 0 successes and 50 failures yields a Beta(0.1+0,460+50)=Beta(0.1,510) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{0.1}{510.1}=0.0002\)</span>.</p></li>
-</ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Benzophenone group</a></li><li><a href="#tabset-2-2">Control group</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{4}{148+4}=\frac{4}{152}=0.026\)</span>.</p>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="3-dis-cases-bayes-stem_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Beta(0.1,460) prior with 0 successes and 50 failures yields a Beta(0.1+0,460+50)=Beta(0.1,510) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{0.1}{510.1}=0.0002\)</span>.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="3-dis-cases-bayes-stem_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="simulation-based-inference" class="slide level2">
 <h2>Simulation-Based Inference</h2>
 <p>We can evaluate the hypothesis that the posterior mean tumor rate in the benzophenone group is greater than that in the control group by simulating values of the proportions from the respective beta posteriors and counting how many times we see a greater tumor proportion parameter value in the benzophenone group than among controls.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>x1<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">1000000</span>,<span class="fl">0.1</span>,<span class="dv">510</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>x2<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">1000000</span>,<span class="dv">4</span>,<span class="dv">148</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">mean</span>(x2<span class="sc">&gt;</span>x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>x_con<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">10000000</span>,<span class="fl">0.1</span>,<span class="dv">510</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>x_ben<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">10000000</span>,<span class="dv">4</span>,<span class="dv">148</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">mean</span>(x_ben<span class="sc">&gt;</span>x_con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.999931</code></pre>
+<pre><code>[1] 0.9999021</code></pre>
 </div>
 </div>
 </section>
@@ -488,7 +532,8 @@ odds ratio
 <h2>What Ideas Do You Have?</h2>
 <ul>
 <li class="fragment"><p>Take 5 minutes to consider an example involving Bayesian inference that you might use in one of your courses</p></li>
-<li class="fragment"><p>Split into groups of 3 and share your ideas</p></li>
+<li class="fragment"><p>Add your examples to LINK HERE</p></li>
+<li class="fragment"><p>Split into (new!) groups of 4 and share your ideas</p></li>
 <li class="fragment"><p>Assign a reporter for large group sharing</p></li>
 </ul>
 
