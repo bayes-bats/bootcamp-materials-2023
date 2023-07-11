@@ -490,7 +490,7 @@ odds ratio
 <div id="tabset-2-1">
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{4}{148+4}=\frac{4}{152}=0.026\)</span>.</p>
+<p>Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+147)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is <span class="math inline">\(\frac{4}{148+4}=\frac{4}{152}=0.026\)</span>.</p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="cell-output-display">
@@ -524,7 +524,7 @@ odds ratio
 <span id="cb5-2"><a href="#cb5-2"></a>x_ben<span class="ot">=</span><span class="fu">rbeta</span>(<span class="dv">10000000</span>,<span class="dv">4</span>,<span class="dv">148</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">mean</span>(x_ben<span class="sc">&gt;</span>x_con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9999057</code></pre>
+<pre><code>[1] 0.9999026</code></pre>
 </div>
 </div>
 </section>

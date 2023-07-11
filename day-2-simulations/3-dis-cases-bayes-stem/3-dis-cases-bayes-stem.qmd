@@ -133,7 +133,7 @@ Most of the prior mass is very close to zero (mean $\frac{\alpha}{\beta}=\frac{0
 ::: columns
 
 ::: {.column width="40%"}
-Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+47)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{4}{148+4}=\frac{4}{152}=0.026$.
+Beta(1,1) prior with 3 successes and 147 failures yields a Beta(1+3,1+147)=Beta(4,148) posterior, and the posterior mean estimate of the probability of a tumor in this group is $\frac{4}{148+4}=\frac{4}{152}=0.026$.
 :::
 
 ::: {.column width="60%"}
