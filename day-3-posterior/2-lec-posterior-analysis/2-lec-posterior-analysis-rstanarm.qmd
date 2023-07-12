@@ -71,7 +71,7 @@ Instead, we consider a relatively non-informative prior for our mean $\mu \sim N
 
 ## Prior for the Standard Deviation
 
-We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which has mean 0 and scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
+We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which has center 0 and scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
 
 ```{r}
 #| echo: false
@@ -106,7 +106,7 @@ fit <- stan_glm(data = baseline, family = gaussian,
                 prior_intercept = normal(300, 50),
                 # prior for mu has mean 300 and sd 50
                 prior_aux = cauchy(0, 40),
-                # prior for sigma is half of a mean 0, scale 40 Cauchy
+                # prior for sigma is half of a center 0, scale 40 Cauchy
                 chains = 4, iter = 5000*2, seed = 84735, refresh = FALSE
 )
 
