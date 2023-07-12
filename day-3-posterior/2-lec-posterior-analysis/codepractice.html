@@ -248,15 +248,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.013216 seconds (Warm-up)
-Chain 1:                0.008652 seconds (Sampling)
-Chain 1:                0.021868 seconds (Total)
+Chain 1:  Elapsed Time: 0.012298 seconds (Warm-up)
+Chain 1:                0.008003 seconds (Sampling)
+Chain 1:                0.020301 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 3e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
+Chain 2: Gradient evaluation took 2e-06 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -273,15 +273,15 @@ Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.014538 seconds (Warm-up)
-Chain 2:                0.00855 seconds (Sampling)
-Chain 2:                0.023088 seconds (Total)
+Chain 2:  Elapsed Time: 0.012762 seconds (Warm-up)
+Chain 2:                0.009504 seconds (Sampling)
+Chain 2:                0.022266 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 3e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
+Chain 3: Gradient evaluation took 1e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.01 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -298,15 +298,15 @@ Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.014918 seconds (Warm-up)
-Chain 3:                0.009628 seconds (Sampling)
-Chain 3:                0.024546 seconds (Total)
+Chain 3:  Elapsed Time: 0.012753 seconds (Warm-up)
+Chain 3:                0.007454 seconds (Sampling)
+Chain 3:                0.020207 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'ff6f0600bb506a46491e0682891f6faf' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 1e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.01 seconds.
+Chain 4: Gradient evaluation took 2e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -323,9 +323,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.013704 seconds (Warm-up)
-Chain 4:                0.008593 seconds (Sampling)
-Chain 4:                0.022297 seconds (Total)
+Chain 4:  Elapsed Time: 0.015128 seconds (Warm-up)
+Chain 4:                0.007471 seconds (Sampling)
+Chain 4:                0.022599 seconds (Total)
 Chain 4: </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -343,11 +343,11 @@ Formula: Reaction ~ 1
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   265.94      7.43   251.07   280.49 1.00     2376     2315
+Intercept   266.07      7.39   251.11   281.30 1.00     2950     2488
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    31.17      5.73    22.33    44.76 1.00     2274     1951
+sigma    31.03      5.46    22.26    43.12 1.00     2637     2571
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -355,7 +355,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(fit)<span class="sc">$</span>b_Intercept<span class="sc">&lt;</span><span class="dv">275</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.89525</code></pre>
+<pre><code>[1] 0.898</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">posterior_summary</span>(fit,</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_Intercept"</span>)</span>
@@ -371,7 +371,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>diff32)) <span class="sc">+</span></span>
 <span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Difference in Reaction Time (ms) when Sleep Deprived"</span>) <span class="sc">+</span> </span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"#00539B"</span>) <span class="co">#pick your favorite hex code! This is Duke Blue</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>

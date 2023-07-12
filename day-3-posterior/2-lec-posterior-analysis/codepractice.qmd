@@ -46,5 +46,5 @@ sleepdep %>%
   ggplot(aes(x=diff32)) +
   geom_histogram() + 
   labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
-  geom_vline(xintercept=0, col="red")
+  geom_vline(xintercept=0, col="#00539B") #pick your favorite hex code! This is Duke Blue
 ```
