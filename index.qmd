@@ -125,6 +125,7 @@ Your GitHub repository: `day3-posterior-username`
 |-------------------|-----------------------------------|-------------------|
 | Lecture - part 1 | Posterior Inference and MCMC Algorithms | [{{< fa desktop >}}](day-3-posterior/1-lec-posterior-MCMC-algorithms/1-lec-posterior-MCMC-algorithms.html)   |
 | Lecture - part 2 | Posterior Analysis with MCMC            | [{{< fa desktop >}}](day-3-posterior/2-lec-posterior-analysis/2-lec-posterior-analysis.html)                 |
+| Lecture - part 2 | Posterior Analysis with MCMC and `rstanarm` version            | [{{< fa desktop >}}](day-3-posterior/2-lec-posterior-analysis/2-lec-posterior-analysis-rstanarm.html)                 |
 | Discussion       | Effective Assessment for Bayes Learning | [{{< fa desktop >}}](day-3-posterior/3-dis-effective-assessment-bayes/3-dis-effective-assessment-bayes.html) |
 | Activity         | Designing a posterior analysis activity | [{{< fa desktop >}}](day-3-posterior/4-act-posterior-analysis/4-act-posterior-analysis.html)                 |
 
