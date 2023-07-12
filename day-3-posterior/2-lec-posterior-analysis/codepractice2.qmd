@@ -1,0 +1,69 @@
+---
+title: "code_work"
+format: html
+editor: visual
+---
+
+
+
+
+
+```{r}
+
+library(tidyverse)
+library(lme4) # lme4 package contains sleep study data
+data(sleepstudy)
+baseline <- sleepstudy %>%
+  filter(Days==2) # Day 2 is baseline, days 0-1 are training
+baseline %>%
+  ggplot(aes(x=Reaction)) +
+  geom_histogram() + 
+  labs(x="Reaction Time (ms)") + 
+  geom_vline(xintercept=275, col="red")
+
+library(rstanarm)
+library(bayesplot)
+library(broom.mixed)
+
+fit <- stan_glm(data = baseline, family = gaussian,
+                Reaction ~ 1, #only estimating a mean (Intercept) and variance
+                prior_intercept = normal(300, 50),
+                # prior for mu has mean 300 and sd 50
+                prior_aux = cauchy(0, 40),
+                # prior for sigma is half of a mean 0, scale 40 Cauchy
+                chains = 4, iter = 5000*2, seed = 84735, refresh = FALSE
+)
+
+
+mcmc_trace(fit) # show trace plots
+mcmc_dens_overlay(fit) # show posteriors
+
+rhat(fit)
+
+neff_ratio(fit)
+
+mean(as.data.frame(fit)$"(Intercept)"<275)
+
+tidy(fit,
+     effects = c("fixed", "aux"),
+     conf.int = TRUE,
+     conf.level = 0.95) # written summary of the output
+
+sleepdep <- sleepstudy %>%
+  filter(Days %in% c(2,3)) %>%
+  pivot_wider(names_from = Days, names_prefix="Day", 
+              values_from = Reaction, id_cols=Subject) %>%
+  mutate(diff32=Day3-Day2)
+  # consider day 2 baseline and day 3, the first value from a sleep-deprived state, and calculate difference
+  # positive differences indicate longer reaction times when sleep-deprived
+sleepdep %>%
+  ggplot(aes(x=diff32)) +
+  geom_histogram() + 
+  labs(x="Difference in Reaction Time (ms) when Sleep Deprived") + 
+  geom_vline(xintercept=0, col="red")
+
+```
+
+
+
+
