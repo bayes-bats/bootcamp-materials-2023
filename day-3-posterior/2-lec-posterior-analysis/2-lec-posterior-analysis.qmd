@@ -71,7 +71,7 @@ Instead, we consider a relatively non-informative prior for our mean $\mu \sim N
 
 ## Prior for the Standard Deviation
 
-We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which has mean 0 and scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
+We will specify a prior directly on the standard deviation $\sigma$ as $\sigma \sim \text{HalfCauchy}(0,40)$, which is centered at 0 and has scale parameter 40 and is called "half" because only the positive values are used. If you haven't seen the Cauchy distribution, it's a special case of a t distribution with 1 degree of freedom, and it's nice because it has fat tails and allows substantial mass away from its mean. We plot it here.
 
 ```{r}
 #| echo: false
@@ -107,7 +107,7 @@ fit <- brm(data = baseline, family = gaussian(),
             prior(normal(300,50), class = Intercept), 
               # prior for mu has mean 300 and sd 50
             prior(cauchy(0,40), class = sigma)
-              # prior for sigma is half of a mean 0, scale 40 Cauchy
+              # prior for sigma is half of a center 0, scale 40 Cauchy
                 )
 )
 
