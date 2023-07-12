@@ -175,12 +175,12 @@ names(para_post) <- c("mu", "phi")
 
 ```{r, echo = TRUE}
 para_post %>%
-  summarize(quants = quantile(mu, probs = c(0.025, 0.0975)))
+  summarize(quants = quantile(mu, probs = c(0.025, 0.975)))
 ```
 
 ```{r, echo = TRUE}
 para_post %>%
-  summarize(quants = quantile(phi, probs = c(0.025, 0.0975)))
+  summarize(quants = quantile(phi, probs = c(0.025, 0.975)))
 ```
 
 ## Plot 1
