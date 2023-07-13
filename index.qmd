@@ -146,10 +146,10 @@ Your GitHub repository: `day5-hierarchical-username`
 
 | Type             | Topic                                   | Materials                                                                                                 |
 |-------------------|-----------------------------------|-------------------|
-| Lecture - part 1 | Hierarchical Models: Priors             | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html)         |
-| Lecture - part 2 | Hierarchical Models: MCMC and Inference | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hierarchical-mcmc/2-lec-hierarchical-mcmc.html)             |
+| Lecture  | Hierarchical Models             | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html)         |
+| Lecture | Statistical Inference: frequentist vs. Bayesian | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hypothesis-testing/2-lec-hypothesis-testing.html)             |
 | Discussion       | Software choices for Bayes learners     | [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)               |
-| Activity         | Designing a hierachical case study      | [{{< fa desktop >}}](day-5-hierarchical/4-act-hierarchical-case-study/4-act-hierarchical-case-study.html) |
+| Activity         | Tier 2 preparation      |  |
 | Closing        | Before We Say Goodbye           | [{{< fa desktop >}}](logistics/2-closing.html) 
 
 ## Tier 2
