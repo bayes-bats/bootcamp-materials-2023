@@ -17,14 +17,14 @@ Note that the example in this lecture is from [Chapter 10.2 of Probability and B
 
 # Introduction: Observations in Groups
 
-## Recap: The Normal Model \& Normal Regression
+## The Normal Model \& Normal Regression
 
 - When you have continuous outcomes, you can use a normal model:
 \begin{equation*}
 Y_i \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma), \,\,\, i = 1, \cdots, n.
 \end{equation*}
 
-- When you have predictor variables available, $\{x_{i1}, \cdots, x_{ip}\}$; you can specify an observation specific mean:
+- When you have predictor variables, $\{x_{i1}, \cdots, x_{ip}\}$; you can specify an observation specific mean:
 \begin{equation*}
 Y_i \mid \mu_i, \sigma \overset{ind}{\sim} \textrm{Normal}(\mu_i, \sigma), \,\,\, i = 1, \cdots, n,
 \end{equation*}
@@ -51,9 +51,6 @@ where
 Can you think of additional examples of observations in groups?
 :::
 
-::: nonincremental
-- We will focus on a movie rating dataset to explore modeling approaches for dependent data
-:::
 
 # Example: Ratings of Animation Movies
 
@@ -217,7 +214,7 @@ Describe how the graphical representation corresponds to the hierarchical model.
 ::: nonincremental
 - Use the `brm()` function with `family = gaussian`
 
-- Use `rating \~ 1 + 1 | Title` expression for model specification
+- Use `rating ~ 1 + 1 | Title` expression for model specification
 :::
 
 ```{r, echo = FALSE}
