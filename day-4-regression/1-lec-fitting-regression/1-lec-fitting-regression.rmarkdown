@@ -15,11 +15,13 @@ format:
       data-background-position: 50% 85%
 ---
 
+
 Note that examples in this lecture are a simplified version of [Chapter 9 of Bayes Rules! book](https://www.bayesrulesbook.com/chapter-9.html).
 
 
 
 ## Packages
+
 
 ```{r}
 library(bayesrules)
@@ -30,11 +32,14 @@ library(broom.mixed)
 theme_set(theme_gray(base_size = 18)) # change default font size in ggplot
 ```
 
+
 ## Data
+
 
 ```{r}
 glimpse(bikes)
 ```
+
 
 
 ## Rides
@@ -42,6 +47,7 @@ glimpse(bikes)
 :::: {.columns}
 
 :::{.column width="60%"}
+
 
 ```{r}
 #| echo: false
@@ -51,6 +57,7 @@ ggplot(data.frame(x = c(-4,4)), aes(x=x)) +
   labs(y = expression(paste("f(y|",mu,",",sigma,")")), x = "y (rides)") + 
   scale_x_continuous(breaks = c(-3,0,3), labels = c(expression(paste(mu,"- 3 / ",sigma)), expression(mu), expression(paste(mu,"+ 3 / ",sigma))))
 ```
+
 
 :::
 
@@ -89,6 +96,7 @@ $\beta_1:$ the typical change in ridership for every one unit increase in temper
 Y_i | \beta_0, \beta_1, \sigma & \stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\right) \;\; \text{ with } \;\; \mu_i = \beta_0 + \beta_1X_i \; .\\
 \end{split}
 
+
 ```{r}
 #| echo: false
 #| fig-width: 8
@@ -117,6 +125,7 @@ g2 <- ggplot(bikes_sim, aes(x=x,y=y_2)) +
 gridExtra::grid.arrange(g1,g2,ncol=2)
   
 ```
+
 
 ##
 
@@ -163,25 +172,31 @@ Suppose we have the following prior understanding of this relationship:
 
 ##
 
+
 ```{r fig.height=5}
 plot_normal(mean = 5000, sd = 1000) + 
   labs(x = "beta_0c", y = "pdf")
 ```
 
+
 ##
+
 
 ```{r fig.height=5}
 plot_normal(mean = 100, sd = 40) + 
   labs(x = "beta_1", y = "pdf")
 ```
 
+
 ##
+
 
 
 ```{r fig.height=5}
 plot_gamma(shape = 1, rate = 0.0008) + 
   labs(x = "sigma", y = "pdf")
 ```
+
 
 ##
 
@@ -193,6 +208,7 @@ Y_i | \beta_0, \beta_1, \sigma & \stackrel{ind}{\sim} N\left(\mu_i, \sigma^2\rig
 \end{split}$$
 
 ##
+
 
 ```{r echo = FALSE, warning=FALSE, fig.height=6, fig.width=15}
 g1 <- plot_normal(mean = 5000, sd = 1000) + 
@@ -206,7 +222,9 @@ gridExtra::grid.arrange(g1,g2,g3,ncol=3)
 ```
 
 
+
 ## Simulation via `rstanarm`
+
 
 ```{r}
 #|cache: true
@@ -219,9 +237,11 @@ bike_model <- stan_glm(rides ~ temp_feel, data = bikes,
                        refresh = FALSE) 
 ```
 
+
 The `refresh = FALSE` prevents printing out your chains and iterations, especially useful in Quarto.
 
 ##
+
 
 ```{r}
 # Effective sample size ratio and Rhat
@@ -231,22 +251,28 @@ rhat(bike_model)
 
 ```
 
+
 The effective sample size ratios are slightly above 1 and the R-hat values are very close to 1, indicating that the chains are stable, mixing quickly, and behaving much like an independent sample.
 
 ##
+
 
 ```{r fig.width=12}
 mcmc_trace(bike_model, size = 0.1)
 ```
 
+
 ##
+
 
 
 ```{r fig.width=12, fig.height=6}
 mcmc_dens_overlay(bike_model)
 ```
 
+
 ## Simulation via `rstan`
+
 
 ```{r}
 #| eval: false
@@ -271,7 +297,9 @@ stan_bike_model <- "
 "
 ```
 
+
 ## Simulation via `rstan`
+
 
 ```{r}
 #| eval: false
@@ -285,7 +313,9 @@ stan_bike_sim <-
 
 
 
+
 ## Posterior summary statistics
+
 
 ```{r echo = FALSE}
 model_summary <- tidy(bike_model, effects = c("fixed", "aux"),
@@ -296,11 +326,11 @@ b1_lower <- model_summary[2,4]
 b1_upper <- model_summary[2,5]
 ```
 
-
 ```{r}
 tidy(bike_model, effects = c("fixed", "aux"),
      conf.int = TRUE, conf.level = 0.80)
 ```
+
 
 The __posterior median relationship__\index{posterior median relationship} is
 
@@ -309,6 +339,7 @@ The __posterior median relationship__\index{posterior median relationship} is
 \end{equation}
 
 ##
+
 
 ```{r}
 # Store the 4 chains for each parameter in 1 data frame
@@ -319,7 +350,9 @@ nrow(bike_model_df)
 head(bike_model_df, 3)
 ```
 
+
 ##
+
 
 ```{r}
 # 50 simulated model lines
@@ -329,6 +362,7 @@ bikes %>%
     geom_line(aes(y = .value, group = .draw), alpha = 0.15) + 
     geom_point(data = bikes, size = 0.05)
 ```
+
 
 ##
 
@@ -340,20 +374,24 @@ __Numerical evidence from the posterior credible interval__ More rigorously, the
 
 __Numerical evidence from a posterior probability__ A quick tabulation approximates that there's _almost certainly_ a positive association, $P(\beta_1 > 0 \; | \; \vec{y}) \approx 1$. 
 
+
 ```{r}
 # Tabulate the beta_1 values that exceed 0
 bike_model_df %>% 
   mutate(exceeds_0 = temp_feel > 0) %>% 
   janitor::tabyl(exceeds_0)
 ```
+
 ## Posterior prediction
 
 Suppose a weather report indicates that tomorrow will be a 75-degree day in D.C. What's your posterior guess of the number of riders that Capital Bikeshare should anticipate?
 
 
+
 ```{r echo = FALSE}
 pred <- round(b0_median,2) + (round(b1_median,2)*75)
 ```
+
 
 Do you think there will be `r round(pred)` riders tomorrow?
 
@@ -412,6 +450,7 @@ We will obtain this approximation both "by hand," which helps us build some powe
 We'll simulate 20,000 predictions of ridership on a 75-degree day, $\left\lbrace Y_{\text{new}}^{(1)}, Y_{\text{new}}^{(2)}, \ldots, Y_{\text{new}}^{(20000)} \right\rbrace$, one from each parameter set in `bike_model_df`.
 Let's start small with just the first posterior plausible parameter set:
 
+
 ```{r}
 first_set <- head(bike_model_df, 1)
 first_set
@@ -424,6 +463,7 @@ sig1 <- round(first_set$sigma)
 pred <- b01 + b11 * 75
 ```
 
+
 Under this particular scenario, $\left(\beta_0^{(1)}, \beta_1^{(1)}, \sigma^{(1)}\right) = (`r b01`, `r b11`, `r sig1`)$, the average ridership at a given temperature is defined by
 
 $$\mu = \beta_0^{(1)} + \beta_1^{(1)} X = `r b01` + `r b11`X  .$$
@@ -432,10 +472,12 @@ $$\mu = \beta_0^{(1)} + \beta_1^{(1)} X = `r b01` + `r b11`X  .$$
 
 As such, we'd expect an __average__ of $\mu = `r round(pred)`$ riders on a 75-degree day:
 
+
 ```{r}
 mu <- first_set$`(Intercept)` + first_set$temp_feel * 75
 mu
 ```
+
 
 ##
 
@@ -443,14 +485,17 @@ To capture the __sampling variability__ around this average, i.e., the fact that
 
 $$Y_{\text{new}}^{(1)} | \beta_0, \beta_1, \sigma  \; \sim \; N\left(`r pred`, `r sig1`^2\right)  .$$
 
+
 ```{r echo = FALSE}
 set.seed(84735)
 y_new <- rnorm(1, mean = mu, sd = first_set$sigma)
 ```
 
+
 . . .
 
 Taking a draw from this model using `rnorm()`, we happen to observe an above average `r round(y_new)` rides on the 75-degree day:
+
 
 ```{r}
 set.seed(84735)
@@ -458,9 +503,11 @@ y_new <- rnorm(1, mean = mu, sd = first_set$sigma)
 y_new
 ```
 
+
 ##
 
 Now let's do this 19,999 more times.
+
 
 
 ```{r}
@@ -471,13 +518,9 @@ predict_75 <- bike_model_df %>%
          y_new = rnorm(20000, mean = mu, sd = sigma))
 ```
 
-
-
 ```{r}
 head(predict_75, 3)
 ```
-
-
 
 ```{r echo = FALSE}
 ci_mean <- predict_75 %>% 
@@ -491,6 +534,7 @@ ci_new <- predict_75 %>%
             upper_95 = quantile(y_new, 0.975))
 ```
 
+
 Whereas the collection of 20,000 `mu` values approximates the posterior model for the _typical_ ridership on 75-degree days, $\mu = \beta_0 + \beta_1 * 75$, the 20,000 `y_new` values approximate the __posterior predictive model__ of ridership for tomorrow, an _individual_ 75-degree day, \index{posterior predictive model}
 
 $$Y_{\text{new}} | \beta_0, \beta_1, \sigma  \; \sim \; N\left(\mu, \sigma^2\right) \;\; \text{ with } \;\; \mu = \beta_0 + \beta_1 \cdot 75 .$$
@@ -499,6 +543,7 @@ $$Y_{\text{new}} | \beta_0, \beta_1, \sigma  \; \sim \; N\left(\mu, \sigma^2\rig
 
 The 95% credible interval for the __typical__ number of rides on a 75-degree day, $\mu$, ranges from `r round(ci_mean$lower_95)` to `r round(ci_mean$upper_95)`.
 In contrast, the 95% __posterior prediction interval__ for the number of rides _tomorrow_ has a much _wider_ range from `r round(ci_new$lower_95)` to `r round(ci_new$upper_95)`.
+
 
 
 ```{r}
@@ -511,7 +556,9 @@ predict_75 %>%
 ```
 
 
+
 ##
+
 
 ```{r eval = FALSE}
 # Plot the posterior model of the typical ridership on 75 degree days
@@ -523,9 +570,11 @@ ggplot(predict_75, aes(x = y_new)) +
   geom_density()
 ```
 
+
 ##
 
 The posterior model of $\mu$, the typical ridership on a 75-degree day (left), and the posterior predictive model of the ridership tomorrow, a specific 75-degree day (right).
+
 
 ```{r ch9-post-pred, fig.width = 10, echo = FALSE, fig.alt = "There are two density plots of mu, both bell-shaped and centered at mu equals 3955. However, the left density plot is much narrower, ranging from roughly 3900 to 4100. The right density plot is wider, ranging from roughly 1500 to 6500."}
 g1 <- ggplot(predict_75, aes(x = mu)) + 
@@ -539,9 +588,11 @@ gridExtra::grid.arrange(g1,g2,ncol=2)
 
 
 
+
 ## 
 
 There's more accuracy in anticipating the _average_ behavior across multiple data points than the _unique_ behavior of a single data point.
+
 
 
 ```{r fig.cap='95% posterior credible intervals (blue) for the __average__ ridership on 75-degree days (left) and the __predicted__ ridership for tomorrow, an individual 75-degree day (right).', fig.width = 4, echo = FALSE, fig.alt = "There are two scatterplots of rides (y-axis) vs temperature (x-axis). Both display the original 500 data points. The left scatterplot is superimposed with a very short vertical line at a temp_feel of 75 -- it ranges from roughly 3800 to 4100 rides. The right scatterplot is superimposed with a much wider vertical line at a temp_feel of 75 -- it ranges from roughly 1500 to 6500 rides."}
@@ -558,9 +609,11 @@ gridExtra::grid.arrange(g1,g2,ncol=2)
 ```
 
 
+
 ### Posterior prediction with rstanarm
 
 Simulating the posterior predictive model from scratch allowed you to really connect with the concept, but moving forward we can utilize the `posterior_predict()` function in the __rstanarm__ package: \indexfun{posterior_predict()}
+
 
 ```{r}
 # Simulate a set of predictions
@@ -569,9 +622,11 @@ shortcut_prediction <-
   posterior_predict(bike_model, newdata = data.frame(temp_feel = 75))
 ```
 
+
 The `shortcut_prediction` object contains 20,000 predictions of ridership on 75-degree days.
 We can both visualize and summarize the corresponding (approximate) posterior predictive model using our usual tricks.
 The results are equivalent to those we constructed from scratch above:
+
 
 
 ```{r fig.cap = "Posterior predictive model of ridership on a 75-degree day.", fig.alt = "A density plot of the predicted ridership on a 75-degree day. The density plot is bell-shaped, centered at roughly 4000 rides, and ranges from roughly 1000 to 7000.", out.width=10}
@@ -582,6 +637,4 @@ posterior_interval(shortcut_prediction, prob = 0.95)
 mcmc_dens(shortcut_prediction) + 
   xlab("predicted ridership on a 75 degree day")
 ```
-
-
 

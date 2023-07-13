@@ -264,6 +264,8 @@ Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has
     The __median absolute error (MAE)__ measures the _typical_ difference between the observed $Y_i$ and their posterior predictive means $Y_i'$, 
 
     $$\text{MAE} = \text{median}|Y_i - Y_i'|.$$
+    
+##
 
 - `mae_scaled`    
     The __scaled median absolute error__ measures the _typical_ number of standard deviations that the observed $Y_i$ fall from their posterior predictive means $Y_i'$:
