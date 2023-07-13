@@ -76,7 +76,7 @@ The relationship between ridership and temperature does appear to be linear. Fur
 
 ## Posterior predictive check
 
-Consider a regression model with response variable $Y$, predictor $X$, and a set of regression parameters $\theta$. For example, in the model above $\theta = (\beta_0,\beta_1,\sigma)$.  Further, let $\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\right\rbrace$ be an $N$-length Markov chain for the posterior model of $\theta$.
+Consider a regression model with response variable $Y$, predictor $X$, and a set of regression parameters $\theta$. For example, in the model in the previous slides $\theta = (\beta_0,\beta_1,\sigma)$.  Further, let $\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\right\rbrace$ be an $N$-length Markov chain for the posterior model of $\theta$.
 Then a "good" Bayesian model will produce _predictions_ of $Y$ with features similar to the _original_ $Y$ data.  To evaluate whether your model satisfies this goal:
 
 1. At each set of posterior plausible parameters $\theta^{(i)}$, simulate a sample of $Y$ values from the likelihood model, one corresponding to each $X$ in the original sample of size $n$.  This produces $N$ separate samples of size $n$.
@@ -93,10 +93,7 @@ bike_model <- stan_glm(rides ~ temp_feel, data = bikes,
                        prior_aux = exponential(0.0008),
                        chains = 4, iter = 5000*2, seed = 84735, refresh = FALSE)
 bike_model_df <- as.data.frame(bike_model)
-set.seed(84735)
-predict_75 <- bike_model_df %>% 
-  mutate(mu = `(Intercept)` + temp_feel*75) %>% 
-  mutate(y_new = rnorm(20000, mu, sigma))
+
 
 ```
 
@@ -117,6 +114,17 @@ one_simulation <- bikes %>%
 head(one_simulation, 2)
 
 ```
+
+
+##
+
+```{r}
+#| eval: false
+ggplot(one_simulation, aes(x = simulated_rides)) + 
+  geom_density(color = "lightblue") + 
+  geom_density(aes(x = rides), color = "darkblue")
+```
+
 
 ##
 
@@ -140,6 +148,23 @@ pp_check(bike_model, nreps = 50) +
 
 
 
+## How accurate are the posterior predictive models?
+
+```{r}
+bikes %>% 
+  filter(date == "2012-10-22") %>% 
+  select(temp_feel, rides)
+```
+
+
+
+```{r}
+set.seed(84735)
+predict_75 <- bike_model_df %>% 
+  mutate(mu = `(Intercept)` + temp_feel*75) %>% 
+  mutate(y_new = rnorm(20000, mu, sigma))
+```
+
 ##
 
 ```{r}
@@ -153,8 +178,16 @@ ggplot(predict_75, aes(x = y_new)) +
 
 ##
 
+```{r}
+predict_75 %>% 
+  summarize(mean = mean(y_new), error = 6228 - mean(y_new))
+```
+
+
+##
+
 __observed value__: $Y$  
-__posterior predictive median__: $Y'$  
+__posterior predictive mean__: $Y'$  
 __predictive error__: $Y - Y'$
 
 ##
@@ -225,17 +258,20 @@ ggpubr::ggarrange(g1,g2,ncol=2, common.legend = TRUE, legend = "right")
 ##
 
 
-Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has a corresponding posterior predictive model with _median_ $Y_i'$ and _median absolute deviation_ $\text{mad}_i$.  We can evaluate the overall posterior predictive model quality by the following measures:
+Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has a corresponding posterior predictive model with _mean_ $Y_i'$ and _standard deviation_ $\text{sd}_i$.  We can evaluate the overall posterior predictive model quality by the following measures:
 
-- The __median absolute error__  `mae`
+- `mae`    
+    The __median absolute error (MAE)__ measures the _typical_ difference between the observed $Y_i$ and their posterior predictive means $Y_i'$, 
 
-    $$\text{mae} = \text{median}_{i \in \{1,2,\ldots,n\}} |Y_i - Y_i'|$$
+    $$\text{MAE} = \text{median}|Y_i - Y_i'|.$$
 
-- The __scaled median absolute error__ `scaled_mae`
+- `mae_scaled`    
+    The __scaled median absolute error__ measures the _typical_ number of standard deviations that the observed $Y_i$ fall from their posterior predictive means $Y_i'$:
 
-    $$\text{mae scaled} = \text{median}_{i \in \{1,2,\ldots,n\}} \frac{|Y_i - Y_i'|}{\text{sd}_i}$$
+    $$\text{MAE scaled} = \text{median}\frac{|Y_i - Y_i'|}{\text{sd}_i}.$$
 
-- `within_50` and `within_95` measure the proportion of observed values $Y_i$ that fall within their 50% and 95% posterior prediction intervals respectively.  
+- `within_50` and `within_95`    
+    The `within_50` statistic measures the proportion of observed values $Y_i$ that fall within their 50% posterior prediction interval.  The `within_95` statistic is similar, but for 95% posterior prediction intervals.
 
 
 ##
