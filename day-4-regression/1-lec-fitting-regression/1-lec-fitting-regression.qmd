@@ -56,8 +56,8 @@ ggplot(data.frame(x = c(-4,4)), aes(x=x)) +
 
 :::{.column width="40%"}
 
-$Y_i | \mu, \sigma  \stackrel{ind}{\sim} N(\mu, \sigma^2)$  
-$\mu \sim N(\theta, \tau^2)$
+$Y_i | \mu_i, \sigma  \stackrel{ind}{\sim} N(\mu_i, \sigma^2)$  
+$\mu_i \sim N(\theta, \tau^2)$
 $\sigma  \sim \text{ some prior model.}$
 
 :::
