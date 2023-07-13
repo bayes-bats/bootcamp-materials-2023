@@ -146,7 +146,7 @@ Your GitHub repository: `day5-hierarchical-username`
 
 | Type             | Topic                                   | Materials                                                                                                 |
 |-------------------|-----------------------------------|-------------------|
-| Lecture  | Hierarchical Models             | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical-priors/1-lec-hierarchical-priors.html)         |
+| Lecture  | Hierarchical Models             | [{{< fa desktop >}}](day-5-hierarchical/1-lec-hierarchical/1-lec-hierarchical.html)         |
 | Lecture | Statistical Inference: frequentist vs. Bayesian | [{{< fa desktop >}}](day-5-hierarchical/2-lec-hypothesis-testing/2-lec-hypothesis-testing.html)             |
 | Discussion       | Software choices for Bayes learners     | [{{< fa desktop >}}](day-5-hierarchical/3-dis-software-choices/3-dis-software-choices.html)               |
 | Activity         | Tier 2 preparation      |  |
