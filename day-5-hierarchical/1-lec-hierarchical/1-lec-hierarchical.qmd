@@ -21,12 +21,12 @@ Note that the example in this lecture is from [Chapter 10.2 of Probability and B
 
 - When you have continuous outcomes, you can use a normal model:
 \begin{equation*}
-Y_i \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma), \,\,\, i = 1, \cdots, n.
+Y_i \mid \mu, \sigma \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2), \,\,\, i = 1, \cdots, n.
 \end{equation*}
 
 - When you have predictor variables, $\{x_{i1}, \cdots, x_{ip}\}$; you can specify an observation specific mean:
 \begin{equation*}
-Y_i \mid \mu_i, \sigma \overset{ind}{\sim} \textrm{Normal}(\mu_i, \sigma), \,\,\, i = 1, \cdots, n,
+Y_i \mid \mu_i, \sigma \overset{ind}{\sim} \textrm{Normal}(\mu_i, \sigma^2), \,\,\, i = 1, \cdots, n,
 \end{equation*}
 where 
 \begin{equation*}
@@ -119,13 +119,13 @@ ggplot(MovieRatings, aes(Title, rating)) +
 
 - Approach 1 - separate estimates for each movie $j$:
 \begin{equation*}
-Y_{1j}, \cdots, Y_{n_j j} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma_j)
+Y_{1j}, \cdots, Y_{n_j j} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma_j^2)
 \end{equation*}
     - No relation among groups; groups with small sample size might suffer (e.g., $n_j = 1$)
 
 - Approach 2 - combined estimates for all $J$ movies:
 \begin{equation*}
-Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma)
+Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma^2)
 \end{equation*}
     - Differences in groups are ignored
 
@@ -142,7 +142,7 @@ Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu, \sigma)
 ::: nonincremental
 - Without loss of generality, assume a group-specific normal model for movie $j$:
 \begin{eqnarray}
-Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma)
+Y_{ij} \overset{i.i.d.}{\sim} \textrm{Normal}(\mu_j, \sigma^2)
 \end{eqnarray}
 where $i = 1, \cdots, n_j$ and $n_j$ is the number of observations in group $j$
 
@@ -160,7 +160,7 @@ Is a commonly shared $\sigma$ reasonable? If not, what can you do?
 
 - First stage: the same normal prior distribution for each mean $\mu_j$
 \begin{equation}
-\mu_j \mid \mu, \tau \sim \textrm{Normal}(\mu, \tau)
+\mu_j \mid \mu, \tau \sim \textrm{Normal}(\mu, \tau^2)
 \end{equation}
 
 - This prior allows information pooled across movies (groups)
@@ -384,8 +384,8 @@ ggplot(df,
 
 - Two sources of variability in $Y_{ij}$:
 \begin{eqnarray*}
-Y_{ij} &\overset{i.i.d.}{\sim}& \textrm{Normal}(\mu_j, \sigma) \,\,\, \text{[within-group variability]} \\
-\mu_j &\sim& \textrm{Normal}(\mu, \tau) \,\,\, \text{[between-group variability]}
+Y_{ij} &\overset{i.i.d.}{\sim}& \textrm{Normal}(\mu_j, \sigma^2) \,\,\, \text{[within-group variability]} \\
+\mu_j &\sim& \textrm{Normal}(\mu, \tau^2) \,\,\, \text{[between-group variability]}
 \end{eqnarray*}
 
 - To compare these two sources of variability, one can compute the fraction
