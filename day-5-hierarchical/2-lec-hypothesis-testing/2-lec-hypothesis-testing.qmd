@@ -925,6 +925,13 @@ mcmc_areas(art_sim, pars = "pi",
 
 ##
 
+$$\begin{split}
+H_0: & \; \; \pi \in (0.25, 0.35) \\
+H_a: & \; \; \pi \notin (0.25, 0.35) \\
+\end{split}$$
+
+##
+
 ```{r}
 #| echo: true
 art_chains_df <- as.data.frame(art_sim, 
